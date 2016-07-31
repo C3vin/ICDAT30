@@ -19,7 +19,7 @@ public class n022_generate_parenthesis {
 		if(left == 0 && right == 0) {
 			result.add(s);
 			System.out.println(result);
-			return; 	//why
+			return; 	
 		}
 		
 		if(left > 0) {
