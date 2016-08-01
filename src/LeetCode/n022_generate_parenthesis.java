@@ -13,7 +13,6 @@ public class n022_generate_parenthesis {
 
 	public void dfs(ArrayList<String> result, String s, int left, int right) {
 		if(left > right) {
-			//System.out.println("l:" + left + " r: " + right);
 			return;
 		}
 		if(left == 0 && right == 0) {
