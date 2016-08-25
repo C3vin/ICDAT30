@@ -11,7 +11,7 @@ public class n026_Remove_Duplicates_from_Sorted_Array {
 		for(int i=1; i < nums.length; i++) {
 			if(nums[i] != nums[count]){
 				//if(count != i) 
-					nums[++count] = nums[i];
+				nums[++count] = nums[i];
 				//count++;
 			}
 
