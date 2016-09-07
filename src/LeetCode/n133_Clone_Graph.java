@@ -17,41 +17,56 @@ public class n133_Clone_Graph {
 
 		LinkedList<UndirectedGraphNode> queue = new LinkedList<UndirectedGraphNode>();       
 		// Hashtable<node, clonedNode>   
-		HashMap<UndirectedGraphNode, UndirectedGraphNode> ht = new HashMap<UndirectedGraphNode, UndirectedGraphNode>();   
+		HashMap<UndirectedGraphNode, UndirectedGraphNode> map = new HashMap<UndirectedGraphNode, UndirectedGraphNode>();   
 		
-		UndirectedGraphNode retClone = new UndirectedGraphNode(node.label); //cp root
-		ht.put(node, retClone);     //put root and root clone into ht
+		UndirectedGraphNode nodeClone = new UndirectedGraphNode(node.label); //cp root
+		map.put(node, nodeClone);     //put root and root clone into ht
 		queue.add(node);        //add to queue
 
 		while(!queue.isEmpty()){  
 			UndirectedGraphNode cur = queue.remove();   //cur node 
-			UndirectedGraphNode curClone = ht.get(cur); //cur node will be in ht, because it added from neighbors
+			UndirectedGraphNode curClone = map.get(cur); //cur node will be in ht, because it added from neighbors
 			List<UndirectedGraphNode> neighbors = cur.neighbors; //get all the cur's neighbor  
 			
 			for(int i=0; i<neighbors.size(); i++){       //check all the neighbor
 				UndirectedGraphNode neighbor = neighbors.get(i);  
-				if(ht.containsKey(neighbor)){       //cp already  
-					UndirectedGraphNode neighborClone = ht.get(neighbor);   //get neighborClone from ht 
+				if(map.containsKey(neighbor)){       //cp already  
+					UndirectedGraphNode neighborClone = map.get(neighbor);   //get neighborClone from ht 
 					curClone.neighbors.add(neighborClone);      // add cp neighbor to curClone  
 				} else {  // neighbor didn't cp before, add new neighborClone  
 					UndirectedGraphNode neighborClone = new UndirectedGraphNode(neighbor.label);  
 					curClone.neighbors.add(neighborClone);  
-					ht.put(neighbor, neighborClone);         
+					map.put(neighbor, neighborClone);         
 					queue.add(neighbor);         
 				}  
 			}  
 		}  
-		return retClone; 
+		return nodeClone; 
 	}
 	
 	//DFS
-/*	public UndirectedGraphNode cloneGraphDFS(UndirectedGraphNode node) { 
+	public UndirectedGraphNode cloneGraphDFS(UndirectedGraphNode node) { 
 		if(node == null) return null;  
 		
-		
 		HashMap<UndirectedGraphNode, UndirectedGraphNode> map = new HashMap<UndirectedGraphNode, UndirectedGraphNode>();
-	}*/
+		UndirectedGraphNode nodeClone = new UndirectedGraphNode(node.label);
+		map.put(node, nodeClone);
+		DFS(node, map);
+		return nodeClone;
+	}
 	
+	private void DFS(UndirectedGraphNode node, HashMap<UndirectedGraphNode, UndirectedGraphNode> map) {
+		for(int i=0; i<node.neighbors.size(); i++) {
+			UndirectedGraphNode cur = node.neighbors.get(i);
+			if(!map.containsKey(cur)) {
+				UndirectedGraphNode neighborClone = new UndirectedGraphNode(cur.label);
+				map.put(cur, neighborClone);
+				DFS(cur, map);
+			}
+			map.get(node).neighbors.add(map.get(cur));
+		}
+	}
+
 	//ref:http://blog.csdn.net/fightforyourdream/article/details/17497883
 	public static void main(String[] args) {
 		n133_Clone_Graph obj = new n133_Clone_Graph();
@@ -59,6 +74,7 @@ public class n133_Clone_Graph {
 
 		System.out.println(UndirectedGraphNode.serialize(n1));
 		System.out.println(UndirectedGraphNode.serialize(obj.cloneGraph(n1)));
+		System.out.println(UndirectedGraphNode.serialize(obj.cloneGraphDFS(n1)));
 	}
 }
 
