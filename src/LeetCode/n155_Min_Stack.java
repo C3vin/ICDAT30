@@ -5,25 +5,31 @@ import java.util.ArrayList;
 public class n155_Min_Stack {
 	/** initialize your data structure here. */
 	class NNode {
-		NNode next;
-		int val;
-		int min;
+		public int val;
+		public NNode next;
+		public int min;
 
 		NNode max;
 
-		NNode(int v){val = v; min = v; max = this;}
+		public NNode(int v) {
+			val = v; 
+			min = v; 
+			max = this;
+		}
 	}
-	private NNode top;
+	//rivate NNode top;
 	ArrayList<Integer> stack = new ArrayList<Integer>();
 	ArrayList<Integer> minStack = new ArrayList<Integer>();
+
 	public n155_Min_Stack() {
-		top = new NNode(0);
+		//top = new NNode(0);
 	}
 
 	public void push(int x) {
 		stack.add(x);
-		if(minStack.isEmpty() || minStack.get(minStack.size()-1) >= x){
+		if(minStack.isEmpty() || minStack.get(minStack.size()-1) >= x){		//if latest element bigger than x, than found the min element need to add to minStack
 			minStack.add(x);
+			//System.out.println("minStack: " + minStack + " size: " + minStack.size());
 		}
 	}
 
@@ -50,17 +56,18 @@ public class n155_Min_Stack {
 	}
 	public static void main(String[] args) {
 		n155_Min_Stack minStack = new n155_Min_Stack();
-		minStack.push(-2);
+		minStack.push(2);
 		minStack.push(0);
 		minStack.push(1);
-		minStack.push(-3);
-		//minStack.pop();
-		System.out.println(minStack.getMin());
-		
+		minStack.push(4);
+		minStack.pop();
+		System.out.println("Top: " + minStack.top());
+		System.out.println("minStack: " + minStack.getMin());
+
 /*		ArrayList<Integer> arr = new ArrayList<Integer>();
 		arr.add(1);
-		arr.add(2);
 		arr.add(3);
+		arr.add(2);
 		System.out.println(arr.toString());
 		System.out.println(arr.size());
 		System.out.println(arr.get(arr.size()-1));*/
