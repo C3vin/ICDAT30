@@ -17,7 +17,7 @@ public class n155_Min_Stack {
 			max = this;
 		}
 	}
-	//rivate NNode top;
+	//private NNode top;
 	ArrayList<Integer> stack = new ArrayList<Integer>();
 	ArrayList<Integer> minStack = new ArrayList<Integer>();
 
@@ -29,7 +29,6 @@ public class n155_Min_Stack {
 		stack.add(x);
 		if(minStack.isEmpty() || minStack.get(minStack.size()-1) >= x){		//if latest element bigger than x, than found the min element need to add to minStack
 			minStack.add(x);
-			//System.out.println("minStack: " + minStack + " size: " + minStack.size());
 		}
 	}
 
@@ -63,13 +62,5 @@ public class n155_Min_Stack {
 		minStack.pop();
 		System.out.println("Top: " + minStack.top());
 		System.out.println("minStack: " + minStack.getMin());
-
-/*		ArrayList<Integer> arr = new ArrayList<Integer>();
-		arr.add(1);
-		arr.add(3);
-		arr.add(2);
-		System.out.println(arr.toString());
-		System.out.println(arr.size());
-		System.out.println(arr.get(arr.size()-1));*/
 	}
 }
