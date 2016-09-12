@@ -1,7 +1,5 @@
 package LeetCode;
 
-import LeetCode.n098_Validate_Binary_Search_Tree.TreeNode;
-
 public class n100_Same_Tree {
 	public class TreeNode {
 		int val;
