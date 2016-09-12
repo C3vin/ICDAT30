@@ -1,5 +1,7 @@
 package LeetCode;
 
+import java.util.LinkedList;
+
 public class n104_Maximum_Depth_of_Binary_Tree {
 	public class TreeNode {
 		int val;
@@ -16,8 +18,35 @@ public class n104_Maximum_Depth_of_Binary_Tree {
 	}
 	
 	public int maxDepth2(TreeNode root) {
-		//TODO:
-		return 0;
+	    if(root == null)  
+	        return 0;  
+	    int level = 0;  
+	    LinkedList<TreeNode> queue = new LinkedList<TreeNode>();  
+	    queue.add(root);  
+	    int curNum = 1; //num of nodes left in current level  
+	    int nextNum = 0; //num of nodes in next level  
+	    while(!queue.isEmpty())  
+	    {  
+	        TreeNode n = queue.poll();  
+	        curNum--;  
+	        if(n.left!=null)  
+	        {  
+	            queue.add(n.left);  
+	            nextNum++;  
+	        }  
+	        if(n.right!=null)  
+	        {  
+	            queue.add(n.right);  
+	            nextNum++;  
+	        }  
+	        if(curNum == 0)  
+	        {  
+	            curNum = nextNum;  
+	            nextNum = 0;  
+	            level++;  
+	        }  
+	    }  
+	    return level;  
 	}
 	public static void main(String[] args) {
 		n104_Maximum_Depth_of_Binary_Tree obj = new n104_Maximum_Depth_of_Binary_Tree();
@@ -38,5 +67,6 @@ public class n104_Maximum_Depth_of_Binary_Tree {
 		System.out.println(p1.val + " " + p1.left.val + " " + p1.right.val + " "+ p2.left.val + " " + p2.right.val 
 				+ " " + p3.left.val + " " +p3.right.val);
 		System.out.println(obj.maxDepth(p1));
+		System.out.println(obj.maxDepth2(p1));
 	}
 }

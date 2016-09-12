@@ -4,7 +4,7 @@ public class n141_Linked_List_Cycle {
 	public boolean hasCycle(ListNode head) {
 		ListNode slow = head;
 		ListNode faster = head;
-		while(slow != null && slow.next != null) {
+		while(faster != null && faster.next != null) {
 			slow = slow.next;
 			faster = faster.next.next;
 			if(slow == faster) {
