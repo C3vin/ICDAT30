@@ -13,33 +13,67 @@ public class n102_BinaryTreeLevelOrderTraversal {
 		TreeNode(String v) { v = null; }
 	}
 	public List<List<Integer>> levelOrder(TreeNode root) {
-		List<List<Integer>> results = new ArrayList<List<Integer>>();
+		List<List<Integer>> res = new ArrayList<List<Integer>>();
+		if(root == null) return res;
+
+		LinkedList<TreeNode> queue = new LinkedList<TreeNode>(); 
+		queue.add(root);
+		List<Integer> tmp = new ArrayList<Integer>();
+
+		int curlevel = 0;
+		int lastlevel = 1;
+
+		while(!queue.isEmpty()) {
+			TreeNode cur = queue.poll();
+			lastlevel--;
+			tmp.add(cur.val);
+
+			if(cur.left != null) {
+				queue.add(cur.left);		//queue not tmp
+				curlevel++;
+			}
+			if(cur.right != null) {
+				queue.add(cur.right);
+				curlevel++;
+			}
+			if(lastlevel == 0) {
+				lastlevel = curlevel;
+				curlevel = 0;
+				res.add(tmp);
+				tmp = new ArrayList<Integer>();
+			}
+		}
+		return res;
+
+		//Jidong
+		/*		List<List<Integer>> results = new ArrayList<List<Integer>>();
 		LinkedList<TreeNode> queue = new LinkedList<TreeNode>();
-		
+
 		if(root != null) 
 			queue.add(root);
 		else
 			return results;
-		int w = 1;
+		int current = 1;
 
-		List<Integer> r = new ArrayList<Integer>();
+		List<Integer> tmp = new ArrayList<Integer>();
 		while(queue.size() > 0) {
 			TreeNode p = queue.poll();
 			System.out.println(p.val);
-			r.add(p.val);
+			tmp.add(p.val);
 			System.out.println("queue size: "+queue.size());
 			if(p.left != null) queue.add(p.left);
 			if(p.right != null) queue.add(p.right);
 
-			if(r.size() == w) {
-				System.out.println("r: " +r.size() + " w: " +w);
+			if(tmp.size() == current) {
+				System.out.println("r: " +tmp.size() + " w: " +current);
 				System.out.println("queue size2: "+queue.size());
-				w = queue.size();
-				results.add(r);
-				r = new ArrayList<Integer>();
+				current = queue.size();
+				results.add(tmp);
+				tmp = new ArrayList<Integer>();
 			}
 		}
-		return results;
+		System.out.println(results);
+		return results;*/
 	}
 
 	public static void main(String[] args) {
@@ -66,7 +100,7 @@ public class n102_BinaryTreeLevelOrderTraversal {
 		p2.left = p4;
 		p3.right = p7;
 		p3.left = p6;
-		
+
 		System.out.println(p1.val + " " + p1.left.val + " " + p1.right.val + " "+ p2.left.v + " " + p2.right.v + " " + p3.left.val + " " +p3.right.val);
 		System.out.println(obj.levelOrder(p1));
 	}
