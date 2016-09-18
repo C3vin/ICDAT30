@@ -15,19 +15,17 @@ public class n021_Merge_Two_Sorted_Lists {
 			}
 			p = p.next;
 		}
-		
+		//extra node
 		if(l1 != null) {
 			p.next = l1;
 		}
 		if(l2 != null) {
 			p.next = l2;
 		}
-
 		return h.next;
 	}
 	public static void main(String[] args) {
 		n021_Merge_Two_Sorted_Lists obj = new n021_Merge_Two_Sorted_Lists();
-		System.out.println(obj.mergeTwoLists(ListNode.create(135), ListNode.create(246)));
-		System.out.print(ListNode.create(135));
+		System.out.println(obj.mergeTwoLists(ListNode.create(1357), ListNode.create(246)));
 	}
 }
