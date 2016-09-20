@@ -9,6 +9,7 @@ public class n236_Lowest_Common_Ancestor_of_a_Binary_Tree {
 			val = x; 
 		}
 	}
+	//https://segmentfault.com/a/1190000003509399
 	public TreeNode lowestCommonAncestor(TreeNode root, TreeNode p, TreeNode q) {
 		if(root == null || root == p || root == q) 
 			return root;
