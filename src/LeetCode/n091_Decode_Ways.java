@@ -2,7 +2,7 @@ package LeetCode;
 
 public class n091_Decode_Ways {
 	public int numDecodings(String s) {
-		if (s.length()==0||s==null||s=="0") 
+		if (s.length()==0||s==null||s=="0") 			//F: " "
 			return 0; 
 
 
@@ -13,7 +13,7 @@ public class n091_Decode_Ways {
 		else 
 			dp[1] = 0; 
 
-		for(int i=2; i<=s.length(); i++){  
+		for(int i=2; i<=s.length(); i++){  				//F: <=
 			if (isValid(s.substring(i-1,i)))  
 				dp[i] += dp[i-1];  
 			if (isValid(s.substring(i-2,i)))  
