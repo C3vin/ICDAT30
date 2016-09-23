@@ -1,8 +1,8 @@
 package LeetCode;
 
 import java.util.Arrays;
-import java.util.Deque;
 import java.util.LinkedList;
+import java.util.Queue;
 
 //Ref:http://www.cnblogs.com/yrbbest/p/5047035.html
 public class n297_Serialize_and_Deserialize_Binary_Tree {
@@ -13,42 +13,45 @@ public class n297_Serialize_and_Deserialize_Binary_Tree {
 		TreeNode(int x) { val = x; }
 	}
 
+	private final String delimiter = ",";
+	private final String emptyNode = "#";
+
 	// Encodes a tree to a single string.
 	public String serialize(TreeNode root) {
-		if(root == null) return null;
 		StringBuilder sb = new StringBuilder();
-		LinkedList<TreeNode> queue = new LinkedList<TreeNode>();
-		queue.add(root);
-		
-		while(!queue.isEmpty()) {
-			TreeNode node = queue.poll();
-			if(node == null) {
-				sb.append("null,");
-			}else {
-				sb.append(node.val + ",");
-				queue.add(node.left);			//node not root
-				queue.add(node.right);
-			}
-		}
+		serialize(root, sb);
 		return sb.toString();
 	}
-
-	// Decodes your encoded data to tree.
-	public TreeNode deserialize(String data) {
-		Deque<String> nodes = new LinkedList<String>();
-		nodes.addAll(Arrays.asList(data.split(",")));
-		return deserialize(nodes);
+	private void serialize(TreeNode root, StringBuilder sb) {
+		if(root == null) {
+			sb.append(emptyNode).append(delimiter);
+		} else {
+			sb.append(root.val).append(delimiter);	//pre-order traversal
+			serialize(root.left, sb);
+			serialize(root.right, sb);
+		}
 	}
 	
-	private TreeNode deserialize(Deque<String> nodes) {
-		String nodeVal = nodes.poll();
+	//pre-order traversal
+	// Decodes your encoded data to tree.
+	public TreeNode deserialize(String data) {
+		Queue<String> nodes = new LinkedList<String>();	//deque change to queue
+		//nodes.addAll(Arrays.asList(data.split(",")));
+		String[] s = data.split(",");
+		for(String ss : s) {
+			nodes.add(ss);
+		}
+		return deserialize(nodes);
+	}
+
+	private TreeNode deserialize(Queue<String> nodes) {	//change to queue
+		String nodeVal = nodes.poll();					//change to poll
 		if(nodeVal.equals("null")) {
 			return null;
 		} else{
 			TreeNode node = new TreeNode(Integer.parseInt(nodeVal));
 			node.left = deserialize(nodes);
 			node.right = deserialize(nodes);
-			System.out.println(node);
 			return node;
 		}
 	}
