@@ -1,10 +1,8 @@
 package LeetCode;
 
-import java.lang.reflect.Array;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.LinkedList;
-import java.util.Queue;
 import java.util.Set;
 
 public class n127_Word_Ladder {
@@ -22,23 +20,20 @@ public class n127_Word_Ladder {
 		while(!queue.isEmpty()) {  
 			String cur = queue.poll();  
 			lastNum--;  
-			System.out.println("last: " + lastNum);
 			for(int i=0;i<cur.length();i++) {  
 				char[] charCur = cur.toCharArray();
 				for(char c='a';c<='z';c++)  {  
 					charCur[i] = c;  
 					String temp = new String(charCur);  
-					if(temp.equals(endWord))   				//why can't use charCur.equals  
+					if(temp.equals(endWord))   				//Need temp because we need to use String to compare with endWord  
 						return level+1;  
 					if(wordList.contains(temp) && !visited.contains(temp)) {  
-						curNum++;  		//?
+						curNum++;  							
 						queue.offer(temp);  
 						visited.add(temp);  
-						System.out.println("temp: " +temp + " ,visited: "+visited);
 					}  
 				}  
 			}
-			System.out.println("curNum: "+curNum + " queue: " + queue);
 			if(lastNum==0) {  
 				lastNum = curNum;  
 				curNum = 0;  
@@ -88,7 +83,7 @@ public class n127_Word_Ladder {
 		for(int i=0; i<wordLists.length; i++) {
 			wordList.add(wordLists[i]);
 		}
-		System.out.println("wordLists: "+Arrays.toString(wordLists));
+		System.out.println("WordLists: "+Arrays.toString(wordLists) + "\nFirst: "+"hit" + " \nEnd: "+"cog");
 		System.out.println(obj.ladderLength("hit", "cog", wordList));
 	}
 }
