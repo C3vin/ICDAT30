@@ -14,30 +14,25 @@ public class n005_longest_palindromic_substring {
 	        if(i%2 == 1) { 
 	            right++;  
 	        }
-	        //System.out.println("left: " + left + " right: " + right);
+	        System.out.println("left: " + left + " right:" + right);
 	        String str = lengthOfPalindrome(s,left,right);  
-	        //System.out.println("str: " + str);
-	        if(maxLen < str.length())  
-	        {  
-	        	//System.out.println("maxLen1: " + maxLen);
+	        System.out.println("str:" + str);
+	        if(maxLen < str.length()) {  
 	            maxLen = str.length();  
-	            //System.out.println("maxLen2: " + maxLen + " str: " + str);
 	            res = str;  
 	        }  
 	    }  
-	    
 	    return res;  
 	}  
 	private String lengthOfPalindrome(String s, int left, int right) {  
-	    while(left>=0 && right<s.length() && s.charAt(left)==s.charAt(right)) {  
-	    	//System.out.println("charAt(left): " + s.charAt(left) + " charAt(right): " + s.charAt(right));
+	    while(left>=0 && right<s.length() && s.charAt(left) == s.charAt(right)) {  
 	    	left--;  
 	        right++;  
-	        //System.out.println("#left: " + left + " #right: " + right);
 	    }  
 	    return s.substring(left+1,right);  
 	} 
 	
+	//DP
 	public String longestPalindromeDP(String s) {  
 	    if(s == null || s.length()==0)  
 	        return "";  
@@ -50,13 +45,10 @@ public class n005_longest_palindromic_substring {
 	    for(int i=s.length()-1; i>=0; i--) {  
 	        for(int j=i; j<s.length(); j++) {  
 	            if(s.charAt(i) == s.charAt(j) && (j-i<=2 || palin[i+1][j-1])) {  
-	            	System.out.println("charAt(left): " + s.charAt(i) + " charAt(right): " + s.charAt(j) + " i: " + i + " j: " + j);
 	            	palin[i][j] = true;  
 	                if(maxLen < j-i+1) {  
-	                	System.out.println("@: " + palin[i][j]);
 	                    maxLen = j-i+1;  
 	                    res = s.substring(i,j+1);  
-	                    System.out.println("maxLen: " + maxLen + " res: " + res);
 	                }  
 	            }  
 	        }  
