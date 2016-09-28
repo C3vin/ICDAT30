@@ -9,9 +9,9 @@ public class n034_Search_for_a_Range {
 
 		int ll = 0;
 		int lr = nums.length-1;
-		while(ll <= lr) {
+		while(ll <= lr) {						
 			int m = (ll + lr)/2;
-			if(nums[m] < target) {
+			if(nums[m] < target) {				//F: <
 				ll = m+1;
 			} else {
 				lr = m-1;
@@ -21,8 +21,8 @@ public class n034_Search_for_a_Range {
 		int rl =0;
 		int rr = nums.length-1;
 		while(rl <= rr) {
-			int m = (rl+rr)/2;
-			if(nums[m] <= target) {
+			int m = (rl + rr)/2;
+			if(nums[m] <= target) {				//F: <=
 				rl = m+1;
 			} else {
 				rr = m-1;
