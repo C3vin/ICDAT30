@@ -34,11 +34,10 @@ public class n138_Copy_List_with_Random_Pointer {
 			oldp = oldp.next;
 			newp = newp.next;
 		}
-		System.out.println(newhead.random.label);
 		return newhead;
 	}
 	
-	public static void main(String[] args) {			//???
+	public static void main(String[] args) {			
 		n138_Copy_List_with_Random_Pointer obj = new n138_Copy_List_with_Random_Pointer();
 		RandomListNode head = obj.new RandomListNode(1);
 		RandomListNode p3 = obj.new RandomListNode(3);
@@ -48,9 +47,11 @@ public class n138_Copy_List_with_Random_Pointer {
 		RandomListNode p6 = obj.new RandomListNode(6);
 		head.next = p3;
 		p3.next = p5;
-		head.random = p2;
+		p5.next = p2;
+		p2.next = p4;
+		p4.next = p6;
+		p2.random = p3;
 		p3.random = p4;
-		p5.random = p6;
 		System.out.println(obj.copyRandomList(head));
 	}
 }
