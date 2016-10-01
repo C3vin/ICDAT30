@@ -31,13 +31,11 @@ public class n215_Kth_Largest_Element_in_an_Array {
 				swap(nums, left, right);
 				left++;			//why left++ right--
 				right--;
-				System.out.println("left: " + left + " right: " + right);
 			}
 		}
-		System.out.println(Arrays.toString(nums));
-		if(orgL < right && k < right)
+		if(orgL < right && k <= right)
 			return quickSelect(nums, k, orgL, right);
-		if(left < orgR && k > left)
+		if(left < orgR && k >= left)
 			return quickSelect(nums, k, left, orgR);
 		return nums[k];
 	}
@@ -50,7 +48,8 @@ public class n215_Kth_Largest_Element_in_an_Array {
 	public static void main(String[] args) {
 		n215_Kth_Largest_Element_in_an_Array obj = new n215_Kth_Largest_Element_in_an_Array();
 		int[] nums = {3, 2, 1, 5, 6, 4};
-		System.out.println(obj.findKthLargest(nums, 2));
+		//int[] nums = {-1, 2, 0};
+		//System.out.println(obj.findKthLargest(nums, 2));
 		System.out.println(obj.findKthLargestqQS(nums, 2));
 	}
 }
