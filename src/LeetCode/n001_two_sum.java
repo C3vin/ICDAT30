@@ -10,7 +10,7 @@ public class n001_two_sum {
 	public int[] twoSum(int[] nums, int target) {
 		int[] res = new int[2];
 		if(nums == null || nums.length < 2) return null;
-		Arrays.sort(nums);  
+		Arrays.sort(nums);  		//Order
 		int l=0;
 		int r=nums.length-1;
 		while(l<r) {
