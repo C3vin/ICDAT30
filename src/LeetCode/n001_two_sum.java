@@ -10,7 +10,7 @@ public class n001_two_sum {
 	public int[] twoSum(int[] nums, int target) {
 		int[] res = new int[2];
 		if(nums == null || nums.length < 2) return null;
-
+		Arrays.sort(nums);  
 		int l=0;
 		int r=nums.length-1;
 		while(l<r) {
@@ -19,10 +19,11 @@ public class n001_two_sum {
 				res[1]=r;
 				return res;
 			}
-			if(nums[l] + nums[r] > target) {
+			else if(nums[l] + nums[r] > target) {
 				r--;
-			} else
+			} else {
 				l++;
+			}
 		}
 		return null;
 	}
@@ -42,10 +43,11 @@ public class n001_two_sum {
 
 	public static void main(String[] args) {
 		n001_two_sum obj = new n001_two_sum();
-		int [] nums = {2,7,11,15};
-		int target = 9;
+		int [] nums = {3,2,4};
+		int [] nums1 = {3,2,4};
+		int target = 6;
 
-		System.out.println(Arrays.toString(obj.twoSum(nums, target)));
-		System.out.println(Arrays.toString(obj.twoSum_hash(nums, target)));	
+		System.out.println(Arrays.toString(obj.twoSum(nums, target)));		//The reason order int array
+		System.out.println(Arrays.toString(obj.twoSum_hash(nums1, target)));	
 	}
 }
