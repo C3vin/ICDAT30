@@ -19,8 +19,8 @@ public class n170_Two_Sum_III_Data_structure_design {
 	public boolean find(int value) {
 		for(int i : map.keySet()) {			//keySet
 			if(map.containsKey(value-i)) {
-				 if (value - i != i) return true;		//?
-				 else if (map.get(i) >= 2) return true;	//?
+				 if ((value-i) != i) return true;		//4-1 != 1 
+				 else if (map.get(i) >= 2) return true;	//has more than 2 times in the map
 			}
 		}
 		return false;
