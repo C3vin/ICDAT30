@@ -1,7 +1,7 @@
 package INQ;
 
 public class text2speech {
-	final String[] specialNames = {
+	private static final String[] specialNames = {
 			"",
 			" thousand",
 			" million",
@@ -10,7 +10,7 @@ public class text2speech {
 			" quadrillion",
 			" quintillion"
 	};
-	final String[] tensNames = {
+	private static final String[] tensNames = {
 			"",
 			" ten",
 			" twenty",
@@ -22,7 +22,7 @@ public class text2speech {
 			" eighty",
 			" ninety"
 	};
-	final String[] numNames = {
+	private static final String[] numNames = {
 			"",
 			" one",
 			" two",
@@ -59,7 +59,6 @@ public class text2speech {
 			current = tensNames[number % 10] + current;
 			number /= 10;
 		}
-		System.out.println("@: "+current);
 		if (number == 0) return current;
 		return numNames[number] + " hundred" + current;
 	}
