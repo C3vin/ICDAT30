@@ -59,6 +59,7 @@ public class text2speech {
 			current = tensNames[number % 10] + current;
 			number /= 10;
 		}
+		System.out.println("@: "+current);
 		if (number == 0) return current;
 		return numNames[number] + " hundred" + current;
 	}
@@ -70,19 +71,19 @@ public class text2speech {
 			number = -number;
 			prefix = "negative";
 		}
-		String current = "";
+		String result = "";
 		int place = 0;
-		do {
+		//do 
+		while(number > 0) {
 			int n = number % 1000;
 			if (n != 0){
 				String s = convertLessThanOneThousand(n);
-				System.out.println(s);
-				current = s + specialNames[place] + current;
+				result = s + specialNames[place] + result;
 			}
 			place++;
-			number /= 1000;
-		} while (number > 0);
-		return (prefix + current).trim();
+			number /= 1000;			//deal the rest part
+		} //while (number > 0);
+		return (prefix + result).trim();
 	}
 	public static void main(String[] args) {
 		text2speech obj = new text2speech();
