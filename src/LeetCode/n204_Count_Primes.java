@@ -10,7 +10,7 @@ public class n204_Count_Primes {
 
 		for(int i=2; i<n; i++) {
 			if(prime[i]) {
-				for(int j=i*2; j<n; j=j+i) {
+				for(int j=i*2; j<n; j=j+i) {			//F: j= j + i
 					prime[j] = false;
 				}
 			}
@@ -25,6 +25,6 @@ public class n204_Count_Primes {
 	
 	public static void main(String[] args) {
 		n204_Count_Primes obj = new n204_Count_Primes();
-		System.out.println(obj.countPrimes(9));
+		System.out.println(obj.countPrimes(100));
 	}
 }
