@@ -11,7 +11,7 @@ public class n156_Binary_Tree_Upside_Down {
 		TreeNode(int x) { val = x; }
 	}
 	public TreeNode upsideDownBinaryTree(TreeNode root) {
-		if(root == null || root.left == null) 
+/*		if(root == null || root.left == null) 
 			return root;
 		//e.g. root:1 -> root:2 -> root:4, root 4 has no left node, return root (back to root 2)
 		TreeNode newRoot = upsideDownBinaryTree(root.left);	//will get the latest left node, so it will go deeper and deeper e.g. 
@@ -23,7 +23,19 @@ public class n156_Binary_Tree_Upside_Down {
 		rightMostIterator.left = root.right;
 		rightMostIterator.right = new TreeNode(root.val);
 		
-		return newRoot;
+		return newRoot;*/
+		
+		//iteration
+	    TreeNode node = root, parent = null, right = null;  
+	    while (node != null) {  
+	        TreeNode left = node.left;  
+	        node.left = right;  
+	        right = node.right;  
+	        node.right = parent;  
+	        parent = node;  
+	        node = left;  
+	    }  
+	    return parent; 
 	}
 	
 	public static void main(String[] args) {
