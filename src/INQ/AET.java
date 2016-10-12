@@ -1,6 +1,6 @@
 package INQ;
 
-import java.util.Stack;
+import java.util.LinkedList;
 
 public class AET {
 	public class Node {
@@ -11,11 +11,8 @@ public class AET {
 	}
 	// A utility function to check if 'c'
 	// is an operator
-
 	public boolean isOperator(char c) {
-		if (c == '+' || c == '-'
-				|| c == '*' || c == '/'
-				|| c == '^') {
+		if (c == '+' || c == '-' || c == '*' || c == '/' || c == '^') {
 			return true;
 		}
 		return false;
@@ -33,7 +30,8 @@ public class AET {
 	// Returns root of constructed tree for given
 	// postfix expression
 	public Node constructTree(char postfix[]) {
-		Stack<Node> st = new Stack();
+		LinkedList<Node> st = new LinkedList();
+		//Stack<Node> st = new Stack(); 
 		Node t, t1, t2;
 
 		// Traverse through every character of
@@ -44,20 +42,20 @@ public class AET {
 			if (!isOperator(postfix[i])) {
 				t = new Node(postfix[i]);
 				st.push(t);
-			} else // operator
-			{
+			} else {
+				// operator
 				t = new Node(postfix[i]);
 
 				// Pop two top nodes
 				// Store top
-				t1 = st.pop();      // Remove top
-				t2 = st.pop();
-
+				//t1 = st.pop();      // Remove top
+				//t2 = st.pop();
+				t1 = st.poll();      // Remove top
+				t2 = st.poll();
 				//  make them children
 				t.right = t1;
 				t.left = t2;
 
-				// System.out.println(t1 + "" + t2);
 				// Add this subexpression to stack
 				st.push(t);
 			}
@@ -78,6 +76,6 @@ public class AET {
 		Node root = et.constructTree(charArray);
 		System.out.println("infix expression is");
 		et.inorder(root);
-		
+
 	}
 }
