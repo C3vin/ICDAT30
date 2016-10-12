@@ -48,6 +48,23 @@ public class n257_Binary_Tree_Paths {
 		}
 	}
 
+	//sol2
+	public List<String> resultList2 = new ArrayList<String>();
+	public List<String> binaryTreePaths2(TreeNode root) {
+		if(root == null) 
+			return resultList2;
+		getPath(root, root.val + "");
+		
+		return resultList2;
+	}
+	private void getPath(TreeNode node, String path) {
+		if(node.left == null && node.right == null) 
+			resultList2.add(path);
+		if(node.left != null)
+			getPath(node.left, path + "->" + node.left.val);
+		if(node.right != null)
+			getPath(node.right, path + "->" + node.right.val);
+	}
 	public static void main(String[] args) {
 		n257_Binary_Tree_Paths obj = new n257_Binary_Tree_Paths();
 		TreeNode p1 = obj.new TreeNode(1);
@@ -58,5 +75,6 @@ public class n257_Binary_Tree_Paths {
 		p1.right = p3;
 		p2.right = p5;
 		System.out.println(obj.binaryTreePaths(p1));
+		System.out.println(obj.binaryTreePaths2(p1));
 	}
 }
