@@ -3,7 +3,7 @@ package LeetCode;
 import java.util.ArrayList;
 import java.util.List;
 
-public class n57_Insert_Interval {
+public class n057_Insert_Interval {
 	public class Interval {
 		int start;
 		int end;
@@ -26,12 +26,15 @@ public class n57_Insert_Interval {
 			if(inter.end < newInterval.start)
 				res.add(inter);
 			else if(inter.start > newInterval.end) {
+				//System.out.println(inter + " : " +newInterval);
 				res.add(newInterval);
-				newInterval = inter;	//?
+				newInterval = inter;	//add newInterval(3, 10) first and update newInterval to inter(12,16), so we can add in res later(out for loop)
 			} else {
+				System.out.println(inter + " : " +newInterval);
 				int nStart = Math.min(inter.start, newInterval.start);
 				int nEnd = Math.max(inter.end, newInterval.end);
-				newInterval = new Interval(nStart, nEnd);
+				newInterval = new Interval(nStart, nEnd);			//update newInterval(4, 9) to (3, 9) to (3, 10)
+				System.out.println("@: "+newInterval);
 			}
 		}
 		res.add(newInterval);
@@ -39,7 +42,7 @@ public class n57_Insert_Interval {
 	}
 	
 	public static void main(String[] args) {
-		n57_Insert_Interval obj = new n57_Insert_Interval();
+		n057_Insert_Interval obj = new n057_Insert_Interval();
 		List<Interval> intervals = new ArrayList<Interval>();
 		intervals.add(obj.new Interval(1, 2));
 		intervals.add(obj.new Interval(3, 5));
@@ -47,10 +50,7 @@ public class n57_Insert_Interval {
 		intervals.add(obj.new Interval(8, 10));
 		intervals.add(obj.new Interval(12, 16));
 		Interval newInterval = obj.new Interval(4, 9);
-		
-		/*for(Interval ii: obj.insert(intervals, obj.new Interval(4, 9))) {
-			System.ou
-		} */
+		System.out.println(intervals + " : " + newInterval);
 		System.out.println(obj.insert(intervals, newInterval));
 	}
 }
