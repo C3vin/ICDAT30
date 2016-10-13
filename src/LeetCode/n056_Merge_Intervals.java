@@ -33,7 +33,7 @@ public class n056_Merge_Intervals {
 			}
 		});
 		Interval pre = intervals.get(0);
-		for(int i=0; i<intervals.size(); i++) {
+		for(int i=0; i<intervals.size(); i++) {			//need i=0 ?
 			Interval curr = intervals.get(i);
 			if(curr.start > pre.end) {
 				res.add(pre);
