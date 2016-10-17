@@ -32,10 +32,10 @@ public class n146_LRU_Cache {
 		return -1;
 	}
 	private void remove(Node n) {
-		if(n.pre!=null) {			//?
+		if(n.pre!=null) {			 
 			n.pre.next = n.next;
 		} else {
-			head = n.next;
+			head = n.next;	 		//F: means n is head
 		}
 		if(n.next!=null) {
 			n.next.pre = n.pre;
@@ -49,26 +49,38 @@ public class n146_LRU_Cache {
 		if(head!=null)
 			head.pre = n;
 
-		head=n;		//?
+		head=n;		 
+		
 		if(end==null)
 			end = head;
 	}
 	public void set(int key, int value) {
 		if(map.containsKey(key)) {
 			Node old = map.get(key);
-			old.value = value;
+			old.value = value;			//F: need to assign new value!!!
 			remove(old);
 			setHead(old);
 		} else {
 			Node created = new Node(key, value);
-			if(map.size() >= capacity) { 		//remove the end, then put into head
-				map.remove(end.key); //can we do end.value
-				remove(end);
+			if(map.size() >= capacity) { 	//map.size, >= !!!
+				map.remove(end.key);  		//map.remove
+				remove(end); 				//remove (Node)
 				setHead(created);
 			} else {
 				setHead(created);
 			}
 			map.put(key, created);	
 		}
+	}
+	
+	public static void main(String[] args) {
+		n146_LRU_Cache obj = new n146_LRU_Cache(3);
+		obj.set(1, 23);
+		obj.set(2, 33);
+		obj.set(3, 56);
+		System.out.println(obj.get(2));
+		obj.set(4, 99);
+		System.out.println(obj.get(4));
+		
 	}
 }
