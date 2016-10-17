@@ -17,7 +17,7 @@ public class n146_LRU_Cache {
 	HashMap<Integer, Node> map = new HashMap<Integer, Node>();
 	Node head = null;
 	Node end = null;
-	
+
 	public n146_LRU_Cache(int capacity) {		//constructor
 		this.capacity = capacity;
 	}
@@ -48,7 +48,7 @@ public class n146_LRU_Cache {
 		n.pre = null;
 		if(head!=null)
 			head.pre = n;
-		
+
 		head=n;		//?
 		if(end==null)
 			end = head;
@@ -61,7 +61,7 @@ public class n146_LRU_Cache {
 			setHead(old);
 		} else {
 			Node created = new Node(key, value);
-			if(map.size()>=capacity) { //?
+			if(map.size() >= capacity) { 		//remove the end, then put into head
 				map.remove(end.key); //can we do end.value
 				remove(end);
 				setHead(created);
