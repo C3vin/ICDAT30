@@ -10,7 +10,7 @@ public class MaximumSum {
 		int cur = prev;
 		
 		for(int i=1; i<len; i++) {
-			cur = Math.max(prev, pprev+arr[i]);
+			cur = Math.max(prev, pprev+arr[i]);		//update cur
 			pprev = prev;
 			prev = cur;
 		}
