@@ -5,7 +5,7 @@ public class MaximumSum {
 		int len = arr.length;
 		if(len < 1) return 0;
 		
-		int pprev = 0;
+		/*int pprev = 0;
 		int prev = arr[0];
 		int cur = prev;
 		
@@ -15,7 +15,16 @@ public class MaximumSum {
 			prev = cur;
 		}
 		
-		return cur;
+		return cur;*/
+		
+		int[] dp = new int[len+1];
+		dp[0] = 0;
+		dp[1] = arr[0];
+		
+		for(int i=1; i<len; i++) {
+			dp[i+1] = Math.max(dp[i-1]+arr[i],dp[i]);
+		}
+		return dp[len];
 	}
 	
 	public static void main(String[] args) {
