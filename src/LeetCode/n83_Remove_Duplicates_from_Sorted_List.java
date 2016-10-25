@@ -20,6 +20,7 @@ public class n83_Remove_Duplicates_from_Sorted_List {
 				p = p.next;
 			}
 		}
+		System.out.println(head.val + " -> " + head.next.val + " -> " + head.next.next.val);
 		return head;
 		
 		// two tmp sol

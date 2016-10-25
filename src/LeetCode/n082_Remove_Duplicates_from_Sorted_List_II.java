@@ -17,8 +17,8 @@ public class n082_Remove_Duplicates_from_Sorted_List_II {
 			int dup;
 			if(p.next.val == p.next.next.val) {
 				dup = p.next.val;
-				while(p.next.val == dup && p.next != null) {
-					p.next = p.next.next;						//F: move and remove dup node, keep move to right(dup) until diff val 
+				while(p.next.val == dup && p.next != null) {	//F: !!! while loop !!!
+					p.next = p.next.next;						//F: move and remove dup node, keep move to right(dup) until diff val, "remove p.next"
 				}
 			} else {
 				p = p.next;

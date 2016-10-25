@@ -24,11 +24,15 @@ public class n206_Reverse_Linked_List {
 	public ListNode reverseList2(ListNode head) {
 		if(head==null || head.next==null) return head;		// || not &&
 		
-		ListNode newhead = reverseList2(head.next);
-		head.next.next = head;
-		head.next = null;
-		
-		return newhead;
+	    //get second node    
+	    ListNode second = head.next;
+	    //set first's next to be null
+	    head.next = null;
+	 
+	    ListNode rest = reverseList2(second);
+	    second.next = head;
+	 
+	    return rest;
 	}
 	public static void main(String[] args) {
 		n206_Reverse_Linked_List obj = new n206_Reverse_Linked_List();
