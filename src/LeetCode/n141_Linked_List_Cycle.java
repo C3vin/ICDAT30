@@ -1,10 +1,13 @@
 package LeetCode;
 
 public class n141_Linked_List_Cycle {
+	/**
+	 *  if slow and faster meet, return true (even need to take a long time)  
+	 */
 	public boolean hasCycle(ListNode head) {
 		ListNode slow = head;
 		ListNode faster = head;
-		while(faster != null && faster.next != null) {
+		while(faster != null && faster.next != null) {		//check faster and faster.next
 			slow = slow.next;
 			faster = faster.next.next;
 			if(slow == faster) {
