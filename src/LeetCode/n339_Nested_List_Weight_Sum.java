@@ -45,7 +45,6 @@ public class n339_Nested_List_Weight_Sum {
 					sbf.append(ni.toString());
 					if(!ni.isInteger()) sbf.append("]");
 				}
-
 			return sbf.toString();
 		}
 
@@ -120,10 +119,37 @@ public class n339_Nested_List_Weight_Sum {
 
 		int sum=0;
 		for(NestedInteger ni : nestedList) {
-			if(ni.isInteger()) {
+			if(ni.isInteger()) {	//int in
 				sum = sum + ni.getInteger() * depth;		//depth
-			} else {
+			} else {				//list depth+1
 				sum = sum + helper(ni.getList(), depth+1);
+			}
+		}
+		return sum;
+	}
+	
+	//Iterative
+	public int depthSum2(List<NestedInteger> nestedList) {
+		//if(nestedList.size() == 0) return 0;
+		int sum = 0;
+		LinkedList<NestedInteger> queue = new LinkedList<NestedInteger>();
+		LinkedList<Integer> depth = new LinkedList<Integer>();
+		
+		for(NestedInteger ni: nestedList){
+	        queue.offer(ni);
+	        depth.offer(1);
+	    }
+		
+		while(!queue.isEmpty()) {				//while!!!
+			NestedInteger tmp = queue.poll();
+	        int dep = depth.poll();
+			if(tmp.isInteger()){
+				sum = sum + (tmp.getInteger()*dep);
+			} else {
+				for(NestedInteger ni : tmp.getList()) {
+					queue.offer(ni);
+					depth.offer(dep+1);
+				}
 			}
 		}
 		return sum;
@@ -133,5 +159,6 @@ public class n339_Nested_List_Weight_Sum {
 		n339_Nested_List_Weight_Sum obj = new n339_Nested_List_Weight_Sum();
 		NI ni = obj.new NI("[1,1],2,[1,1]");
 		System.out.println(obj.depthSum(ni.getList()));
+		System.out.println(obj.depthSum2(ni.getList()));
 	}
 }
