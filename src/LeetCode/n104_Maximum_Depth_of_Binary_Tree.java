@@ -11,18 +11,24 @@ public class n104_Maximum_Depth_of_Binary_Tree {
 			val = x; 
 		}
 	}
-
+	
+	//sol1: Recursive
 	public int maxDepth(TreeNode root) {
 		if(root == null) return 0;
-		return Math.max(1 + maxDepth(root.left), 1 + maxDepth(root.right));	//root
+		int left = maxDepth(root.left)+1; //depth+1
+		int right = maxDepth(root.right)+1;
+		
+		int res = Math.max(left, right);
+		return res;
 	}
 
+	//sol2: Non-recursive
 	public int maxDepth2(TreeNode root) {
 		if(root == null)  
 			return 0;  
 		int level = 0;  
 		LinkedList<TreeNode> queue = new LinkedList<TreeNode>();  
-		queue.add(root);  
+		queue.add(root);  //only add one node, size = 1 e.g. root
 		int curNum = 1; //num of nodes left in current level  
 		int nextNum = 0; //num of nodes in next level  
 		
@@ -37,7 +43,7 @@ public class n104_Maximum_Depth_of_Binary_Tree {
 				queue.add(n.right);  
 				nextNum++;  
 			}  
-			if(curNum == 0) {  
+			if(curNum == 0) {  			//reset
 				curNum = nextNum;  
 				nextNum = 0;  
 				level++;  
