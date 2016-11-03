@@ -1,5 +1,8 @@
 package LeetCode;
 
+import java.util.LinkedList;
+import java.util.Queue;
+
 public class n226_Invert_Binary_Tree {
 	/*
 	 *      
@@ -16,7 +19,7 @@ to
  / \   / \				             
 9   6 3   1
 	 */
-	
+
 	public class TreeNode {
 		int val;
 		TreeNode left;
@@ -24,15 +27,35 @@ to
 		TreeNode(int x) { val = x; }
 	}
 	public TreeNode invertTree(TreeNode root) {
-		if(root == null) return root;
-		
+		if(root == null) return root;		//need to return root!
+
 		TreeNode l = root.left;				//swap
 		root.left = invertTree(root.right);
-		root.right = l;
-		
+		root.right = invertTree(l);
+
 		return root;
 	}
-	
+	public TreeNode invertTree2(TreeNode root) {
+		if(root == null) return null;
+
+		Queue<TreeNode> queue = new LinkedList<>();
+		queue.offer(root);
+		while(!queue.isEmpty()) {
+			TreeNode tmp = queue.poll();
+			TreeNode l = tmp.left;
+
+			tmp.left = tmp.right;
+			if(tmp.right != null) {
+				queue.offer(tmp.right);
+			}
+
+			tmp.right = l;
+			if(l != null) {
+				queue.offer(l);
+			}
+		}
+		return root;
+	}
 	public static void main(String[] args) {
 		n226_Invert_Binary_Tree obj = new n226_Invert_Binary_Tree();
 		TreeNode t1 = obj.new TreeNode(4);
@@ -50,5 +73,6 @@ to
 		t3.right = t7;
 		System.out.println(t1.val + " " + t1.left.val + " " + t1.right.val);
 		System.out.println(obj.invertTree(t1).left.val);
+		System.out.println(obj.invertTree2(t1).left.val);	//diff than sol1, cuz tree invert already
 	}
 }
