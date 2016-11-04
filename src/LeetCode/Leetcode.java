@@ -18,6 +18,7 @@ public class Leetcode {
 		Map<Integer,String> questions = new HashMap<Integer, String>();
 		while (resources.hasMoreElements()) {
 			URL resource = resources.nextElement();
+			System.out.println(resource);
 			File dir = new File(resource.getFile());
 			for(File file: dir.listFiles()) {
 				if(!file.getName().endsWith(".class")) continue;
@@ -25,6 +26,7 @@ public class Leetcode {
 
 				Alg lc = klazz.getAnnotation(Alg.class);
 				if(lc != null) {
+					System.out.println(lc.num());
 					questions.put(lc.num(), String.format("#%s - %s - %s- %20s", lc.com(), lc.type(), lc.level(), klazz.getName()));
 
 					count++;
@@ -34,6 +36,7 @@ public class Leetcode {
 		System.out.println("Total @LeetCode = " + count);
 		Set<Integer> keys = new TreeSet<Integer>(questions.keySet());
 		for(Integer key: keys) {
+			System.out.println(keys);
 			System.out.println(questions.get(key));
 		}
 	}
