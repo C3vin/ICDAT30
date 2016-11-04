@@ -5,6 +5,7 @@ import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
 
+@Alg(type="DFS", com="LL&M$", level="med", num=047)
 public class n047_Permutations_II {
 	public List<List<Integer>> permuteUnique(int[] nums) {
 		 List<List<Integer>> res = new ArrayList<List<Integer>>();
@@ -30,7 +31,7 @@ public class n047_Permutations_II {
 				tmp.remove(tmp.size()-1);
 				used[i] = false;
 				
-				//!!!??????
+				//ignore duplicate 
 				while(i<nums.length-1 && nums[i] == nums[i+1]) {
 					i++;
 				}

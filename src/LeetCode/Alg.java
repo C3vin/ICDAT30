@@ -11,4 +11,5 @@ public @interface Alg {
 	public String type();
 	public String com();
 	public String level();
+	public int num();
 }

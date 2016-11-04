@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
-//LL & M$
+@Alg(type="DFS", com="LL&M$", level="med", num=046)
 public class n046_Permutations {
 	 public List<List<Integer>> permute(int[] nums) {
 		 List<List<Integer>> res = new ArrayList<List<Integer>>();
