@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
-@Alg(type="DFS", com="LL&M$", level="med", num=046)
+@Alg(type="NP", com="LL&M$", level="med", num=46)
 public class n046_Permutations {
 	//Need one res, tmp, used(visited) for dfs
 	 public List<List<Integer>> permute(int[] nums) {
