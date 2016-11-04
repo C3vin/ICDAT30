@@ -6,6 +6,7 @@ import java.util.List;
 
 @Alg(type="DFS", com="LL&M$", level="med", num=046)
 public class n046_Permutations {
+	//Need one res, tmp, used(visited) for dfs
 	 public List<List<Integer>> permute(int[] nums) {
 		 List<List<Integer>> res = new ArrayList<List<Integer>>();
 		 boolean[] used = new boolean[nums.length];
@@ -14,6 +15,7 @@ public class n046_Permutations {
 		 return res;
 	 }
 	 //DFS
+	 //Need one list to create space [A,B,C] and add to res
 	 private void helper(int[] nums, List<List<Integer>> res, List<Integer> tmp, boolean[] used) {
 		 if(tmp.size() == nums.length) {
 			 List<Integer> list = new LinkedList<Integer>(tmp);		//why? cuz tmp will be change
