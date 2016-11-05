@@ -2,6 +2,7 @@ package LeetCode;
 
 import java.util.LinkedList;
 
+@Alg(type="String", com="AA,G,M$", level="easy", num=20)
 public class n020_Valid_Parentheses {
 	public boolean isValid(String s) {
 		if(s.length() == 0 || s.length() == 1) return false;
@@ -12,11 +13,11 @@ public class n020_Valid_Parentheses {
 				stack.push(s.charAt(i));
 				System.out.println(stack);
 			} else {
-				if(stack.size() == 0)
+				if(stack.size() == 0)			//F: Need to handle this, [(]
 					return false;
 				
 				char tmp = stack.pop();
-				System.out.println(tmp);
+				System.out.println("tmp: "+tmp + " : " + s.charAt(i));
 				if(s.charAt(i) == ')') {
 					if(tmp != '(')
 						return false;
@@ -29,13 +30,13 @@ public class n020_Valid_Parentheses {
 				}
 			}	
 		}
-		return stack.size()== 0;					//F: using size !!!!!!!!!!!!!!! 
+		return stack.size() == 0;					//F: using size !!!!!!!!!!!!!!! 
 	}
 
 	public static void main(String[] args) {
 		n020_Valid_Parentheses obj = new n020_Valid_Parentheses();
-		//String s = "()[]{}";
-		String s = "([)]";
+		String s = "()[]{}";
+		//String s = "([)]";
 		System.out.println(obj.isValid(s));
 	}
 }

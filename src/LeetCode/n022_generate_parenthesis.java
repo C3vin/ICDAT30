@@ -3,35 +3,32 @@ package LeetCode;
 import java.util.ArrayList;
 import java.util.List;
 
+@Alg(type="NP", com="G", level="med", num=22)
 public class n022_generate_parenthesis {
 	public List<String> generateParenthesis(int n) {
-		
-	    ArrayList<String> result = new ArrayList<String>();
-	    dfs(result, "", n, n);
-	    return result;
+		List<String> res = new ArrayList<String>();
+		String tmp = new String();
+		//if(n <= 0) return res;
+		helper(n, n, res, tmp);
+		return res;
 	}
-
-	public void dfs(ArrayList<String> result, String s, int left, int right) {
-		if(left > right) {
+	private void helper(int left, int right, List<String> res, String tmp) {
+		if(left>right) //deal with ")("
+			return;
+		if(left == 0 && right == 0) {
+			String s = new String(tmp);
+			res.add(s);
 			return;
 		}
-		if(left == 0 && right == 0) {
-			result.add(s);
-			System.out.println(result);
-			return; 	
-		}
-		
 		if(left > 0) {
-			dfs(result, s+"(", left-1, right);
+			helper(left-1, right, res, tmp+"(");
 		}
-		
 		if(right > 0) {
-			dfs(result, s+")", left, right-1);
+			helper(left, right-1, res, tmp+")");
 		}
 	}
-	
 	public static void main(String[] args) {
 		n022_generate_parenthesis obj = new n022_generate_parenthesis();
-		obj.generateParenthesis(3);
+		System.out.println(obj.generateParenthesis(3));
 	}
 }
