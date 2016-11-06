@@ -2,6 +2,7 @@ package LeetCode;
 import static java.lang.annotation.RetentionPolicy.RUNTIME;
 import static java.lang.annotation.ElementType.METHOD;
 import static java.lang.annotation.ElementType.TYPE;
+
 import java.lang.annotation.Retention;
 import java.lang.annotation.Target;
 
@@ -13,3 +14,4 @@ public @interface Alg {
 	public String level();
 	public int num();
 }
+//e.g. @Alg(type=DP", com="AA", level="med", num=xx)
