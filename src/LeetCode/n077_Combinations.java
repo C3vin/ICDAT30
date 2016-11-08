@@ -3,6 +3,7 @@ package LeetCode;
 import java.util.ArrayList;
 import java.util.List;
 
+@Alg(type="DFS", com="NA", level="med", num=77)
 public class n077_Combinations {
 	public List<List<Integer>> combine(int n, int k) {
 		List<List<Integer>> res = new ArrayList<List<Integer>>();  
@@ -12,7 +13,7 @@ public class n077_Combinations {
 	}
 	public void dfs(List<List<Integer>> res, List<Integer> tmp, int k, int n, int start){  
 		for(int i=start; i<=n; i++) {  //F: need start can't use '1', // try each possibility number in current position
-			tmp.add(i); 
+			tmp.add(i); 	//F: !!! 
 			if(tmp.size() == k) {
 				res.add(new ArrayList<Integer>(tmp));  
 			}
