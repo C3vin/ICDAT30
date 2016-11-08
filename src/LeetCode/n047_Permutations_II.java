@@ -8,37 +8,36 @@ import java.util.List;
 @Alg(type="NP", com="LL&M$", level="med", num=47)
 public class n047_Permutations_II {
 	public List<List<Integer>> permuteUnique(int[] nums) {
-		 List<List<Integer>> res = new ArrayList<List<Integer>>();
-		 boolean[] used = new boolean[nums.length];
-		 List<Integer> tmp = new LinkedList<Integer>();
-		 Arrays.sort(nums);
-		 helper(nums, res, tmp, used);
-		 return res;
+		List<List<Integer>> res = new ArrayList<List<Integer>>();
+		boolean[] used = new boolean[nums.length];
+		List<Integer> tmp = new LinkedList<Integer>();
+		Arrays.sort(nums);
+		helper(nums, res, tmp, used);
+		return res;
 	}
 
 	private void helper(int[] nums, List<List<Integer>> res, List<Integer> tmp, boolean[] used) {
 		if(tmp.size() == nums.length) {
 			List<Integer> list = new LinkedList<Integer>(tmp);			//don't miss tmp
 			res.add(list);
-		} else {
-			for(int i=0; i<nums.length; i++) {
-				if(used[i])
-					continue;
-				
-				used[i] = true;
-				tmp.add(nums[i]);
-				helper(nums, res, tmp, used);
-				tmp.remove(tmp.size()-1);
-				used[i] = false;
-				
-				//ignore duplicate 
-				while(i<nums.length-1 && nums[i] == nums[i+1]) {
-					i++;
-				}
+		} 
+		for(int i=0; i<nums.length; i++) {
+			if(used[i])
+				continue;
+
+			used[i] = true;
+			tmp.add(nums[i]);
+			helper(nums, res, tmp, used);
+			tmp.remove(tmp.size()-1);
+			used[i] = false;
+
+			//ignore duplicate 
+			while(i<nums.length-1 && nums[i] == nums[i+1]) {
+				i++;
 			}
 		}
 	}
-	
+
 	public static void main(String[] args) {
 		n047_Permutations_II obj = new n047_Permutations_II();
 		int[] nums = {1,1,2};
