@@ -1,40 +1,36 @@
 package LeetCode;
 
 import java.util.LinkedList;
-
+@Alg(type="DFS,Tree", com="LL,A", level="easy", num=104)
 public class n104_Maximum_Depth_of_Binary_Tree {
 	public class TreeNode {
 		int val;
 		TreeNode left;
 		TreeNode right;
-		TreeNode(int x) { 
-			val = x; 
-		}
+		TreeNode(int x) { val = x; }
 	}
-	
 	//sol1: Recursive
 	public int maxDepth(TreeNode root) {
-		if(root == null) return 0;
-		int left = maxDepth(root.left)+1; //depth+1
-		int right = maxDepth(root.right)+1;
+		if(root == null) return 0;			
+		int left = maxDepth(root.left); 
+		int right = maxDepth(root.right);
 		
-		int res = Math.max(left, right);
+		int res = Math.max(left, right)+1;	//depth+1(root)
 		return res;
 	}
-
 	//sol2: Non-recursive
 	public int maxDepth2(TreeNode root) {
-		if(root == null)  
-			return 0;  
+		if(root == null)  return 0;
+		
 		int level = 0;  
 		LinkedList<TreeNode> queue = new LinkedList<TreeNode>();  
-		queue.add(root);  //only add one node, size = 1 e.g. root
-		int curNum = 1; //num of nodes left in current level  
-		int nextNum = 0; //num of nodes in next level  
+		queue.add(root);  	//only add one node, size = 1 e.g. root
+		int curNum = 1; 	//num of nodes left in current level  
+		int nextNum = 0; 	//num of nodes in next level  
 		
 		while(!queue.isEmpty()) {  
-			TreeNode n = queue.poll();  
-			curNum--;  
+			TreeNode n = queue.poll();  	//poll one node from queue
+			curNum--;  						//curNum--
 			if(n.left!=null) {  
 				queue.add(n.left);  
 				nextNum++;  
@@ -43,7 +39,7 @@ public class n104_Maximum_Depth_of_Binary_Tree {
 				queue.add(n.right);  
 				nextNum++;  
 			}  
-			if(curNum == 0) {  			//reset
+			if(curNum == 0) {  			//if no curNum, reset
 				curNum = nextNum;  
 				nextNum = 0;  
 				level++;  
