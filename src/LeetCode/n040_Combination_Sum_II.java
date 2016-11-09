@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-@Alg(type="NP", com="NA", level="Med", num=40)
+@Alg(type="NP", com="Snap", level="Med", num=40)
 public class n040_Combination_Sum_II {
 	public List<List<Integer>> combinationSum2(int[] candidates, int target) {
 		List<List<Integer>> res = new ArrayList<List<Integer>>();
