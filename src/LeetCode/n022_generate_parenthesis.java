@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Alg(type="NP", com="G", level="med", num=22)
+//[((())), (()()), (())(), ()(()), ()()()]
 public class n022_generate_parenthesis {
 	public List<String> generateParenthesis(int n) {
 		List<String> res = new ArrayList<String>();
