@@ -3,7 +3,7 @@ package LeetCode;
 import java.util.ArrayList;
 import java.util.List;
 
-@Alg(type=" ", com="AA", level="med", num=89)
+@Alg(type="Backtracking", com="AA", level="med", num=89)
 /**
 n = 0,[0]
 n = 1,[0,1]
