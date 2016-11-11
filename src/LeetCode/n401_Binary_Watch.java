@@ -3,6 +3,7 @@ package LeetCode;
 import java.util.ArrayList;
 import java.util.List;
 
+@Alg(type="bit", com="G", level="easy", num=401)
 public class n401_Binary_Watch {
 	public List<String> readBinaryWatch(int num) {
 		List<String> res = new ArrayList<String>();
