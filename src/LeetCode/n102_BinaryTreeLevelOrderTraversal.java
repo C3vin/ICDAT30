@@ -3,6 +3,8 @@ package LeetCode;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
+
+@Alg(type="BFS", com="L,AA,A,M$,F", level="easy", num=102)
 public class n102_BinaryTreeLevelOrderTraversal {
 	public class TreeNode {
 		int val;
@@ -14,11 +16,11 @@ public class n102_BinaryTreeLevelOrderTraversal {
 	}
 	public List<List<Integer>> levelOrder(TreeNode root) {
 		List<List<Integer>> res = new ArrayList<List<Integer>>();
+		List<Integer> tmp = new ArrayList<Integer>();
 		if(root == null) return res;
 
 		LinkedList<TreeNode> queue = new LinkedList<TreeNode>(); 
 		queue.add(root);
-		List<Integer> tmp = new ArrayList<Integer>();
 
 		int curlevel = 0;
 		int lastlevel = 1;
