@@ -1,5 +1,5 @@
 package LeetCode;
-//Amazon, Apple, FB
+@Alg(type="LinkedList", com="A,AA,F", level="easy", num=206)
 public class n206_Reverse_Linked_List {
 	//Iterative 0ms
 	public ListNode reverseList(ListNode head) {
@@ -37,6 +37,6 @@ public class n206_Reverse_Linked_List {
 	public static void main(String[] args) {
 		n206_Reverse_Linked_List obj = new n206_Reverse_Linked_List();
 		//System.out.print(obj.reverseList(ListNode.create(123)));
-		System.out.print(obj.reverseList2(ListNode.create(123)));
+		System.out.print(obj.reverseList(ListNode.create(123)));
 	}
 }
