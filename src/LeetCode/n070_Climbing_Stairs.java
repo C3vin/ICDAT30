@@ -14,7 +14,7 @@ public class n070_Climbing_Stairs {
 			f1 = f2;
 			f2 = f3;
 		}
-		return f2;
+		return f2;	//why f2, cuz it contain f3 value
 	}
 	
 	//DP
@@ -27,7 +27,7 @@ public class n070_Climbing_Stairs {
 		for(int i=3; i<n+1; i++) {			//n+1
 			dp[i] = dp[i-1] + dp[i-2];
 		}
-		return dp[n];
+		return dp[n];						//only need the lastest one dp[n]
 	}
 	public static void main(String[] args) {
 		n070_Climbing_Stairs obj = new n070_Climbing_Stairs();
