@@ -1,15 +1,29 @@
 package LeetCode;
 
 import java.util.Arrays;
+import java.util.PriorityQueue;
+import java.util.Queue;
 
 public class n215_Kth_Largest_Element_in_an_Array {
+	//sort
 	public int findKthLargest(int[] nums, int k) {
 		Arrays.sort(nums);
-
-		return nums[nums.length-k];
+		
+		return nums[nums.length-k];		
 	}
 	
-	//Quick Sort
+	//Priority
+	public int findKthLargestPriority(int[] nums, int k) {
+		Queue<Integer> pq = new PriorityQueue<Integer>();
+		for(int i=0; i<nums.length; i++) {
+			pq.add(nums[i]);	//add and sort in the same time e.g. [2,3,5]
+			if(pq.size() > k)	
+				pq.poll();		//poll head, e.g. [3,5]
+		}
+		return pq.poll();
+	}
+	
+	//Quick Sort https://segmentfault.com/a/1190000003704825
 	public int findKthLargestqQS(int[] nums, int k) {
 		if(nums.length == 0 || k < 1 ) return 0; 			//F: k < 1
 		
@@ -50,6 +64,7 @@ public class n215_Kth_Largest_Element_in_an_Array {
 		int[] nums = {3, 2, 1, 5, 6, 4};
 		//int[] nums = {-1, 2, 0};
 		//System.out.println(obj.findKthLargest(nums, 2));
-		System.out.println(obj.findKthLargestqQS(nums, 2));
+		//System.out.println(obj.findKthLargestqQS(nums, 2));
+		System.out.println(obj.findKthLargestPriority(nums, 2));
 	}
 }
