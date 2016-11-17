@@ -46,24 +46,23 @@ public class n036_Valid_Sudoku {
 		}
 		return true;
 	}
-
+	//HashSet sol better!
 	public boolean isValidSudokuHashSet(char[][] board) {
 		 HashSet<Character> set = new HashSet<Character>();
 		    // Check for each row
-		    for (int i = 0; i < 9; i++) {
-		        for (int j = 0; j < 9; j++) {
+		    for (int i=0; i<9; i++) {
+		        for (int j=0; j<9; j++) {
 		            if (board[i][j] == '.')
 		                continue;
 		            if (set.contains(board[i][j]))
 		                return false;
 		            set.add(board[i][j]);
 		        }
-		        set.clear();
+		        set.clear(); //Need to remove all elements before next row
 		    }
-
 		    // Check for each column
-		    for (int j = 0; j < 9; j++) {
-		        for (int i = 0; i < 9; i++) {
+		    for (int j=0; j<9; j++) {			//j
+		        for (int i=0; i<9; i++) { 	//i
 		            if (board[i][j] == '.')
 		                continue;
 		            if (set.contains(board[i][j]))
@@ -74,9 +73,9 @@ public class n036_Valid_Sudoku {
 		    }
 
 		    // Check for each sub-grid
-		    for (int k = 0; k < 9; k++) {
-		        for (int i = k/3*3; i < k/3*3+3; i++) {
-		            for (int j = (k%3)*3; j < (k%3)*3+3; j++) {
+		    for (int k=0; k<9; k++) {
+		        for (int i=k/3*3; i<k/3*3+3; i++) {	//row
+		            for (int j=(k%3)*3; j<(k%3)*3+3; j++) { //col
 		                if (board[i][j] == '.')
 		                    continue;
 		                if (set.contains(board[i][j]))
