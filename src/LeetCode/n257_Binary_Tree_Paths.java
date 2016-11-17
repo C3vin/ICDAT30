@@ -48,23 +48,22 @@ public class n257_Binary_Tree_Paths {
 		}
 	}
 
-	//sol2
-	public List<String> resultList2 = new ArrayList<String>();
+	//sol2 DFS
 	public List<String> binaryTreePaths2(TreeNode root) {
-		if(root == null) 
-			return resultList2;
-		getPath(root, root.val + "");
-		
-		return resultList2;
+		List<String> res = new ArrayList<String>();
+		if(root != null) 
+			getPath(root, res, root.val + "");	//covent to string
+		return res;
 	}
-	private void getPath(TreeNode node, String path) {
+	private void getPath(TreeNode node, List<String> res, String path) {
 		if(node.left == null && node.right == null) 
-			resultList2.add(path);
+			res.add(path);		//add path not node, cuz we need path
 		if(node.left != null)
-			getPath(node.left, path + "->" + node.left.val);
+			getPath(node.left, res, path + "->" + node.left.val);
 		if(node.right != null)
-			getPath(node.right, path + "->" + node.right.val);
+			getPath(node.right, res, path + "->" + node.right.val);
 	}
+	
 	public static void main(String[] args) {
 		n257_Binary_Tree_Paths obj = new n257_Binary_Tree_Paths();
 		TreeNode p1 = obj.new TreeNode(1);
