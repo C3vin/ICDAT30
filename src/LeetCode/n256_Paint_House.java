@@ -9,15 +9,15 @@ public class n256_Paint_House {
       //dp[i][B] = cost[i][B] + Math.min(dp[i - 1][R], dp[i - 1 ][G]);
       //dp[i][G] = cost[i][G] + Math.min(dp[i - 1][R], dp[i - 1][B]);
 
-      //Final staus: min(dp[n - 1][R], dp[n - 1][B], dp[n - 1][G]);
+      //Final status: min(dp[n - 1][R], dp[n - 1][B], dp[n - 1][G]);
         
-        for(int i = 1; i < costs.length; i++){				//F: i=1
+        for(int i = 1; i < costs.length; i++) {				//F: i=1
             costs[i][0] = costs[i][0] + Math.min(costs[i-1][1], costs[i-1][2]);
             costs[i][1] = costs[i][1] + Math.min(costs[i-1][0], costs[i-1][2]);
             costs[i][2] = costs[i][2] + Math.min(costs[i-1][0], costs[i-1][1]);
         }
-        int last = costs.length-1;
-        return Math.min(costs[last][0], Math.min(costs[last][1], costs[last][2]));
+        int n = costs.length;
+        return Math.min(costs[n-1][0], Math.min(costs[n-1][1], costs[n-1][2]));
 	}
 
 	public static void main(String[] args) {
