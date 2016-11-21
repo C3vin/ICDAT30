@@ -10,9 +10,8 @@ public class n256_Paint_House {
       //dp[i][G] = cost[i][G] + Math.min(dp[i - 1][R], dp[i - 1][B]);
 
       //Final status: min(dp[n - 1][R], dp[n - 1][B], dp[n - 1][G]);
-        
         for(int i = 1; i < costs.length; i++) {				//F: i=1
-            costs[i][0] = costs[i][0] + Math.min(costs[i-1][1], costs[i-1][2]);
+            costs[i][0] = costs[i][0] + Math.min(costs[i-1][1], costs[i-1][2]);		//i + min(i-1)$ 
             costs[i][1] = costs[i][1] + Math.min(costs[i-1][0], costs[i-1][2]);
             costs[i][2] = costs[i][2] + Math.min(costs[i-1][0], costs[i-1][1]);
         }
@@ -20,6 +19,12 @@ public class n256_Paint_House {
         return Math.min(costs[n-1][0], Math.min(costs[n-1][1], costs[n-1][2]));
 	}
 
+	/* {{7, 5, 10},		//it will update 
+		{8, 13, 6},
+		{14,13,12},
+		{18,14,22},
+		{15,22,21},
+		{23,18,21},*/
 	public static void main(String[] args) {
 		n256_Paint_House obj = new n256_Paint_House();
 		int [][] costMatrix = 			   
