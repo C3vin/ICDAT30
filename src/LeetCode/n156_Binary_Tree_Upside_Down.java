@@ -1,8 +1,11 @@
 package LeetCode;
 
-/*a                         b
- / \        ----->         / \
-b   c                     c   a*/
+/*  1          4     
+   / \        / \   
+  2   3 	 5	 2
+ / \	 ->		/ \
+4   5  		   3   1  
+{1,2,3,4,5} -> [4,5,2,#,#,3,1]  */
 public class n156_Binary_Tree_Upside_Down {
 	public class TreeNode {
 		int val;
@@ -11,33 +14,39 @@ public class n156_Binary_Tree_Upside_Down {
 		TreeNode(int x) { val = x; }
 	}
 	public TreeNode upsideDownBinaryTree(TreeNode root) {
-/*		if(root == null || root.left == null) 
+		if(root == null || root.left == null) 
 			return root;
-		//e.g. root:1 -> root:2 -> root:4, root 4 has no left node, return root (back to root 2)
-		TreeNode newRoot = upsideDownBinaryTree(root.left);	//will get the latest left node, so it will go deeper and deeper e.g. 
+		//e.g. root:1 -> root:2 -> root:4, root 4 has no left node, return root (back to root 2 and so on)
+		TreeNode newRoot = upsideDownBinaryTree(root.left);	//will get the latest left node, so it will go deeper and deeper 
 		TreeNode rightMostIterator = newRoot;
 		
-		while(rightMostIterator.right != null) {
-			rightMostIterator = rightMostIterator.right;
+		while(rightMostIterator.right != null) {			//rightMostIterator=4, but after rightMostIterator.right, IN! 
+			rightMostIterator = rightMostIterator.right; 	
 		}
 		rightMostIterator.left = root.right;
-		rightMostIterator.right = new TreeNode(root.val);
-		
-		return newRoot;*/
-		
-		//iteration
-	    TreeNode node = root, parent = null, right = null;  
-	    while (node != null) {  
-	        TreeNode left = node.left;  
-	        node.left = right;  
-	        right = node.right;  
-	        node.right = parent;  
-	        parent = node;  
-	        node = left;  
-	    }  
-	    return parent; 
+		rightMostIterator.right = new TreeNode(root.val);	//cuz need to be type TreeNode, root 2, and root 1
+
+		return newRoot;
 	}
-	
+	//iteration
+	public TreeNode upsideDownBinaryTree2(TreeNode root) {
+		if(root == null || root.left == null) 
+			return root;
+		
+		TreeNode node = root;
+		TreeNode parent = null;
+		TreeNode right = null;  
+		while (node != null) {  
+			TreeNode left = node.left;  
+			node.left = right;  
+			right = node.right;  
+			node.right = parent;  
+			parent = node;  	//reset
+			node = left;  
+		}  
+		return parent; 
+	}
+
 	public static void main(String[] args) {
 		n156_Binary_Tree_Upside_Down obj = new n156_Binary_Tree_Upside_Down();
 		TreeNode p1 = obj.new TreeNode(1);
