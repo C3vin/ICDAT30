@@ -30,19 +30,20 @@ public class n156_Binary_Tree_Upside_Down {
 	}
 	//iteration
 	public TreeNode upsideDownBinaryTree2(TreeNode root) {
-		if(root == null || root.left == null) 
+		if(root == null || root.left == null) 		//F: Need!!! root.left  
 			return root;
 		
 		TreeNode node = root;
 		TreeNode parent = null;
-		TreeNode right = null;  
-		while (node != null) {  
-			TreeNode left = node.left;  
-			node.left = right;  
-			right = node.right;  
-			node.right = parent;  
-			parent = node;  	//reset
-			node = left;  
+		TreeNode tRight = null; 
+		TreeNode tLeft = null;
+		while (node != null) {  		//node:1 -> node:2 -> node:4 
+			tLeft = node.left;  
+			node.left = tRight;  		//reset
+			tRight = node.right;  
+			node.right = parent;  		//reset
+			parent = node;  			//reset, check the new tree you will know
+			node = tLeft;  
 		}  
 		return parent; 
 	}
@@ -60,6 +61,7 @@ public class n156_Binary_Tree_Upside_Down {
 		p2.left = p4;
 		p2.right = p5;
 		p3.left = p6;
-		System.out.println(obj.upsideDownBinaryTree(p1));
+		//System.out.println(obj.upsideDownBinaryTree(p1));
+		System.out.println(obj.upsideDownBinaryTree2(p1));
 	}
 }
