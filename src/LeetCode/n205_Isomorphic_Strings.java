@@ -2,6 +2,7 @@ package LeetCode;
 
 import java.util.HashMap;
 
+@Alg(type="HashMap", com="L", level="easy", num=205)
 public class n205_Isomorphic_Strings {
 	public boolean isIsomorphic(String s, String t) {
 		if(s.length() != t.length()) return false;
@@ -17,8 +18,8 @@ public class n205_Isomorphic_Strings {
 				if(map.get(ss) != tt) {
 					return false;
 				}
-			}else {
-				if(map.containsValue(tt))	//if tt is already being mapped
+			}else {	//If a value is already mapped, it can not be mapped again.
+				if(map.containsValue(tt)) //if tt is already being mapped
 					return false;
 				map.put(ss, tt);
 			}
@@ -27,8 +28,8 @@ public class n205_Isomorphic_Strings {
 	}
 	public static void main(String[] args) {
 		n205_Isomorphic_Strings obj = new n205_Isomorphic_Strings();
-		String s = "2wd";
-		String t = "cdd";
+		String s = "ab";
+		String t = "aa";
 		System.out.println(obj.isIsomorphic(s, t));
 	}
 }
