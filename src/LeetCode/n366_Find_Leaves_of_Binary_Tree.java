@@ -20,16 +20,16 @@ public class n366_Find_Leaves_of_Binary_Tree {
 	private int helper(TreeNode root, List<List<Integer>> res) {
 		if(root == null) return -1;
 
-		int left = helper(root.left, res);
+		int left = helper(root.left, res);			
 		int right = helper(root.right, res);
-		System.out.println(left + " : " + right);
-		int cur = Math.max(left, right)+1;
-		if(res.size() == cur) {
-			List<Integer> tmp = new ArrayList<Integer>();
+		int index = Math.max(left, right)+1;		//4 max(-1,-1)+1=0,5,3 index: 0 | 2 index: 1 | 1 index: 2
+		
+		if(res.size() == index) {			
+			List<Integer> tmp = new ArrayList<Integer>();		//create space
 			res.add(tmp);
 		}
-		res.get(cur).add(root.val);
-		return cur;
+		res.get(index).add(root.val);
+		return index;
 	}
 
 	public static void main(String[] args) {
