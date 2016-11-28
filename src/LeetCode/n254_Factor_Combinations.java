@@ -7,8 +7,9 @@ public class n254_Factor_Combinations {
 	public List<List<Integer>> getFactors(int n) {
 		List<List<Integer>> res = new ArrayList<List<Integer>>();
 		List<Integer> tmp = new ArrayList<Integer>();
-
-		helper(2, 1, n, res, tmp);
+		int start = 2;
+		int product = 1;
+		helper(start, product, n, res, tmp);
 		return res;
 	}
 	public void helper(int start, int product, int n, List<List<Integer>> res, List<Integer> tmp) {
@@ -32,6 +33,6 @@ public class n254_Factor_Combinations {
 	}
 	public static void main(String[] args) {
 		n254_Factor_Combinations obj = new n254_Factor_Combinations();
-		System.out.println(obj.getFactors(1));
+		System.out.println(obj.getFactors(8));
 	}
 }
