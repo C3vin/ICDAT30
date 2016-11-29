@@ -32,22 +32,30 @@ public class n364_Nested_List_Weight_Sum_II {
 		public List<NestedInteger> getList();
 	}
 	public int depthSumInverse(List<NestedInteger> nestedList) {
-		int intSum = 0;
-		return helper(nestedList, intSum);
+		   if(nestedList.size() == 0 || nestedList == null) return 0;
+	        
+	        int depth = 1;
+	        int maxDepth = helperMax(nestedList, depth);
+	        
+	        return helper(nestedList, maxDepth);
 	}
-
-	private int helper(List<NestedInteger> nestedList, int intSum) {
-		List<NestedInteger> nextLevel = new ArrayList<NestedInteger>();
-		int listSum = 0;
-
-		for(NestedInteger ni : nestedList) {
-			if(ni.isInteger()) {
-				intSum = intSum + ni.getInteger();
-			} else {
-				nextLevel.addAll(ni.getList());
-			}
-		}
-		listSum = nextLevel.isEmpty() ? 0 : helper(nextLevel, intSum);
-		return listSum + intSum;
-	}
+	 public int helperMax(List<NestedInteger> nestedList, int depth) {    //Max depth
+	        int max = depth;        //F: max <- depth
+	        for(NestedInteger ni : nestedList) {
+	            if(!ni.isInteger())
+	                max = Math.max(max, helperMax(ni.getList(), depth+1));                  //F: need to maintain Max, cuz will overwrite
+	        }
+	        return max;
+	    }
+	    public int helper(List<NestedInteger> nestedList, int maxDepth) {
+	        int sum = 0;
+	        for(NestedInteger ni : nestedList) {
+	            if(ni.isInteger()) {
+	                sum = sum + ni.getInteger() * maxDepth;
+	            } else {
+	                sum = sum + helper(ni.getList(), maxDepth-1);
+	            }
+	        }
+	        return sum;
+	    }
 }
