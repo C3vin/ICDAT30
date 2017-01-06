@@ -3,6 +3,7 @@ package LeetCode;
 import java.util.LinkedList;
 import java.util.Queue;
 
+@Alg(type="tree", com="NA", level="easy", num=226)
 public class n226_Invert_Binary_Tree {
 	/*
 	 *      
