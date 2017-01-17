@@ -35,10 +35,11 @@ public class n206_Reverse_Linked_List {
 		return rest;
 	}
 
-	//Recursive	
 	public ListNode reverseList3(ListNode head) {
-		// case1: empty list // case2: only one element list
-		if(head == null || head.next == null) return head;
+		// case1: empty list
+		if (head == null) return head;
+		// case2: only one element list
+		if (head.next == null) return head;
 		// case3: reverse from the rest after head
 		ListNode newHead = reverseList3(head.next);
 		// reverse between head and head->next
@@ -50,8 +51,8 @@ public class n206_Reverse_Linked_List {
 	}
 	public static void main(String[] args) {
 		n206_Reverse_Linked_List obj = new n206_Reverse_Linked_List();
-		//System.out.println(obj.reverseList(ListNode.create(123)));
-		//System.out.println(obj.reverseList2(ListNode.create(123)));
-		System.out.println(obj.reverseList3(ListNode.create(123)));
+		//System.out.print(obj.reverseList(ListNode.create(123)));
+		System.out.print(obj.reverseList2(ListNode.create(123)));
+		System.out.print(obj.reverseList3(ListNode.create(123)));
 	}
 }
