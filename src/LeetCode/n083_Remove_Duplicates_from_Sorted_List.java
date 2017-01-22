@@ -1,6 +1,6 @@
 package LeetCode;
 
-public class n83_Remove_Duplicates_from_Sorted_List {
+public class n083_Remove_Duplicates_from_Sorted_List {
 	public class ListNode {
 		int val;
 		ListNode next;
@@ -43,7 +43,7 @@ public class n83_Remove_Duplicates_from_Sorted_List {
 		return head;*/
 	}
 	public static void main(String[] args) {
-		n83_Remove_Duplicates_from_Sorted_List obj = new n83_Remove_Duplicates_from_Sorted_List();
+		n083_Remove_Duplicates_from_Sorted_List obj = new n083_Remove_Duplicates_from_Sorted_List();
 		ListNode p1 = obj.new ListNode(1);
 		ListNode p2 = obj.new ListNode(1);
 		ListNode p3 = obj.new ListNode(2);
