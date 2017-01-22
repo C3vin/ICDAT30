@@ -3,12 +3,12 @@ package LeetCode;
 public class n206_Reverse_Linked_List {
 	//Iterative 0ms
 	public ListNode reverseList(ListNode head) {
-	    if(head==null||head.next==null)
-	        return head;
-	    
+		if(head==null||head.next==null)
+			return head;
+
 		ListNode p1 = head;
 		ListNode p2 = p1.next;
-		
+
 		head.next = null;
 		while(p1!=null && p2!=null) {
 			ListNode tmp = p2.next;
@@ -19,24 +19,40 @@ public class n206_Reverse_Linked_List {
 		}
 		return p1;
 	}
-	
+
 	//Recursive	1ms
 	public ListNode reverseList2(ListNode head) {
 		if(head==null || head.next==null) return head;		// || not &&
-		
-	    //get second node    
-	    ListNode second = head.next;
-	    //set first's next to be null
-	    head.next = null;
-	 
-	    ListNode rest = reverseList2(second);
-	    second.next = head;
-	 
-	    return rest;
+
+		//get second node    
+		ListNode second = head.next;
+		//set first's next to be null
+		head.next = null;
+
+		ListNode rest = reverseList2(second);
+		second.next = head;
+
+		return rest;
+	}
+
+	public ListNode reverseList3(ListNode head) {
+		// case1: empty list
+		if (head == null) return head;
+		// case2: only one element list
+		if (head.next == null) return head;
+		// case3: reverse from the rest after head
+		ListNode newHead = reverseList3(head.next);
+		// reverse between head and head->next
+		head.next.next = head;
+		// unlink list from the rest
+		head.next = null;
+
+		return newHead;
 	}
 	public static void main(String[] args) {
 		n206_Reverse_Linked_List obj = new n206_Reverse_Linked_List();
 		//System.out.print(obj.reverseList(ListNode.create(123)));
-		System.out.print(obj.reverseList(ListNode.create(123)));
+		System.out.print(obj.reverseList2(ListNode.create(123)));
+		System.out.print(obj.reverseList3(ListNode.create(123)));
 	}
 }
