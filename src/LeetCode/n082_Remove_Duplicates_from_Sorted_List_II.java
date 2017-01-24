@@ -20,6 +20,7 @@ public class n082_Remove_Duplicates_from_Sorted_List_II {
 				while(p.next.val == dup && p.next != null) {	//F: !!! while loop !!!
 					p.next = p.next.next;						//F: move and remove dup node, keep move to right(dup) until diff val, "remove p.next"
 				}
+				System.out.println(p.next.val);
 			} else {
 				p = p.next;
 			}

@@ -2,7 +2,7 @@ package LeetCode;
 
 //Given 1->4->3->2->5->2 and x = 3,
 //return 1->2->2->4->3->5.
-public class n86_Partition_List {
+public class n086_Partition_List {
 	public class ListNode {
 		int val;
 		ListNode next;
@@ -32,7 +32,7 @@ public class n86_Partition_List {
 		return dummy1.next;
 	}
 	public static void main(String[] args) {
-		n86_Partition_List obj = new n86_Partition_List();
+		n086_Partition_List obj = new n086_Partition_List();
 		ListNode head = obj.new ListNode(1);
 		ListNode p2 = obj.new ListNode(4);
 		ListNode p3 = obj.new ListNode(3);
