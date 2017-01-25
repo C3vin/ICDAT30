@@ -5,8 +5,10 @@ public class n344_Reverse_String {
 	public String reverseString(String s) { 
 		char[] ch = s.toCharArray();
 		int half = s.length()/2;
+		System.out.println(s.length());
 		char tmp;
-		for(int i=0; i<half; i++) {
+		//swap
+		for(int i=0; i<half; i++) {			
 			tmp = ch[i];
 			ch[i] = ch[ch.length-i-1];		//F: need '-i'  
 			ch[ch.length-i-1] = tmp;
@@ -29,7 +31,7 @@ public class n344_Reverse_String {
 
 	public static void main(String[] args) {
 		n344_Reverse_String obj = new n344_Reverse_String();
-		String s = "hello";
+		String s = "helloworld";
 		System.out.println(obj.reverseString(s));
 	}
 }
