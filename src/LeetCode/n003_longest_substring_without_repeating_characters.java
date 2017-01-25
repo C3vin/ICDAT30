@@ -41,7 +41,9 @@ public class n003_longest_substring_without_repeating_characters {
 		int start=0;  
 		for (int current = 0; current<s.length(); current++) {
 			if (map.containsKey(s.charAt(current))) {
-				start = Math.max(start, map.get(s.charAt(current)) + 1);		//Need + 1
+				//update start
+				start = Math.max(start, map.get(s.charAt(current)) + 1);		//Need + 1 cuz start need to point next current
+				System.out.println("@: "+start);
 			}
 			map.put(s.charAt(current), current);
 			max = Math.max(max, current - start + 1);
@@ -50,7 +52,7 @@ public class n003_longest_substring_without_repeating_characters {
 	}
 	public static void main(String[] args) {
 		n003_longest_substring_without_repeating_characters obj = new n003_longest_substring_without_repeating_characters();
-		String s = "abcabcbb";
+		String s = "abcbbcbb";
 		System.out.println(obj.lengthOfLongestSubstring(s));
 	}
 }
