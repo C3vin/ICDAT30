@@ -14,12 +14,14 @@ public class n005_longest_palindromic_substring {
 	 
 		String longest = s.substring(0, 1);
 		for (int i = 0; i < s.length(); i++) {
+			//case 1:
 			// get longest palindrome with center of i (we can start at i-1, i+1)
 			String tmp = helper(s, i, i);		//helper(s, i, i) e.g. bab
 			if (tmp.length() > longest.length()) {
 				longest = tmp;
 			}
 	 
+			//case 2:
 			// get longest palindrome with center of i, i+1	e.g. cbbd
 			tmp = helper(s, i, i + 1);
 			if (tmp.length() > longest.length()) {
@@ -32,7 +34,7 @@ public class n005_longest_palindromic_substring {
 	// Given a center, either one letter or two letter, 
 	// Find longest palindrome
 	public String helper(String s, int begin, int end) {
-		while (begin >= 0 && end <= s.length()-1 && s.charAt(begin) == s.charAt(end)) {		//F: end range
+		while (begin >= 0 && end <= s.length()-1 && s.charAt(begin) == s.charAt(end)) {		//F: while loop!!!
 			begin--;
 			end++;
 		}
@@ -64,7 +66,7 @@ public class n005_longest_palindromic_substring {
 	
 	public static void main(String[] args) {
 		n005_longest_palindromic_substring obj = new n005_longest_palindromic_substring();
-		//System.out.println(obj.longestPalindrome("babad"));
+		System.out.println(obj.longestPalindrome("babad"));
 		System.out.println(obj.longestPalindrome("cbbd"));
 		//System.out.println(obj.longestPalindromeDP("babad"));
 		//System.out.println(obj.longestPalindromeDP("cbbd"));
