@@ -43,16 +43,18 @@ public class n003_longest_substring_without_repeating_characters {
 			if (map.containsKey(s.charAt(current))) {
 				//update start
 				start = Math.max(start, map.get(s.charAt(current)) + 1);		//Need + 1 cuz start need to point next current
-				System.out.println("@: "+start);
-			}
-			map.put(s.charAt(current), current);
+				//System.out.println("start: "+start);
+			} 
+			//can't use else, cuz will miss count max, also will update map value e.g. t=0 -> t=6
+			map.put(s.charAt(current), current);	
 			max = Math.max(max, current - start + 1);
+
 		}
 		return max;
 	}
 	public static void main(String[] args) {
 		n003_longest_substring_without_repeating_characters obj = new n003_longest_substring_without_repeating_characters();
-		String s = "abcbbcbb";
+		String s = "tmmzuxt";
 		System.out.println(obj.lengthOfLongestSubstring(s));
 	}
 }
