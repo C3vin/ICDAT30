@@ -7,14 +7,15 @@ public class n014_longest_common_prefix {
 	        return "";
 	    if(strs.length==1) 
 	        return strs[0];
+	    
 	    int minLen = strs[0].length();		//Need this for the for loop 
-	    for(String str: strs) {
-	        if(minLen > str.length()) {
-	            minLen = str.length();		//Get the most of the small size of strs, e.g. aaaaaew
-	        }
+
+	    for(int i=0; i<strs.length; i++) {
+	    	if(minLen > strs[i].length())
+	    		minLen = strs[i].length();
 	    }
 	    for(int i=0; i<minLen; i++){
-	        for(int j=0; j<strs.length-1; j++){
+	        for(int j=0; j<strs.length-1; j++){		//why -1, cuz handle j+1 boundary 
 	            String s1 = strs[j];
 	            String s2 = strs[j+1];
 	            if(s1.charAt(i)!=s2.charAt(i)){
