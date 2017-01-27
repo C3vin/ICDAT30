@@ -17,9 +17,23 @@ public class n009_palindrome_number {
 		}
 		return true;
 	}
+
+	public boolean isPailindrome2(int x) {
+		if(x<0)
+			return false;
+		return x == reverseInt(x);
+	}
+	public int reverseInt(int x) {
+		int ret = 0;
+		while(x != 0) {
+			ret = ret * 10 + x % 10; //F: Need * 10 !
+			x = x / 10;
+		}
+		return ret;
+	}
 	public static void main(String[] args) {
 		n009_palindrome_number obj = new n009_palindrome_number();
-		System.out.println(obj.isPailindrome(10101));
-		System.out.println(obj.isPailindrome(1232));
+		System.out.println(obj.isPailindrome2(10101));
+		System.out.println(obj.isPailindrome2(1232));
 	}
 }
