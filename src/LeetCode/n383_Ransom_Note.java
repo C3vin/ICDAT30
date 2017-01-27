@@ -20,7 +20,7 @@ public class n383_Ransom_Note {
 				if(b[j] == 0 && magazine.charAt(j) == c) {
 					b[j]++; 
 					found = true;
-					break;							//break, go to check next magazine char
+					break;							//break the for loop, go to next if loop
 				}
 			}
 			if(!found) {
