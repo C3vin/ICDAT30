@@ -1,5 +1,10 @@
-package INQ.DAO;
+package DAO;
 
+/*
+ * We are going to create a Student object acting as a Model or Value Object.
+ * StudentDao is Data Access Object Interface.StudentDaoImpl is concrete class implementing Data Access Object Interface. 
+ * DaoPatternDemo, our demo class, will use StudentDao to demonstrate the use of Data Access Object pattern.
+ */
 public class DaoPatternDemo {
 	public static void main(String[] args) {
 		StudentDao studentDao = new StudentDaoImpl();
