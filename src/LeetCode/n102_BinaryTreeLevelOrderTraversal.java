@@ -3,6 +3,7 @@ package LeetCode;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Queue;
 
 @Alg(type="BFS", com="L,AA,A,M$,F", level="easy", num=102)
 public class n102_BinaryTreeLevelOrderTraversal {
@@ -77,7 +78,37 @@ public class n102_BinaryTreeLevelOrderTraversal {
 		System.out.println(results);
 		return results;*/
 	}
+	public List<List<Integer>> levelOrder2(TreeNode root) {
+		List<List<Integer>> res = new ArrayList<List<Integer>>();
+		if(root == null)
+			return res;
+		
+		Queue<TreeNode> queue = new LinkedList<TreeNode>();	
+		queue.offer(root);
+		queue.offer(null);
 
+		LinkedList<Integer> cur = new LinkedList<Integer>();
+		
+		while(!queue.isEmpty()) {
+			TreeNode tmp = queue.poll();
+			if(tmp != null) {
+				cur.add(tmp.val);
+				if(tmp.left != null)
+					queue.offer(tmp.left);
+				if(tmp.right != null)
+					queue.offer(tmp.right);
+			} else {
+				ArrayList<Integer> c_cur = new ArrayList<Integer>(cur);
+				res.add(c_cur);
+				System.out.println("@:" + res);
+				cur.clear();
+				if(!queue.isEmpty())
+					queue.add(null);
+			}
+		}
+		
+		return res;
+	}
 	public static void main(String[] args) {
 		//[3,9,20,null,null,15,7]
 		/**
@@ -104,6 +135,7 @@ public class n102_BinaryTreeLevelOrderTraversal {
 		p3.left = p6;
 
 		System.out.println(p1.val + " " + p1.left.val + " " + p1.right.val + " "+ p2.left.v + " " + p2.right.v + " " + p3.left.val + " " +p3.right.val);
-		System.out.println(obj.levelOrder(p1));
+		//System.out.println(obj.levelOrder(p1));
+		System.out.println(obj.levelOrder2(p1));
 	}
 }
