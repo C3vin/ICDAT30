@@ -10,11 +10,13 @@ public class Q27_MirrorOfBinaryTree {
 		TreeNode(String v) { v = null; }
 	}
 	public TreeNode mirrorOfBinaryTree(TreeNode root) {
+		if(root == null) return root;
+
 		TreeNode tmp = null;
 		if(root != null) {		//no need to test == null in here
 			mirrorOfBinaryTree(root.left);
 			mirrorOfBinaryTree(root.right);
-			
+
 			//swap
 			tmp = root.left;
 			root.left = root.right;
@@ -36,7 +38,7 @@ public class Q27_MirrorOfBinaryTree {
 		p1.left = p2;
 		p2.right = p5;
 		p2.left = p4;
-/*		p3.right = p7;
+		/*p3.right = p7;
 		p3.left = p6;*/
 
 		System.out.println(p1.val + " " + p1.left.val + " " + p1.right.val + " "+ p2.left.val + " " + p2.right.val);
