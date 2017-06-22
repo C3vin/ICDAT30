@@ -21,12 +21,10 @@ public class n101_Symmetric_Tree {
 			return false;
 
 		if(left.val == right.val) {
-			if(isSymmetricTree(left.left, right.right) && isSymmetricTree(left.right, right.left))
-				return true;
+			return (isSymmetricTree(left.left, right.right) && isSymmetricTree(left.right, right.left));
 		}
 		else 
 			return false;
-		return false;
 	}
 
 	//iteratively
