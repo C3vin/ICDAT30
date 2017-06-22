@@ -98,12 +98,17 @@ public class n102_BinaryTreeLevelOrderTraversal {
 				if(tmp.right != null)
 					queue.offer(tmp.right);
 			} else {
-				ArrayList<Integer> c_cur = new ArrayList<Integer>(cur);
+/*				ArrayList<Integer> c_cur = new ArrayList<Integer>(cur);
 				res.add(c_cur);
-				System.out.println("@:" + res);
 				cur.clear();
 				if(!queue.isEmpty())
-					queue.add(null);
+					queue.add(null);*/
+				
+				res.add(cur);
+				//cur.clear();	//can't use it, will update the res
+				cur = new LinkedList<Integer>();
+				if(!queue.isEmpty())
+					queue.offer(null);
 			}
 		}
 		
