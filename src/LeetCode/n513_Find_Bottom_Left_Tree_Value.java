@@ -37,7 +37,8 @@ public class n513_Find_Bottom_Left_Tree_Value {
 		
 		while(!queue.isEmpty()) {
 			TreeNode tmp = queue.poll();
-			res = tmp.val;
+			if(queue.peek() == null)			//improvement: Just first time (1) and last time (7) will add res!
+				res = tmp.val;
 			if(tmp.right != null) 
 				queue.offer(tmp.right);
 			if(tmp.left != null)
@@ -55,12 +56,14 @@ public class n513_Find_Bottom_Left_Tree_Value {
 		TreeNode p5 = obj.new TreeNode(5);
 		TreeNode p6 = obj.new TreeNode(6);
 		TreeNode p7 = obj.new TreeNode(7);
+		TreeNode p8 = obj.new TreeNode(8);
 		p1.left = p2;
 		p1.right = p3;
 		p2.left = p4;
 		p3.left = p5;
 		p3.right = p6;
-		p5.left = p7; 	
+		p5.left = p7;
+		p6.left = p8;
 		System.out.println(p1.val + " " + p1.left.val + " " + p1.right.val + " "+ p2.left.val + " " + p3.left.val 
 				+ " " + p3.right.val);
 
