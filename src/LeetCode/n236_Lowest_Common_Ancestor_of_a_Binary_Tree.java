@@ -16,11 +16,12 @@ public class n236_Lowest_Common_Ancestor_of_a_Binary_Tree {
 		TreeNode left = lowestCommonAncestor(root.left, p, q);
 		TreeNode right = lowestCommonAncestor(root.right, p, q);
 		
+		//nodes are each on a separate branch
 		if(left != null && right!= null)
 			return root;
 		
+		//either one node is on one branch, or none was found in any of the branches 
 		return left == null ? right : left;
-
 	}
 	public static void main(String[] args) {
 		n236_Lowest_Common_Ancestor_of_a_Binary_Tree obj = new n236_Lowest_Common_Ancestor_of_a_Binary_Tree();
