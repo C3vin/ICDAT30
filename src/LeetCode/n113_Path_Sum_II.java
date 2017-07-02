@@ -1,10 +1,8 @@
 package LeetCode;
 
-import java.util.ArrayList;
 import java.util.Deque;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Stack;
 
 public class n113_Path_Sum_II {
 	public class TreeNode {
@@ -19,88 +17,65 @@ public class n113_Path_Sum_II {
 		List<List<Integer>> res = new LinkedList<List<Integer>>();
 		if(root == null)
 			return res;
+		List<Integer> curList = new LinkedList<Integer>();
+		helper(root, sum, 0, curList, res);
+		
+		return res;
+	}
+	private void helper(TreeNode root, int sum, int curSum, List<Integer> curList, List<List<Integer>> res) {
+		if(root == null)
+			return;
+		curSum = curSum + root.val;
+		curList.add(root.val);
+		
+		if(root.left == null && root.right == null && curSum == sum)
+			res.add(new LinkedList<Integer>(curList));
+		if(root.left != null) {
+			helper(root.left, sum, curSum, curList, res);
+			curList.remove(curList.size()-1);			//because if it match, it will add to the res
+		}
+		if(root.right != null) {
+			helper(root.right, sum, curSum, curList, res);
+			curList.remove(curList.size()-1);
+		}
+	}
+	public List<List<Integer>> pathSum2(TreeNode root, int sum) {
+		List<List<Integer>> res = new LinkedList<List<Integer>>();
+		if(root == null)
+			return res;
 		Deque<TreeNode> queue = new LinkedList<TreeNode>();
 		queue.offer(root);
-		Deque<Integer> value = new LinkedList<Integer>();
-		value.offer(root.val);
-
-		List<Integer> cur = new LinkedList<Integer>();
+		Deque<Integer> level = new LinkedList<Integer>();
+		level.offer(1);
+		
+		List<Integer> curList = new LinkedList<Integer>();
 		int curSum = 0;
 
 		while(!queue.isEmpty()) {
 			TreeNode tmp = queue.pollLast();
-			int sumValue = tmp.val;
-			curSum = curSum + sumValue;
-			cur.add(tmp.val);
-			if(curSum > sum) {
-				//System.out.println("@");
-				curSum = curSum - sumValue;
-				cur.remove(cur.size() - 1);
+			int curLevel = level.pollLast();
+			curSum = curSum + tmp.val;
+			
+			// remove list elements
+			while(curList.size() >= curLevel) {
+				curSum = curSum - curList.get(curList.size()-1);
+				curList.remove(curList.size() - 1);
 			}
-
+			curList.add(tmp.val);	//need to remove one node before add to the curList
+			
 			if(tmp.left == null && tmp.right == null && curSum == sum) {
-				res.add(new LinkedList<Integer>(cur));
-				System.out.println("Got!        " + cur);
+				res.add(new LinkedList<Integer>(curList));
 			}
 			if(tmp.right != null) {
 				queue.offer(tmp.right);
-				//value.offer(sumValue + tmp.right.val);
+				level.offer(curLevel+1);
 			}
 			if(tmp.left != null) {
 				queue.offer(tmp.left);
-				//value.offer(sumValue + tmp.left.val);
+				level.offer(curLevel+1);
 			}
 		}
 		return res;
-	}
-	public List<List<Integer>> pathSum2(TreeNode root, int sum) {
-		List<List<Integer>> result = new ArrayList<List<Integer>>();
-		if (root == null) {
-			return result;
-		}
-
-		Stack<TreeNode> nodeStack = new Stack<TreeNode>();
-		Stack<Integer> levelStack = new Stack<Integer>();
-
-		List<Integer> curList = new ArrayList<Integer>();
-
-		nodeStack.push(root);
-		levelStack.push(1);
-
-		int curSum = 0;
-
-		while (!nodeStack.isEmpty()) {
-			System.out.println("levelstack: " +levelStack);
-			TreeNode curNode = nodeStack.pop();
-			int curLevel = levelStack.pop();
-			curSum += curNode.val;
-
-			System.out.println("@1: "+curList + " : " + curNode.val);
-			// remove list elements
-			while (curList.size() >= curLevel) {
-				//System.out.println("curLevel!: " + curLevel);
-				curSum -= curList.get(curList.size() - 1);
-				curList.remove(curList.size() - 1);
-				System.out.println("#: "+curList);
-			}
-
-			curList.add(curNode.val);
-			// if is a leaf node
-			if (curNode.left == null && curNode.right == null && curSum == sum) {
-				result.add(new ArrayList<Integer>(curList));
-			}
-
-			if (curNode.right != null) {
-				nodeStack.push(curNode.right);
-				levelStack.push(curLevel + 1);
-			}
-
-			if (curNode.left != null) {
-				nodeStack.push(curNode.left);
-				levelStack.push(curLevel + 1);
-			}
-		}
-		return result;
 	}
 	public static void main(String[] args) {
 		n113_Path_Sum_II obj = new n113_Path_Sum_II();
@@ -123,10 +98,8 @@ public class n113_Path_Sum_II {
 		p4.right = p8;
 		p6.left = p9;
 		p6.right = p10;
-		/*		System.out.println(p1.val + " " + p1.left.val + " " + p1.right.val + " "+ p2.left.val + " " + p3.left.val 
-				+ " " + p3.right.val + " " +p4.left.val + " " + p4.right.val + " " + p6.left.val + " " + p6.right.val);
-		 */
+		
 		System.out.println(obj.pathSum(p1, 22));
-		//System.out.println(obj.pathSum2(p1, 22));
+		System.out.println(obj.pathSum2(p1, 22));
 	}
 }
