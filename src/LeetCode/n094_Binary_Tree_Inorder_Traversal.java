@@ -19,7 +19,9 @@ public class n094_Binary_Tree_Inorder_Traversal {
 		return res;
 	}
 	private void helper(TreeNode root, List<Integer> res) {
-		if(root == null) return;
+		if(root == null) 
+			return;
+		
 		helper(root.left, res);
 		res.add(root.val);
 		helper(root.right, res);
