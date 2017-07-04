@@ -34,12 +34,13 @@ public class n113_Path_Sum_II {
 			res.add(new LinkedList<Integer>(curList));
 		if(root.left != null) {
 			helper(root.left, sum, curSum, curList, res);
-			curList.remove(curList.size()-1);			//because if it match, it will add to the res
+			//curList.remove(curList.size()-1);			//because if it match, it will add to the res
 		}
 		if(root.right != null) {
 			helper(root.right, sum, curSum, curList, res);
-			curList.remove(curList.size()-1);
+			//curList.remove(curList.size()-1);
 		}
+		curList.remove(curList.size()-1);			//just need once!
 	}
 	
 	//Recursion
@@ -57,7 +58,6 @@ public class n113_Path_Sum_II {
 		
 		sum = sum - root.val;		//no need curSum
 		curList.add(root.val);
-		System.out.println(curList);
 		
 		if(root.left == null && root.right == null && sum == 0)
 			res.add(new LinkedList<Integer>(curList));
@@ -128,8 +128,8 @@ public class n113_Path_Sum_II {
 		p6.left = p9;
 		p6.right = p10;
 		
-		//System.out.println(obj.pathSum(p1, 22));
-		//System.out.println(obj.pathSum2(p1, 22));
+		System.out.println(obj.pathSum(p1, 22));
+		System.out.println(obj.pathSum2(p1, 22));
 		System.out.println(obj.pathSum3(p1, 22));
 	}
 }
