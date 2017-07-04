@@ -13,10 +13,12 @@ public class n113_Path_Sum_II {
 			val = x; 
 		}
 	}
+	
+	//Recursion
 	public List<List<Integer>> pathSum(TreeNode root, int sum) {
 		List<List<Integer>> res = new LinkedList<List<Integer>>();
-		if(root == null)
-			return res;
+/*		if(root == null)
+			return res;*/
 		List<Integer> curList = new LinkedList<Integer>();
 		helper(root, sum, 0, curList, res);
 		
@@ -39,6 +41,33 @@ public class n113_Path_Sum_II {
 			curList.remove(curList.size()-1);
 		}
 	}
+	
+	//Recursion
+	public List<List<Integer>> pathSum3(TreeNode root, int sum) {
+		List<List<Integer>> res = new LinkedList<List<Integer>>();
+		List<Integer> curList = new LinkedList<Integer>();
+		
+		helper3(root, sum, curList, res);
+		
+		return res;
+	}
+	private void helper3(TreeNode root, int sum, List<Integer> curList, List<List<Integer>> res) {
+		if(root == null)
+			return;
+		
+		sum = sum - root.val;		//no need curSum
+		curList.add(root.val);
+		System.out.println(curList);
+		
+		if(root.left == null && root.right == null && sum == 0)
+			res.add(new LinkedList<Integer>(curList));
+		
+		helper3(root.left, sum, curList, res);
+		helper3(root.right, sum, curList, res);
+		curList.remove(curList.size()-1);		//why just need once? comments 
+	}
+	
+	//iterate
 	public List<List<Integer>> pathSum2(TreeNode root, int sum) {
 		List<List<Integer>> res = new LinkedList<List<Integer>>();
 		if(root == null)
@@ -99,7 +128,8 @@ public class n113_Path_Sum_II {
 		p6.left = p9;
 		p6.right = p10;
 		
-		System.out.println(obj.pathSum(p1, 22));
-		System.out.println(obj.pathSum2(p1, 22));
+		//System.out.println(obj.pathSum(p1, 22));
+		//System.out.println(obj.pathSum2(p1, 22));
+		System.out.println(obj.pathSum3(p1, 22));
 	}
 }
