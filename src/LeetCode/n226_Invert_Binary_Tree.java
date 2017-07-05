@@ -30,30 +30,31 @@ to
 	public TreeNode invertTree(TreeNode root) {
 		if(root == null) return root;		//need to return root!
 
-		TreeNode l = root.left;				//swap
-		root.left = invertTree(root.right);
-		root.right = invertTree(l);
+		//SWAP
+		TreeNode tmp = root.left;				
+		root.left = invertTree(root.right);			//need invertTree() or won't change the subtree
+		root.right = invertTree(tmp	);
 
 		return root;
 	}
 	public TreeNode invertTree2(TreeNode root) {
-		if(root == null) return null;
-
-		Queue<TreeNode> queue = new LinkedList<>();
+		if(root == null)
+			return root;
+		Queue<TreeNode> queue = new LinkedList<TreeNode>();
 		queue.offer(root);
+
 		while(!queue.isEmpty()) {
-			TreeNode tmp = queue.poll();
-			TreeNode l = tmp.left;
+			TreeNode node = queue.poll();
+			
+			//SWAP
+			TreeNode tmp = node.left;
+			node.left = node.right;
+			node.right = tmp;     
 
-			tmp.left = tmp.right;
-			if(tmp.right != null) {
-				queue.offer(tmp.right);
-			}
-
-			tmp.right = l;
-			if(l != null) {
-				queue.offer(l);
-			}
+			if(node.left != null) 
+				queue.offer(node.left);
+			if(node.right != null)
+				queue.offer(node.right);
 		}
 		return root;
 	}
