@@ -19,10 +19,29 @@ public class n206_Reverse_Linked_List {
 		}
 		return p1;
 	}
+	//Iterative Good!
+	public ListNode reverseList4(ListNode head) {
+		if(head==null||head.next==null)
+			return head;
 
+		ListNode p = null;
+
+		//Null 1->2->3         Null<-1->2->3
+		//  p  h  tmp                p  h  tmp
+		while(head != null) {
+			ListNode tmp = head.next;
+			head.next = p;	
+			//reset
+			p = head;
+			head = tmp;
+		}
+		return p;
+	}
+	
 	//Recursive	1ms
 	public ListNode reverseList2(ListNode head) {
-		if(head==null || head.next==null) return head;		// || not &&
+		if(head==null || head.next==null) 		// || not &&
+			return head;		
 
 		//get second node    
 		ListNode second = head.next;
@@ -37,22 +56,30 @@ public class n206_Reverse_Linked_List {
 
 	public ListNode reverseList3(ListNode head) {
 		// case1: empty list
-		if (head == null) return head;
+		if (head == null) 
+			return head;
 		// case2: only one element list
-		if (head.next == null) return head;
+		if (head.next == null) 
+			return head;
+
 		// case3: reverse from the rest after head
 		ListNode newHead = reverseList3(head.next);
+
 		// reverse between head and head->next
-		head.next.next = head;
+		head.next.next = head;				//e.g. (head.next).next = head  2(head).next = 3, so 3.next -> 2 
+
 		// unlink list from the rest
-		head.next = null;
+		head.next = null;					//e.g. 2.next will become null, so 2->3 old link will broken
+
+		System.out.println("newHead: "+newHead + " head: " + head);
 
 		return newHead;
 	}
 	public static void main(String[] args) {
 		n206_Reverse_Linked_List obj = new n206_Reverse_Linked_List();
 		//System.out.print(obj.reverseList(ListNode.create(123)));
-		System.out.print(obj.reverseList2(ListNode.create(123)));
-		System.out.print(obj.reverseList3(ListNode.create(123)));
+		//System.out.println(obj.reverseList2(ListNode.create(123)));
+		//System.out.println(obj.reverseList3(ListNode.create(123)));
+		System.out.println(obj.reverseList4(ListNode.create(123)));
 	}
 }
