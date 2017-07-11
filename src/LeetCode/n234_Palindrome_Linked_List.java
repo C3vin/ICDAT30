@@ -1,6 +1,6 @@
 package LeetCode;
 
-public class n234_Palindrome_Linked_List {
+public class n234_Palindrome_Linked_List {2
 /*	public class ListNode {
 		int val;
 		ListNode next;
@@ -35,9 +35,13 @@ public class n234_Palindrome_Linked_List {
 		return true;
 	}
 	
+	public boolean isPalindrome2(ListNode head) {
+		
+	}
 	public static void main(String[] args) {
 		n234_Palindrome_Linked_List obj = new n234_Palindrome_Linked_List();
 		ListNode head = ListNode.create(12321);
 		System.out.println(obj.isPalindrome(head));
+		System.out.println(obj.isPalindrome2(head));
 	}
 }
