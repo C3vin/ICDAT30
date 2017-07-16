@@ -9,8 +9,8 @@ public class n237_Delete_Node_in_a_Linked_List {
 	public void deleteNode(ListNode node) {
 		if(node == null) 
 			return;
-		node.val = node.next.val;
-		node.next = node.next.next;
+		node.val = node.next.val;			//update node val
+		node.next = node.next.next;			//update next node
 	}
 	
 	public static void main(String[] args) {
