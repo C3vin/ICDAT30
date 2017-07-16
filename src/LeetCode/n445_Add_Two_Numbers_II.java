@@ -27,7 +27,7 @@ public class n445_Add_Two_Numbers_II {
 		//case 1: same amount
 		while(p1 != null && p2 != null) {
 			int sum = carry + p1.val + p2.val;
-			carry = sum/10;
+			carry = sum / 10;						//F:sum/10
 			p3.next = new ListNode(sum%10);
 			p3 = p3.next;
 			p1 = p1.next;
@@ -36,15 +36,15 @@ public class n445_Add_Two_Numbers_II {
 		//case 2: l1 rest
 		while(p1 != null) {
 			int sum = carry + p1.val;
-			carry = sum/10;
-			p3.next = new ListNode(sum%10);	//sum not carry
+			carry = sum / 10;
+			p3.next = new ListNode(sum%10);	    //sum not carry
 			p3 = p3.next;
 			p1 = p1.next;
 		}
 		//case 3: l2 rest
 		while(p2 != null) {
 			int sum = carry + p2.val;
-			carry = sum/10;
+			carry = sum / 10;
 			p3.next = new ListNode(sum%10);
 			p3 = p3.next;
 			p2 = p2.next;
@@ -56,8 +56,10 @@ public class n445_Add_Two_Numbers_II {
 		return dummy.next;
 	}
 	public ListNode reverse(ListNode head) {
-		if(head == null || head.next == null) return head;
-		ListNode p = null;	//why null, cuz pre node will point to p
+		if(head == null || head.next == null) 
+			return head;
+		
+		ListNode p = null;			//why null, cuz pre node will point to p
 		while(head != null) {
 			ListNode tmp = head.next;
 			head.next = p;
