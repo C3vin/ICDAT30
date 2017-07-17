@@ -18,17 +18,19 @@ public class n138_Copy_List_with_Random_Pointer {
 		
 		RandomListNode oldp = head.next;
 		RandomListNode newp = newhead;
+		
 		while(oldp!= null) {
 			RandomListNode newNode = new RandomListNode(oldp.label);
 			map.put(oldp, newNode);
-			newp.next = newNode;		//F: Link together
+			newp.next = newNode;		//F: Link together, need to use pointer!
 			
 			oldp = oldp.next;
 			newp = newp.next;			//F: don't forget 
 		}
-		
+		//reset
 		oldp = head;
 		newp = newhead;
+		//config random nodes
 		while(oldp != null) {
 			newp.random = map.get(oldp.random);
 			oldp = oldp.next;
@@ -40,10 +42,10 @@ public class n138_Copy_List_with_Random_Pointer {
 	public static void main(String[] args) {			
 		n138_Copy_List_with_Random_Pointer obj = new n138_Copy_List_with_Random_Pointer();
 		RandomListNode head = obj.new RandomListNode(1);
-		RandomListNode p3 = obj.new RandomListNode(3);
-		RandomListNode p5 = obj.new RandomListNode(5);
-		RandomListNode p2 = obj.new RandomListNode(2);
-		RandomListNode p4 = obj.new RandomListNode(4);
+		RandomListNode p3 = obj.new RandomListNode(2);
+		RandomListNode p5 = obj.new RandomListNode(3);
+		RandomListNode p2 = obj.new RandomListNode(4);
+		RandomListNode p4 = obj.new RandomListNode(5);
 		RandomListNode p6 = obj.new RandomListNode(6);
 		head.next = p3;
 		p3.next = p5;
