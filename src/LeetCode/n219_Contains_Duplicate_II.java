@@ -14,9 +14,8 @@ public class n219_Contains_Duplicate_II {
 		for(int i=0; i<nums.length; i++) {
 			if(map.containsKey(nums[i])) {
 				int j = map.get(nums[i]);
-				System.out.println(i + " : " + j);
 				if(i-j <= k)
-					return true;				//?
+					return true;				
 			} else
 				map.put(nums[i], i);		
 		}
