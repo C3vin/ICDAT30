@@ -5,7 +5,6 @@ public class n344_Reverse_String {
 	public String reverseString(String s) { 
 		char[] ch = s.toCharArray();
 		int half = s.length()/2;
-		System.out.println(s.length());
 		char tmp;
 		//swap
 		for(int i=0; i<half; i++) {			
