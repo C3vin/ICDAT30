@@ -2,7 +2,8 @@ package LeetCode;
 
 public class n160_Intersection_of_Two_Linked_Lists {
 	  public ListNode getIntersectionNode(ListNode headA, ListNode headB) {
-		  if(headA == null || headB == null) return null;
+		  if(headA == null || headB == null) 
+			  return null;
 		  
 		  ListNode p1 = headA;
 		  ListNode p2 = headB;
@@ -18,15 +19,16 @@ public class n160_Intersection_of_Two_Linked_Lists {
 				  p2 = headA;
 			  
 			  if(p1.next == null)
-				  t1 = p1;
+				  t1 = p1;		//setup tail
 			  
 			  if(p2.next == null)
-				  t2 = p2;
+				  t2 = p2;		//setup tail
 			  
-			  if(t1 != null && t2 != null && t1 != t2)
+			  //The two links have different tails. So just return null;
+			  if(t1 != null && t2 != null && t1 != t2)	//why need t1 != null e.g.[3] ,[2,3], t1 = 3, no t2. so need to make sure t2 != null
 				  return null;
 			  
-			  if(p1 == p2)
+			  if(p1 == p2)		//F: need to use p1 not t1
 				  return p1;
 			  
 			  p1 = p1.next;

@@ -15,6 +15,16 @@ public class n344_Reverse_String {
 		return new String(ch);
 	}
 
+	//Can't pass LC, because the limitation on the heap size
+	public String reverseString2(String s) { 
+		String res = "";
+		char[] ch = s.toCharArray();
+		
+		for(int i=ch.length-1; i>=0; i--)
+			res = res + ch[i];
+		
+		return res;
+	}
 	/* public String reverseString2(String s) {
         String result = "";
         for (int i = s.length() - 1; i >= 0; i--) {
@@ -30,7 +40,7 @@ public class n344_Reverse_String {
 
 	public static void main(String[] args) {
 		n344_Reverse_String obj = new n344_Reverse_String();
-		String s = "helloworld";
+		String s = "hello world";
 		System.out.println(obj.reverseString(s));
 	}
 }
