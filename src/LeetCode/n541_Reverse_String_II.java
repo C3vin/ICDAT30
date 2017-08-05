@@ -15,7 +15,7 @@ public class n541_Reverse_String_II {
 		
 		for(int i=0; i<len; i = i+2*k) {
 			if(len - i < k) {
-				reverse(ch, i, len);
+				reverse(ch, i, len);	//reserve all
 			} else {
 				reverse(ch, i, i+k); 
 			}
@@ -29,7 +29,7 @@ public class n541_Reverse_String_II {
 			ch[end-1-i+start] = tmp;
 		}
 	}
-	
+
 	public static void main(String[] args) {
 		n541_Reverse_String_II obj = new n541_Reverse_String_II();
 		String s = "abcdefg";
