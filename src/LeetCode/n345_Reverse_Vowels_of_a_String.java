@@ -55,7 +55,7 @@ public class n345_Reverse_Vowels_of_a_String {
 		int end=s.length()-1;
 		char[] ch = s.toCharArray();	//F: fill out the character array
 
-		while(start < end) {
+		while(start < end) {			//Need this to avoid crossover
 			if(!checkVowel(ch[start])) {
 				start++;
 				continue;		//F: continue not break!
@@ -75,8 +75,8 @@ public class n345_Reverse_Vowels_of_a_String {
 	}
 	public static void main(String[] args) {
 		n345_Reverse_Vowels_of_a_String obj = new n345_Reverse_Vowels_of_a_String();
-		System.out.println(obj.reverseVowels("hello"));
-		System.out.println(obj.reverseVowels("leetcode"));
+		//System.out.println(obj.reverseVowels("hello"));
+		//System.out.println(obj.reverseVowels("leetcode"));
 		System.out.println(obj.reverseVowels2("hello"));
 		System.out.println(obj.reverseVowels2("leetcode"));
 	}
