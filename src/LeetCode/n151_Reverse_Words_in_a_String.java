@@ -1,28 +1,49 @@
 package LeetCode;
 
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
+
 //Given s = "the sky is blue",
 //return "blue is sky the".
 public class n151_Reverse_Words_in_a_String {
 	public String reverseWords(String s) {
 		String[] str = s.split(" ");
-		for(int i=0; i<str.length; i++) {
-			System.out.println(i + ": "+str[i]);
-		}
 		StringBuilder sb = new StringBuilder();
 
-		for(int i=str.length-1; i>=0; i--) {			//--i can't use i--, will miss last one 'e'
-			if (!str[i].equals("")) {		//F: need this to handle ""
+		for(int i=str.length-1; i>=0; i--) {			
+			if (!str[i].isEmpty()) {		//F: need this to handle ""
 				sb.append(str[i]).append(" ");
 			}
 		}
-		System.out.println(sb.length());
 		return sb.length() == 0 ? "" : sb.substring(0, sb.length()-1);
+	}
+	
+	public String reverseWords2(String s) {
+		String[] str = s.split(" ");
+		ArrayList<String> list = new ArrayList<String>();
+		if(str == null ||str.length == 0) 
+			return "";
+		
+		for(int i=0; i<str.length; i++) {
+			if(!str[i].equals(" "))
+				list.add(str[i]);
+		}
+		Collections.reverse(list);
+
+		String ans = new String();
+		for(int i=0; i<list.size(); i++)
+			ans = ans + list.get(i) + " ";
+		
+		ans = ans + list.get(list.size()-1);
+		return ans;
 	}
 	
 	public static void main(String[] args) {
 		n151_Reverse_Words_in_a_String obj = new n151_Reverse_Words_in_a_String();
-		String s = "   a   b ";			//" 1"
+		String s = " I am iron man";			//" 1"
 		System.out.println(obj.reverseWords(s));
+		System.out.println(obj.reverseWords2(s));
 	}
 }
 
