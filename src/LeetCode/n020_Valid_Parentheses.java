@@ -11,13 +11,11 @@ public class n020_Valid_Parentheses {
 		for(int i=0; i<s.length(); i++) {
 			if(s.charAt(i) == '(' || s.charAt(i) == '[' || s.charAt(i) == '{') {
 				stack.push(s.charAt(i));
-				System.out.println(stack);
 			} else {
-				if(stack.size() == 0)			//F: Need to handle this, [(]
+				if(stack.size() == 0)			//F: Need to handle this, '){'
 					return false;
-				
+
 				char tmp = stack.pop();
-				System.out.println("tmp: "+tmp + " : " + s.charAt(i));
 				if(s.charAt(i) == ')') {
 					if(tmp != '(')
 						return false;
@@ -30,13 +28,17 @@ public class n020_Valid_Parentheses {
 				}
 			}	
 		}
-		return stack.size() == 0;					//F: using size !!!!!!!!!!!!!!! 
+		if(stack.size() == 0)
+			return true;
+		//return stack.size() == 0;					//F: using size !!!!!!!!!!!!!!! 
+		return false;
 	}
 
 	public static void main(String[] args) {
 		n020_Valid_Parentheses obj = new n020_Valid_Parentheses();
 		String s = "()[]{}";
-		//String s = "([)]";
+		String s1 = "){";
 		System.out.println(obj.isValid(s));
+		System.out.println(obj.isValid(s1));
 	}
 }
