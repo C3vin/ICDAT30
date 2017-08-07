@@ -14,11 +14,15 @@ public class n022_generate_parenthesis {
 		return res;
 	}
 	private void helper(int left, int right, List<String> res, String tmp) {
-		if(left>right) //deal with ")("
+		//handle ")(" e.g. ()())(
+		if(left > right) 
 			return;
+		
+		//base case
 		if(left == 0 && right == 0) {
-			String s = new String(tmp);
-			res.add(s);
+/*			String s = new String(tmp);
+			res.add(s);*/
+			res.add(new String(tmp));
 			return;
 		}
 		if(left > 0) {
