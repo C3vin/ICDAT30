@@ -47,7 +47,8 @@ public class n522_Longest_Uncommon_Subsequence_II {
 
 		return res;
 	}
-	//Checking Subsequence
+	
+	//Checking Subsequence //use this method!
 	public int findLUSlength2(String[] strs) {
 		int res = -1;
 		for(int i=0; i<strs.length; i++) {
@@ -55,8 +56,9 @@ public class n522_Longest_Uncommon_Subsequence_II {
 			for(j=0; j<strs.length; j++) {
 				if(i == j)
 					continue;
-				if(isSubsequence(strs[i], strs[j]))
+				if(isSubsequence(strs[i], strs[j])) {
 					break;
+				}
 			}
 			if(j == strs.length)						//compare to latest value
 				res = Math.max(res, strs[i].length());
@@ -64,24 +66,18 @@ public class n522_Longest_Uncommon_Subsequence_II {
 		return res;
 	}
 	private boolean isSubsequence(String s, String t) {
-/*		int i=0, j=0;
-		while(i < t.length() && j < s.length()) {
-			if(s.charAt(i) == t.charAt(j)) {
-				i++;
+		int j = 0;
+		for(int i = 0; i < t.length() && j < s.length(); i++) {
+			if(s.charAt(j) == t.charAt(i))
 				j++;
-			}
 		}
-		return j == s.length();*/
-        int j = 0;
-        for (int i = 0; i < t.length() && j < s.length(); i++)
-            if (s.charAt(j) == t.charAt(i))
-                j++;
-        return j == s.length();
+		return j == s.length();				//why use j, because need one flag outside for loop to determine if it move to latest one.
 	}
 	public static void main(String[] args) {
 		n522_Longest_Uncommon_Subsequence_II obj = new n522_Longest_Uncommon_Subsequence_II();
-		String[] s = {"aba", "cdc", "eae"};
-		//String[] s = {"aaa", "aaa", "aa"};		//return -1
+		//String[] s = {"ADXCPY", "AXY"};
+		//String[] s = {"aba", "cdc", "abc"};
+		String[] s = {"aaa", "aaa", "aa"};		//return -1
 		//System.out.println(obj.findLUSlength(s));
 		System.out.println(obj.findLUSlength2(s));
 	}
