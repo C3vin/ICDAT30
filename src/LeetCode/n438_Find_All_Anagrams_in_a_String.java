@@ -72,7 +72,7 @@ public class n438_Find_All_Anagrams_in_a_String {
 				res.add(left);
 
 			if(right - left == plen) {
-				if(target[s.charAt(left)] >= 0) {
+				if(target[s.charAt(left)] >= 0) {		//>=0, not <=0. Because before at least 1
 					count++;
 				}
 				target[s.charAt(left)]++;
