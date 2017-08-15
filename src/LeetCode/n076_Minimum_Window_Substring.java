@@ -16,9 +16,9 @@ public class n076_Minimum_Window_Substring {
 				dict.put(t.charAt(i), dict.get(t.charAt(i))+1);
 		}
 
-		int count=0;
-		int pre=0;
-		int minLen=s.length()+1;
+		int count = 0;
+		int pre = 0;
+		int minLen = s.length()+1;
 		for(int i=0; i<s.length(); i++) {
 			if(dict.containsKey(s.charAt(i))) {
 				dict.put(s.charAt(i), dict.get(s.charAt(i))-1);	
@@ -33,18 +33,63 @@ public class n076_Minimum_Window_Substring {
 							if(minLen > i-pre+1) {
 								res = s.substring(pre, i+1);
 								minLen = i-pre+1;
-							} //if
+							} 
 							count--;
-						} //if
-					} //if
+						} 
+					} 
 					pre++;
-				} //while
+				} 
 			}
 		}
 		return res;
 	}
+	public String minWindow2(String s, String t) {
+		String res = "";
+		int[] target = new int[256];
+		for(int i=0; i<t.length(); i++) {
+			target[t.charAt(i)]++;
+		}
+
+		int left = 0;
+		int right = 0;
+		int count = t.length();
+		boolean flag = true;
+		int minlen = s.length()+1;
+
+		while(right < s.length()) {
+			if(target[s.charAt(right)] >= 1)
+				count--;
+
+			target[s.charAt(right)]--;
+			right++;
+
+			if(count == 0) {
+				if(minlen > right-left) {
+					minlen = right-left;		//update minlen
+					System.out.println(minlen);
+				}
+
+				if(target[s.charAt(left)] >= 0) 
+					count++;
+
+				target[s.charAt(left)]++;
+				left++;
+				//res = s.substring(pre, i+1);
+			}
+			/*			if(right - left == t.length()) {
+				if(target[s.charAt(left)] >= 0) 
+					count++;
+
+				target[s.charAt(left)]++;
+				left++;
+			}*/
+		}
+
+		return res;
+	}
 	public static void main(String[] args) {
 		n076_Minimum_Window_Substring obj = new n076_Minimum_Window_Substring();
-		System.out.println(obj.minWindow("ADOBECODEBANC", "ABC"));
+		//System.out.println(obj.minWindow("ADOBECODEBANC", "ABC"));
+		System.out.println(obj.minWindow2("ADOBECODEBANC", "ABC"));
 	}
 }
