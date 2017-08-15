@@ -65,7 +65,7 @@ public class n076_Minimum_Window_Substring {
 
 			if(count == 0) {
 				if(minlen > right-left) {
-					minlen = right-left;		//update minlen
+					minlen = right-left;		
 					System.out.println(minlen);
 				}
 
