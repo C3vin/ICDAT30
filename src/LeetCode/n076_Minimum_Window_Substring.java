@@ -43,6 +43,7 @@ public class n076_Minimum_Window_Substring {
 		}
 		return res;
 	}
+	//better and faster
 	public String minWindow2(String s, String t) {
 		String res = "";
 		int[] target = new int[256];
@@ -53,38 +54,27 @@ public class n076_Minimum_Window_Substring {
 		int left = 0;
 		int right = 0;
 		int count = t.length();
-		boolean flag = true;
-		int minlen = s.length()+1;
+		int minlen = Integer.MAX_VALUE;
 
-		while(right < s.length()) {
-			if(target[s.charAt(right)] >= 1)
-				count--;
-
-			target[s.charAt(right)]--;
-			right++;
-
+		while(right < s.length() || count == 0) {			//F: need count == 0, because first got 'ADOBEC'(count=0) but need keep searching 
 			if(count == 0) {
-				if(minlen > right-left) {
-					minlen = right-left;		
-					System.out.println(minlen);
+				if(minlen > right - left + 1) {
+					minlen = right - left + 1;				//update minlen
+					res = s.substring(left, right);			//update string res, reference
 				}
-
-				if(target[s.charAt(left)] >= 0) 
+				if(target[s.charAt(left)] >= 0) {
 					count++;
-
+				}
 				target[s.charAt(left)]++;
 				left++;
-				//res = s.substring(pre, i+1);
+			} else {
+				if(target[s.charAt(right)] >= 1) {
+					count--;
+				}
+				target[s.charAt(right)]--;
+				right++;
 			}
-			/*			if(right - left == t.length()) {
-				if(target[s.charAt(left)] >= 0) 
-					count++;
-
-				target[s.charAt(left)]++;
-				left++;
-			}*/
 		}
-
 		return res;
 	}
 	public static void main(String[] args) {
