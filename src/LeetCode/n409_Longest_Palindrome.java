@@ -17,12 +17,18 @@ public class n409_Longest_Palindrome {
 			} else 
 				map.put(s.charAt(i), 1);
 		}
-		for(int i=0; i<s.length(); i++) {
+/*		for(int i=0; i<s.length(); i++) {
 			if(map.get(s.charAt(i))/2 > 0) {
-				count = count + map.get(s.charAt(i))/2; 
-				map.put(s.charAt(i), map.get(s.charAt(i))%2);
+				count = count + map.get(s.charAt(i))/2; 			//update count
+				map.put(s.charAt(i), map.get(s.charAt(i))%2);		//update map
 			}
+		}*/
+		
+		for(char k : map.keySet()) {
+			count = count + map.get(k)/2;			//update count 
+			map.put(k, map.get(k)%2);				//update map
 		}
+		
 		for(int x : map.values()) {
 			if(x != 0) {
 				return count * 2 + 1;
