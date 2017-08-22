@@ -1,4 +1,4 @@
-package LeetCode;
+	package LeetCode;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -46,22 +46,22 @@ public class n599_Minimum_Index_Sum_of_Two_Lists {
 
 		int sum = 0;
 		int min = Integer.MAX_VALUE;
-		List<String> res = new ArrayList<String>();
+		List<String> list = new ArrayList<String>();
 		for(int i=0; i<list2.length; i++) {
 			if(map.containsKey(list2[i])) {
 				sum = i + map.get(list2[i]);
 				if(min > sum) {
-					min = sum;
-					res.clear(); 		//clean first
-					res.add(list2[i]);
-				} else if(min == sum)
-					res.add(list2[i]);
+					min = sum;			//update min
+					list.clear(); 		//clean first
+					list.add(list2[i]);
+				} else if(min == sum)				//F: deal multiple correct value
+					list.add(list2[i]);
 			}
 		}
-		String[] ans = new String[res.size()];
-		res.toArray(ans);
-		System.out.println(res);
-		return ans;
+		String[] res = new String[list.size()];
+		list.toArray(res);
+		System.out.println(list);
+		return res;
 	}
 	public static void main(String[] args) {
 		n599_Minimum_Index_Sum_of_Two_Lists obj = new n599_Minimum_Index_Sum_of_Two_Lists();
