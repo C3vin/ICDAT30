@@ -29,10 +29,11 @@ public class n389_Find_the_Difference {
 		}
 		return 0;
 	}
+	//+-
 	public char findTheDifference2(String s, String t) {
 		char res = 0;
 		for(int i=0; i<s.length(); i++) 
-			res -= s.charAt(i);	
+			res -= s.charAt(i);						//can't use res = res - s.charAT(i)
 		
 		for(int i=0; i<t.length(); i++) 
 			res += t.charAt(i);
