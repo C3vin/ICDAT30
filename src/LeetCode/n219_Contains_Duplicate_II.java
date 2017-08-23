@@ -1,6 +1,6 @@
 package LeetCode;
 
-import java.util.HashMap;
+import java.util.HashSet;
 
 /*
  * Given an array of integers and an integer k, find out whether there are two distinct indices i and j in the array 
@@ -8,22 +8,22 @@ import java.util.HashMap;
  */
 public class n219_Contains_Duplicate_II {
 	public boolean containsNearbyDuplicate(int[] nums, int k) {
-		if(nums == null || nums.length == 0)
-			return false;
-		HashMap<Integer, Integer> map = new HashMap<Integer, Integer>();
+		HashSet<Integer> set = new HashSet<Integer>();
 		for(int i=0; i<nums.length; i++) {
-			if(map.containsKey(nums[i])) {
-				int j = map.get(nums[i]);
-				if(i-j <= k)
-					return true;				
-			} else
-				map.put(nums[i], i);		
+			if(set.contains(nums[i]))
+				return true;
+			set.add(nums[i]);
+			if(set.size() > k) {
+				set.remove(nums[i-k]);		//becasue we just need to care windows size i -> j 
+			}
 		}
 		return false;
 	}
 	public static void main(String[] args) {
 		n219_Contains_Duplicate_II obj = new n219_Contains_Duplicate_II();
 		int[] nums = {1,2,3,1,3};
+		int[] nums2 = {1,0,2,1};
 		System.out.println(obj.containsNearbyDuplicate(nums, 3));
+		System.out.println(obj.containsNearbyDuplicate(nums2, 2));
 	}
 }
