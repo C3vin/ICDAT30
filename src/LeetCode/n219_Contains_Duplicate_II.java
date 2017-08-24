@@ -13,8 +13,8 @@ public class n219_Contains_Duplicate_II {
 			if(set.contains(nums[i]))
 				return true;
 			set.add(nums[i]);
-			if(set.size() > k) {
-				set.remove(nums[i-k]);		//becasue we just need to care windows size i -> j 
+			if(set.size() > k) {			//why i-k, because set.size() > k, so i > k
+				set.remove(nums[i-k]);		//because we just need to care windows size i -> j 
 			}
 		}
 		return false;
