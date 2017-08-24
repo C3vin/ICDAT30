@@ -20,7 +20,7 @@ public class n246_Strobogrammatic_Number {
 		while(l <= r) {
 			if(!map.containsKey(num.charAt(l)))
 				return false;
-			if(map.get(num.charAt(l)) != num.charAt(r))
+			if(map.get(num.charAt(l)) != num.charAt(r))		//compare value and right num char
 				return false;
 			l++;
 			r--;
