@@ -4,7 +4,10 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
+//For example, given: ["eat", "tea", "tan", "ate", "nat", "bat"], 
+//[["ate", "eat","tea"],["nat","tan"],["bat"]]
 public class n049_Group_Anagrams {
 	public List<List<String>> groupAnagrams(String[] strs) {
 		List<List<String>> res = new ArrayList<List<String>>();
@@ -25,14 +28,31 @@ public class n049_Group_Anagrams {
 				map.put(ns, list);
 			}
 		}
-		res.addAll(map.values());	//addAll(map.values) 
+		res = new ArrayList<List<String>>(map.values());
 		
 		return res;
 	}
 
+	//convert and sort
+	public List<List<String>> groupAnagrams2(String[] strs) {
+		if(strs.length == 0 || strs == null) return new ArrayList<List<String>>();
+		HashMap<String, List<String>> map = new HashMap<String, List<String>>();
+		for(String s : strs) {
+			char[] ch = s.toCharArray();		//convert string to ch array
+			Arrays.sort(ch);
+			String key = String.valueOf(ch);	//convert ch array to string
+			if(!map.containsKey(key))
+				map.put(key, new ArrayList<String>());
+			map.get(key).add(s);				//Tip: get value(List) and add the string s. e.g. eat, tea in map
+			//System.out.println(map);			//{aet=[eat, tea, ate], abt=[bat], ant=[tan, nat]}
+		} 
+		
+		return new ArrayList<List<String>>(map.values());
+	}
 	public static void main(String[] args) {
 		n049_Group_Anagrams obj = new n049_Group_Anagrams();
 		String[] s = {"eat", "tea", "tan", "ate", "nat", "bat"};
 		System.out.println(obj.groupAnagrams(s));
+		System.out.println(obj.groupAnagrams2(s));
 	}
 }
