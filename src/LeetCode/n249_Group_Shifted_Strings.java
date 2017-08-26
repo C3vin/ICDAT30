@@ -1,0 +1,48 @@
+package LeetCode;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.List;
+
+//For example, given: ["abc", "bcd", "acef", "xyz", "az", "ba", "a", "z"]
+//Return: [["abc","bcd","xyz"],["az","ba"],["acef"],["a","z"]]
+//ascii: a(97), b(98)
+public class n249_Group_Shifted_Strings {
+	public List<List<String>> groupStrings(String[] strings) {
+		//Wait! How do I mod a negative number like -45?
+		//Mentor: Just like a positive number, so that -45 mod 26 = -19, but then you add 26 to make the result positive, 
+		//so that -45 mod 26 = -19 + 26 = 7.
+
+		List<List<String>> res = new ArrayList<List<String>>();
+		HashMap<String, List<String>> map = new HashMap<String, List<String>>();
+
+		for(String s : strings) {
+			StringBuilder sb = new StringBuilder();
+			for(int i=0; i<s.length(); i++) {
+				int val = (s.charAt(i) - s.charAt(0) + 26) % 26;
+				sb.append(val + " ");	//F: need " ", e.g. 2 22
+			}
+
+			String str = sb.toString();	//Need to convert to String.
+
+			if(!map.containsKey(str)) {
+				List<String> tmp = new ArrayList<String>();
+				map.put(str, tmp);
+			}
+			map.get(str).add(s);		//can't use else, because need to add all s.
+		}
+
+		for(String s : map.keySet()) {
+			res.add(map.get(s));		//Tip: add to list using map.get(s) to get the value.
+		}
+
+		return res;
+	}
+
+	public static void main(String[] args) {
+		n249_Group_Shifted_Strings obj = new n249_Group_Shifted_Strings();
+		String[] strings = {"abc", "bcd", "acef", "xyz", "az", "ba", "a", "z"};
+		System.out.println(obj.groupStrings(strings));
+	}
+}
