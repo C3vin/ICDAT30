@@ -49,9 +49,9 @@ public class n409_Longest_Palindrome {
 			}
 		}
 		if(!set.isEmpty())
-			return count * 2 + 1;
+			return count * 2 + 1;					//why? because need to handle s=a, return 1 (0*2+1).
 		
-		return count * 2;
+		return count * 2;				
 	}
 	public static void main(String[] args) {
 		n409_Longest_Palindrome obj = new n409_Longest_Palindrome();
