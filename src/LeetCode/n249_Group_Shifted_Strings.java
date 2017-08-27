@@ -1,6 +1,7 @@
 package LeetCode;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
@@ -26,13 +27,19 @@ public class n249_Group_Shifted_Strings {
 
 			String str = sb.toString();	//Need to convert to String.
 
+			//this is same way LC 49
+/*			char[] ch = s.toCharArray();		//convert string to ch array
+			for(int i=0; i<s.length(); i++) {
+				ch[i] = (char) ((s.charAt(i) - s.charAt(0) + 26) % 26);
+			}
+			String str = String.valueOf(ch);	//convert ch array to string
+*/			
 			if(!map.containsKey(str)) {
 				List<String> tmp = new ArrayList<String>();
 				map.put(str, tmp);
 			}
 			map.get(str).add(s);		//can't use else, because need to add all s.
 		}
-
 		for(String s : map.keySet()) {
 			res.add(map.get(s));		//Tip: add to list using map.get(s) to get the value.
 		}
