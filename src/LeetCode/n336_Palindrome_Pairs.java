@@ -34,6 +34,14 @@ public class n336_Palindrome_Pairs {
 	}
 
 	private boolean isPalindrome(String tmp) {
+		for(int i=0; i<tmp.length()/2; i++) {
+			if(tmp.charAt(i) != tmp.charAt(tmp.length()-1-i))
+				return false;
+		}
+		
+		return true;
+	}
+	/*private boolean isPalindrome(String tmp) {
 		int l=0;
 		int r=tmp.length()-1;
 		while(l < r) {
@@ -43,7 +51,7 @@ public class n336_Palindrome_Pairs {
 			r--;
 		}
 		return true;
-	}
+	}*/
 
 	public static void main(String[] args) {
 		n336_Palindrome_Pairs obj = new n336_Palindrome_Pairs();
