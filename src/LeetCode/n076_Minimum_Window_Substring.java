@@ -44,26 +44,28 @@ public class n076_Minimum_Window_Substring {
 		}
 		return res;
 	}
-	//better and faster
+	//better and faster, Sliding Window! same as 438
 	public String minWindow2(String s, String t) {
 		String res = "";
 		int[] target = new int[256];
+		//int[] target = new int[26];		//can't use size 26, because we don't know low case or high case! 
+		//record each character in t to target
 		for(int i=0; i<t.length(); i++) {
 			target[t.charAt(i)]++;
 		}
-
+		
 		int left = 0;
 		int right = 0;
-		int count = t.length();
+		int count = t.length();			//window size
 		int minlen = Integer.MAX_VALUE;
 
-		while(right < s.length() || count == 0) {			//F: need count == 0, because first got 'ADOBEC'(count=0) but need keep searching 
+		while(right < s.length() || count == 0) {		//F: need count == 0, because first got 'ADOBEC'(count=0) but need keep searching 
 			if(count == 0) {
-				if(minlen > right - left + 1) {
-					minlen = right - left + 1;				//update minlen
-					res = s.substring(left, right);			//update string res, reference
+				if(minlen > right - left) {				//because right already out of select window, 0123456, l(0)r(6), 6-0 = select window size
+					minlen = right - left;				//update minlen
+					res = s.substring(left, right);		//update string res, reference
 				}
-				if(target[s.charAt(left)] >= 0) {
+				if(target[s.charAt(left)] >= 0) {		//>=0, not <=0. Because before at least 1
 					count++;
 				}
 				target[s.charAt(left)]++;

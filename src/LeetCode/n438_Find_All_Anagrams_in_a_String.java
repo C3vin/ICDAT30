@@ -62,29 +62,30 @@ public class n438_Find_All_Anagrams_in_a_String {
 		int plen = p.length();
 
 		//record each character in p to target
-		int[] target = new int[256];			//if use [26], need - 'a'
+		//int[] target = new int[256];			//if use [26], need - 'a'
+		int[] target = new int[26];
 		for(int i=0; i<plen; i++) {
-			target[p.charAt(i)]++;
+			target[p.charAt(i) - 'a']++;
 		}
 
 		int left = 0;
 		int right = 0;
-		int count = plen;
+		int count = plen;		//window size
 		while(right < slen) {
-			if(target[s.charAt(right)] >= 1) {
+			if(target[s.charAt(right) - 'a'] >= 1) {
 				count--;
 			}
-			target[s.charAt(right)]--;
+			target[s.charAt(right) - 'a']--;
 			right++;
 
 			if(count == 0)
 				res.add(left);
 
 			if(right - left == plen) {
-				if(target[s.charAt(left)] >= 0) {		//>=0, not <=0. Because before at least 1
+				if(target[s.charAt(left) - 'a'] >= 0) {		//>=0, not <=0. Because before at least 1
 					count++;
 				}
-				target[s.charAt(left)]++;
+				target[s.charAt(left) - 'a']++;
 				left++;
 			}
 		}
@@ -143,8 +144,8 @@ public class n438_Find_All_Anagrams_in_a_String {
 		String p2 = "aa";//"abc";
 		//System.out.println(obj.findAnagrams(s, p));		//[0, 6]
 		//System.out.println(obj.findAnagrams(s1, p1));		//[0, 1, 2]
-		//System.out.println(obj.findAnagrams2(s1, p1));
+		System.out.println(obj.findAnagrams2(s1, p1));
 		//System.out.println(obj.findAnagrams3(s, p));
-		System.out.println(obj.findAnagrams3(s2, p2));
+		//System.out.println(obj.findAnagrams3(s2, p2));
 	}
 }
