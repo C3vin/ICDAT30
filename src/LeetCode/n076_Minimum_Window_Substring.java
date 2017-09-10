@@ -2,6 +2,7 @@ package LeetCode;
 
 import java.util.HashMap;
 
+//Given a string S and a string T, find the minimum window in S which will contain all the characters in T in complexity O(n).
 //S = "ADOBECODEBANC", T = "ABC"  =>  Minimum window is "BANC".
 public class n076_Minimum_Window_Substring {
 	public String minWindow(String s, String t) {
