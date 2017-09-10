@@ -1,10 +1,18 @@
 package LeetCode;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 
+/*
+Given a string s and a non-empty string p, find all the start indices of p's anagrams in s.
+Strings consists of lowercase English letters only and the length of both strings s and p will not be larger than 20,100.
+The order of output does not matter.
+Input:
+s: "cbaebabacd" p: "abc"
+Output: [0, 6]
+*/
+		
 public class n438_Find_All_Anagrams_in_a_String {
 	public List<Integer> findAnagrams(String s, String p) {
 		List<Integer> res = new LinkedList<Integer>();
@@ -47,6 +55,7 @@ public class n438_Find_All_Anagrams_in_a_String {
 		return res;
 	}
 
+	//Sliding Window
 	public List<Integer> findAnagrams2(String s, String p) {
 		List<Integer> res = new LinkedList<Integer>();
 		int slen = s.length();
