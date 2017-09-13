@@ -1,6 +1,7 @@
 package LeetCode;
 
 import java.util.HashMap;
+import java.util.HashSet;
 
 //Given "abcabcbb", the answer is "abc", which the length is 3.
 //Given "bbbbb", the answer is "b", with the length of 1.
@@ -52,9 +53,51 @@ public class n003_longest_substring_without_repeating_characters {
 		}
 		return max;
 	}
+	
+	//Sliding Window, HashSet
+	public int lengthOfLongestSubstring2(String s) {
+		HashSet<Character> set = new HashSet<Character>();	
+		
+		int n = s.length();
+		int res = 0;
+		int i = 0;
+		int j = 0;
+		
+		while(i < n && j < n) {
+			if(!set.contains(s.charAt(j))) {
+				set.add(s.charAt(j++));
+				res = Math.max(res, j-i);	
+			} else {
+				set.remove(s.charAt(i++));
+			}
+		}
+		return res;
+ 	}
+	
+	//Sliding Window, HashMap
+	public int lengthOfLongestSubstring3(String s) {
+		HashMap<Character, Integer> map = new HashMap<Character, Integer>();
+
+		int n = s.length();
+		int res = 0;
+		int i=0;
+		int j=0;
+		
+		while(i < n && j < n) {
+			if(map.containsKey(s.charAt(j))) {
+				i = Math.max(map.get(s.charAt(j)), i);	//need this Math.max, cuz i might take old value! 
+			}
+			res = Math.max(res, j-i+1);
+			map.put(s.charAt(j), j+1);		//add or update value
+			j++;
+		}
+		return res;
+	}
 	public static void main(String[] args) {
 		n003_longest_substring_without_repeating_characters obj = new n003_longest_substring_without_repeating_characters();
 		String s = "tmmzuxt";
 		System.out.println(obj.lengthOfLongestSubstring(s));
+		System.out.println(obj.lengthOfLongestSubstring2(s));
+		System.out.println(obj.lengthOfLongestSubstring3(s));
 	}
 }
