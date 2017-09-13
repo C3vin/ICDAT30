@@ -11,33 +11,35 @@ public class AA_Longest_order {
 		int i = 0;
 		int j = 0;
 		ArrayList<String> res = new ArrayList<String>();
-		int maxRange = 0;
+		int maxRange = 0;	
+		int startIndex = 0;
 		while(i < n && j < n) {
 			if(!set.contains(orders[j])) {
 				set.add(orders[j]);
 				j++;
 				if(maxRange < j - i) {
-					maxRange = j - i;
-					//System.out.println("maxRange: "+maxRange + " i: "+i + " j: "+j);
-					res = new ArrayList<String>();
-					for(int k = i; k<i+maxRange; k++) {
-						System.out.println("i: "+i + " j:" + j);
+					maxRange = j - i;						//update maxRange & startIndex
+					startIndex = i;						 
+					/*res = new ArrayList<String>();		//each time create a new ArrayList
+					for(int k = i; k<i+maxRange; k++) {		//No need to add in here, just get the startIndex
 						res.add(orders[k]);
-					}
+					}*/
 				}
 			} else {
 				set.remove(orders[i]);
 				i++;
 			}
 		}
-		System.out.println("maxRange: "+maxRange);
+		//System.out.println("maxRange: "+maxRange + " startIndex: "+startIndex);
+		for(int k = startIndex; k < startIndex+maxRange; k++) 
+			res.add(orders[k]);
+		
 		return res;
 	}
 
 	public static void main(String[] args) {
 		AA_Longest_order obj = new AA_Longest_order();
 		String[] orders = {"Water", "Banana", "OJ", "Fish", "OJ", "Water", "Cookie", "Apple", "Water", "OJ", "Banana", "Fish", "Cookie", "Fish"};
-		//String[] orders = {"Water", "OJ", "Banana", "Fish", "Cookie", "Apple","Water", "Banana", "OJ", "Fish", "OJ", "Water", "Cookie", "Apple"};
 		System.out.print(obj.findLongestOrder(orders));
 	}
 }
