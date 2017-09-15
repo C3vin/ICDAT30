@@ -26,20 +26,20 @@ public class n239_Sliding_Window_Maximum {
 		}
 		
 		int[] res = new int[nums.length - k + 1];			//need + 1
-		Deque<Integer> q = new ArrayDeque<Integer>();
-		int rindex = 0;
+		Deque<Integer> q = new ArrayDeque<Integer>();		//store index
+		int rIndex = 0;
 		
 		for(int i=0; i<nums.length; i++) {
-			while(!q.isEmpty() && q.peek() == i-k) 				//remove numbers out of range k
+			while(!q.isEmpty() && q.peek() == i-k) 				//remove numbers out of range k 
 				q.poll();
 			
 			while(!q.isEmpty() && nums[q.peekLast()] < nums[i])	//remove smaller numbers in k range as they are useless
-				q.pollLast();
+				q.pollLast();									//use while loop, so it will test all the value in q
 			
-			q.offer(i);		//q contains index... r contains content
-
+			q.offer(i);		
+		
 			if(i+1 >= k)	//need to use i+1 >= k, 2+1 >= 3, so need to update res
-				res[rindex++] = nums[q.peek()];
+				res[rIndex++] = nums[q.peek()];					//F: rIndex++, so we can add to next if need it
 		}
 /*		for(int x : res)
 			System.out.print(x);*/
