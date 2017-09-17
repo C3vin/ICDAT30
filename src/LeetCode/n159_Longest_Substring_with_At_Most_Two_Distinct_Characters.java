@@ -9,31 +9,36 @@ import java.util.HashMap;
 public class n159_Longest_Substring_with_At_Most_Two_Distinct_Characters {
 	public int lengthOfLongestSubstringTwoDistinct(String s) {
 		HashMap<Character, Integer> map = new HashMap<Character, Integer>();
-		int res = 0;
-		int n = s.length();
+		int count = 0;
 		int i = 0;
 		int j = 0;
-		int count = 0;
-		while(i < n && j < n) {
-			if(map.containsKey(s.charAt(j))) {
-				count++;
-				if(count == 1) {
-					System.out.println("i: "+i + " j: "+ j);
-					res = Math.max(res, j-i+1);
-					i = Math.max(map.get(s.charAt(j)), i);		//update i;
-					System.out.println("i: "+i + " j: "+ j + " res: " + res);
-					count--;
-				}
+		int n = s.length();
+		int maxLen = 0;
+		
+		while(i<n && j<n) {
+			if(!map.containsKey(s.charAt(j))) {
+				map.put(s.charAt(j), 1);
+			} else {
+				map.put(s.charAt(j), map.get(s.charAt(j))+1);
 			}
-			map.put(s.charAt(j), j+1);
+			if(map.get(s.charAt(j)) == 1)			//new value
+				count++;
 			j++;
-			System.out.println(map);
+				
+			if(count > 2) {							//e.g. count = 3, meaning 3 distinct char, need to sliding window  
+				map.put(s.charAt(i), map.get(s.charAt(i))-1);
+				if(map.get(s.charAt(i)) == 0)		//eceb, after -1, map[(e,1), (c,0), (b,1)] so count--;
+					count--;
+				i++;
+			}
+			maxLen = Math.max(maxLen, j-i);
 		}
-		return res;
+		return maxLen;
 	}
 	public static void main(String[] args) {
 		n159_Longest_Substring_with_At_Most_Two_Distinct_Characters obj = new n159_Longest_Substring_with_At_Most_Two_Distinct_Characters();
-		String s = "ecebaab";
+		String s = "ecebaa";
+		//String s = "abcabcabc";	//2 
 		System.out.println(obj.lengthOfLongestSubstringTwoDistinct(s));
 	}
 }
