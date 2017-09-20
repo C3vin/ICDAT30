@@ -13,7 +13,7 @@ words: ["foo", "bar"]
 You should return the indices: [0,9].
 (order does not matter).
  */
-public class n300_Substring_with_Concatenation_of_All_Words {
+public class n030_Substring_with_Concatenation_of_All_Words {
 	public List<Integer> findSubstring(String s, String[] words) {
 		List<Integer> res = new ArrayList<Integer>();
 		HashMap<String, Integer> map = new HashMap<String, Integer>();
@@ -58,7 +58,7 @@ public class n300_Substring_with_Concatenation_of_All_Words {
 		return res;
 	}
 	public static void main(String[] args) {
-		n300_Substring_with_Concatenation_of_All_Words obj = new n300_Substring_with_Concatenation_of_All_Words();
+		n030_Substring_with_Concatenation_of_All_Words obj = new n030_Substring_with_Concatenation_of_All_Words();
 		String s = "barfoothefoobarman";
 		String[] words = {"foo", "bar"}; 
 		System.out.print(obj.findSubstring(s, words));
