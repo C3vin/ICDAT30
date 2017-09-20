@@ -13,7 +13,7 @@ words: ["foo", "bar"]
 You should return the indices: [0,9].
 (order does not matter).
  */
-public class n30_Substring_with_Concatenation_of_All_Words {
+public class n300_Substring_with_Concatenation_of_All_Words {
 	public List<Integer> findSubstring(String s, String[] words) {
 		List<Integer> res = new ArrayList<Integer>();
 		HashMap<String, Integer> map = new HashMap<String, Integer>();
@@ -27,9 +27,9 @@ public class n30_Substring_with_Concatenation_of_All_Words {
 			HashMap<String, Integer> curFreq = new HashMap<String, Integer>();
 			int start = i; 
 			int count = 0;
-			for(int j=i; j<=s.length()-len; j+=len) {
+			for(int j=i; j<=s.length()-len; j+=len) {				//F: range control: need s.length()-len, so j won't OOR
 				String sub = s.substring(j, j+len);
-				//System.out.println(j+ ", sub: "+sub);
+				System.out.println("j: "+j+ " sub: "+sub);
 				
 				if(map.containsKey(sub)) {
 					curFreq.put(sub, curFreq.containsKey(sub) ? curFreq.get(sub)+1 : 1);
@@ -58,7 +58,7 @@ public class n30_Substring_with_Concatenation_of_All_Words {
 		return res;
 	}
 	public static void main(String[] args) {
-		n30_Substring_with_Concatenation_of_All_Words obj = new n30_Substring_with_Concatenation_of_All_Words();
+		n300_Substring_with_Concatenation_of_All_Words obj = new n300_Substring_with_Concatenation_of_All_Words();
 		String s = "barfoothefoobarman";
 		String[] words = {"foo", "bar"}; 
 		System.out.print(obj.findSubstring(s, words));
