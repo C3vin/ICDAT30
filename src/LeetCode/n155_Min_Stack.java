@@ -1,6 +1,6 @@
 package LeetCode;
 
-import java.util.ArrayList;
+import java.util.Stack;
 
 public class n155_Min_Stack {
 	/** initialize your data structure here. */
@@ -17,7 +17,38 @@ public class n155_Min_Stack {
 			max = this;
 		}
 	}
-	//private NNode top;
+	Stack<Integer> data;
+	Stack<Integer> minStack;
+	public n155_Min_Stack() {			//MinStack
+		data = new Stack<Integer>();
+		minStack = new Stack<Integer>();
+	}
+
+	public void push(int x) {
+		data.push(x);
+		if(minStack.isEmpty() || minStack.peek() >= x)
+			minStack.push(x);
+/*		else {
+			if(minStack.peek() >= x)
+				minStack.push(x);
+		}*/
+	}
+
+	public void pop() {
+		int val = data.pop();
+		if(!minStack.isEmpty() && minStack.peek() == val)		//== not >=
+			minStack.pop();
+	}
+
+	public int top() {
+		return data.peek();
+	}
+
+	public int getMin() {
+		return minStack.peek();
+	}
+
+	/*	//private NNode top;
 	ArrayList<Integer> stack = new ArrayList<Integer>();
 	ArrayList<Integer> minStack = new ArrayList<Integer>();
 
@@ -52,10 +83,10 @@ public class n155_Min_Stack {
 		if(!minStack.isEmpty())  
 			return minStack.get(minStack.size()-1);  
 		return 0; 
-	}
+	}*/
 	public static void main(String[] args) {
 		n155_Min_Stack minStack = new n155_Min_Stack();
-		minStack.push(2);
+		minStack.push(-3);
 		minStack.push(0);
 		minStack.push(1);
 		minStack.push(4);
