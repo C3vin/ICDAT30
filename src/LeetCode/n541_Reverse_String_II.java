@@ -13,17 +13,17 @@ public class n541_Reverse_String_II {
 		int len = s.length();
 		char[] ch = s.toCharArray();
 		
-		for(int i=0; i<len; i = i+2*k) {
+		for(int i=0; i<len; i = i+2*k) {	//need 2*k
 			if(len - i < k) {
-				reverse(ch, i, len);	//reserve all
+				reverse(ch, i, len);		//reserve all
 			} else {
-				reverse(ch, i, i+k); 
+				reverse(ch, i, i+k); 		//i+k, e.g. (ch, 0, 2)-> abcd, so we can change only ch[0] and ch[1]
 			}
 		}
 		return new String(ch);
 	}
 	public void reverse(char[] ch, int start, int end) {
-		for(int i=start; i<(start+end)/2; i++) {
+		for(int i=start; i<(start+end)/2; i++) {			//F: need start + end to get the length, also need to / 2 !!!
 			char tmp = ch[i];
 			ch[i] = ch[end-1-i+start];	//Need +start. e.g. (ch,4,6) ch[end-1-i] -> ch[6-1-4] = ch[1]. So will swap the wrong item
 			ch[end-1-i+start] = tmp;
