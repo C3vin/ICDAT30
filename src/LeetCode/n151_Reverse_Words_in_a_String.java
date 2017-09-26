@@ -8,11 +8,11 @@ import java.util.Collections;
 //return "blue is sky the".
 public class n151_Reverse_Words_in_a_String {
 	public String reverseWords(String s) {
-		String[] str = s.split(" ");
+		String[] str = s.split(" ");				// " " 
 		StringBuilder sb = new StringBuilder();
 
 		for(int i=str.length-1; i>=0; i--) {			
-			if (!str[i].isEmpty()) {		//F: need this to handle ""
+			if (!str[i].isEmpty()) {				//F: need this to handle ""
 				sb.append(str[i]).append(" ");
 			}
 		}
@@ -29,13 +29,13 @@ public class n151_Reverse_Words_in_a_String {
 			if(!str[i].equals(" "))
 				list.add(str[i]);
 		}
-		Collections.reverse(list);
-
+		Collections.reverse(list);				//Collections
+		
 		String ans = new String();
 		for(int i=0; i<list.size(); i++)
 			ans = ans + list.get(i) + " ";
 		
-		ans = ans + list.get(list.size()-1);
+		ans = ans + list.get(list.size()-1);	 
 		return ans;
 	}
 	
