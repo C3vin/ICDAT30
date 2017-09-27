@@ -7,19 +7,18 @@ public class n557_Reverse_Words_in_a_String_III {
 	public String reverseWords(String s) {
 		if(s.length() == 0)
 			return s;
-		char[] ch = s.toCharArray();
+		char[] ch = s.toCharArray();			//Need this, after same as LC 186
+		
 		int last = 0;
 		for(int i=0; i<ch.length; i++) {
 			if(ch[i] == ' ') {					//' ' not " "
 				reverse(ch, last, i-1);
-				last = i + 1;					//i + 1 not i only
+				last = i + 1;					
 			}
-/*			if(i == ch.length-1)				//handle last word with no space
-				reverse(ch, last, i);*/
 		}
-		reverse(ch, last, ch.length-1);			//same as 10ms
+		reverse(ch, last, ch.length-1);			//last, not 0
 		
-		return new String(ch);
+		return new String(ch);					//new String
 	}
 	private void reverse(char[] ch, int l, int r) {
 		while(l < r) {
@@ -34,6 +33,6 @@ public class n557_Reverse_Words_in_a_String_III {
 	public static void main(String[] args) {
 		n557_Reverse_Words_in_a_String_III obj = new n557_Reverse_Words_in_a_String_III();
 		String s = "Let's take LeetCode contest";
-		System.out.println(obj.reverseWords(s));
+		System.out.println(s + "\n" +obj.reverseWords(s));
 	}
 }
