@@ -1,6 +1,6 @@
 package LeetCode;
 
-@Alg(type="Math", com="NA", level="easy", num=9)
+//Determine whether an integer is a palindrome. Do this without extra space.
 public class n009_palindrome_number {
 	public boolean isPailindrome(int x) {
 		if(x<0)
@@ -25,15 +25,30 @@ public class n009_palindrome_number {
 	}
 	public int reverseInt(int x) {
 		int ret = 0;
-		while(x != 0) {
-			ret = ret * 10 + x % 10; //F: Need * 10 !
+		while(x != 0) {				   //Reverse int 
+			ret = ret * 10 + (x % 10); //F: Need * 10 !
 			x = x / 10;
 		}
 		return ret;
+	}
+	
+	//Revert half of the number
+	public boolean isPailindrome3(int x) {
+		if(x < 0 || (x != 0 && x % 10 == 0))			////handle special case '10', need x != 0. Because '0' is true
+			return false;
+		int ret = 0;
+		while(x > ret) {
+			ret = ret * 10 + (x % 10);
+			x = x / 10;
+		}
+		
+		return x == ret || x == (ret/10);
 	}
 	public static void main(String[] args) {
 		n009_palindrome_number obj = new n009_palindrome_number();
 		System.out.println(obj.isPailindrome2(10101));
 		System.out.println(obj.isPailindrome2(1232));
+		System.out.println(obj.isPailindrome3(10101));
+		System.out.println(obj.isPailindrome3(0));
 	}
 }
