@@ -1,5 +1,7 @@
 package LeetCode;
 
+//Given a non-empty string check if it can be constructed by taking a substring of it and appending multiple copies of the substring together. 
+//You may assume the given string consists of lowercase English letters only and its length will not exceed 10000.
 //Input: "abab" Output: True, Explanation: It's the substring "ab" twice.
 //Input: "aba" Output: False
 //Input: "abcabcabcabc" Output: True, Explanation: It's the substring "abc" four times. (And the substring "abcabc" twice.)
@@ -8,9 +10,7 @@ public class n459_Repeated_Substring_Pattern {
 		int strLen = str.length();
 		
 		for(int i=strLen/2; i>=1; i--) {			//F: >= 1, cuz strLen%i == 0 will failed 
-			System.out.println(strLen + " @ " +i);
 			if(strLen%i == 0) {
-				System.out.println("@: " + i);
 				int cp = strLen/i;
 				String subStr = str.substring(0, i);
 				StringBuilder sb = new StringBuilder();
