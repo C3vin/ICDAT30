@@ -1,12 +1,14 @@
 package LeetCode;
 
-@Alg(type="String", com="M$,F", level="easy", num=125)
+//Given a string, determine if it is a palindrome, considering only alphanumeric characters and ignoring cases.
+//"A man, a plan, a canal: Panama" is a palindrome.
+//"race a car" is not a palindrome.
 public class n125_Valid_Palindrome {
 	public boolean isPalindrome(String s) {
 		if(s.length() == 0 || s == null || s.length() < 2) return true;
         int i=0;
         int j=s.length()-1;
-        s = s.toLowerCase();		//change to low case
+        s = s.toLowerCase();		//F: change to low case, because 'A' == 'a' in this case
         while(i < j) {
         	char c1 = s.charAt(i);
         	char c2 = s.charAt(j);
