@@ -18,9 +18,36 @@ public class n520_Detect_Capital {
 
 		return false;
 	}
+	public boolean detectCapitalUse2(String word) {
+		boolean up = false;
+		boolean low = false;
+		char[] ch = word.toCharArray();
+		
+		if(ch[0] >= 'A' && ch[0] <= 'Z') {
+			for(int i=1; i<ch.length; i++) {
+				if(ch[i] >= 'a' && ch[i] <= 'z') {	//case 3: Google
+					if(up)
+						return false;
+					low = true;
+				} else {	//case 1: USA
+					if(low)
+						return false;
+					up = true;
+				}
+			}
+		} else {	//case 2: leetcode
+			for(int i=1; i<ch.length; i++) {
+				if(ch[i] >= 'A' && ch[i] <= 'Z')
+					return false;
+			}
+		}
+		return true;
+	}
 	public static void main(String[] args) {
 		n520_Detect_Capital obj = new n520_Detect_Capital();
 		System.out.println(obj.detectCapitalUse("USA"));
 		System.out.println(obj.detectCapitalUse("FlaG"));
+		System.out.println(obj.detectCapitalUse2("USA"));
+		System.out.println(obj.detectCapitalUse2("FlaG"));
 	}
 }
