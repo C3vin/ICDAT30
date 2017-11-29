@@ -34,7 +34,7 @@ public class n009_palindrome_number {
 	
 	//Revert half of the number
 	public boolean isPailindrome3(int x) {
-		if(x < 0 || (x != 0 && x % 10 == 0))			////handle special case '10', need x != 0. Because '0' is true
+		if(x < 0 || (x != 0 && x % 10 == 0))		//handle special case '10', need x != 0. Because '0' is true
 			return false;
 		int ret = 0;
 		while(x > ret) {
