@@ -13,7 +13,7 @@ public class n021_Merge_Two_Sorted_Lists {
 				p.next = l2;
 				l2 = l2.next;
 			}
-			p = p.next;
+			p = p.next;			//Need to move p after all
 		}
 		//extra node
 		if(l1 != null) {
