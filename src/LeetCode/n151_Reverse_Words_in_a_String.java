@@ -12,7 +12,7 @@ public class n151_Reverse_Words_in_a_String {
 		StringBuilder sb = new StringBuilder();
 
 		for(int i=str.length-1; i>=0; i--) {			
-			if (!str[i].isEmpty()) {				//F: need this to handle ""
+			if (!str[i].isEmpty()) {				//F: need this to handle "", e.g. [, I, am, iron, man], this can handle str[0] (no need)
 				sb.append(str[i]).append(" ");
 			}
 		}
