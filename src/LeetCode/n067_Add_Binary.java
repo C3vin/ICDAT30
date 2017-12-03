@@ -12,7 +12,7 @@ public class n067_Add_Binary {
 		int i=a.length()-1;
 		int j=b.length()-1;
 		
-		while(i >=0 || j >=0) {		//F:=
+		while(i >=0 || j >=0) {				// || not &&
 			if(i>=0) {
 				carry = carry + a.charAt(i)-'0';
 				i--;
@@ -21,6 +21,7 @@ public class n067_Add_Binary {
 				carry = carry + b.charAt(j)-'0';
 				j--;
 			}
+			
 			sb.insert(0, carry%2);			//sb.insert, tip: from head to tail ->
 			carry = carry/2;
 		}
@@ -30,8 +31,34 @@ public class n067_Add_Binary {
 		return sb.toString();
 	}
 	
+	//if don't want to use sb.insert 
+	public String addBinary2(String a, String b) {
+		StringBuilder sb = new StringBuilder();
+		int i = a.length()-1;
+		int j = b.length()-1;
+		int carry = 0;
+		
+		while(i >= 0 || j >= 0) {				// || not &&
+			int sum = carry;
+			if(i >= 0) {
+				sum = sum + a.charAt(i)-'0';
+				i--;
+			}
+			if(j >= 0) {
+				sum = sum + b.charAt(j)-'0';
+				j--;
+			}
+			sb.append(sum % 2);
+			carry = sum / 2;
+		}
+		if(carry != 0)
+			sb.append(carry);
+			
+		return sb.reverse().toString();			//still need to use reverse() 
+	}
 	public static void main(String[] args) {
 		n067_Add_Binary obj = new n067_Add_Binary();
 		System.out.println(obj.addBinary("11", "1"));
+		System.out.println(obj.addBinary2("11", "1"));
 	}
 }
