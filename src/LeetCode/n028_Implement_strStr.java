@@ -11,9 +11,9 @@ public class n028_Implement_strStr {
 			return 0;*/
 		if(needle.length() == 0)
 			return 0;
-		for(int i=0; i <= haystack.length()-needle.length(); i++) {
+		for(int i=0; i <= haystack.length()-needle.length(); i++) {		//need =, e.g. 6-4=2 but 0~2 will return -1, need 0~3. so need <= 
 			for(int j=0; j < needle.length(); j++) {
-				if(haystack.charAt(i+j) != needle.charAt(j)) {
+				if(haystack.charAt(i+j) != needle.charAt(j)) {			//use != much easy than == in this case
 					break;
 				}
 				if(j == needle.length()-1)		//F: need to needle.length() - 1
