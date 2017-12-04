@@ -1,6 +1,6 @@
 package LeetCode;
 
-@Alg(type="String", com="Yelp", level="easy", num=14)
+//Write a function to find the longest common prefix string amongst an array of strings.
 public class n014_longest_common_prefix {
 	public String longestCommonPrefix(String[] strs) {
 	    if(strs==null || strs.length==0)
@@ -8,8 +8,9 @@ public class n014_longest_common_prefix {
 	    if(strs.length==1) 
 	        return strs[0];
 	    
-	    int minLen = strs[0].length();		//Need this for the for loop 
+	    int minLen = strs[0].length();		//Need this for the for loop, default minLen 
 
+	    //update the minLen
 	    for(int i=0; i<strs.length; i++) {
 	    	if(minLen > strs[i].length())
 	    		minLen = strs[i].length();
@@ -18,7 +19,7 @@ public class n014_longest_common_prefix {
 	        for(int j=0; j<strs.length-1; j++){		//why -1, cuz handle j+1 boundary 
 	            String s1 = strs[j];
 	            String s2 = strs[j+1];
-	            if(s1.charAt(i)!=s2.charAt(i)){
+	            if(s1.charAt(i)!=s2.charAt(i)){		//buz we start from head to end, e.g. aaaaab, b=5
 	                return s1.substring(0, i);
 	            }
 	        }
