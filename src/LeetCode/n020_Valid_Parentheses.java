@@ -1,8 +1,9 @@
 package LeetCode;
 
 import java.util.LinkedList;
+//Given a string containing just the characters '(', ')', '{', '}', '[' and ']', determine if the input string is valid.
+//The brackets must close in the correct order, "()" and "()[]{}" are all valid but "(]" and "([)]" are not.
 
-@Alg(type="String", com="AA,G,M$", level="easy", num=20)
 public class n020_Valid_Parentheses {
 	public boolean isValid(String s) {
 		if(s.length() == 0 || s.length() == 1) return false;
