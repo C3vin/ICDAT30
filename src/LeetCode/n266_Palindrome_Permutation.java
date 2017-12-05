@@ -40,10 +40,23 @@ public class n266_Palindrome_Permutation {
 		
 		return count <= 1;
 	}
+
+	
+	
+	public boolean canPermutePalindrome3(String s) {
+		HashSet<Character> set = new HashSet<Character>();
+		for(int i=0; i<s.length(); i++) {
+			if(set.contains(s.charAt(i))) {
+				set.remove(s.charAt(i));
+			} else
+				set.add(s.charAt(i));
+		}
+		return set.size() <= 1;
+	}
 	public static void main(String[] args) {
 		n266_Palindrome_Permutation obj = new n266_Palindrome_Permutation();
 		String s = "code";
 		System.out.println(obj.canPermutePalindrome(s));
-		System.out.println(obj.canPermutePalindrome2(s));
+		System.out.println(obj.canPermutePalindrome3(s));
 	}
 }
