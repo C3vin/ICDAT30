@@ -1,4 +1,4 @@
-package INQ.DAO;
+package DAO;
 
 import java.util.ArrayList;
 import java.util.List;

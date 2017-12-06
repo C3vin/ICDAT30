@@ -1,4 +1,4 @@
-package INQ.DAO;
+package DAO;
 
 public class Student {
 	private String name;
