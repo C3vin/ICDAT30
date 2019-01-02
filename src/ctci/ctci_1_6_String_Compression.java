@@ -28,7 +28,7 @@ public class ctci_1_6_String_Compression {
 	
 	public static void main(String[] args) {
 		ctci_1_6_String_Compression obj = new ctci_1_6_String_Compression();
-		String str = "aa";
+		String str = "aabcccccaaa";
 		System.out.println(str);
 		System.out.println(obj.compress(str));
 	}
