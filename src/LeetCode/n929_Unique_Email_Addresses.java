@@ -41,9 +41,35 @@ public class n929_Unique_Email_Addresses {
 		}
 		return localNames.size();
 	}
+	
+	public int numUniqueEmails2(String[] emails) {
+		if(emails == null || emails.length == 0) 
+			return 0;
+		
+		HashSet<String> localNames = new HashSet<>();
+		
+		for(String email : emails) {
+			String[] arr = email.split("@");
+			String localName = arr[0];
+			StringBuilder sb = new StringBuilder();				//sb need to be in this loop, if not will add on old sb
+			
+			for(int i=0; i<localName.length(); i++) {
+				if(localName.charAt(i) == '+') {
+					localNames.add(sb.toString() + "@" + arr[1]);
+					break;
+				} else if(localName.charAt(i) == '.') {
+					continue; 
+				} else {
+					sb.append(localName.charAt(i));
+				}
+			}
+		}
+		return localNames.size();
+	}
 	public static void main(String[] args) {
 		n929_Unique_Email_Addresses obj = new n929_Unique_Email_Addresses();
 		String[] emails = {"test.email+alex@leetcode.com","test.e.mail+bob.cathy@leetcode.com","testemail+david@lee.tcode.com"};
 		System.out.println(obj.numUniqueEmails(emails));
+		System.out.println(obj.numUniqueEmails2(emails));
 	}
 }
