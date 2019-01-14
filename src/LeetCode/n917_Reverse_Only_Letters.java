@@ -39,7 +39,8 @@ public class n917_Reverse_Only_Letters {
 				end--;
 			}
 		}
-		return new String(ch);
+		return String.valueOf(ch);
+		//return new String(ch);
 	}
 	public static void main(String[] args) {
 		n917_Reverse_Only_Letters obj = new n917_Reverse_Only_Letters();
