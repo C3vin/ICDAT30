@@ -42,6 +42,7 @@ public class n606_Construct_String_from_Binary_Tree {
 		}
 	}
 	
+	//sol1
 	public String tree2str(TreeNode t) {
 		StringBuilder sb = new StringBuilder();
 		helper(sb, t);
@@ -62,6 +63,22 @@ public class n606_Construct_String_from_Binary_Tree {
 			}
 		}
 	}
+	
+	//sol2
+	public String tree2str2(TreeNode t) {
+		if(t == null) {
+			return "";
+		}
+		if(t.left == null && t.right == null) {
+			return String.valueOf(t.val);
+		}
+		if(t.right == null) {
+			return t.val + "(" + tree2str2(t.left) + ")";
+		}
+		
+		return t.val + "(" + tree2str2(t.left) + ")" + "(" + tree2str2(t.right) + ")"; 
+	}
+	
 	public static void main(String[] args) {
 		n606_Construct_String_from_Binary_Tree obj = new n606_Construct_String_from_Binary_Tree();
 		TreeNode p1 = obj.new TreeNode(1);
@@ -72,5 +89,6 @@ public class n606_Construct_String_from_Binary_Tree {
 		p1.right = p3;
 		p2.left = p4;
 		System.out.println(obj.tree2str(p1));
+		System.out.println(obj.tree2str2(p1));
 	}
 }
