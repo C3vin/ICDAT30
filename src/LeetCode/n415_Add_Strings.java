@@ -36,9 +36,34 @@ public class n415_Add_Strings {
 
 		return res;
 	}
+	
+	public String addStrings2(String num1, String num2) {
+		StringBuilder sb = new StringBuilder();
+		int i = num1.length()-1;
+		int j = num2.length()-1;
+		int carry = 0;
+		
+		while(i >= 0 || j >= 0 || carry != 0) {
+			if(i >= 0) {
+				carry = carry + num1.charAt(i) - '0';
+				i--;
+			}
+			if(j >= 0) {
+				carry = carry + num2.charAt(j) - '0';
+				j--;
+			}
+			sb.append(carry % 10);
+			carry = carry/10;
+		}
+		
+		return sb.reverse().toString();
+	}
+	
 	public static void main(String[] args) {
 		n415_Add_Strings obj = new n415_Add_Strings();
-		//System.out.println(obj.addStrings("100", "23"));
+		System.out.println(obj.addStrings("100", "23"));
 		System.out.println(obj.addStrings("1", "9"));
+		System.out.println(obj.addStrings2("100", "23"));
+		System.out.println(obj.addStrings2("1", "9"));
 	}
 }
