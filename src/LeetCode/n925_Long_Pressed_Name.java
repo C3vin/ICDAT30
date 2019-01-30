@@ -28,10 +28,10 @@ public class n925_Long_Pressed_Name {
 	public boolean isLongPressedName(String name, String typed) {
 		int index = 0;
 		for(int i=0; i<name.length(); i++) {
-			while(index < typed.length() && name.charAt(i) != typed.charAt(index)) {
+			while(index < typed.length() && name.charAt(i) != typed.charAt(index)) {	//can't <=, cuz need index++
 				index++;
 			}
-			if(index >= typed.length()) {
+			if(index >= typed.length()) {		//need >=, cuz index start with '0' 
 				return false;
 			}
 			index++;
