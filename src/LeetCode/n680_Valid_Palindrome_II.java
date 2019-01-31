@@ -28,11 +28,6 @@ public class n680_Valid_Palindrome_II {
 			}
 			i++;
 			j--;
-		/*	if(s.charAt(i) == s.charAt(j)) {
-				i++;
-				j--;
-			} else 
-				return false; */
 		}
 		return true;
 	}
