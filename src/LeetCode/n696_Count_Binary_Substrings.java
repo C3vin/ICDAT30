@@ -20,6 +20,7 @@ Output: 4
 Explanation: There are 4 substrings: "10", "01", "10", "01" that have equal number of consecutive 1's and 0's.
  */
 public class n696_Count_Binary_Substrings {
+	//sol
 	public int countBinarySubstrings(String s) {
 		//prev: previous 0 number, curr: current 1 number
 		int prev = 0;
@@ -41,6 +42,7 @@ public class n696_Count_Binary_Substrings {
 		return count;
 	}
 	
+	//sol2
 	public int countBinarySubstrings2(String s) {
 		int one = 0;
 		int zero = 0;
@@ -48,12 +50,22 @@ public class n696_Count_Binary_Substrings {
 		
 		for(int i=0; i<s.length(); i++) {
 			if(i == 0) {
-				(s.charAt(i) == '0')? one : ze;
-			} else {
-				if(s.charAt(i) == 1) {
-					
+				if(s.charAt(i) == '0') {
+					zero++;
 				} else {
-					
+					one++;
+				}
+			} else {
+				if(s.charAt(i) == '1') {
+					one = (s.charAt(i-1) == '1') ? one+1 : 1;				//need to plus one or reset
+					if(zero >= one) {										//why =, 10, 01 
+						count++;
+					}
+				} else {
+					zero = (s.charAt(i-1) == '0') ? zero+1 : 1;
+					if(one >= zero) {
+						count++;
+					}
 				}
 			}
 		}
