@@ -48,8 +48,7 @@ public class n696_Count_Binary_Substrings {
 		
 		for(int i=0; i<s.length(); i++) {
 			if(i == 0) {
-				boolean c = (s.charAt(i) == 0);
-				System.out.println(c);
+				(s.charAt(i) == '0')? one : ze;
 			} else {
 				if(s.charAt(i) == 1) {
 					
