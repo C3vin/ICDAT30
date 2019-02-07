@@ -21,27 +21,51 @@ Explanation: There are 4 substrings: "10", "01", "10", "01" that have equal numb
  */
 public class n696_Count_Binary_Substrings {
 	public int countBinarySubstrings(String s) {
+		//prev: previous 0 number, curr: current 1 number
 		int prev = 0;
 		int curr = 1;
-		int res = 0;
+		int count = 0;
 
 		for(int i=1; i<s.length(); i++) {
+			//handle 11, 00
 			if(s.charAt(i) == s.charAt(i-1)) {
 				curr++;
 			} else {
 				prev = curr;
-				curr = 1;
+				curr = 1;		//reset
 			}
 			if(prev >= curr) {
-				res++;
+				count++;
 			}
 		}
-		return res;
+		return count;
 	}
-
+	
+	public int countBinarySubstrings2(String s) {
+		int one = 0;
+		int zero = 0;
+		int count = 0;
+		
+		for(int i=0; i<s.length(); i++) {
+			if(i == 0) {
+				boolean c = (s.charAt(i) == 0);
+				System.out.println(c);
+			} else {
+				if(s.charAt(i) == 1) {
+					
+				} else {
+					
+				}
+			}
+		}
+		return count;
+	}
+	
 	public static void main(String[] args) {
 		n696_Count_Binary_Substrings obj = new n696_Count_Binary_Substrings();
 		System.out.println(obj.countBinarySubstrings("00110011"));
 		System.out.println(obj.countBinarySubstrings("10101"));
+		System.out.println(obj.countBinarySubstrings2("00110011"));
+		System.out.println(obj.countBinarySubstrings2("10101"));
 	}
 }
