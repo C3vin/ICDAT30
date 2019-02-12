@@ -61,15 +61,15 @@ public class n68_Text_Justification {
 	//https://www.youtube.com/watch?v=ENyox7kNKeY
 	//MIT: Introduction to Algorithms 
 	//20. Dynamic Programming II: Text Justification, Blackjack
-	
+
 	public List<String> fullJustify(String[] words, int maxWidth) {
 		List<String> lines = new ArrayList<String>();
 		int index = 0;
-		
+
 		while(index < words.length) {
 			int count = words[index].length();		//words length in the line
 			int last = index + 1;					//latest word index for the line
-			
+
 			while(last < words.length) {
 				//out of bound
 				if(words[last].length() + count + 1 > maxWidth) {
@@ -81,10 +81,10 @@ public class n68_Text_Justification {
 			}
 			StringBuilder sb = new StringBuilder();
 			sb.append(words[index]);						//append first word for the line
-			
+
 			//rest of the words after removed the first append word in the line
 			int rest = last - index - 1;					//rest# from index to last-1
-			
+
 			//if last line or number of words in the line is 1 (only one word), left-justified 
 			if(last == words.length || rest == 0) {
 				//last line
