@@ -36,8 +36,24 @@ public class n293_Flip_Game {
 		}
 		return res;
 	}
+	
+	public List<String> generatePossibleNextMoves2(String s) {
+		char[] c = s.toCharArray();
+		List<String> res = new ArrayList<String>();
+		for(int i=0; i<c.length-1; i++) {
+			if(c[i] == '+' && c[i+1] == '+') {
+				c[i] = '-';
+				c[i+1] = '-';
+				res.add(new String(c));
+				c[i] = '+';
+				c[i+1] = '+';
+			}
+		}
+		return res;
+	}
 	public static void main(String[] args) {
 		n293_Flip_Game obj = new n293_Flip_Game();
 		System.out.println(obj.generatePossibleNextMoves("++++"));
+		System.out.println(obj.generatePossibleNextMoves2("++++"));
 	}
 }
