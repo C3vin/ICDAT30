@@ -34,6 +34,28 @@ public class n017_letter_combinations_of_a_phone_number {
 		}
 	}
 
+	//dfs
+	public List<String> letterCombinations_dfs(String digits) {
+		List<String> combin = new ArrayList<String>();
+		dfs(digits, "", combin);
+		return combin;
+	}
+	
+	private void dfs(String digits, String path, List<String> combin) {
+		if(digits.isEmpty()) {
+			return;
+		} else if(digits.length() == 1) {
+			for(Character letter : dicts[digits.charAt(0) - '0'].toCharArray()) {
+				combin.add(path + letter);
+			}
+		} else {
+			for(Character letter : dicts[digits.charAt(0) - '0'].toCharArray()) {
+				dfs(digits.substring(1), path + letter, combin);
+			}
+		}
+	}
+	
+	//sol2
 	public List<String> letterCombinations(String digits) {
 		List<String> combin = new ArrayList<String>();
 		if(digits.length() == 0) {
@@ -66,5 +88,6 @@ public class n017_letter_combinations_of_a_phone_number {
 		n017_letter_combinations_of_a_phone_number obj = new n017_letter_combinations_of_a_phone_number();
 		System.out.println(obj.letterCom("23"));
 		System.out.println(obj.letterCombinations("23"));
+		System.out.println(obj.letterCombinations_dfs("23"));
 	}
 }
