@@ -1,9 +1,35 @@
 package LeetCode;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
-@Alg(type="NP", com="NA", level="Med", num=39)
+/*
+Given a set of candidate numbers (candidates) (without duplicates) and a target number (target), 
+find all unique combinations in candidates where the candidate numbers sums to target.
+The same repeated number may be chosen from candidates unlimited number of times.
+
+Note:
+All numbers (including target) will be positive integers.
+The solution set must not contain duplicate combinations.
+
+Example 1:
+Input: candidates = [2,3,6,7], target = 7,
+A solution set is:
+[
+  [7],
+  [2,2,3]
+]
+
+Example 2:
+Input: candidates = [2,3,5], target = 8,
+A solution set is:
+[
+  [2,2,2,2],
+  [2,3,3],
+  [3,5]
+]
+ */
 public class n039_Combination_Sum {
 	public List<List<Integer>> combinationSum(int[] candidates, int target) {
 		List<List<Integer>> res = new ArrayList<List<Integer>>();
@@ -30,10 +56,42 @@ public class n039_Combination_Sum {
 		}
 	}
 	
+	//sol1: backtrack:dfs
+	public List<List<Integer>> combinationSum2(int[] candidates, int target) {
+		List<List<Integer>> res = new ArrayList<List<Integer>>();
+		List<Integer> tmp = new ArrayList<Integer>();
+		dfs(candidates, target, 0, tmp, res);
+		
+		return res;
+	}
+	
+	private void dfs(int[] candidates, int target, int start, List<Integer> tmp, List<List<Integer>> res) {
+		if(target == 0) {
+			//List<Integer> list = new ArrayList<Integer>(tmp);		//need new list, cuz will remove the old value from tmp
+			//res.add(list);
+			res.add(new ArrayList<Integer>(tmp));
+			return;
+		}
+		
+		for(int i=start; i<candidates.length; i++) {
+			if(target < candidates[i]) {
+				continue;
+			}
+			tmp.add(candidates[i]);
+			dfs(candidates, target-candidates[i], i, tmp, res);
+			tmp.remove(tmp.size()-1);
+		}
+	}
+
 	public static void main(String[] args) {
 		n039_Combination_Sum obj = new n039_Combination_Sum();
 		int[] candidates = {2,3,6,7};
 		int target = 7;
+		int[] candidates1 = {8,7,4,3};
+		int target1 =11;
 		System.out.println(obj.combinationSum(candidates, target));
+		System.out.println(obj.combinationSum2(candidates, target));
+		System.out.println(obj.combinationSum(candidates1, target1));
+		System.out.println(obj.combinationSum2(candidates1, target1));
 	}
 }
