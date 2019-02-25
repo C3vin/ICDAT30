@@ -55,16 +55,17 @@ public class n039_Combination_Sum {
 			tmp.remove(tmp.size()-1);
 		}
 	}
-	
+
 	//sol1: backtrack:dfs
 	public List<List<Integer>> combinationSum2(int[] candidates, int target) {
 		List<List<Integer>> res = new ArrayList<List<Integer>>();
 		List<Integer> tmp = new ArrayList<Integer>();
+		Arrays.sort(candidates);
 		dfs(candidates, target, 0, tmp, res);
-		
+
 		return res;
 	}
-	
+
 	private void dfs(int[] candidates, int target, int start, List<Integer> tmp, List<List<Integer>> res) {
 		if(target == 0) {
 			//List<Integer> list = new ArrayList<Integer>(tmp);		//need new list, cuz will remove the old value from tmp
@@ -72,7 +73,7 @@ public class n039_Combination_Sum {
 			res.add(new ArrayList<Integer>(tmp));
 			return;
 		}
-		
+
 		for(int i=start; i<candidates.length; i++) {
 			if(target < candidates[i]) {
 				continue;
@@ -83,6 +84,31 @@ public class n039_Combination_Sum {
 		}
 	}
 
+	//sol3
+	public List<List<Integer>> combinationSum3(int[] candidates, int target) {
+		List<List<Integer>> res = new ArrayList<>();
+		Arrays.sort(candidates);
+		backtrack(res, new ArrayList<Integer>(), candidates, target, 0);
+		return res;
+	}
+
+	private void backtrack(List<List<Integer>> res, List<Integer> tempList, int[] cand, int remain, int start) {
+		if (remain < 0) {
+			return; /** no solution */
+		}
+		else if (remain == 0) {
+			res.add(new ArrayList<>(tempList));
+		}
+		else {
+			for (int i = start; i < cand.length; i++) { 
+				tempList.add(cand[i]);
+				backtrack(res, tempList, cand, remain-cand[i], i);
+				tempList.remove(tempList.size()-1);
+			} 
+		}
+
+	}
+
 	public static void main(String[] args) {
 		n039_Combination_Sum obj = new n039_Combination_Sum();
 		int[] candidates = {2,3,6,7};
@@ -91,7 +117,10 @@ public class n039_Combination_Sum {
 		int target1 =11;
 		System.out.println(obj.combinationSum(candidates, target));
 		System.out.println(obj.combinationSum2(candidates, target));
+		System.out.println(obj.combinationSum3(candidates, target));
+		
 		System.out.println(obj.combinationSum(candidates1, target1));
 		System.out.println(obj.combinationSum2(candidates1, target1));
+		System.out.println(obj.combinationSum3(candidates1, target1));
 	}
 }
