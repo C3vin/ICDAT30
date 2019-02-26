@@ -69,20 +69,34 @@ public class n040_Combination_Sum_II {
 		return list;
 	}
 
-	private void backtrack(List<List<Integer>> list, List<Integer> tempList, int[] cand, int remain, int start) {
-		if(remain < 0) {
-			return; /** no solution */
+	private void backtrack(List<List<Integer>> res, List<Integer> tmp, int[] candidates, int target, int start) {
+		if(target == 0) {
+			res.add(new ArrayList<Integer>(tmp));
+			return;
+		}
+
+		for(int i=start; i<candidates.length; i++) {
+			//target < candidates[i]
+			if(i > start  && candidates[i] == candidates[i-1]) {
+				continue;
+			}
+			tmp.add(candidates[i]);
+			backtrack(res, tmp, candidates, target-candidates[i], i+1);
+			tmp.remove(tmp.size()-1);
+		}
+/*		if(remain < 0) {
+			return; *//** no solution *//*
 		} else if(remain == 0) {
 			list.add(new ArrayList<>(tempList));
 		}
 		else {
 			for (int i = start; i < cand.length; i++) {
-				if(i > start && cand[i] == cand[i-1]) continue; /** skip duplicates */
+				if(i > start && cand[i] == cand[i-1]) continue; *//** skip duplicates *//*
 				tempList.add(cand[i]);
 				backtrack(list, tempList, cand, remain - cand[i], i+1);
 				tempList.remove(tempList.size() - 1);
 			}
-		}
+		}*/
 	}
 
 	public static void main(String[] args) {
