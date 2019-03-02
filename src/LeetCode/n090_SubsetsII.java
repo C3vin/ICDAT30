@@ -5,47 +5,51 @@ import java.util.Arrays;
 import java.util.List;
 
 /**
-nums = [1,2,2]
+Given a set of distinct integers, nums, return all possible subsets (the power set).
+Note: The solution set must not contain duplicate subsets.
+
+Example:
+
+Input: nums = [1,2,3]
+Output:
 [
-  [2],
+  [3],
   [1],
-  [1,2,2],
-  [2,2],
+  [2],
+  [1,2,3],
+  [1,3],
+  [2,3],
   [1,2],
   []
 ]
  */
-@Alg(type="NP", com="FB", level="Med", num=90)
 public class n090_SubsetsII {
-	//DFS
-	public List<List<Integer>> subsetsWithDup(int[] nums) {
+	public List<List<Integer>> subsets(int[] nums) {
 		List<List<Integer>> res = new ArrayList<List<Integer>>();
-		List<Integer> tmp = new ArrayList<Integer>(); 
-		Arrays.sort(nums);
-		//res.add(tmp);
-		helper(nums, res, tmp, 0);
+		List<Integer> tmp = new ArrayList<Integer>();
+		Arrays.sort(nums);								//must sort first, cuz n78 is distinct num
+		dfs(nums, 0, tmp, res);
 		return res;
 	}
-
-	private void helper(int[] nums, List<List<Integer>> res, List<Integer> tmp, int start) {
-		//if(start == nums.length) return;
-		List<Integer> list = new ArrayList<Integer>(tmp);
-		res.add(list);
-
+	//dfs
+	private void dfs(int[] nums, int start, List<Integer> tmp, List<List<Integer>> res) {
+		res.add(new ArrayList<Integer>(tmp));
+		
 		for(int i=start; i<nums.length; i++) {
-/*			if(i>start && nums[i]==nums[i-1])
-				continue;*/
+			if(i > start && nums[i] == nums[i-1]) {		//i > start, not the first num	
+				continue; 
+			}
 			tmp.add(nums[i]);
-			helper(nums, res, tmp, i+1);
+			dfs(nums, i+1, tmp, res);
 			tmp.remove(tmp.size()-1);
-			while(i<nums.length-1 && nums[i] == nums[i+1])
-				i++;
 		}
 	}
 
 	public static void main(String[] args){
 		n090_SubsetsII obj = new n090_SubsetsII();
 		int[] nums = {1,2,2};
-		System.out.println(obj.subsetsWithDup(nums));
+		int[] nums1 = {4,4,4,1,4};
+		System.out.println(obj.subsets(nums));
+		System.out.println(obj.subsets(nums1));
 	}
 }
