@@ -31,20 +31,24 @@ public class n698_Partition_to_K_Equal_Sum_Subsets {
 		return dfs(nums, k, 0, visited, target, 0, 0);
 	}
 	
-	private boolean dfs(int[] nums, int k, int start, int[] visited, int target, int cur_sum, int cur_num) {
+	private boolean dfs(int[] nums, int k, int start, int[] visited, int target, int curSum, int curCount) {
 		if(k == 1) {
 			return true;
 		}
 		
-		if(cur_sum == target && cur_num > 0) {
-			System.out.println(k);
+		//match the target, so k-1 to the next 
+		if(curSum == target && curCount > 0) {
+			System.out.println(k + " : " +curCount);
+			for(int v : visited) 
+				System.out.print(v);
+			System.out.println("\n");
 			return dfs(nums, k-1, 0, visited, target, 0, 0);
 		}
 		
 		for(int i=start; i<nums.length; i++) {
 			if(visited[i] == 0) {
-				visited[i] = 1;
-				if(dfs(nums, k, i+1, visited, target, cur_sum+nums[i], cur_num++)) {
+				visited[i] = 1;				//use curCount to record the number of elements in the current subset
+				if(dfs(nums, k, i+1, visited, target, curSum+nums[i], curCount++)) {			//why curCount++? 
 					return true;
 				}
 				visited[i] = 0;
