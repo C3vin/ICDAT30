@@ -31,24 +31,24 @@ public class n698_Partition_to_K_Equal_Sum_Subsets {
 		return dfs(nums, k, 0, visited, target, 0, 0);
 	}
 	
+	//Ref: https://www.youtube.com/watch?v=qpgqhp_9d1s
+	//https://github.com/bephrem1/backtobackswe/blob/master/Dynamic%20Programming%2C%20Recursion%2C%20%26%20Backtracking/partitionIntoKEqualSumSubsets.java
 	private boolean dfs(int[] nums, int k, int start, int[] visited, int target, int curSum, int curCount) {
 		if(k == 1) {
+			//System.out.println(k + " : " +curCount);
 			return true;
 		}
 		
 		//match the target, so k-1 to the next 
 		if(curSum == target && curCount > 0) {
-			System.out.println(k + " : " +curCount);
-			for(int v : visited) 
-				System.out.print(v);
-			System.out.println("\n");
 			return dfs(nums, k-1, 0, visited, target, 0, 0);
 		}
 		
 		for(int i=start; i<nums.length; i++) {
 			if(visited[i] == 0) {
 				visited[i] = 1;				//use curCount to record the number of elements in the current subset
-				if(dfs(nums, k, i+1, visited, target, curSum+nums[i], curCount++)) {			//why curCount++? 
+				System.out.println("@: " + curCount);
+				if(dfs(nums, k, i+1, visited, target, curSum+nums[i], curCount+1)) {			//why curCount++? 
 					return true;
 				}
 				visited[i] = 0;
@@ -61,6 +61,6 @@ public class n698_Partition_to_K_Equal_Sum_Subsets {
 		n698_Partition_to_K_Equal_Sum_Subsets obj = new n698_Partition_to_K_Equal_Sum_Subsets();
 		int[] nums = {4, 3, 2, 3, 5, 2, 1};
 		int k = 4;
-		System.out.println(obj.canPartitionKSubsets(nums, k));
+		System.out.println(obj.canPartitionKSubsets(nums, 20));
 	}
 }
