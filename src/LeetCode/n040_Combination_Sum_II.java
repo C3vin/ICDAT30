@@ -63,13 +63,15 @@ public class n040_Combination_Sum_II {
 	}
 
 	public List<List<Integer>> combinationSum2_2(int[] candidates, int target) {
-		List<List<Integer>> list = new ArrayList<List<Integer>>();
-		Arrays.sort(candidates);
-		dfs(list, new ArrayList<Integer>(), candidates, target, 0);
-		return list;
+		List<List<Integer>> res = new ArrayList<List<Integer>>();
+		List<Integer> tmp = new ArrayList<Integer>();
+		Arrays.sort(candidates);							//need sort first
+		dfs(candidates, target, 0, tmp, res);
+		return res;
 	}
 
-	private void dfs(List<List<Integer>> res, List<Integer> tmp, int[] candidates, int target, int start) {
+	//dfs
+	private void dfs(int[] candidates, int target, int start, List<Integer> tmp, List<List<Integer>> res) {
 		if(target == 0) {
 			res.add(new ArrayList<Integer>(tmp));
 			return;
@@ -80,11 +82,11 @@ public class n040_Combination_Sum_II {
 			if(target < 0) {
 				return;
 			}
-			if(i > start  && candidates[i] == candidates[i-1]) {			//i > start, not the first num			
+			if(i > start  && candidates[i] == candidates[i-1]) {		//i > start, not the first num			
 				continue;
 			}
 			tmp.add(candidates[i]);
-			dfs(res, tmp, candidates, target-candidates[i], i+1);		//why i+1, make sure no duplicates
+			dfs(candidates, target-candidates[i], i+1, tmp, res);		//why i+1, make sure no duplicates
 			tmp.remove(tmp.size()-1);
 		}
 	}
