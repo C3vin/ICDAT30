@@ -10,7 +10,7 @@ Example:
 Input: "25525511135"
 Output: ["255.255.11.135", "255.255.111.35"]
  */
-public class n93_Restore_IP_Addresses {
+public class n093_Restore_IP_Addresses {
 	public List<String> restoreIpAddresses(String s) {
 		List<String> res = new ArrayList<String>();
 		dfs(s, 0, 4, "", res);
@@ -33,9 +33,6 @@ public class n93_Restore_IP_Addresses {
 		}
 	}
 
-	
-	//http://www.voidcn.com/article/p-qrijogvv-hq.html
-	//https://shmilyaw-hotmail-com.iteye.com/blog/2304783
 	public List<String> restoreIpAddresses2(String s) {
 		List<String> res = new ArrayList<String>();
 		String item = new String();
@@ -46,24 +43,24 @@ public class n93_Restore_IP_Addresses {
 		dfs2(s, 0, item, res);
 		return res;
 	}
-
+	//dfs
 	private void dfs2(String s, int start, String item, List<String> res) {
 		if(start == 3 && isValid(s)) {
-			System.out.println("@s: "+s);
-			res.add(item + s);			//item + s?
+			res.add(item + s);			 
 			return;
 		}
 		for(int i=0; i<3 && i<s.length()-1; i++) {
-			String substr = s.substring(0, i+1);
+			String substr = s.substring(0, i+1);				//to get (0,1)(0,2)(0,3)
 			if(isValid(substr)) {
-				System.out.println("i: "+i+" sub: "+substr + " start: " + start + " item: " + item +" s:" +s);
-				dfs2(s.substring(i+1, s.length()), start+1, item+substr+'.', res);
+				String newS = s.substring(i+1, s.length());		//i+1 to get the new s
+				dfs2(newS, start+1, item+substr+'.', res);
 			}
 		}
 	}
+	
 	private boolean isValid(String s) {
 		if(s.charAt(0) == '0') {
-			return s.equals("0");
+			return s.equals("0");		//cuz '001', '01' is invalid value
 		}
 
 		int num = Integer.parseInt(s);
@@ -75,9 +72,9 @@ public class n93_Restore_IP_Addresses {
 		}
 	}
 	public static void main(String[] args) {
-		n93_Restore_IP_Addresses obj = new n93_Restore_IP_Addresses();
+		n093_Restore_IP_Addresses obj = new n093_Restore_IP_Addresses();
 		String s = "25525511135";
-		//System.out.println(obj.restoreIpAddresses(s));
+		System.out.println(obj.restoreIpAddresses(s));
 		System.out.println(obj.restoreIpAddresses2(s));
 	}
 }
