@@ -71,10 +71,37 @@ public class n093_Restore_IP_Addresses {
 			return false;
 		}
 	}
+	
+	public List<String> restoreIpAddresses3(String s) {
+		List<String> res = new ArrayList<String>();
+		dfs3(s, 0, "", 0, res);
+		return res;
+	}
+	private void dfs3(String s, int idx, String tmp, int count, List<String> res) {
+		if(count > 4) {
+			return;
+		}
+		if(count == 4 && idx == s.length()) {
+			res.add(tmp.substring(0, tmp.length()-1));			//the reason is [255.255.11.135., 255.255.111.35.]
+		}
+		
+		for(int i=1; i<4; i++) {			//i=1
+			if(idx+i > s.length()) {
+				break;
+			}
+			String sub = s.substring(idx, idx+i);
+			if((sub.startsWith("0") && sub.length() > 1) || (i == 3 && Integer.parseInt(sub) > 255)) {
+				continue;
+			}
+			dfs3(s, idx+i, tmp+sub+".", count+1, res);			//idx + i not +1
+		}
+	}
+	
 	public static void main(String[] args) {
 		n093_Restore_IP_Addresses obj = new n093_Restore_IP_Addresses();
 		String s = "25525511135";
 		System.out.println(obj.restoreIpAddresses(s));
 		System.out.println(obj.restoreIpAddresses2(s));
+		System.out.println(obj.restoreIpAddresses3(s));
 	}
 }
