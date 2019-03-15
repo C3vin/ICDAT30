@@ -22,6 +22,9 @@ public class n131_Palindrome_Partitioning {
     	List<String> tmp = new ArrayList<String>();
     	dfs(s, 0, tmp, res);
     }
+	private void dfs(String s, int start, List<String> tmp, List<List<String>> res) {
+		
+	}
 	public static void main(String[] args) {
     	n131_Palindrome_Partitioning obj = new n131_Palindrome_Partitioning();
     	System.out.println(obj.partition("aab"));
