@@ -83,11 +83,12 @@ public class n093_Restore_IP_Addresses {
 		}
 		if(count == 4 && idx == s.length()) {
 			res.add(tmp.substring(0, tmp.length()-1));			//the reason is [255.255.11.135., 255.255.111.35.]
+			return;
 		}
 		
-		for(int i=1; i<4; i++) {			//i=1
-			if(idx+i > s.length()) {
-				break;
+		for(int i=1; i<4; i++) {								//i=1, cuz need for idx
+			if(idx+i > s.length()) {							
+				break;											//must have, otherwise will out of range
 			}
 			String sub = s.substring(idx, idx+i);
 			if((sub.startsWith("0") && sub.length() > 1) || (i == 3 && Integer.parseInt(sub) > 255)) {
