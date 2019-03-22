@@ -53,14 +53,23 @@ public class n282_Expression_Add_Operators {
 				dfs(num, target, i+1, path+cur, cur, cur, res);
 			} else {
 				dfs(num, target, i+1, path+"+"+cur, val+cur, cur, res);
-				dfs(num, target, i+1, path+"-"+cur, val-cur, -cur, res);
+				dfs(num, target, i+1, path+"-"+cur, val-cur, -cur, res);				//-cur
 				dfs(num, target, i+1, path+"*"+cur, val-pre+pre*cur, pre*cur, res);		//?
 			}
 		}
 	}
-
+	
+	//https://segmentfault.com/a/1190000003797204
+	//https://blog.csdn.net/yy254117440/article/details/54581450
+	//https://www.cnblogs.com/grandyang/p/4814506.html
+	
 	public static void main(String[] args) {
 		n282_Expression_Add_Operators obj = new n282_Expression_Add_Operators();
 		System.out.println(obj.addOperators("123", 6));
+		System.out.println(obj.addOperators("232", 8));
+		System.out.println(obj.addOperators("105", 5));
+		System.out.println(obj.addOperators("00", 0));
+		System.out.println(obj.addOperators("3456237490", 9191));
+		
 	}
 }
