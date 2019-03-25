@@ -26,43 +26,42 @@ Output: ["0+0", "0-0", "0*0"]
 Example 5:
 Input: num = "3456237490", target = 9191
 Output: []
-*/
+ */
 public class n282_Expression_Add_Operators {
+	//sol
 	public List<String> addOperators(String num, int target) {
 		List<String> res = new ArrayList<String>();
-		if(num == null || num.length() == 0) {
-			return res;
-		}
 		dfs(num, target, 0, "", 0, 0, res);
 		return res;
 	}
-	
-	private void dfs(String num, int target, int start, String path, long val, long pre, List<String> res) {
-		if(start == num.length()) {
-			if(val == target) {
-				res.add(path);
+
+	//https://github.com/awangdev/LintCode/blob/master/Java/Expression%20Add%20Operators.java
+	private void dfs(String num, int target, int index, String tmp, long curRes, long preNum, List<String> res) {
+		if(curRes == target && index == num.length()) {
+			res.add(new String(tmp));
+			return;
+		}
+
+		for(int i=index; i<num.length(); i++) {
+			String sub = num.substring(index, i+1);
+			if(sub.length() > 1 && sub.charAt(0) == '0') {
 				return;
 			}
-		}
-		for(int i=start; i<num.length(); i++) {
-			if(i != start && num.charAt(start) == '0') {
-				break; 			//?
-			}
-			long cur = Long.parseLong(num.substring(start, i+1));
-			if(start == 0) {
-				dfs(num, target, i+1, path+cur, cur, cur, res);
+			long curNum = Long.parseLong(sub);
+			if(index == 0) {
+				dfs(num, target, i+1, tmp+curNum, curNum, curNum, res);
 			} else {
-				dfs(num, target, i+1, path+"+"+cur, val+cur, cur, res);
-				dfs(num, target, i+1, path+"-"+cur, val-cur, -cur, res);				//-cur
-				dfs(num, target, i+1, path+"*"+cur, val-pre+pre*cur, pre*cur, res);		//?
+				dfs(num, target, i+1, tmp+"+"+curNum, curRes+curNum, curNum, res);
+				dfs(num, target, i+1, tmp+"-"+curNum, curRes-curNum, -curNum, res);
+				dfs(num, target, i+1, tmp+"*"+curNum, (curRes-preNum)+(preNum*curNum), (preNum*curNum), res);
 			}
 		}
 	}
-	
+
 	//https://segmentfault.com/a/1190000003797204
 	//https://blog.csdn.net/yy254117440/article/details/54581450
 	//https://www.cnblogs.com/grandyang/p/4814506.html
-	
+
 	public static void main(String[] args) {
 		n282_Expression_Add_Operators obj = new n282_Expression_Add_Operators();
 		System.out.println(obj.addOperators("123", 6));
@@ -70,6 +69,6 @@ public class n282_Expression_Add_Operators {
 		System.out.println(obj.addOperators("105", 5));
 		System.out.println(obj.addOperators("00", 0));
 		System.out.println(obj.addOperators("3456237490", 9191));
-		
+
 	}
 }
