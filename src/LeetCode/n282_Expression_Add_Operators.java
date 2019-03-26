@@ -58,6 +58,57 @@ public class n282_Expression_Add_Operators {
 		}
 	}
 
+	//sol2
+	public List<String> addOperators2(String num, int target) {
+		List<String> res = new ArrayList<String>();
+		List<String> tmp = new ArrayList<String>();
+		dfs2(num, target, tmp, 0, 0, 0, res);
+		return res;
+	} 
+	
+	private void dfs2(String num, int target, List<String> tmp, int index, long curRes, long preNum, List<String> res) {
+		if(curRes == target && index == num.length()) {
+			StringBuilder sb = new StringBuilder();			//in order to add res without ','
+			for(String part : tmp) {
+				sb.append(part);
+			}
+			res.add(sb.toString());
+			return;
+		}
+		for(int i=index; i<num.length(); i++) {
+			String sub = num.substring(index, i+1);
+			if(sub.length() > 1 && sub.charAt(0) == '0') {
+				return;
+			}
+			long curNum = Long.parseLong(sub);
+			
+			if(index == 0) {
+				tmp.add(sub);
+				dfs2(num, target, tmp, i+1, curNum, curNum, res);
+				tmp.remove(tmp.size()-1);
+			} else {
+				//+
+				tmp.add("+");
+				tmp.add(sub);
+				dfs2(num, target, tmp, i+1, curRes+curNum, curNum, res);
+				tmp.remove(tmp.size()-1);
+				tmp.remove(tmp.size()-1);
+				//-
+				tmp.add("-");
+				tmp.add(sub);
+				dfs2(num, target, tmp, i+1, curRes-curNum, -curNum, res);
+				tmp.remove(tmp.size()-1);
+				tmp.remove(tmp.size()-1);
+				//*
+				tmp.add("*");
+				tmp.add(sub);
+				dfs2(num, target, tmp, i+1, (curRes-preNum)+(preNum*curNum), (preNum*curNum), res);
+				tmp.remove(tmp.size()-1);
+				tmp.remove(tmp.size()-1);
+			}
+		}
+	}
+	
 	//https://segmentfault.com/a/1190000003797204
 	//https://blog.csdn.net/yy254117440/article/details/54581450
 	//https://www.cnblogs.com/grandyang/p/4814506.html
@@ -69,6 +120,12 @@ public class n282_Expression_Add_Operators {
 		System.out.println(obj.addOperators("105", 5));
 		System.out.println(obj.addOperators("00", 0));
 		System.out.println(obj.addOperators("3456237490", 9191));
+		
+		System.out.println(obj.addOperators2("123", 6));
+		System.out.println(obj.addOperators2("232", 8));
+		System.out.println(obj.addOperators2("105", 5));
+		System.out.println(obj.addOperators2("00", 0));
+		System.out.println(obj.addOperators2("3456237490", 9191));
 
 	}
 }
