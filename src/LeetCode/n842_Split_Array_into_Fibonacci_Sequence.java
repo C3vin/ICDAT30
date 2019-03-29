@@ -50,36 +50,74 @@ public class n842_Split_Array_into_Fibonacci_Sequence {
 		return res;
 	}
 	private void dfs(String S, int index, List<Integer> tmp, List<Integer> res) {
-		if(index == S.length() && tmp.size() > 2) {
-			res.addAll(tmp);			//addAll?
+		if(!res.isEmpty()) {
+			return;
+		}
+		if(index == S.length() && tmp.size() >= 3) {
+			res.addAll(tmp);			
 			return;
 		}
 		for(int i=index; i<S.length(); i++) {
 			String sub = S.substring(index, i+1);
 			long num = Long.parseLong(sub);
-			
-			if(sub.charAt(0) == '0' && i > index+1) {
-				return;
+
+			if((sub.charAt(0) == '0' && sub.length() > 1) || sub.length() > 10) {	//wny 10, cuz max int is 2147483647
+				break;
 			}
-			
+
 			if(num > Integer.MAX_VALUE) {
-				return;
+				break;
 			}
+			int size = tmp.size();
 			
-			int curNum = Integer.parseInt(sub);
-			if(tmp.size() >= 2) {
-				if(num == tmp.get(tmp.size()-1)+tmp.get(tmp.size()-2)) {
-					tmp.add(curNum);
-					dfs(S, index+1, tmp, res);
-					tmp.remove(tmp.size()-1);
-				}
+			if(tmp.size() >= 2 && num != tmp.get(size-2) + tmp.get(size-1)) {
+				continue;
 			}
+			tmp.add(Long.valueOf(num).intValue());
+			dfs(S, i+1, tmp, res);
+			tmp.remove(tmp.size()-1);
 		}
 	}
+
+	public List<Integer> splitIntoFibonacci2(String S) {
+		List<Integer> res = new ArrayList<Integer>();
+		dfs2(S, 0, res);
+		return res;
+	}
+
+	private boolean dfs2(String S, int index, List<Integer> res) {
+		if(index == S.length() && res.size() > 2) {
+			return true;
+		}
+		for(int i=index; i<S.length(); i++) {
+			if(S.charAt(0) == '0' && i != index) {
+				break;
+			}
+			long curNum = Long.parseLong(S.substring(index, i+1));
+			if(curNum > Integer.MAX_VALUE) {
+				return false;
+			}
+
+			int size = res.size();
+			if(size >= 2 && curNum > res.get(size-2) + res.get(size-1)) {
+				break;
+			}
+			if(size <= 1 || curNum == res.get(size-2) + res.get(size-1)) {
+				res.add(Long.valueOf(curNum).intValue());			
+				if(dfs2(S, i+1, res)) {
+					return true;
+				}
+				res.remove(res.size()-1);
+			}
+		}
+		return false;
+	}
+
 	public static void main(String[] args) {
 		n842_Split_Array_into_Fibonacci_Sequence obj = new n842_Split_Array_into_Fibonacci_Sequence();
+		System.out.println(obj.splitIntoFibonacci("1101111"));
 		System.out.println(obj.splitIntoFibonacci("123456579"));
-		
+		System.out.println(obj.splitIntoFibonacci2("123456579"));
 	}
 }
 
