@@ -1,5 +1,8 @@
 package LeetCode;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /*
 The set [1,2,3,...,n] contains a total of n! unique permutations.
 By listing and labeling all of the permutations in order, we get the following sequence for n = 3:
@@ -25,11 +28,31 @@ Output: "2314"
  */
 public class n60_Permutation_Sequence {
 	public String getPermutation(int n, int k) {
+		List<Integer> tmp = new ArrayList<Integer>();
+		for(int i=1; i<=n; i++) {				//must start from i=1
+			tmp.add(i);
+		}
 		
+		int[] factorial = new int[n];
+		factorial[0] = 1;
+		for(int i=1; i<n; i++) {		
+			factorial[i] = i * factorial[i-1]; 	//4! = 4 * 3!
+		}
+		
+		k = k-1;								//cuz k start from 1 !!!
+		StringBuilder sb = new StringBuilder();
+		for(int i=n; i>0; i--) {
+			int index = k / factorial[i-1];		//why i-1, cuz i start from n
+			k = k % factorial[i-1];
+			sb.append(tmp.get(index));
+			tmp.remove(index);
+		}
+		return sb.toString();
 	}
 	public static void main(String[] args) {
 		n60_Permutation_Sequence obj = new n60_Permutation_Sequence();
 		System.out.println(obj.getPermutation(3, 3));
 		System.out.println(obj.getPermutation(4, 9));
+		System.out.println(obj.getPermutation(4, 18));
 	}
 }
