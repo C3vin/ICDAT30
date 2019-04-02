@@ -25,6 +25,15 @@ Output: "213"
 Example 2:
 Input: n = 4, k = 9
 Output: "2314"
+
+1 + {2 3 4}
+2 + {1 3 4}
+3 + {1 2 4}
+4 + {1 2 3}
+    
+res : 1 2 3 4
+fact: 1 1 2 6 <- 3*factorial(3-1) = 3*2 = 6
+i   : 0 1 2 3
  */
 public class n60_Permutation_Sequence {
 	public String getPermutation(int n, int k) {
