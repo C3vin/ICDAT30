@@ -53,7 +53,8 @@ public class n294_Flip_Game_II {
 	
 	public static void main(String[] args) {
 		n294_Flip_Game_II obj = new n294_Flip_Game_II();
-		//System.out.println(obj.canWin("++++"));
+		System.out.println(obj.canWin("++--"));
+		System.out.println(obj.canWin("++++"));
 		System.out.println(obj.canWin2("++++"));
 	}
 }
