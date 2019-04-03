@@ -71,5 +71,7 @@ public class n291_Word_Pattern_II {
 	public static void main(String[] args) {
 		n291_Word_Pattern_II obj = new n291_Word_Pattern_II();
 		System.out.println(obj.wordPatternMatch("abab", "redblueredblue"));
+		System.out.println(obj.wordPatternMatch("aaaa", "asdasdasdasd"));
+		System.out.println(obj.wordPatternMatch("aabb", "xyzabcxzyabc"));
 	}
 }
