@@ -37,27 +37,26 @@ public class n291_Word_Pattern_II {
 			return false;
 		}
 
-		char c = pattern.charAt(p);		//get current pattern char
+		char curPattern = pattern.charAt(p);		 
 		//if the pattern character exists
-		if(map.containsKey(c)) {
-			String value = map.get(c);
+		if(map.containsKey(curPattern)) {
+			String value = map.get(curPattern);
 
 			if(!str.startsWith(value, s)) {
-				System.out.println("@ "+value + " c: " + c +" s: " + s );
 				return false;
 			}
 			//if it can match, great, continue to match the rest
 			return helper(str, pattern, s+value.length(), p+1, map, set);
 		} else {
-			//pattern character does not exist in the map
 			for(int k=s; k<str.length(); k++) {
 				String sub = str.substring(s, k+1);
-				//	System.out.println(sub);
+				
+				//handle {a=a, b=a}
 				if(set.contains(sub)) {
 					continue;
 				}
 				//create or update it
-				map.put(c, sub);
+				map.put(curPattern, sub);
 				set.add(sub);
 
 				//continue to match the rest
@@ -65,15 +64,55 @@ public class n291_Word_Pattern_II {
 					return true;
 				}
 				//backtracking
-				map.remove(c);
+				map.remove(curPattern);
 				set.remove(sub);
 			}
 		}
 		return false;
 	}
-
+	
+	//sol2
+	public boolean wordPatternMatch2(String pattern, String str) {
+		HashMap<Character, String> map = new HashMap<Character, String>();
+		HashSet<String> set = new HashSet<String>();
+		if(pattern.isEmpty()) {
+			return str.isEmpty();
+		}
+		if(map.containsKey(pattern.charAt(0))) {
+			
+		} else {
+			
+		}
+	}
+	
+/*	class Solution {
+		public:
+		    bool wordPatternMatch(string pattern, string str) {
+		        if (pattern.empty()) return str.empty();
+		        if (m.count(pattern[0])) {
+		            string t = m[pattern[0]];
+		            if (t.size() > str.size() || str.substr(0, t.size()) != t) return false;
+		            if (wordPatternMatch(pattern.substr(1), str.substr(t.size()))) return true;
+		        } else {
+		            for (int i = 1; i <= str.size(); ++i) {
+		                if (s.count(str.substr(0, i))) continue;
+		                m[pattern[0]] = str.substr(0, i);
+		                s.insert(str.substr(0, i));
+		                if (wordPatternMatch(pattern.substr(1), str.substr(i))) return true;
+		                m.erase(pattern[0]);
+		                s.erase(str.substr(0, i));
+		            }
+		        }
+		        return false;
+		    }
+		    unordered_map<char, string> m;
+		    unordered_set<string> s;
+		};
+	*/
+	
 	public static void main(String[] args) {
 		n291_Word_Pattern_II obj = new n291_Word_Pattern_II();
+		System.out.println(obj.wordPatternMatch("ab", "aa"));
 		System.out.println(obj.wordPatternMatch("abab", "redblueredblue"));
 		System.out.println(obj.wordPatternMatch("aaaa", "asdasdasdasd"));
 		System.out.println(obj.wordPatternMatch("aabb", "xyzabcxzyabc"));
