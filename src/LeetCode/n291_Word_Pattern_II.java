@@ -26,48 +26,52 @@ public class n291_Word_Pattern_II {
 	public boolean wordPatternMatch(String pattern, String str) {
 		HashMap<Character, String> map = new HashMap<Character, String>();
 		HashSet<String> set = new HashSet<String>();
-		
+
 		return helper(str, pattern, 0, 0, map, set);
 	}
-	private boolean helper(String str, String pattern, int i, int j, HashMap<Character, String> map, HashSet<String> set) {
-		if(i == str.length() && j == pattern.length()) {
+	private boolean helper(String str, String pattern, int s, int p, HashMap<Character, String> map, HashSet<String> set) {
+		if(s == str.length() && p == pattern.length()) {
 			return true;
 		}
-		if(i == str.length() || j == pattern.length()) {
+		if(s == str.length() || p == pattern.length()) {
 			return false;
 		}
-		
-		char c = str.charAt(j);		//get current pattern char
+
+		char c = pattern.charAt(p);		//get current pattern char
 		//if the pattern character exists
 		if(map.containsKey(c)) {
-			String s = map.get(c);
-			
-			if(!str.startsWith(s, i)) {
+			String value = map.get(c);
+
+			if(!str.startsWith(value, s)) {
+				System.out.println("@ "+value + " c: " + c +" s: " + s );
 				return false;
 			}
 			//if it can match, great, continue to match the rest
-			return helper(str, pattern, i+s.length(), j+1, map, set);
-		}
-		//pattern character does not exist in the map
-		for(int k=i; k<str.length(); k++) {
-			String p = str.substring(i, k+1);
-			if(set.contains(p)) {
-				continue;
+			return helper(str, pattern, s+value.length(), p+1, map, set);
+		} else {
+			//pattern character does not exist in the map
+			for(int k=s; k<str.length(); k++) {
+				String sub = str.substring(s, k+1);
+				//	System.out.println(sub);
+				if(set.contains(sub)) {
+					continue;
+				}
+				//create or update it
+				map.put(c, sub);
+				set.add(sub);
+
+				//continue to match the rest
+				if(helper(str, pattern, k+1, p+1, map, set)) {
+					return true;
+				}
+				//backtracking
+				map.remove(c);
+				set.remove(sub);
 			}
-			//create or update it
-			map.put(c, p);
-			set.add(p);
-			
-			//continue to match the rest
-			if(helper(str, pattern, k+1, j+1, map, set)) {
-				return true;
-			}
-			//backtracking
-			map.remove(c);
-			set.remove(p);
 		}
 		return false;
 	}
+
 	public static void main(String[] args) {
 		n291_Word_Pattern_II obj = new n291_Word_Pattern_II();
 		System.out.println(obj.wordPatternMatch("abab", "redblueredblue"));
