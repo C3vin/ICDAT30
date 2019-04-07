@@ -4,8 +4,23 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 
-//Given s = "the sky is blue",
-//return "blue is sky the".
+/*
+Given an input string, reverse the string word by word.
+
+Example 1:
+Input: "the sky is blue"
+Output: "blue is sky the"
+
+Example 2:
+Input: "  hello world!  "
+Output: "world! hello"
+Explanation: Your reversed string should not contain leading or trailing spaces.
+
+Example 3:
+Input: "a good   example"
+Output: "example good a"
+Explanation: You need to reduce multiple spaces between two words to a single space in the reversed string.
+ */
 public class n151_Reverse_Words_in_a_String {
 	public String reverseWords(String s) {
 		String[] str = s.split(" ");				// " " 
@@ -41,7 +56,7 @@ public class n151_Reverse_Words_in_a_String {
 	
 	public static void main(String[] args) {
 		n151_Reverse_Words_in_a_String obj = new n151_Reverse_Words_in_a_String();
-		String s = " I am iron man";			//" 1"
+		String s = " I am iron man";			//" I"
 		System.out.println(obj.reverseWords(s));
 		System.out.println(obj.reverseWords2(s));
 	}
