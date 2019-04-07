@@ -1,11 +1,19 @@
 package LeetCode;
 
-/*Given an arbitrary ransom note string and another string containing letters from all the magazines, write a function that will 
-return true if the ransom note can be constructed from the magazines ; otherwise, it will return false.
-Each letter in the magazine string can only be used once in your ransom note.*/
-//canConstruct("a", "b") -> false
-//canConstruct("aa", "ab") -> false
-//canConstruct("aa", "aab") -> true
+import java.util.HashMap;
+
+/*
+Given an arbitrary ransom note string and another string containing letters from all the magazines, 
+write a function that will return true if the ransom note can be constructed from the magazines ; otherwise, it will return false.
+Each letter in the magazine string can only be used once in your ransom note.
+
+Note:
+You may assume that both strings contain only lowercase letters.
+
+canConstruct("a", "b") -> false
+canConstruct("aa", "ab") -> false
+canConstruct("aa", "aab") -> true
+ */
 
 public class n383_Ransom_Note {
 	//sol1
@@ -42,11 +50,46 @@ public class n383_Ransom_Note {
 		}
 		return true;
 	}
+	
+	//sol3 Hashmap new!
+	public boolean canConstruct3(String ransomNote, String magazine) {
+		if(ransomNote.length() > magazine.length()) {
+			return false;
+		}
+		if(ransomNote.isEmpty() && magazine.isEmpty()) {
+			return true;
+		}
+		HashMap<Character, Integer> map = new HashMap<Character, Integer>();		
+		
+		for(char c : ransomNote.toCharArray()) {
+			if(map.containsKey(c)) {
+				map.put(c, map.get(c)+1);
+			} else {
+				map.put(c, 1);
+			}
+		}
+		
+		for(char c : magazine.toCharArray()) {
+			if(map.containsKey(c)) {
+				map.put(c, map.get(c)-1);			//minus one
+				if(map.get(c) == 0) {				
+					map.remove(c);					//need to remove key for KeySet size
+				}
+			} 
+			if(map.keySet().size() == 0) {
+				return true;
+			}
+		}
+		return false;
+	}
+	
 	public static void main(String[] args) {
 		n383_Ransom_Note obj = new n383_Ransom_Note();
 		System.out.println(obj.canConstruct("aa", "aab"));	//true
 		System.out.println(obj.canConstruct("aa", "ab"));	//false
 		System.out.println(obj.canConstruct2("aa", "aab"));	//true
 		System.out.println(obj.canConstruct2("aa", "ab"));	//false
+		System.out.println(obj.canConstruct3("aa", "aab"));	//true
+		System.out.println(obj.canConstruct3("aa", "ab"));	//false
 	}
 }
