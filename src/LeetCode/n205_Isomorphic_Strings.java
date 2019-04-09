@@ -37,8 +37,8 @@ public class n205_Isomorphic_Strings {
 				if(map.get(ss) != tt) {
 					return false;
 				}
-			} else {						//If a value is already mapped, it can not be mapped again.
-				if(map.containsValue(tt)) 	//if tt is already being mapped
+			} else {						
+				if(map.containsValue(tt)) 	//need "containValue"
 					return false;
 				map.put(ss, tt);
 			}
