@@ -25,11 +25,12 @@ public class n293_Flip_Game {
 		if(s == null || s.length() < 2) {
 			return res;
 		}
-		StringBuilder sb = new StringBuilder(s);
-		for(int i=0; i<s.length()-1; i++) {
+		StringBuilder sb = new StringBuilder(s); 	//need to init s !!!
+	
+		for(int i=0; i<s.length()-1; i++) {			//must -1, out of bounds
 			String str = s.substring(i, i+2);
 			if(str.equals("++")) {
-				sb.replace(i, i+2, "--");
+				sb.replace(i, i+2, "--");			//need sb for replace method
 				res.add(sb.toString());
 				sb.replace(i, i+2, "++");
 			}
