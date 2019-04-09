@@ -35,11 +35,13 @@ public class n290_Word_Pattern {
 		for(int i=0; i<pattern.length(); i++) {
 			char c = pattern.charAt(i);
 			if(map.containsKey(c)){
-				if(!map.get(c).equals(s[i]))
+				if(!map.get(c).equals(s[i])) {			//use equals()
 					return false;
-			}else {
-				if(map.containsValue(s[i]))			//F: Need to check!
+				}
+			} else {
+				if(map.containsValue(s[i])) {			//need "containValue(value)"
 					return false;
+				}
 				map.put(c, s[i]);
 			}	
 		}

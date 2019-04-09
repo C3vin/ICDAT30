@@ -34,7 +34,7 @@ public class n205_Isomorphic_Strings {
 			char tt = t.charAt(i);
 
 			if(map.containsKey(ss)) {
-				if(map.get(ss) != tt) {
+				if(map.get(ss) != tt) {     //if(!map.get(ss).equals(tt))
 					return false;
 				}
 			} else {						
