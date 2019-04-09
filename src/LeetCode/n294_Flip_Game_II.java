@@ -14,18 +14,22 @@ Explanation: The starting player can guarantee a win by flipping the middle "++"
  */
 public class n294_Flip_Game_II {
 	public boolean canWin(String s) {
-		char[] c = s.toCharArray();
 		if(s.length() == 0 || s.length() <2) 
 			return false;
 		
+		char[] c = s.toCharArray();
+	
 		for(int i=0; i<c.length-1; i++) {
 			if(c[i] == '+' && c[i+1] == '+') {
 				c[i] = '-';
 				c[i+1] = '-';
+				
 				boolean win = canWin(new String(c));	
+				
 				c[i] = '+';
 				c[i+1] = '+';
-				if(!win) {						// if the opposite cannot win, then you can gaurantee to win
+				
+				if(!win) {					// if the opposite cannot win, then you can guarantee to win
 					return true;
 				}
 			}
@@ -55,6 +59,6 @@ public class n294_Flip_Game_II {
 		n294_Flip_Game_II obj = new n294_Flip_Game_II();
 		System.out.println(obj.canWin("++--"));
 		System.out.println(obj.canWin("++++"));
-		System.out.println(obj.canWin2("++++"));
+		//System.out.println(obj.canWin2("++++"));
 	}
 }
