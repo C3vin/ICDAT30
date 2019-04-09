@@ -37,18 +37,37 @@ public class n205_Isomorphic_Strings {
 				if(map.get(ss) != tt) {
 					return false;
 				}
-			}else {	//If a value is already mapped, it can not be mapped again.
-				if(map.containsValue(tt)) //if tt is already being mapped
+			} else {						//If a value is already mapped, it can not be mapped again.
+				if(map.containsValue(tt)) 	//if tt is already being mapped
 					return false;
 				map.put(ss, tt);
 			}
 		}
 		return true;
 	}
+	
+	//sol2: cool but !
+	public boolean isIsomorphic2(String s, String t) {
+		HashMap map = new HashMap<>();
+		for(int i=0; i<s.length(); i++) {
+			//why +"", cuz put will return null and add new value. 
+			//e.g. //{p=2, a=1, r=4, t=2, e=3, e=4, i=1, l=3}
+			//Main idea is using single HashMap as two HashMaps with different keys. 
+			if(map.put(s.charAt(i), i) != map.put(t.charAt(i)+"", i)) { 
+				return false;
+			}
+		}
+		return true;
+	}
+	
 	public static void main(String[] args) {
 		n205_Isomorphic_Strings obj = new n205_Isomorphic_Strings();
 		System.out.println(obj.isIsomorphic("egg", "add"));
 		System.out.println(obj.isIsomorphic("foo", "bar"));
 		System.out.println(obj.isIsomorphic("paper", "title"));
+		
+		System.out.println(obj.isIsomorphic2("egg", "add"));
+		System.out.println(obj.isIsomorphic2("foo", "bar"));
+		System.out.println(obj.isIsomorphic2("paper", "title"));
 	}
 }
