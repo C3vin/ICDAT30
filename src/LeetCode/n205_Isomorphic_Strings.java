@@ -54,6 +54,7 @@ public class n205_Isomorphic_Strings {
 			//e.g. //{p=2, a=1, r=4, t=2, e=3, e=4, i=1, l=3}
 			//Main idea is using single HashMap as two HashMaps with different keys. 
 			if(map.put(s.charAt(i), i) != map.put(t.charAt(i)+"", i)) { 
+				System.out.println(map);
 				return false;
 			}
 		}

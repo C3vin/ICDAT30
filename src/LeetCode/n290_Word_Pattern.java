@@ -28,7 +28,8 @@ You may assume pattern contains only lowercase letters, and str contains lowerca
 public class n290_Word_Pattern {
 	public boolean wordPattern(String pattern, String str) {
 		HashMap<Character, String> map = new HashMap<Character, String>();
-		String[] s = str.split(" ");				//need []
+		
+		String[] s = str.split(" ");				    //need []
 		if(s.length != pattern.length())
 			return false;
 
@@ -55,8 +56,9 @@ public class n290_Word_Pattern {
 		if(words.length != pattern.length()) {
 			return false;
 		}
-		for(int i=0; i<words.length; i++) {
-			if(map.put(pattern.charAt(i), i) != map.put(words[i], i)) {		//!?
+		for(Integer i=0; i<words.length; i++) {
+			if(map.put(pattern.charAt(i), i) != map.put(words[i], i)) {	
+				System.out.println(map);
 				return false;
 			}
 		}
@@ -65,14 +67,20 @@ public class n290_Word_Pattern {
 	
 	public static void main(String[] args) {
 		n290_Word_Pattern obj = new n290_Word_Pattern();
-		System.out.println(obj.wordPattern("abba", "dog cat cat dog"));
+/*		System.out.println(obj.wordPattern("abba", "dog cat cat dog"));
 		System.out.println(obj.wordPattern("abba", "dog cat cat fish"));
 		System.out.println(obj.wordPattern("aaaa", "dog cat cat dog"));
-		System.out.println(obj.wordPattern("abba", "dog dog dog dog"));
+		System.out.println(obj.wordPattern("abba", "dog dog dog dog"));*/
+		System.out.println(obj.wordPattern("ccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccdd"
+, 		"s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s t t"
+));
 		
-		System.out.println(obj.wordPattern2("abba", "dog cat cat dog"));
+/*		System.out.println(obj.wordPattern2("abba", "dog cat cat dog"));
 		System.out.println(obj.wordPattern2("abba", "dog cat cat fish"));
 		System.out.println(obj.wordPattern2("aaaa", "dog cat cat dog"));
-		System.out.println(obj.wordPattern2("abba", "dog dog dog dog"));
+		System.out.println(obj.wordPattern2("abba", "dog dog dog dog"));*/
+		System.out.println(obj.wordPattern2("ccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccdd"
+, 		"s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s t t"
+));
 	}
 }
