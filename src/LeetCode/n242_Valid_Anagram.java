@@ -1,8 +1,22 @@
 package LeetCode;
 
 import java.util.Arrays;
-//For example, s = "anagram", t = "nagaram", return true.
-//Follow up:What if the inputs contain unicode characters? How would you adapt your solution to such case?
+/*
+Given two strings s and t , write a function to determine if t is an anagram of s.
+
+Example 1:
+Input: s = "anagram", t = "nagaram"
+Output: true
+
+Example 2:
+Input: s = "rat", t = "car"
+Output: false
+Note:
+You may assume the string contains only lowercase alphabets.
+
+Follow up:
+What if the inputs contain unicode characters? How would you adapt your solution to such case?
+ */
 
 public class n242_Valid_Anagram {
 	public boolean isAnagram(String s, String t) {
@@ -15,7 +29,7 @@ public class n242_Valid_Anagram {
 			list[t.charAt(i) - 'a']--;
 
 		}
-		for(int i: list) {
+		for(int i : list) {
 			if(i!=0)
 				return false;
 		}
