@@ -6,8 +6,22 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-//For example, given: ["eat", "tea", "tan", "ate", "nat", "bat"], 
-//[["ate", "eat","tea"],["nat","tan"],["bat"]]
+/*
+Given an array of strings, group anagrams together.
+
+Example:
+Input: ["eat", "tea", "tan", "ate", "nat", "bat"],
+Output:
+[
+  ["ate","eat","tea"],
+  ["nat","tan"],
+  ["bat"]
+]
+
+Note:
+All inputs will be in lowercase.
+The order of your output does not matter.
+ */
 public class n049_Group_Anagrams {
 	public List<List<String>> groupAnagrams(String[] strs) {
 		List<List<String>> res = new ArrayList<List<String>>();
