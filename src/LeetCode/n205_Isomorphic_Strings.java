@@ -46,15 +46,15 @@ public class n205_Isomorphic_Strings {
 		return true;
 	}
 	
-	//sol2: cool but !
+	//sol2: cool   //same as LC 290  
 	public boolean isIsomorphic2(String s, String t) {
-		HashMap map = new HashMap<>();
+		HashMap<Object, Integer> map = new HashMap<Object, Integer>();
+		
 		for(int i=0; i<s.length(); i++) {
 			//why +"", cuz put will return null and add new value. 
 			//e.g. //{p=2, a=1, r=4, t=2, e=3, e=4, i=1, l=3}
-			//Main idea is using single HashMap as two HashMaps with different keys. 
-			if(map.put(s.charAt(i), i) != map.put(t.charAt(i)+"", i)) { 
-				System.out.println(map);
+			//Main idea is using single HashMap as two HashMaps with different keys. 			
+			if(map.put(s.charAt(i), i) != map.put(t.charAt(i)+"", i)) { 	//Character(s) and String(t+"") for the key
 				return false;
 			}
 		}

@@ -52,13 +52,13 @@ public class n290_Word_Pattern {
 	//sol2
 	public boolean wordPattern2(String pattern, String str) {
 		HashMap<Object, Integer> map = new HashMap<Object, Integer>();
+		
 		String[] words = str.split(" ");
 		if(words.length != pattern.length()) {
 			return false;
 		}
-		for(Integer i=0; i<words.length; i++) {
+		for(Integer i=0; i<words.length; i++) {				//same us LC 205, Character(charAt) and String(words) for the key
 			if(map.put(pattern.charAt(i), i) != map.put(words[i], i)) {	
-				System.out.println(map);
 				return false;
 			}
 		}
@@ -77,10 +77,11 @@ public class n290_Word_Pattern {
 		
 /*		System.out.println(obj.wordPattern2("abba", "dog cat cat dog"));
 		System.out.println(obj.wordPattern2("abba", "dog cat cat fish"));
-		System.out.println(obj.wordPattern2("aaaa", "dog cat cat dog"));
-		System.out.println(obj.wordPattern2("abba", "dog dog dog dog"));*/
-		System.out.println(obj.wordPattern2("ccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccdd"
+		System.out.println(obj.wordPattern2("aaaa", "dog cat cat dog"));*/
+		//System.out.println(obj.wordPattern2("abba", "dog dog dog dog"));
+		System.out.println(obj.wordPattern2("abbc", "dog cat cat a"));
+/*		System.out.println(obj.wordPattern2("ccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccdd"
 , 		"s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s t t"
-));
+));*/
 	}
 }
