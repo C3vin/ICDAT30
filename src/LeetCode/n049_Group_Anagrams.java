@@ -85,7 +85,7 @@ public class n049_Group_Anagrams {
 				map.put(key, new ArrayList<String>(Arrays.asList(s)));	//default value need Arrays.asList() 
 			}
 		}
-		return new ArrayList<List<String>>(map.values());
+		return new ArrayList<List<String>>(map.values());				//need map.values()!
 	}
 
 	public static void main(String[] args) {
