@@ -35,17 +35,17 @@ public class n249_Group_Shifted_Strings {
 			StringBuilder sb = new StringBuilder();
 			for(int i=0; i<s.length(); i++) {
 				int val = (s.charAt(i) - s.charAt(0) + 26) % 26;
-				sb.append(val + " ");	//F: need " ", e.g. 2 22
+				sb.append(val + " ");								//F: need " ", e.g. 2 22
 			}
-			String str = sb.toString();	//Need to convert to String.
+			String str = sb.toString(); 
 
-			//this is same way LC 49
-			/*			char[] ch = s.toCharArray();		//convert string to ch array
+			/*//this is same way LC 49
+		    char[] ch = s.toCharArray();							//convert string to ch array
 			for(int i=0; i<s.length(); i++) {
 				ch[i] = (char) ((s.charAt(i) - s.charAt(0) + 26) % 26);
 			}
-			String str = String.valueOf(ch);	//convert ch array to string
-			 */			
+			String str = String.valueOf(ch);						//convert ch array to string  */	
+
 			if(!map.containsKey(str)) {
 				List<String> tmp = new ArrayList<String>();
 				map.put(str, tmp);
@@ -53,7 +53,7 @@ public class n249_Group_Shifted_Strings {
 			map.get(str).add(s);		//can't use else, because need to add all s.
 		}
 		for(String s : map.keySet()) {
-			res.add(map.get(s));		//Tip: add to list using map.get(s) to getthe value.
+			res.add(map.get(s));		
 		}
 
 		return res;
@@ -67,7 +67,11 @@ public class n249_Group_Shifted_Strings {
 		for(String s : strings) {
 			StringBuilder sb = new StringBuilder();
 			for(int i=0; i<s.length(); i++) {
-				int val = (s.charAt(i) - s.charAt(0) + 26) % 26;
+				//int val = (s.charAt(i) - s.charAt(0) + 26) % 26;
+				int val = s.charAt(i) - s.charAt(0);
+				if(val < 0) {								//if don't want to use mod
+					val = val + 26;
+				}
 				sb.append(val + " ");
 
 			}
@@ -77,7 +81,6 @@ public class n249_Group_Shifted_Strings {
 				map.put(sb.toString(), new ArrayList<String>(Arrays.asList(s)));
 			}
 		}
-		System.out.println(map);
 		for(String s : map.keySet()) {
 			res.add(map.get(s));
 		}
