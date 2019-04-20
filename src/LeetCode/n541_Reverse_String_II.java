@@ -1,4 +1,7 @@
 package LeetCode;
+
+import javax.swing.plaf.SliderUI;
+
 /*
 Given a string and an integer k, you need to reverse the first k characters for every 2k characters counting from the start of the string. If there are less than k characters left, reverse all of them. If there are less than 2k but greater than or equal to k characters, then reverse the first k characters and left the other as original.
 Example:
@@ -30,6 +33,26 @@ public class n541_Reverse_String_II {
 		}
 	}
 
+	public String reverseStr2(String s, int k) {
+		char[] ch = s.toCharArray();
+		int len = s.length();
+		
+		for(int i=0; i<len; i=i+2*k) {
+			if(len-i < k) {
+				reverse2(ch, i, len);
+			} else {
+				reverse2(ch, i, i+2*k-1);
+			}
+		}
+		return new String(ch);
+	}
+	private void reverse2(char[] ch, int s, int e) {
+		for(int i=s; i<e; i++) {
+			char tmp = ch[i];
+			ch[i] = ch[i+1+s];
+			ch[i+1+s] = tmp;
+		}
+	}
 	public static void main(String[] args) {
 		n541_Reverse_String_II obj = new n541_Reverse_String_II();
 		String s = "abcdefg";

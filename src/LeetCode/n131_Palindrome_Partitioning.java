@@ -50,7 +50,7 @@ public class n131_Palindrome_Partitioning {
 	public List<List<String>> partition2(String s) {
     	List<List<String>> res = new ArrayList<List<String>>();
     	List<String> tmp = new ArrayList<String>();
-    	dfs(s, 0, tmp, res);
+    	dfs2(s, 0, tmp, res);
     	return res;
 	}
 	private void dfs2(String s, int start, List<String> tmp, List<List<String>> res) {
@@ -59,7 +59,7 @@ public class n131_Palindrome_Partitioning {
 			return;
 		}
 		for(int i=start; i<s.length(); i++) {
-			String sub = s.substring(start, i+1);
+			String sub = s.substring(start, i+1);			//(start, i+1)
 			if(!isParlindrome2(sub)) {
 				continue;
 			}

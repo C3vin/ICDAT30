@@ -1,6 +1,6 @@
 package LeetCode;
 
-public class n234_Palindrome_Linked_List {2
+public class n234_Palindrome_Linked_List {
 /*	public class ListNode {
 		int val;
 		ListNode next;
