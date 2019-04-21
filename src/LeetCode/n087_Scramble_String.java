@@ -41,6 +41,7 @@ Input: s1 = "abcde", s2 = "caebd"
 Output: false 
  */
 public class n087_Scramble_String {
+	//won't use DP sol
 	public boolean isScramble(String s1, String s2) {
 		if(s1 == null || s2 == null) {
 			return false;
@@ -74,5 +75,6 @@ public class n087_Scramble_String {
 	public static void main(String[] args) {
 		n087_Scramble_String obj = new n087_Scramble_String();
 		System.out.println(obj.isScramble("great", "rgeat"));
+		System.out.println(obj.isScramble("abcde", "caebd"));
 	}
 }
