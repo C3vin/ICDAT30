@@ -47,6 +47,7 @@ public class n087_Scramble_String {
 			return false;
 		}
 		if(s1.equals(s2)) {
+			System.out.println(s1 + " : " + s2);
 			return true;
 		}
 		
@@ -63,10 +64,14 @@ public class n087_Scramble_String {
 		}
 		
 		for(int i=1; i<len; i++) {			//i start from '1' not '0'
+			//gr eat
+			//te arg neighbor
 			if(isScramble(s1.substring(0, i), s2.substring(0, i)) && isScramble(s1.substring(i), s2.substring(i))) {
 				return true;
-			}
-			if(isScramble(s1.substring(0, i), s2.substring(len-i)) && isScramble(s1.substring(i), s2.substring(0, len-i))) {			
+			} 
+			//gr eat
+			//tea rg cross 
+			if(isScramble(s1.substring(0, i), s2.substring(len-i)) && isScramble(s1.substring(i), s2.substring(0, len-i))) {
 				return true;																
 			}
 		}
@@ -74,7 +79,9 @@ public class n087_Scramble_String {
 	}
 	public static void main(String[] args) {
 		n087_Scramble_String obj = new n087_Scramble_String();
+		System.out.println(obj.isScramble("great", "tearg"));
 		System.out.println(obj.isScramble("great", "rgeat"));
+		System.out.println(obj.isScramble("great", "rgtae"));
 		System.out.println(obj.isScramble("abcde", "caebd"));
 	}
 }
