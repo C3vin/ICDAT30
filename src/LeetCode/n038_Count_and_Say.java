@@ -21,7 +21,7 @@ public class n038_Count_and_Say {
 		int round = 1;
 		while (round < n) {
 			StringBuilder sb = new StringBuilder();
-			int count = 1;
+			int count = 1;			
 			for (int i=1; i<result.length(); i++) {
 				//same value
 				if (result.charAt(i) == result.charAt(i - 1)) {
@@ -36,7 +36,7 @@ public class n038_Count_and_Say {
 			sb.append(count);
 			sb.append(result.charAt(result.length() - 1));
 			result = sb.toString();
-			round++;				//F: ++
+			round++;				 
 		}
 		return result;
 	}
