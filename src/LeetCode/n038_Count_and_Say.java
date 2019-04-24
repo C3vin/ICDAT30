@@ -29,13 +29,14 @@ public class n038_Count_and_Say {
 				} else {
 					//new value
 					sb.append(count);
-					sb.append(result.charAt(i - 1));			//need i - 1 
-					count = 1;		//reset
+					sb.append(result.charAt(i - 1));	//1211, '21' i=2 so i-1 -> '12' 
+					count = 1;							//reset
 				}
 			}
 			sb.append(count);
 			sb.append(result.charAt(result.length() - 1));
 			result = sb.toString();
+			
 			round++;				 
 		}
 		return result;
