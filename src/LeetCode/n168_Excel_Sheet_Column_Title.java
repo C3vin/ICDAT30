@@ -25,6 +25,17 @@ Output: "ZY"
  */
 public class n168_Excel_Sheet_Column_Title {
 	public String convertToTitle(int n) {
-		
+		StringBuilder sb = new StringBuilder();
+		while(n > 0) {
+			n--;								//cuz 'A'+
+			sb.append((char)('A' + n%26));
+			n = n/26;
+		}
+		return sb.reverse().toString();			//need to reverse
+	}
+	public static void main(String[] args) {
+		n168_Excel_Sheet_Column_Title obj = new n168_Excel_Sheet_Column_Title();
+		System.out.println(obj.convertToTitle(28));
+		System.out.println(obj.convertToTitle(701));
 	}
 }
