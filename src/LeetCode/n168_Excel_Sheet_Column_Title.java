@@ -33,9 +33,23 @@ public class n168_Excel_Sheet_Column_Title {
 		}
 		return sb.reverse().toString();			//need to reverse
 	}
+	
+	public String convertToTitle2(int n) {
+		StringBuilder sb = new StringBuilder();
+		while(n > 0) {
+			n--;
+			sb.insert(0, (char)('A' + n%26));
+			n = n/26;
+		}
+		return sb.toString();
+	}
+	
 	public static void main(String[] args) {
 		n168_Excel_Sheet_Column_Title obj = new n168_Excel_Sheet_Column_Title();
 		System.out.println(obj.convertToTitle(28));
 		System.out.println(obj.convertToTitle(701));
+		
+		System.out.println(obj.convertToTitle2(28));
+		System.out.println(obj.convertToTitle2(701));
 	}
 }
