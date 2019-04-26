@@ -25,8 +25,16 @@ Input: "ZY"
 Output: 701
 */
 public class n171_Excel_Sheet_Column_Number {
+	/*
+	 AB -> 28
+     res = 1 * 26 + 2 = 28
+	*/
 	public int titleToNumber(String s) {
-		
+		int res = 0;
+		for(int i=0; i<s.length(); i++) {
+			res = res * 26 + (s.charAt(i) - 'A' + 1);					//need + 1
+		}
+		return res;
 	}
 	public static void main(String[] args) {
 		n171_Excel_Sheet_Column_Number obj = new n171_Excel_Sheet_Column_Number();
