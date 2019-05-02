@@ -47,17 +47,14 @@ Explanation: M = 1000, CM = 900, XC = 90 and IV = 4.
  */
 public class n012_integer_to_roman {
 	 public String intToRoman(int num) {
-		 //int[] val = {1000, 900, 500, 400, 100, 90, 50, 40, 10, 9, 5, 4, 1};
-		 //String[] rval = {"M", "CM", "D", "CD", "C", "XC", "L", "XL", "X", "IX", "V", "IV", "I"};
-		 int[] val = {1000, 500, 100, 50, 10, 5, 1};
-		 String[] rval = {"M", "D", "C", "L", "X", "V", "I"};
-		 //String res = "";
+		 int[] val = {1000, 900, 500, 400, 100, 90, 50, 40, 10, 9, 5, 4, 1};
+		 String[] rval = {"M", "CM", "D", "CD", "C", "XC", "L", "XL", "X", "IX", "V", "IV", "I"};
+		 //int[] val = {1000, 500, 100, 50, 10, 5, 1};                     //can't use this, won't pass '1994'
+		 //String[] rval = {"M", "D", "C", "L", "X", "V", "I"};
 		 StringBuilder sb = new StringBuilder();
 		 
 		 for(int i=0; i<val.length; i++) {
 			 while(num >= val[i]) {				//F: need this to locate the i 
-				 //res = res + rval[i];
-				 //System.out.println(i);
 				 sb.append(rval[i]);
 				 num = num - val[i];
 			 }
@@ -65,43 +62,36 @@ public class n012_integer_to_roman {
 		 return sb.toString();
 	 }
 	 
-	 public String intToRoman2(int num) {
-		 int[] val = {1000, 500, 100, 50, 10, 5, 1};
-		 char[] rval = {'M', 'D', 'C', 'L', 'X', 'V', 'I'};
-		 
-		 StringBuilder sb = new StringBuilder();
-		 for(int i=0; i<val.length; i++) {
-			 if(num >= val[i]) {
-				 if(num / val[i] > 3) {
-					 num = num - val[i-1] + val[i];
-					 sb.append(rval[i]);
-					 sb.append(rval[i-1]);
-				 } else if(i % 2 == 1) {
-					 if((num - val[i]) / val[i+1] > 3) {
-						 num = num - val[i-1] + val[i+1];
-						 sb.append(rval[i+1]);
-						 sb.append(rval[i-1]);
-					 } else {
-						 num = num - val[i];
-						 sb.append(rval[i]);
-					 }
-				 } else {
-					 while(num / val[i] > 0) {
-						 num = num - val[i];
-						 sb.append(rval[i]);
-					 }
-				 }
-			 }
+	 //sol2
+	 public enum Type {
+		 M(1000), CM(900), D(500), CD(400), C(100), XC(90), L(50), XL(40), X(10), IX(9), V(5), IV(4), I(1);
+		 private final int value;
+		 Type(int value1) {
+			 this.value = value1;
 		 }
-		 return sb.toString();
+	 };
+	 
+	 public String intToRoman2(int num) {
+		StringBuilder sb = new StringBuilder();
+		for(Type t : Type.values()) {
+			while(num >= t.value) {
+				sb.append(t);
+				System.out.println(t + " : " + t.value);
+				num = num - t.value;
+			}
+		}
+		return sb.toString();
 	 }
 	 public static void main(String[] args) {
 		 n012_integer_to_roman obj = new n012_integer_to_roman();
-		 //System.out.println(obj.intToRoman(3978));
+		 System.out.println(obj.intToRoman(3978));
 		 System.out.println(obj.intToRoman(11));
 		 System.out.println(obj.intToRoman(58));
 		 System.out.println(obj.intToRoman(1994));
 		 
+		 System.out.println(obj.intToRoman2(3978));
+		 System.out.println(obj.intToRoman2(11));
+		 System.out.println(obj.intToRoman2(58));
 		 System.out.println(obj.intToRoman2(1994));
 	 }
 
