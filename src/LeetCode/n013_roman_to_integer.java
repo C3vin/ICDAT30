@@ -111,18 +111,15 @@ public class n013_roman_to_integer {
 				break;
 			}
 		}
-		int res = num[s.charAt(0)];
-		System.out.println(res);
-		for(int i=1; i<s.length(); i++) {
-			if(num[s.charAt(i)] > num[s.charAt(i-1)]) {
-				res = res + num[s.charAt(i)];
+		int res = num[0];
+		for(int i=1; i<num.length; i++) {	           //start with 1
+			if(num[i] > num[i-1]) {
+				res = res + num[i] - 2 * num[i-1];				
 			} else {
-				
+				res = res + num[i];	
 			}
 		}
 		return res;
-		
-		
 	}
 	
 	public static void main(String[] args) {
@@ -131,6 +128,8 @@ public class n013_roman_to_integer {
 		System.out.println(obj.romanToInt("CV"));
 		System.out.println(obj.romanToInt("IV"));
 		
+		System.out.println(obj.romanToInt2("VI"));
+		System.out.println(obj.romanToInt2("CV"));
 		System.out.println(obj.romanToInt2("IV"));
 	}
 }
