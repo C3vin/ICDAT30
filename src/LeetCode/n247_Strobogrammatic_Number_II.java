@@ -4,9 +4,14 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-//A strobogrammatic number is a number that looks the same when rotated 180 degrees (looked at upside down).
-//Find all strobogrammatic numbers that are of length = n.
-//For example,Given n = 2, return ["11","69","88","96"].
+/*
+A strobogrammatic number is a number that looks the same when rotated 180 degrees (looked at upside down).
+Find all strobogrammatic numbers that are of length = n.
+
+Example:
+Input:  n = 2
+Output: ["11","69","88","96"]
+*/
 public class n247_Strobogrammatic_Number_II {
 	public List<String> findStrobogrammatic(int n) {
 		List<String> one = Arrays.asList("0", "1", "8");	
@@ -14,8 +19,8 @@ public class n247_Strobogrammatic_Number_II {
 		one2.add("0");
 		one2.add("1");
 		one2.add("8");*/
-		List<String> two = Arrays.asList("");
-		List<String> res = two;
+		//List<String> two = Arrays.asList("");
+		List<String> res = Arrays.asList("");
 
 		if(n%2 == 1)
 			res = one;	//update res, for odd 
@@ -23,8 +28,10 @@ public class n247_Strobogrammatic_Number_II {
 		for(int i=(n%2)+2; i<=n; i=i+2) {		//F: i=i+2 e.g. n=4, i=2->4 (twice loop). 1) 00,11,69,88,96 2) 1001,1111,1691....
 			List<String> list = new ArrayList<String>();
 			for(String s : res) {
-				if(i != n)
+				if(i != n) {
+					System.out.println(s);
 					list.add("0" + s + "0");	//e.g. n=4, need 00.
+				}
 				list.add("1" + s + "1");
 				list.add("6" + s + "9");
 				list.add("8" + s + "8");
@@ -36,8 +43,10 @@ public class n247_Strobogrammatic_Number_II {
 	}
 	public static void main(String[] args) {
 		n247_Strobogrammatic_Number_II obj = new n247_Strobogrammatic_Number_II();
-		int n = 4;
-		System.out.println(obj.findStrobogrammatic(n));
+		System.out.println(obj.findStrobogrammatic(1));
+		System.out.println(obj.findStrobogrammatic(2));
+		System.out.println(obj.findStrobogrammatic(3));
+		System.out.println(obj.findStrobogrammatic(4));
 	}
 }
 /*n = 0:   none
