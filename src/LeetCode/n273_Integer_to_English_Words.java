@@ -21,8 +21,8 @@ Output: "One Billion Two Hundred Thirty Four Million Five Hundred Sixty Seven Th
  */
 public class n273_Integer_to_English_Words {
 	private final String[] belowTen = new String[] {"", "One", "Two", "Three", "Four", "Five", "Six", "Seven", "Eight", "Nine"};
-	private final String[] belowTwenty = new String[] {"Ten", "Eleven", "Twelve", "Thirteen", "Fourteen", "Fifteen", "Sixteen", "Seventeen", "Eightteen", "Nineteen"};
-	private final String[] belowHundred = new String[] {"", "Ten", "Twenty", "Thirty", "Forth", "Fifty", "Sixty", "Seventy", "Eighty", "Ninety"};
+	private final String[] belowTwenty = new String[] {"Ten", "Eleven", "Twelve", "Thirteen", "Fourteen", "Fifteen", "Sixteen", "Seventeen", "Eighteen", "Nineteen"};
+	private final String[] belowHundred = new String[] {"", "Ten", "Twenty", "Thirty", "Forty", "Fifty", "Sixty", "Seventy", "Eighty", "Ninety"};
 	
 	public String numberToWords(int num) {
 		if(num == 0) {
@@ -38,7 +38,7 @@ public class n273_Integer_to_English_Words {
 		} else if(num < 20) {
 			res = belowTwenty[num - 10];
 		} else if(num < 100) {
-			res = belowHundred[num / 10] + helper(num % 10);
+			res = belowHundred[num / 10] + " " + helper(num % 10);
 		} else if(num < 1000) {
 			res = helper(num / 100) + " Hundred " + helper(num % 100);
 		} else if(num < 1000000) {
