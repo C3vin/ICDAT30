@@ -15,21 +15,15 @@ Output: ["11","69","88","96"]
 public class n247_Strobogrammatic_Number_II {
 	public List<String> findStrobogrammatic(int n) {
 		List<String> one = Arrays.asList("0", "1", "8");	
-/*		List<String> one2 = new ArrayList<String>();
-		one2.add("0");
-		one2.add("1");
-		one2.add("8");*/
-		//List<String> two = Arrays.asList("");
 		List<String> res = Arrays.asList("");
 
 		if(n%2 == 1)
-			res = one;	//update res, for odd 
+			res = one;							//update res, for odd 
 
-		for(int i=(n%2)+2; i<=n; i=i+2) {		//F: i=i+2 e.g. n=4, i=2->4 (twice loop). 1) 00,11,69,88,96 2) 1001,1111,1691....
+		for(int i=(n%2)+2; i<=n; i=i+2) {		//F: i=i+2 e.g. n=4, i=2->4 (twice loop). 1) 00,11,69,88,96 2) 1001,1111,1691...
 			List<String> list = new ArrayList<String>();
 			for(String s : res) {
 				if(i != n) {
-					System.out.println(s);
 					list.add("0" + s + "0");	//e.g. n=4, need 00.
 				}
 				list.add("1" + s + "1");
