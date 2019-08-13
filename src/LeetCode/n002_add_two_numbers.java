@@ -37,6 +37,33 @@ public class n002_add_two_numbers {
 		return dummyHead.next;
 	}
 	
+	//Top
+	public ListNode addTwoNumber3(ListNode l1, ListNode l2) {
+		ListNode dummy = new ListNode(0);
+		int sum = 0;
+		ListNode cur = dummy;
+		ListNode p1 = l1; 
+		ListNode p2 = l2;
+		
+		while(p1 != null || p2 != null) {
+			if(p1 != null) {
+				sum += p1.val;
+				p1 = p1.next;
+			}
+			if(p2 != null) {
+				sum += p2.val;
+				p2 = p2.next;
+			}
+			cur.next = new ListNode(sum % 10);
+			sum = sum / 10;
+			cur = cur.next;
+		}
+		if(sum == 1) {
+			cur.next = new ListNode(1);		
+		}
+		return dummy.next;
+	}
+	
 	public ListNode addTwoNumber2(ListNode l1, ListNode l2) {
 		if(l1 == null)
 			return l2;
@@ -126,7 +153,23 @@ public class n002_add_two_numbers {
 		q7.next = q8;
 		q8.next = q9;
 		
-		//System.out.println(obj.addTwoNumber(p1, q1));
+		ListNode a1 = obj.new ListNode(2);
+		ListNode a2 = obj.new ListNode(4);
+		ListNode a3 = obj.new ListNode(5);
+		
+		ListNode b1 = obj.new ListNode(5);
+		ListNode b2 = obj.new ListNode(6);
+		ListNode b3 = obj.new ListNode(5);
+		
+		a1.next = a2;
+		a2.next = a3;
+
+		b1.next = b2;
+		b2.next = b3;
+
+		
+		System.out.println(obj.addTwoNumber(p1, q1));
 		System.out.println(obj.addTwoNumber2(p1, q1));		//result: 6556442551
+		System.out.println(obj.addTwoNumber3(a1, b1));
 	}
 }
