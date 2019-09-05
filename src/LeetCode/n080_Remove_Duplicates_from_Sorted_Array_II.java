@@ -15,6 +15,8 @@ Your function should return length = 7, with the first seven elements of nums be
 It doesn't matter what values are set beyond the returned length.
  */
 public class n080_Remove_Duplicates_from_Sorted_Array_II {
+	//cs
+	//time:O(n) space:O(1)
 	public int removeDuplicates(int[] nums) {
 		if(nums == null || nums.length == 0) {
 			return 0;
