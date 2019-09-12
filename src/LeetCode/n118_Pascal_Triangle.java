@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 public class n118_Pascal_Triangle {
 	/*
+Given a non-negative integer numRows, generate the first numRows of Pascal's triangle.
 [
      [1],
     [1,1],
