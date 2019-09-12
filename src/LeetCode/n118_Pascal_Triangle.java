@@ -15,11 +15,11 @@ public class n118_Pascal_Triangle {
 	public List<List<Integer>> generate(int numRows) {
 		List<List<Integer>> res = new ArrayList<List<Integer>>();	
 		if(numRows <0) return res;
-		
+
 		ArrayList<Integer> pre = new ArrayList<Integer>();
 		pre.add(1);
 		res.add(pre);
-		
+
 		for(int i =2; i<numRows; i++) {
 			ArrayList<Integer> cur = new ArrayList<Integer>();
 			cur.add(1);
@@ -32,10 +32,27 @@ public class n118_Pascal_Triangle {
 		}
 		return res;
 	}
-	
+
+	//cs
+	//time:O(n^2) space:O(n)
+	public List<List<Integer>> generate2(int numRows) {
+		List<List<Integer>> res = new ArrayList<List<Integer>>();
+		List<Integer> list = new ArrayList<Integer>();
+
+		for(int i=0; i<numRows; i++) {
+			list.add(0, 1);
+			for(int j=1; j<list.size()-1; j++) {
+				list.set(j, list.get(j)+list.get(j+1));
+			}
+			res.add(new ArrayList<Integer>(list));
+		}
+		return res;
+	}
+
 	public static void main(String[] args) {
 		n118_Pascal_Triangle obj = new n118_Pascal_Triangle();
 		System.out.println(obj.generate(6));
+		System.out.println(obj.generate2(6));
 	}
 }
 
