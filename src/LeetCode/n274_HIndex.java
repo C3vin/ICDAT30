@@ -23,15 +23,51 @@ public class n274_HIndex {
 		int h = 0;
 		for(int i = 0; i < citations.length; i++){
 			int currH = Math.min(citations[i], citations.length-i);
-			System.out.println("currH: "+currH);
 			if(currH > h) {
 				h = currH;
 			}
 		}
 		return h;
 	}
+	
+	public int hIndex2(int[] citations) {
+		Arrays.parallelSort(citations);
+		int hindex = 0;
+		int count = 0;
+		for(int i=citations.length-1; i>=0; i--) {
+			count = citations.length-i;
+			if(citations[i] >= count) {
+				hindex = count;
+			}
+		}
+		return hindex;
+	}
+	
+	//extra space 
+	//https://github.com/awangdev/LeetCode/blob/master/Java/H-Index.java
+	public int hIndex3(int[] citations) {
+		int n = citations.length;
+		int[] b = new int[n+1];
+		for(int i=0; i<n; i++) {
+			int bs = citations[i];
+			//System.out.println("bs: "+bs);
+			if(citations[i] <= n) {
+				System.out.println("bs: "+bs);
+				b[bs]++;
+			} else {
+				System.out.println("n: "+n);
+				b[n]++;
+			}
+		}
+		for(int x : b) 
+			System.out.println("x: "+x);
+		
+		return 0;
+	}
 	public static void main(String[] args) {
 		n274_HIndex obj = new n274_HIndex();
 		System.out.println(obj.hIndex(new int[] {3,0,6,1,5}));
+		System.out.println(obj.hIndex2(new int[] {3,0,6,1,5}));
+		System.out.println(obj.hIndex3(new int[] {3,0,6,1,5}));
 	}
 }
