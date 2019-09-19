@@ -1,5 +1,18 @@
 package LeetCode;
+/*
+Design a class which receives a list of words in the constructor, and implements a method that takes two words word1 and word2 and return the shortest distance between these two words in the list. Your method will be called repeatedly many times with different parameters. 
 
+Example:
+Assume that words = ["practice", "makes", "perfect", "coding", "makes"].
+
+Input: word1 = “coding”, word2 = “practice”
+Output: 3
+
+Input: word1 = "makes", word2 = "coding"
+Output: 1
+Note:
+You may assume that word1 does not equal to word2, and word1 and word2 are both in the list.
+ */
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -9,14 +22,29 @@ public class n244_Shortest_Word_Distance_II {
 	HashMap<String, List<Integer>> map = new HashMap<String, List<Integer>>();
 	
 	public n244_Shortest_Word_Distance_II(String[] words) {
-		for(int i = 0; i < words.length; i++){
-			List<Integer> cnt = map.get(words[i]);
-			if(cnt == null){
-				cnt = new ArrayList<Integer>();		//?
+		
+		for(int i=0; i<words.length; i++) {
+			List<Integer> list = new ArrayList<Integer>();
+			if(map.containsKey(words[i])) {
+				list = map.get(words[i]);
+				list.add(i);
+				map.put(words[i], list);
+			} else {
+				list.add(i);
+				map.put(words[i], list);
 			}
-			cnt.add(i);
-			map.put(words[i], cnt);		//{makes=[1, 4], practice=[0], perfect=[2], coding=[3]}
 		}
+		
+		System.out.println(map);
+//		for(int i = 0; i < words.length; i++){
+//			List<Integer> cnt = map.get(words[i]);
+//			if(cnt == null){
+//				cnt = new ArrayList<Integer>();		//?
+//			}
+//			cnt.add(i);
+//			map.put(words[i], cnt);		
+//		}
+		//{makes=[1, 4], practice=[0], perfect=[2], coding=[3]}
 	}
 
 	public int shortest(String word1, String word2) {
@@ -35,7 +63,6 @@ public class n244_Shortest_Word_Distance_II {
 		}
 		return distance;
 	}
-
 	public static void main(String[] args) {
 		String[] words = {"practice", "makes", "perfect", "coding", "makes"};
 		n244_Shortest_Word_Distance_II obj = new n244_Shortest_Word_Distance_II(words);
