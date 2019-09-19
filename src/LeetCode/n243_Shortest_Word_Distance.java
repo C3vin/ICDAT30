@@ -14,6 +14,8 @@ Note:
 You may assume that word1 does not equal to word2, and word1 and word2 are both in the list.
  */
 public class n243_Shortest_Word_Distance {
+	//cs
+	//time:O(n)
 	public int shortestDistance(String[] words, String word1, String word2) {
 		int res = words.length;
 		int a = -1;
