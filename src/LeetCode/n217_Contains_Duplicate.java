@@ -47,6 +47,8 @@ public class n217_Contains_Duplicate {
 		}
 		return false;
 	}
+	//cs
+	//time:O(nlogn) space:O(1)
 	public boolean containsDuplicate3(int[] nums) {
 		Arrays.sort(nums);
 		for(int i=1; i<nums.length; i++) {
