@@ -1,9 +1,25 @@
 package LeetCode;
 
+import java.util.Arrays;
 import java.util.HashSet;
+/*
+Given an array of integers, find if the array contains any duplicates.
+Your function should return true if any value appears at least twice in the array, 
+and it should return false if every element is distinct.
 
-//Given an array of integers, find if the array contains any duplicates. 
-//Your function should return true if any value appears at least twice in the array, and it should return false if every element is distinct.
+Example 1:
+Input: [1,2,3,1]
+Output: true
+
+Example 2:
+Input: [1,2,3,4]
+Output: false
+
+Example 3:
+Input: [1,1,1,3,3,4,3,2,4,2]
+Output: true
+ */
+
 public class n217_Contains_Duplicate {
 	//hashset 21ms
 	public boolean containsDuplicate(int[] nums) {
@@ -17,14 +33,26 @@ public class n217_Contains_Duplicate {
 		}
 		return false;
 	}
-	//hashset 14ms
+	//cs
+	//time:O(n) space:O(n)
 	public boolean containsDuplicate2(int[] nums) {
-		if(nums == null || nums.length == 0)
+		if(nums == null || nums.length == 0) {
 			return false;
+		}
 		HashSet<Integer> set = new HashSet<Integer>();
 		for(int i=0; i<nums.length; i++) {
-			if(!set.add(nums[i]))					//If this set already contains the element, the call leaves the set unchanged and returns false.
+			if(!set.add(nums[i])) {					//If this set already contains, the call leaves the set unchanged and returns false.
 				return true;
+			}
+		}
+		return false;
+	}
+	public boolean containsDuplicate3(int[] nums) {
+		Arrays.sort(nums);
+		for(int i=1; i<nums.length; i++) {
+			if(nums[i] == nums[i-1]) {
+				return true;
+			}
 		}
 		return false;
 	}
@@ -33,5 +61,6 @@ public class n217_Contains_Duplicate {
 		int[] nums = {1,2,4,4};
 		System.out.println(obj.containsDuplicate(nums));
 		System.out.println(obj.containsDuplicate2(nums));
+		System.out.println(obj.containsDuplicate3(nums));
 	}
 }
