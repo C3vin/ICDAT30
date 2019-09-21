@@ -21,8 +21,9 @@ public class n244_Shortest_Word_Distance_II {
 	
 	HashMap<String, List<Integer>> map = new HashMap<String, List<Integer>>();
 	
+	//cs
+	//space: O(n)
 	public n244_Shortest_Word_Distance_II(String[] words) {
-		
 		for(int i=0; i<words.length; i++) {
 			List<Integer> list = new ArrayList<Integer>();
 			if(map.containsKey(words[i])) {
@@ -34,34 +35,38 @@ public class n244_Shortest_Word_Distance_II {
 				map.put(words[i], list);
 			}
 		}
-		
-		System.out.println(map);
-//		for(int i = 0; i < words.length; i++){
-//			List<Integer> cnt = map.get(words[i]);
-//			if(cnt == null){
-//				cnt = new ArrayList<Integer>();		//?
-//			}
-//			cnt.add(i);
-//			map.put(words[i], cnt);		
-//		}
 		//{makes=[1, 4], practice=[0], perfect=[2], coding=[3]}
 	}
-
+	//time:O(n*m)
 	public int shortest(String word1, String word2) {
-		List<Integer> idx1 = map.get(word1);
-		List<Integer> idx2 = map.get(word2);
-		System.out.println("@: "+idx1.size() + " : " +idx2.size());
-		int distance = Integer.MAX_VALUE;
-		int i = 0, j = 0;
-		while(i < idx1.size() && j < idx2.size()){
-			distance = Math.min(Math.abs(idx1.get(i) - idx2.get(j)), distance);
-			if(idx1.get(i) < idx2.get(j)){
-				i++;
-			} else {
-				j++;
+		List<Integer> l1 = map.get(word1);
+		List<Integer> l2 = map.get(word2);
+		int res = Integer.MAX_VALUE;
+		for(int w1 : l1) {
+			for(int w2 : l2) {
+				res = Math.min(res, Math.abs(w1-w2));
 			}
 		}
-		return distance;
+		return res;
+	}
+	
+	//time:O(n+m)
+	public int shortest2(String word1, String word2) {
+		List<Integer> l1 = map.get(word1);
+		List<Integer> l2 = map.get(word2);
+		int res = Integer.MAX_VALUE;
+		int a = 0;
+		int b = 0;
+		
+		while(a < l1.size() && b < l2.size()) {
+			res = Math.min(res, Math.abs(l1.get(a) - l2.get(b)));
+			if(l1.size() < l2.size()) {
+				a++;
+			} else {
+				b++;
+			}
+		}
+		return res;
 	}
 	public static void main(String[] args) {
 		String[] words = {"practice", "makes", "perfect", "coding", "makes"};
