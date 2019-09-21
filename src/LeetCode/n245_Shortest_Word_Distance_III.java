@@ -17,7 +17,7 @@ public class n245_Shortest_Word_Distance_III {
 	//cs
 	//time:O(n) space:O(1)
 	public int shortestWordDistance(String[] words, String word1, String word2) {
-		int res = words.length;
+		int res = Integer.MAX_VALUE;
 		int a = -1;
 		int b = -1;
 		for(int i=0; i<words.length; i++) {
@@ -30,18 +30,17 @@ public class n245_Shortest_Word_Distance_III {
 				}
 				b = i;
 			}
-		}
-		System.out.println(a + " : "+b);
-		if(a != -1 && b != -1) {
-			res = Math.min(res, Math.abs(a - b));
+			if(a != -1 && b != -1) {
+				res = Math.min(res, Math.abs(a - b));
+			}
 		}
 		return res;
 	}
 	public static void main(String[] args) {
 		n245_Shortest_Word_Distance_III obj = new n245_Shortest_Word_Distance_III();
 		String[] words = {"practice", "makes", "perfect", "coding", "makes"};
-	/*	System.out.println(obj.shortestWordDistance(words, "makes", "coding"));
-		System.out.println(obj.shortestWordDistance(words, "makes", "makes"));*/
+		System.out.println(obj.shortestWordDistance(words, "makes", "coding"));
+		System.out.println(obj.shortestWordDistance(words, "makes", "makes"));
 		System.out.println(obj.shortestWordDistance(new String[] {"a","a"}, "a", "a"));
 	}
 }
