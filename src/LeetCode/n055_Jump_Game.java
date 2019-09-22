@@ -29,6 +29,7 @@ public class n055_Jump_Game {
 		}
 		return true;
 	}
+	
 	public static void main(String[] args) {
 		n055_Jump_Game obj = new n055_Jump_Game();
 		System.out.println(obj.canJump(new int[] {2,3,1,1,4}));
