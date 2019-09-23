@@ -20,16 +20,15 @@ public class n055_Jump_Game {
 	//cs
 	//time:O(n) space:O(1)
 	public boolean canJump(int[] nums) {
-		int max = 0;
+		int far = 0;
 		for(int i=0; i<nums.length; i++) {
-			if(i > max) {
+			if(i > far) {
 				return false;
 			}
-			max = Math.max(max, nums[i]+i);
+			far = Math.max(far, nums[i]+i);
 		}
 		return true;
 	}
-	
 	public static void main(String[] args) {
 		n055_Jump_Game obj = new n055_Jump_Game();
 		System.out.println(obj.canJump(new int[] {2,3,1,1,4}));
