@@ -20,12 +20,12 @@ public class n055_Jump_Game {
 	//cs
 	//time:O(n) space:O(1)
 	public boolean canJump(int[] nums) {
-		int far = 0;
+		int max = 0;
 		for(int i=0; i<nums.length; i++) {
-			if(i > far) {
+			if(i > max) {
 				return false;
 			}
-			far = Math.max(far, nums[i]+i);
+			max = Math.max(max, nums[i]+i);
 		}
 		return true;
 	}
