@@ -20,10 +20,9 @@ public class n045_Jump_Game_II {
 		int res = 0;
 		int curMaxArea = 0;
 		int maxNext = 0;
-		//Greedy alg
+		
 		for(int i=0; i<nums.length-1; i++) {		//need length-1
 			maxNext = Math.max(maxNext, nums[i]+i);
-			System.out.println("i: "+i+" maxNext: "+maxNext);
 			if(i == curMaxArea) {
 				res++;
 				curMaxArea = maxNext;
@@ -31,6 +30,8 @@ public class n045_Jump_Game_II {
 		}
 		return res;
 	}
+	//Greedy algorithm
+	//https://www.hackerearth.com/practice/algorithms/greedy/basics-of-greedy-algorithms/tutorial/
 	public static void main(String[] args) {
 		n045_Jump_Game_II obj = new n045_Jump_Game_II();
 		System.out.println(obj.jump(new int[] {2,3,1,1,4}));
