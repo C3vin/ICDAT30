@@ -25,8 +25,19 @@ Output: 0
 Explanation: In this case, no transaction is done, i.e. max profit = 0.
  */
 public class n122_Best_Time_to_Buy_and_Sell_Stock_II {
+	//cs
+	//time:O(n) space:O(1)
 	public int maxProfit(int[] prices) {
-		
+		if(prices == null || prices.length < 2) {
+			return 0;
+		}
+		int profit = 0;
+		for(int i=1; i<prices.length; i++) {
+			if(prices[i] > prices[i-1]) {
+				profit = profit + prices[i] - prices[i-1];
+			}
+		}
+		return profit;
 	}
 	public static void main(String[] args) {
 		n122_Best_Time_to_Buy_and_Sell_Stock_II obj = new n122_Best_Time_to_Buy_and_Sell_Stock_II();
