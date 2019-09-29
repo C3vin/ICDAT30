@@ -37,8 +37,37 @@ public class n123_Best_Time_to_Buy_and_Sell_Stock_III {
 		}
 		return sell2;
 	}
+	
+	public int maxProfit2(int[] prices) {
+/*		These four variables represent your profit after executing corresponding transaction 
+		in the beginning, your profit is 0. 
+		when you buy a stock ,the profit will be deducted of the price of stock.*/
+		
+		int firstBuy = Integer.MIN_VALUE;
+		int firstSell = 0;
+		int secondBuy = Integer.MIN_VALUE;
+		int secondSell = 0;
+		
+		for(int curPrice : prices) {
+			if(firstBuy < -curPrice) {
+				firstBuy = -curPrice;	// the max profit after you buy first stock
+			}
+			if(firstSell < firstBuy + curPrice) {
+				firstSell = firstBuy + curPrice;	// the max profit after you sell it
+			}
+			if(secondBuy < firstSell - curPrice) {
+				secondBuy = firstSell - curPrice;	// the max profit after you buy the second stock
+			}
+			if(secondSell < secondBuy + curPrice) {
+				secondSell = secondBuy + curPrice;	// the max profit after you sell the second stock
+			}
+		}
+		return secondSell;
+	}
+	
 	public static void main(String[] args) {
 		n123_Best_Time_to_Buy_and_Sell_Stock_III obj = new n123_Best_Time_to_Buy_and_Sell_Stock_III();
 		System.out.println(obj.maxProfit(new int[] {3,3,5,0,0,3,1,4}));
+		System.out.println(obj.maxProfit2(new int[] {3,3,5,0,0,3,1,4}));
 	}
 }
