@@ -24,6 +24,15 @@ Output: 0
 Explanation: In this case, no transaction is done, i.e. max profit = 0.
  */
 public class n123_Best_Time_to_Buy_and_Sell_Stock_III {
+/*	First assume that we have no money, so buy1 means that we have to borrow money from others, 
+    we want to borrow less so that we have to make our balance as max as we can(because this is negative).
+	sell1 means we decide to sell the stock, after selling it we have price[i] money and we have to give back the money we owed,
+	so we have price[i] - |buy1| = prices[i ] + buy1, we want to make this max.
+	buy2 means we want to buy another stock, we already have sell1 money, so after buying stock2 we have buy2 = sell1 - price[i] 
+	money left, we want more money left, so we make it max
+	sell2 means we want to sell stock2, we can have price[i] money after selling it, and we have buy2 money left before, 
+	so sell2 = buy2 + prices[i], we make this max.
+	So sell2 is the most money we can have.*/
 	public int maxProfit(int[] prices) {
 		int buy1 = Integer.MIN_VALUE;
 		int buy2 = Integer.MIN_VALUE;
@@ -39,10 +48,6 @@ public class n123_Best_Time_to_Buy_and_Sell_Stock_III {
 	}
 	
 	public int maxProfit2(int[] prices) {
-/*		These four variables represent your profit after executing corresponding transaction 
-		in the beginning, your profit is 0. 
-		when you buy a stock ,the profit will be deducted of the price of stock.*/
-		
 		int firstBuy = Integer.MIN_VALUE;
 		int firstSell = 0;
 		int secondBuy = Integer.MIN_VALUE;
