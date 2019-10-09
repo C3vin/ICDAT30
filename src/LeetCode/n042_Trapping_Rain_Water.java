@@ -63,12 +63,10 @@ public class n042_Trapping_Rain_Water {
 			if(height[l] < height[r]) {
 				lMax = Math.max(lMax, height[l]);
 				res = res + lMax - height[l];
-				System.out.println("res: "+res + " l: " +l);
 				l++;
 			} else {
 				rMax = Math.max(rMax, height[r]);
 				res = res + rMax - height[r];
-				System.out.println("res: "+res + " r "+r);
 				r--;
 			}
 		}
