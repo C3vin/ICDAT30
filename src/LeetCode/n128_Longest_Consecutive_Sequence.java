@@ -30,14 +30,12 @@ public class n128_Longest_Consecutive_Sequence {
 				set.remove(down);
 				down--;
 			}
-			System.out.println(set);
 			
 			int up = nums[i]+1;
 			while(set.contains(up)) {
 				set.remove(up);
 				up++;
 			}
-			System.out.println(set);
 			
 			res = Math.max(res, up - down -1);
 		}
