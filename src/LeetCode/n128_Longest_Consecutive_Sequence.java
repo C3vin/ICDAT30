@@ -37,7 +37,7 @@ public class n128_Longest_Consecutive_Sequence {
 				up++;
 			}
 			
-			res = Math.max(res, up - down -1);
+			res = Math.max(res, up - down -1);		//at least res = 1 (itself)
 		}
 		return res;
 	}
