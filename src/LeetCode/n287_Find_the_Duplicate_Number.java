@@ -56,11 +56,32 @@ public class n287_Find_the_Duplicate_Number {
 		}
 		return -1;
 	}
+	
+	//Floyd's Tortoise and Hare (Cycle Detection)
+	public int findDuplicate3(int[] nums) {
+		int fast = nums[0];
+		int slow = nums[nums[0]];		//s&f not the same!
+		
+		while(slow != fast) {			//!= not <
+			slow = nums[slow];
+			fast = nums[nums[fast]];
+		}
+		
+		fast = 0;						//0 not nums[0]
+		while(slow != fast) {
+			slow = nums[slow];
+			fast = nums[fast];
+		}
+		return slow;
+	}
+	
 	public static void main(String[] args) {
 		n287_Find_the_Duplicate_Number obj = new n287_Find_the_Duplicate_Number();
 		System.out.println(obj.findDuplicate(new int[] {1,3,4,2,2}));
 		System.out.println(obj.findDuplicate(new int[] {3,1,3,4,2}));
 		System.out.println(obj.findDuplicate2(new int[] {1,3,4,2,2}));
 		System.out.println(obj.findDuplicate2(new int[] {3,1,3,4,2}));
+		System.out.println(obj.findDuplicate3(new int[] {1,3,4,2,2}));
+		System.out.println(obj.findDuplicate3(new int[] {3,1,3,4,2}));
 	}
 }
