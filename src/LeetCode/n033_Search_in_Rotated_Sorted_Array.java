@@ -39,26 +39,24 @@ public class n033_Search_in_Rotated_Sorted_Array {
 		if(nums[mid] == target ) 
 			return mid;
 		
-		if(nums[left] <= nums[mid]) {
-			if(nums[left] <= target && target <nums[mid]) {
-				return binarySearch(nums, left, mid-1, target);		//return
+		if(nums[left] <= nums[mid]) {	//e.g. 3,4,5,6,1,2
+			if(nums[left] <= target && target <nums[mid]) {		//check the sorted side ONLY, no = for mid
+				return binarySearch(nums, left, mid-1, target);		 
 			} else {
-				return binarySearch(nums, mid+1, right, target);	//F: left=mid+1
+				return binarySearch(nums, mid+1, right, target);	 
 			}
-		} else {
-			if(target <= nums[right] && nums[mid] < target) {
+		} else {						//e.g. 5,6,1,2,3,4
+			if(nums[mid] < target && target <= nums[right ]) {	//check the sorted side ONLY, no = for mid		
 				return binarySearch(nums, mid+1, right, target);
 			} else 
-				return binarySearch(nums, left, mid-1, target);		//F: right=mid-1
+				return binarySearch(nums, left, mid-1, target);		 
 		}
 	}
 
 	public static void main(String[] args) {
 		n033_Search_in_Rotated_Sorted_Array obj = new n033_Search_in_Rotated_Sorted_Array();
 		int[] nums = {4,5,6,7,0,1,2};
-		for(int i=0; i<nums.length; i++) 
-			System.out.println(obj.search(nums, nums[i]));
-		for(int i=0; i<nums.length; i++) 
-			System.out.println(obj.search2(nums, nums[i]));
+		System.out.println(obj.search(nums, 5));
+		System.out.println(obj.search2(nums, 5));
 	}
 }
