@@ -21,11 +21,14 @@ public class n361_Bomb_Enemy {
 	public int maxKilledEnemies(char[][] grid) {
 		int max = 0;
 		int m = grid.length;
+        if(m == 0) {
+            return 0;
+        }
 		int n = grid[0].length;
 		
 		for(int i=0; i<m; i++) {
 			for(int j=0; j<n; j++) {
-				if(grid[i][j] == '0') {
+				if(grid[i][j] == '0') {		//need '0'
 					max = Math.max(recur(grid, i, j, 0), max);
 				}
 			}
@@ -33,7 +36,7 @@ public class n361_Bomb_Enemy {
 		return max;
 	}
 	public int recur(char[][] grid, int x, int y, int count) {
-		for(int i=x-1, j=y; i>=0; i--) {
+		for(int i=x-1, j=y; i>=0; i--) {		//need i,j both
 			if(grid[i][j] == 'W') {
 				break;
 			}
@@ -57,7 +60,7 @@ public class n361_Bomb_Enemy {
 				count++;
 			}
 		}
-		for(int i=1, j=y+1; j<grid[0].length; j++) {
+		for(int i=x, j=y+1; j<grid[0].length; j++) {
 			if(grid[i][j] == 'W') {
 				break;
 			}
@@ -115,7 +118,8 @@ public class n361_Bomb_Enemy {
 		0 E 0 0
 		 */
 		char[][] grid = {{'0','E','0','0'}, {'E','0','W','E'}, {'0','E','0','0'}};
-		System.out.println(obj.maxKilledEnemies(grid));
-		System.out.println(obj.maxKilledEnemies2(grid));
+		char[][] grid1 = {{'E','E','E'}};
+		System.out.println(obj.maxKilledEnemies(grid1));
+		//System.out.println(obj.maxKilledEnemies2(grid));
 	}
 }
