@@ -84,7 +84,8 @@ public class n361_Bomb_Enemy {
 
 		for(int i=0; i<m; i++) {
 			for(int j=0; j<n; j++) {
-				if(j == 0 || grid[i][j-1] == 'W') {
+				//row
+				if(j == 0 || grid[i][j-1] == 'W') {			//j-1
 					rows = 0;
 					for(int k=j; k<n && grid[i][k] != 'W'; k++) {
 						if(grid[i][k] == 'E') {
@@ -92,7 +93,8 @@ public class n361_Bomb_Enemy {
 						}
 					}
 				}
-				if(i == 0 || grid[i-1][j] == 'W') {
+				//col
+				if(i == 0 || grid[i-1][j] == 'W') {			//i-1
 					cols[j] = 0;
 					for(int k=i; k<m && grid[k][j] != 'W'; k++) {
 						if(grid[k][j] == 'E') {
@@ -100,6 +102,7 @@ public class n361_Bomb_Enemy {
 						}
 					}
 				}
+				//'0' bomb
 				if(grid[i][j] == '0' && rows + cols[j] > result) {
 					result = rows + cols[j];
 				}
