@@ -1,4 +1,4 @@
-package HackingtheCodingInterview.Arrays;
+package PatternsForCodingQuestions.BFS;
 
 import java.util.ArrayList;
 import java.util.LinkedList;
