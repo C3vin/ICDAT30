@@ -14,13 +14,14 @@ class TreeNode {
 	}
 };
 public class Binary_Tree_Level_Order_Traversal {
+	//time:O(n) space:O(n)
+	//BFS - Queue
 	private static List<List<Integer>> traverse(TreeNode root) {
 		List<List<Integer>> result = new ArrayList<List<Integer>>();
 		if(root == null) {
 			return result;
 		}
-		//time:O(n) space:O(n)
-		//BFS - Queue
+
 		Queue<TreeNode> queue = new LinkedList<TreeNode>();
 		queue.offer(root);
 
