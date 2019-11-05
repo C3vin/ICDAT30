@@ -3,6 +3,24 @@ package LeetCode;
 import java.util.LinkedList;
 import java.util.Queue;
 
+/*
+Given a binary tree and a sum, determine if the tree has a root-to-leaf path such that 
+adding up all the values along the path equals the given sum.
+
+Note: A leaf is a node with no children.
+
+Example:
+Given the below binary tree and sum = 22,
+
+      5
+     / \
+    4   8
+   /   / \
+  11  13  4
+ /  \      \
+7    2      1
+return true, as there exist a root-to-leaf path 5->4->11->2 which sum is 22.
+ */
 public class n112_Path_Sum {
 	public class TreeNode {
 		int val;
@@ -13,44 +31,43 @@ public class n112_Path_Sum {
 		}
 	}
 
+	//dfs
 	public boolean hasPathSum(TreeNode root, int sum) {
-		if(root == null)
+		if(root == null) {
 			return false;
+		}
 		
-		sum = sum - root.val;
-		System.out.println(sum);
+		if(root.left == null && root.right == null && root.val == sum) {
+			return true;
+		}
 		
-		if(root.left == null && root.right == null)
-			return sum == 0;	//F: in the latest node, if sum == 0 match it! 
-		else
-			return hasPathSum(root.left, sum) || hasPathSum(root.right, sum);
-		
+		return hasPathSum(root.left, sum - root.val) || hasPathSum(root.right, sum - root.val);
 	}
-	
+
 	public boolean hasPathSum2(TreeNode root, int sum) {
-		if(root == null)
+		if(root == null) {
 			return false;
-		
+		}
+
 		Queue<TreeNode> queue = new LinkedList<TreeNode>();
 		queue.offer(root);
 		Queue<Integer> value = new LinkedList<Integer>();
 		value.offer(root.val);
-		
+
 		while(!queue.isEmpty()) {
-			TreeNode tmp = queue.poll();
+			TreeNode currentNode = queue.poll();
 			int sumValue = value.poll();
-			
-			if(tmp.left == null && tmp.right == null && sumValue == sum) 
+
+			if(currentNode.left == null && currentNode.right == null && sumValue == sum) 
 				return true;
-			
-			if(tmp.left != null) {
-				queue.offer(tmp.left);
-				value.offer(sumValue + tmp.left.val);
+
+			if(currentNode.left != null) {
+				queue.offer(currentNode.left);
+				value.offer(sumValue + currentNode.left.val);
 			}
-			
-			if(tmp.right != null) {
-				queue.offer(tmp.right);
-				value.offer(sumValue + tmp.right.val);
+			if(currentNode.right != null) {
+				queue.offer(currentNode.right);
+				value.offer(sumValue + currentNode.right.val);
 			}
 		}
 		return false;
