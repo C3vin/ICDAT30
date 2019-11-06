@@ -1,5 +1,6 @@
 package LeetCode;
 
+import java.util.ArrayList;
 import java.util.Deque;
 import java.util.LinkedList;
 import java.util.List;
@@ -35,57 +36,30 @@ public class n113_Path_Sum_II {
 		}
 	}
 	
-	//Recursion
+	//dfs
 	public List<List<Integer>> pathSum(TreeNode root, int sum) {
-		List<List<Integer>> res = new LinkedList<List<Integer>>();
-/*		if(root == null)
-			return res;*/
-		List<Integer> curList = new LinkedList<Integer>();
-		helper(root, sum, 0, curList, res);
+		List<List<Integer>> allPaths = new ArrayList<List<Integer>>();
+		List<Integer> currentPath = new ArrayList<Integer>();
+		findPathsRecursive(root, sum, currentPath, allPaths);
 		
-		return res;
+		return allPaths;
 	}
-	private void helper(TreeNode root, int sum, int curSum, List<Integer> curList, List<List<Integer>> res) {
-		if(root == null)
+	private static void findPathsRecursive(TreeNode currentNode, int sum, List<Integer> currentPath,
+		      List<List<Integer>> allPaths) {
+		if(currentNode == null) {
 			return;
-		curSum = curSum + root.val;
-		curList.add(root.val);
-		
-		if(root.left == null && root.right == null && curSum == sum)
-			res.add(new LinkedList<Integer>(curList));
-		if(root.left != null) {
-			helper(root.left, sum, curSum, curList, res);
-			//curList.remove(curList.size()-1);			//because if it match, it will add to the res
 		}
-		if(root.right != null) {
-			helper(root.right, sum, curSum, curList, res);
-			//curList.remove(curList.size()-1);
+		
+		currentPath.add(currentNode.val);
+		
+		if(currentNode.val == sum && currentNode.left == null && currentNode.right == null) {
+			allPaths.add(new ArrayList<Integer>(currentPath));
+		} else {
+			findPathsRecursive(currentNode.left, sum-currentNode.val, currentPath, allPaths);
+			findPathsRecursive(currentNode.right, sum-currentNode.val, currentPath, allPaths);
 		}
-		curList.remove(curList.size()-1);			//just need once!
-	}
-	
-	//Recursion
-	public List<List<Integer>> pathSum3(TreeNode root, int sum) {
-		List<List<Integer>> res = new LinkedList<List<Integer>>();
-		List<Integer> curList = new LinkedList<Integer>();
 		
-		helper3(root, sum, curList, res);
-		
-		return res;
-	}
-	private void helper3(TreeNode root, int sum, List<Integer> curList, List<List<Integer>> res) {
-		if(root == null)
-			return;
-		
-		sum = sum - root.val;		//no need curSum
-		curList.add(root.val);
-		
-		if(root.left == null && root.right == null && sum == 0)
-			res.add(new LinkedList<Integer>(curList));
-		
-		helper3(root.left, sum, curList, res);
-		helper3(root.right, sum, curList, res);
-		curList.remove(curList.size()-1);		//why just need once? comments 
+		currentPath.remove(currentPath.size()-1);
 	}
 	
 	//iterate
@@ -151,6 +125,5 @@ public class n113_Path_Sum_II {
 		
 		System.out.println(obj.pathSum(p1, 22));
 		System.out.println(obj.pathSum2(p1, 22));
-		System.out.println(obj.pathSum3(p1, 22));
 	}
 }

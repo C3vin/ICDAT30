@@ -114,17 +114,22 @@ public class n339_Nested_List_Weight_Sum {
 	}
 
 	private int helper(List<NestedInteger> nestedList, int depth) {
-		if(nestedList.size() == 0 || nestedList == null)
+		if(nestedList.size() == 0 || nestedList == null) {
 			return 0;
-
-		int sum=0;
-		for(NestedInteger ni : nestedList) {
-			if(ni.isInteger()) {	//int in
-				sum = sum + ni.getInteger() * depth;		//depth
-			} else {				//list depth+1
-				sum = sum + helper(ni.getList(), depth+1);
+		}
+		
+		int sum = 0;
+		
+		for(NestedInteger nest : nestedList) {
+			if(nest != null) {
+				if(nest.isInteger()) {
+					sum = sum + nest.getInteger() * depth;
+				} else {
+					sum = sum + helper(nest.getList(), depth+1);
+				}
 			}
 		}
+		
 		return sum;
 	}
 	
