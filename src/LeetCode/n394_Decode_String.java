@@ -18,7 +18,7 @@ s = "2[abc]3[cd]ef", return "abcabccdcdcdef".
 public class n394_Decode_String {
 	public String decodeString(String s) {
 		if(s == null || s.length() == 0) {
-			return null;
+			return "";
 		}
 		Stack<Character> stack = new Stack<Character>();
 		
@@ -40,9 +40,9 @@ public class n394_Decode_String {
 				while(!stack.isEmpty() && Character.isDigit(stack.peek())) {
 					sb.insert(0, stack.pop());
 				}
-				int count = Integer.valueOf(sb.toString());
 				
 				//step3: repeat the string within the [ ] count number of times and push it back into stack
+				int count = Integer.valueOf(sb.toString());
 				while(count > 0) {
 					for(char ch : sub.toCharArray()) {
 						stack.push(ch);
@@ -55,13 +55,13 @@ public class n394_Decode_String {
 		//final fetching and returning the value in stack 
 		StringBuilder res = new StringBuilder();
 		while(!stack.isEmpty()) {
-			res.insert(0, stack.pop());
+			res.insert(0, stack.pop());		//must be insert not append
 		}
-		
 		return res.toString();
 	}
 	public static void main(String[] args) {
 		n394_Decode_String obj = new n394_Decode_String();
 		System.out.println(obj.decodeString("3[a]2[bc]"));
+		System.out.println(obj.decodeString(""));
 	}
 }
