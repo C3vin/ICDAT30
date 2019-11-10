@@ -23,44 +23,18 @@ public class n104_Maximum_Depth_of_Binary_Tree {
 		TreeNode right;
 		TreeNode(int x) { val = x; }
 	}
-	//sol1: Recursive
+	//sol1: Recursive dfs
+	//O(n) O(logn)
 	public int maxDepth(TreeNode root) {
-		if(root == null) 
-			return 0;			
-		int left = maxDepth(root.left); 
-		int right = maxDepth(root.right);
+		if(root == null) {
+			return 0;		
+		}
+		int leftDepth = maxDepth(root.left); 
+		int rightDepth = maxDepth(root.right);
 
-		int res = Math.max(left, right)+1;	//depth+1(root)
+		int res = Math.max(leftDepth, rightDepth)+1;	//depth+1(root)
+		
 		return res;
-	}
-	//sol2: Non-recursive
-	public int maxDepth2(TreeNode root) {
-		if(root == null)  return 0;
-
-		int level = 0;  
-		LinkedList<TreeNode> queue = new LinkedList<TreeNode>();  
-		queue.add(root);  	//only add one node, size = 1 e.g. root
-		int curNum = 1; 	//num of nodes left in current level  
-		int nextNum = 0; 	//num of nodes in next level  
-
-		while(!queue.isEmpty()) {  
-			TreeNode n = queue.poll();  	//poll one node from queue
-			curNum--;  						//curNum--
-			if(n.left!=null) {  
-				queue.add(n.left);  
-				nextNum++;  
-			}  
-			if(n.right!=null) {  
-				queue.add(n.right);  
-				nextNum++;  
-			}  
-			if(curNum == 0) {  			//if no curNum, reset
-				curNum = nextNum;  
-				nextNum = 0;  
-				level++;  
-			}  
-		}  
-		return level;  
 	}
 	//sol3: Non-recursive
 	public int maxDepth3(TreeNode root) {
@@ -87,13 +61,35 @@ public class n104_Maximum_Depth_of_Binary_Tree {
 		}
 		return depth;
 	}
+	
+	//O(n) O(logn)
 	public int maxDepth4(TreeNode root) {
 		if(root == null) {
 			return 0;
 		}
-		System.out.println(root.val);
-		return Math.max(maxDepth4(root.left), maxDepth4(root.right)) + 1;
+		
+		LinkedList<TreeNode> stack = new LinkedList<TreeNode>();
+		LinkedList<Integer> depths = new LinkedList<Integer>();
+		
+		stack.offer(root);
+		depths.offer(1);
+		
+		int depth = 0;
+		int currentDepth = 0;
+		while(!stack.isEmpty()) {
+			TreeNode currentNode = stack.pollLast();		//last element
+			currentDepth = depths.pollLast();
+			if(currentNode != null) {
+				depth = Math.max(depth, currentDepth);
+				stack.offer(currentNode.left);
+				stack.offer(currentNode.right);
+				depths.offer(currentDepth+1);				//left
+				depths.offer(currentDepth+1);				//right
+			}
+		}
+		return depth;
 	}
+	
 	public static void main(String[] args) {
 		n104_Maximum_Depth_of_Binary_Tree obj = new n104_Maximum_Depth_of_Binary_Tree();
 		TreeNode p1 = obj.new TreeNode(3);
