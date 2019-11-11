@@ -1,9 +1,23 @@
 package LeetCode;
 
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Queue;
 
+/*
+Given a binary tree, imagine yourself standing on the right side of it, 
+return the values of the nodes you can see ordered from top to bottom.
+
+Example:
+Input: [1,2,3,null,5,null,4]
+Output: [1, 3, 4]
+Explanation:
+   1            <---
+ /   \
+2     3         <---
+ \     \
+ */
 public class n199_Binary_Tree_Right_Side_View {
 	public class TreeNode {
 		int val;
@@ -11,6 +25,7 @@ public class n199_Binary_Tree_Right_Side_View {
 		TreeNode right;
 		TreeNode(int x) { val = x; }
 	}
+	//bfs
 	public List<Integer> rightSideView(TreeNode root) {
 		List<Integer> res = new LinkedList<Integer>();
 		if(root == null)
@@ -18,7 +33,6 @@ public class n199_Binary_Tree_Right_Side_View {
 		
 		Queue<TreeNode> queue = new LinkedList<TreeNode>();
 		queue.offer(root);
-		queue.offer(null);
 		
 		while(!queue.isEmpty()) {
 			TreeNode tmp = queue.poll();
@@ -37,28 +51,29 @@ public class n199_Binary_Tree_Right_Side_View {
 		}
 		return res;
 	}
-	
-	//sol2: DFS
-	int maxdepth = 0;									//F: need to use global variables
+
+	//cs O(n) O(n) 
+	//dfs
 	public List<Integer> rightSideView2(TreeNode root) {
-		List<Integer> res = new LinkedList<Integer>();
+		List<Integer> res = new ArrayList<Integer>();
+		if(root == null) {
+			return res;
 		
-		if(root != null)
-			helper(root, res, 1);
-		
+		}
+		helper(root, res, 0);
 		return res;
 	}
-	private void helper(TreeNode root, List<Integer> res, int depth) {
-		if(maxdepth < depth) {
-			maxdepth = depth;
+	private void helper(TreeNode root, List<Integer> res, int level) {
+		if(root == null) {
+			return;
+		}
+		if(res.size() == level) {
 			res.add(root.val);
 		}
-		if(root.right != null)					//this time, we need to do right first
-			helper(root.right, res, depth+1);
-		if(root.left != null)
-			helper(root.left, res, depth+1);
+		helper(root.right, res, level+1);		//this time, we need to do right first
+		helper(root.left, res, level+1);
 	}
-
+	
 	public static void main(String[] args) {
 		n199_Binary_Tree_Right_Side_View obj = new n199_Binary_Tree_Right_Side_View();
 		TreeNode p1 = obj.new TreeNode(1);
