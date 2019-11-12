@@ -1,6 +1,6 @@
 package LeetCode;
 
-import LeetCode.n105_Construct_Binary_Tree_from_Preorder_and_Inorder_Traversal.TreeNode;
+import java.util.Stack;
 
 /*
 Given a binary tree, flatten it to a linked list in-place.
@@ -32,6 +32,7 @@ public class n114_Flatten_Binary_Tree_to_Linked_List {
 		TreeNode(int x) { val = x; }
 	} 
 	public void flatten(TreeNode root) {
+		//Preorder 
 		if(root == null) {
 			return;
 		}
@@ -41,6 +42,7 @@ public class n114_Flatten_Binary_Tree_to_Linked_List {
 		if(root.right != null) {
 			flatten(root.right);
 		}
+		
 		TreeNode currentNode = root.right;
 		root.right = root.left;
 		root.left = null;
@@ -50,6 +52,29 @@ public class n114_Flatten_Binary_Tree_to_Linked_List {
 		}
 		root.right = currentNode;
 	} 
+	
+	public void flatten2(TreeNode root) {
+		if(root == null) {
+			return; 
+		}
+		Stack<TreeNode> stack = new Stack<TreeNode>();
+		stack.push(root);
+		
+		while(!stack.isEmpty()) {
+			TreeNode currentNode = stack.pop();
+			if(currentNode.right != null) {
+				stack.push(currentNode.right);
+			}
+			if(currentNode.left != null) {
+				stack.push(currentNode.left);
+			}
+			if(!stack.isEmpty()) {
+				currentNode.right = stack.peek();	//why not push, cuz still need to go next round
+			}
+			currentNode.left = null;
+		}
+	}
+	
 	public static void main(String[] args) {
 		n114_Flatten_Binary_Tree_to_Linked_List obj = new n114_Flatten_Binary_Tree_to_Linked_List();
 		TreeNode p1 = obj.new TreeNode(1);
@@ -64,6 +89,8 @@ public class n114_Flatten_Binary_Tree_to_Linked_List {
 		p2.right = p4;
 		p5.right = p6;
 		
-		obj.flatten(p1);
+		//obj.flatten(p1);
+		obj.flatten2(p1);
+		System.out.println(p1.val + " -> " + p1.right.val);
 	}
 }
