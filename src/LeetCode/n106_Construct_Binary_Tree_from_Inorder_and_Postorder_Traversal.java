@@ -41,12 +41,10 @@ public class n106_Construct_Binary_Tree_from_Inorder_and_Postorder_Traversal {
 		for(int i=inStart; i<=inEnd; i++) {		//start with inStart, end with inEnd
 			if(inorder[i] == postorder[postEnd]) {
 				inMid = i;
-				break;
 			}
 		}
 		
-		int rightTreeSize = inEnd - inMid;		//F:
-		System.out.println(postorder[postEnd]+ " : "+inMid + " : " + inStart + " postEnd: "+postEnd);
+		int rightTreeSize = inEnd - inMid;		//F: inEnd not inStart
 		root.left = helper(inorder, inStart, inMid-1, postorder, postEnd-rightTreeSize-1);
 		root.right = helper(inorder, inMid+1, inEnd, postorder, postEnd-1);
 		
