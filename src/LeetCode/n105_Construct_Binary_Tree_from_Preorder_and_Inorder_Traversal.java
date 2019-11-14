@@ -39,7 +39,7 @@ public class n105_Construct_Binary_Tree_from_Preorder_and_Inorder_Traversal {
 		TreeNode root = new TreeNode(preorder[preStart]);
 		
 		int inMid = 0;
-		for(int i=inStart; i<=inEnd; i++) {		//can't use inorder.length
+		for(int i=inStart; i<=inEnd; i++) {		//start with inStart, end with inEnd
 			if(inorder[i] == preorder[preStart]){
                 inMid = i;
             }
