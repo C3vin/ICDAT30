@@ -42,7 +42,8 @@ public class n110_Balanced_Binary_Tree {
 
 		return true;
 	}
-
+	//https://www.cnblogs.com/yrbbest/p/4437324.html
+	//dfs bottom-up solution 
 	private int helper(TreeNode root) {
 		if(root == null) {
 			return 0;
