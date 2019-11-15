@@ -1,7 +1,5 @@
 package LeetCode;
 
-import LeetCode.n105_Construct_Binary_Tree_from_Preorder_and_Inorder_Traversal.TreeNode;
-
 /*
 Given inorder and postorder traversal of a tree, construct the binary tree.
 
