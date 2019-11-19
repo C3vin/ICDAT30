@@ -67,6 +67,31 @@ public class n110_Balanced_Binary_Tree {
 		}
 	}
 
+	//bottom-up
+	public boolean isBalanced2(TreeNode root) {
+		if(root == null) {
+			return true;
+		}
+		int leftDepth = helper2(root.left);
+		int rightDepth = helper2(root.right);
+		
+		if(Math.abs(leftDepth - rightDepth) > 1) {
+			return false;
+		}
+		
+		return isBalanced2(root.left) && isBalanced2(root.right);
+	}
+	//LC104
+	private int helper2(TreeNode root) {
+		if(root == null) {
+			return 0;
+		}
+		int leftDepth = helper2(root.left);
+		int rightDepth = helper2(root.right);
+		
+		return Math.max(leftDepth, rightDepth) + 1;
+	}
+	
 	public static void main(String[] args) {
 		n110_Balanced_Binary_Tree obj = new n110_Balanced_Binary_Tree();
 		TreeNode p1 = obj.new TreeNode(1);

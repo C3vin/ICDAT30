@@ -23,7 +23,8 @@ public class n104_Maximum_Depth_of_Binary_Tree {
 		TreeNode right;
 		TreeNode(int x) { val = x; }
 	}
-	//sol1: Recursive dfs
+	//sol1: Recursive 
+	//DFS
 	//O(n) O(logn)
 	public int maxDepth(TreeNode root) {
 		if(root == null) {
@@ -32,9 +33,7 @@ public class n104_Maximum_Depth_of_Binary_Tree {
 		int leftDepth = maxDepth(root.left); 
 		int rightDepth = maxDepth(root.right);
 
-		int res = Math.max(leftDepth, rightDepth)+1;	//depth+1(root)
-
-		return res;
+		return Math.max(leftDepth, rightDepth) + 1;
 	}
 
 	//O(n) O(logn)
@@ -74,6 +73,7 @@ public class n104_Maximum_Depth_of_Binary_Tree {
 	}
 
 	//sol3: Non-recursive
+	//BFS
 	public int maxDepth3(TreeNode root) {
 		if(root == null) 
 			return 0;
