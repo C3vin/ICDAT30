@@ -23,7 +23,7 @@ public class n104_Maximum_Depth_of_Binary_Tree {
 		TreeNode right;
 		TreeNode(int x) { val = x; }
 	}
-	//sol1: Recursive 
+	//Recursive 
 	//DFS
 	//O(n) O(logn)
 	public int maxDepth(TreeNode root) {
@@ -35,7 +35,34 @@ public class n104_Maximum_Depth_of_Binary_Tree {
 
 		return Math.max(leftDepth, rightDepth) + 1;
 	}
-
+	
+	//Non-recursive
+	//BFS
+	public int maxDepth3(TreeNode root) {
+		if(root == null) {
+			return 0;
+		}
+		Queue<TreeNode> queue = new LinkedList<TreeNode>();
+		queue.offer(root);
+		int level = 0;
+		
+		while(!queue.isEmpty()) {
+			int levelSize = queue.size();
+			for(int i=0; i<levelSize; i++) {
+				TreeNode currentNode = queue.poll();
+				
+				if(currentNode.left != null) {
+					queue.offer(currentNode.left);
+				}
+				if(currentNode.right != null) {
+					queue.offer(currentNode.right);
+				}
+			}
+			level++;
+		}
+		return level;
+	}
+	
 	//O(n) O(logn)
 	public int maxDepth2(TreeNode root) {
 		if(root == null) {
@@ -72,32 +99,7 @@ public class n104_Maximum_Depth_of_Binary_Tree {
 		return depth;
 	}
 
-	//sol3: Non-recursive
-	//BFS
-	public int maxDepth3(TreeNode root) {
-		if(root == null) 
-			return 0;
 
-		int depth = 0;
-		Queue<TreeNode> queue = new LinkedList<TreeNode>();
-		queue.offer(root);
-		queue.offer(null);
-
-		while(!queue.isEmpty()) {
-			TreeNode tmp = queue.poll();
-			if(tmp != null) {
-				if(tmp.left != null) 
-					queue.offer(tmp.left);
-				if(tmp.right != null)
-					queue.offer(tmp.right);
-			} else {
-				depth++;
-				if(!queue.isEmpty())
-					queue.offer(null);
-			}
-		}
-		return depth;
-	}
 
 	public static void main(String[] args) {
 		n104_Maximum_Depth_of_Binary_Tree obj = new n104_Maximum_Depth_of_Binary_Tree();
