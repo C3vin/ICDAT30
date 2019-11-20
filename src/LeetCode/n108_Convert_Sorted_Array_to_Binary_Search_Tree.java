@@ -26,15 +26,15 @@ public class n108_Convert_Sorted_Array_to_Binary_Search_Tree {
 	public TreeNode sortedArrayToBST(int[] nums) {
 		return helper(nums, 0, nums.length-1);
 	}
-	private TreeNode helper(int[] nums, int low, int high) {
-		if(low > high) {
+	private TreeNode helper(int[] nums, int start, int end) {
+		if(start > end) {
 			return null;
 		}
-		int mid = (high - low)/2 + low;
+		int mid = (end - start)/2 + start;
 
 		TreeNode node = new TreeNode(nums[mid]);	//map to the new node
-		node.left = helper(nums, low, mid-1);			
-		node.right = helper(nums, mid+1, high);			
+		node.left = helper(nums, start, mid-1);			
+		node.right = helper(nums, mid+1, end);			
 		
 		return node;
 	}
