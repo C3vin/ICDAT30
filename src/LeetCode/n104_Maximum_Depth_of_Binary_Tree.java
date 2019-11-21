@@ -38,7 +38,7 @@ public class n104_Maximum_Depth_of_Binary_Tree {
 	
 	//Non-recursive
 	//BFS
-	public int maxDepth3(TreeNode root) {
+	public int maxDepth2(TreeNode root) {
 		if(root == null) {
 			return 0;
 		}
@@ -62,44 +62,6 @@ public class n104_Maximum_Depth_of_Binary_Tree {
 		}
 		return level;
 	}
-	
-	//O(n) O(logn)
-	public int maxDepth2(TreeNode root) {
-		if(root == null) {
-			return 0;
-		}
-
-		LinkedList<TreeNode> stack = new LinkedList<TreeNode>();
-		LinkedList<Integer> depths = new LinkedList<Integer>();
-
-		stack.offer(root);
-		depths.offer(1);
-
-		int depth = 0;
-		int currentDepth = 0;
-		while(!stack.isEmpty()) {
-			TreeNode currentNode = stack.pollLast();		//last element
-			currentDepth = depths.pollLast();
-			if(currentNode != null) {
-				depth = Math.max(depth, currentDepth);
-				if(currentNode.left != null) {
-					stack.offer(currentNode.left);
-					depths.offer(currentDepth+1);	
-				}
-				if(currentNode.right != null) {
-					stack.offer(currentNode.right);
-					depths.offer(currentDepth+1);	
-				}
-				/*stack.offer(currentNode.left);
-				stack.offer(currentNode.right);
-				depths.offer(currentDepth+1);				//left
-				depths.offer(currentDepth+1);				//right
-*/			}
-		}
-		return depth;
-	}
-
-
 
 	public static void main(String[] args) {
 		n104_Maximum_Depth_of_Binary_Tree obj = new n104_Maximum_Depth_of_Binary_Tree();
@@ -120,6 +82,5 @@ public class n104_Maximum_Depth_of_Binary_Tree {
 		//	+ " " + p3.left.val + " " +p3.right.val);
 		System.out.println(obj.maxDepth(p1));
 		System.out.println(obj.maxDepth2(p1));
-		System.out.println(obj.maxDepth3(p1));
 	}
 }
