@@ -72,7 +72,7 @@ public class n110_Balanced_Binary_Tree {
 		if(root == null) {
 			return true;
 		}
-		int leftDepth = helper2(root.left);
+		int leftDepth = helper2(root.left);			//just like LC 104
 		int rightDepth = helper2(root.right);
 		
 		if(Math.abs(leftDepth - rightDepth) > 1) {
@@ -81,7 +81,7 @@ public class n110_Balanced_Binary_Tree {
 		
 		return isBalanced2(root.left) && isBalanced2(root.right);
 	}
-	//LC104
+	//LC 104
 	private int helper2(TreeNode root) {
 		if(root == null) {
 			return 0;
@@ -111,5 +111,6 @@ public class n110_Balanced_Binary_Tree {
 				+ " " + p3.right.val);
 
 		System.out.println(obj.isBalanced(p1));
+		System.out.println(obj.isBalanced2(p1));
 	}
 }
