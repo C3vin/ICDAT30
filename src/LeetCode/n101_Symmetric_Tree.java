@@ -64,6 +64,7 @@ public class n101_Symmetric_Tree {
 		    LinkedList<TreeNode> q2 = new LinkedList<TreeNode>();
 		    q1.add(root.left);
 		    q2.add(root.right);
+		    
 		    while(!q1.isEmpty() && !q2.isEmpty()){
 		        TreeNode n1 = q1.poll();
 		        TreeNode n2 = q2.poll();
