@@ -49,7 +49,7 @@ public class n124_Binary_Tree_Maximum_Path_Sum {
 		if(root == null) {
 			return 0;
 		}
-		int left = Math.max(helper(root.left), 0);
+		int left = Math.max(helper(root.left), 0);			//F: ignore negative  
 		int right = Math.max(helper(root.right), 0);
 		
 		max = Math.max(max, root.val + left + right);
