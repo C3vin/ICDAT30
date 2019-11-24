@@ -17,6 +17,7 @@ Explanation:
  /   \
 2     3         <---
  \     \
+  5     4       <---
  */
 public class n199_Binary_Tree_Right_Side_View {
 	public class TreeNode {
@@ -27,26 +28,29 @@ public class n199_Binary_Tree_Right_Side_View {
 	}
 	//bfs
 	public List<Integer> rightSideView(TreeNode root) {
-		List<Integer> res = new LinkedList<Integer>();
-		if(root == null)
+		List<Integer> res = new ArrayList<Integer>();
+		if(root == null) {
 			return res;
+		}
 		
 		Queue<TreeNode> queue = new LinkedList<TreeNode>();
 		queue.offer(root);
 		
 		while(!queue.isEmpty()) {
-			TreeNode tmp = queue.poll();
-			
-			if(tmp != null) {
-				if(queue.peek() == null)
-					res.add(tmp.val);
-				if(tmp.left != null) 					//must left first, because we need NULL 
-					queue.offer(tmp.left);
-				if(tmp.right != null)				
-					queue.offer(tmp.right);
-			} else {
-				if(!queue.isEmpty())
-					queue.offer(null);
+			int levelSize = queue.size();
+			for(int i=0; i<levelSize; i++) {
+				TreeNode currentNode = queue.poll();
+				
+				if(i == 0) {
+					res.add(currentNode.val);
+				}
+					
+				if(currentNode.right != null) {
+					queue.offer(currentNode.right);		//this time, we need to do right first
+				}
+				if(currentNode.left != null) {
+					queue.offer(currentNode.left);
+				}
 			}
 		}
 		return res;
@@ -79,10 +83,12 @@ public class n199_Binary_Tree_Right_Side_View {
 		TreeNode p1 = obj.new TreeNode(1);
 		TreeNode p2 = obj.new TreeNode(2);
 		TreeNode p3 = obj.new TreeNode(3);
-		TreeNode p5 = obj.new TreeNode(4);
+		TreeNode p4 = obj.new TreeNode(4);
+		TreeNode p5 = obj.new TreeNode(5);
 		p1.left = p2;
 		p1.right = p3;
 		p2.right = p5;
+		p3.right = p4;
 		System.out.println(obj.rightSideView(p1));
 		System.out.println(obj.rightSideView2(p1));
 	}
