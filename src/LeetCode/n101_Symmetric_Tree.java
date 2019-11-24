@@ -68,24 +68,24 @@ public class n101_Symmetric_Tree {
 		rightNode.add(root.right);
 
 		while(!leftNode.isEmpty() && !rightNode.isEmpty()){
-			TreeNode curLeft = leftNode.poll();
-			TreeNode curRight = rightNode.poll();
+			TreeNode currentLeftNode = leftNode.poll();
+			TreeNode currentRightNode = rightNode.poll();
 
-			if(curLeft.val != curRight.val)
+			if(currentLeftNode.val != currentRightNode.val)
 				return false;
-			if((curLeft.left == null && curRight.right != null) || (curLeft.left != null && curRight.right == null))
+			if((currentLeftNode.left == null && currentRightNode.right != null) || (currentLeftNode.left != null && currentRightNode.right == null))
 				return false;
-			if((curLeft.right == null && curRight.left != null) || (curLeft.right != null && curRight.left == null))
+			if((currentLeftNode.right == null && currentRightNode.left != null) || (currentLeftNode.right != null && currentRightNode.left == null))
 				return false;
 
-			if(curLeft.left != null && curRight.right != null){
-				leftNode.add(curLeft.left);
-				rightNode.add(curRight.right);
+			if(currentLeftNode.left != null && currentRightNode.right != null){
+				leftNode.add(currentLeftNode.left);
+				rightNode.add(currentRightNode.right);
 			}
 
-			if(curLeft.right != null && curRight.left != null){
-				leftNode.add(curLeft.right);
-				rightNode.add(curRight.left);
+			if(currentLeftNode.right != null && currentRightNode.left != null){
+				leftNode.add(currentLeftNode.right);
+				rightNode.add(currentRightNode.left);
 			}            
 		}
 		return true;
@@ -109,7 +109,7 @@ public class n101_Symmetric_Tree {
 			TreeNode currentRightNode = rightQueue.poll();
 
 			if(currentLeftNode == null && currentRightNode == null) {
-				return true;
+				continue;			//F: must continue NOT return true		
 			}
 			if(currentLeftNode == null || currentRightNode == null) {
 				return false;
@@ -120,33 +120,11 @@ public class n101_Symmetric_Tree {
 
 			leftQueue.offer(currentLeftNode.left);		//left first
 			leftQueue.offer(currentLeftNode.right);
-			
+
 			rightQueue.offer(currentRightNode.right);	//right first
 			rightQueue.offer(currentRightNode.left);
 		}
 		return true;
-		//		Queue<TreeNode> queue = new LinkedList<TreeNode>();
-		//		queue.offer(root);
-		//		queue.offer(root);
-		//		
-		//		while(!queue.isEmpty()) { 
-		//			TreeNode t1 = queue.poll();
-		//			TreeNode t2 = queue.poll();
-		//			if(t1 == null && t2 == null) {
-		//				return true;
-		//			}
-		//			if(t1 == null || t2 == null) {
-		//				return false;
-		//			}
-		//			if(t1.val != t2.val) {
-		//				return false;
-		//			}
-		//			queue.offer(t1.left);
-		//			queue.offer(t2.right);
-		//			queue.offer(t1.right);
-		//			queue.offer(t2.left);
-		//		}
-		//		return true;
 	}
 
 	public static void main(String[] args) {
