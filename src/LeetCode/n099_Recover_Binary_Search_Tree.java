@@ -116,7 +116,7 @@ public class n099_Recover_Binary_Search_Tree {
 		}
 	}
 
-	//Morris Traversal
+	//Morris Traversal time:O(n) space:O(1)
 	public void recoverTree3(TreeNode root) {
 		TreeNode first = null;
 		TreeNode second = null;
