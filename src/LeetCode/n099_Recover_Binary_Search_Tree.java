@@ -77,6 +77,8 @@ public class n099_Recover_Binary_Search_Tree {
 		helper(root.right);
 	}
 
+	//Iteration
+	//Stack approach
 	TreeNode f = null;
 	TreeNode s = null;
 	public void recoverTree2(TreeNode root) {
@@ -114,6 +116,59 @@ public class n099_Recover_Binary_Search_Tree {
 		}
 	}
 
+	//Morris Traversal
+	public void recoverTree3(TreeNode root) {
+		TreeNode first = null;
+		TreeNode second = null;
+		TreeNode cur = root;
+		TreeNode pre = null;
+		
+		while(cur != null) {
+			//case1
+			if(cur.left == null) {
+				if(pre != null && pre.val >= cur.val) {
+					if(first == null) {
+						first = pre;
+						second = cur;
+					} else {
+						second = cur;
+					}
+				}
+				pre = cur;
+				cur = cur.right;
+			} else { 
+				//case2
+				TreeNode last = cur.left;
+				while(last.right != null && last.right != cur) {
+					last = last.right;
+				}
+				//case2.1
+				if(last.right == null) {
+					last.right = cur;
+					cur = cur.left;
+				}
+				//case2.2
+				if(last.right == cur) {
+					last.right = null;			//must but LC94 don't need
+					if(pre != null && pre.val >= cur.val) {
+						if(first == null) {
+							first = pre;
+							second = cur;
+						} else {
+							second = cur;
+						}
+					}
+					pre = cur;
+					cur = cur.right;
+				}
+			}
+		}
+		//swap
+		int tmp = first.val;
+		first.val = second.val;
+		second.val = tmp;
+	}
+	
 	public static void main(String[] args) {
 		n099_Recover_Binary_Search_Tree obj = new n099_Recover_Binary_Search_Tree();
 		TreeNode t1 = obj.new TreeNode(1);
@@ -130,7 +185,15 @@ public class n099_Recover_Binary_Search_Tree {
 		p1.right = null;
 		p2.left = null;
 		p2.right = p2;
+		TreeNode q1 = obj.new TreeNode(1);
+		TreeNode q2 = obj.new TreeNode(3);
+		TreeNode q3 = obj.new TreeNode(2);
+		q1.left = q3;
+		q1.right = null;
+		q2.left = null;
+		q2.right = q2;
 		obj.recoverTree(t1);
 		obj.recoverTree2(p1);
+		obj.recoverTree3(q1);
 	}
 }
