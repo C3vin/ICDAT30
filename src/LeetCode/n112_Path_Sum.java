@@ -2,6 +2,7 @@ package LeetCode;
 
 import java.util.LinkedList;
 import java.util.Queue;
+import java.util.Stack;
 
 /*
 Given a binary tree and a sum, determine if the tree has a root-to-leaf path such that 
@@ -31,7 +32,7 @@ public class n112_Path_Sum {
 		}
 	}
 
-	//dfs
+	//Recursion
 	public boolean hasPathSum(TreeNode root, int sum) {
 		if(root == null) {
 			return false;
@@ -41,9 +42,11 @@ public class n112_Path_Sum {
 			return true;
 		}
 		
+		//F: || not &&
 		return hasPathSum(root.left, sum - root.val) || hasPathSum(root.right, sum - root.val);
 	}
 
+	//BFS
 	public boolean hasPathSum2(TreeNode root, int sum) {
 		if(root == null) {
 			return false;
@@ -51,27 +54,57 @@ public class n112_Path_Sum {
 
 		Queue<TreeNode> queue = new LinkedList<TreeNode>();
 		queue.offer(root);
-		Queue<Integer> value = new LinkedList<Integer>();
-		value.offer(root.val);
+		Queue<Integer> queueSum = new LinkedList<Integer>();
+		queueSum.offer(root.val);
 
 		while(!queue.isEmpty()) {
-			TreeNode currentNode = queue.poll();
-			int sumValue = value.poll();
-
-			if(currentNode.left == null && currentNode.right == null && sumValue == sum) 
-				return true;
-
-			if(currentNode.left != null) {
-				queue.offer(currentNode.left);
-				value.offer(sumValue + currentNode.left.val);
-			}
-			if(currentNode.right != null) {
-				queue.offer(currentNode.right);
-				value.offer(sumValue + currentNode.right.val);
+			int levelSize = queue.size();
+			for(int i=0; i<levelSize; i++) {
+				TreeNode currentNode = queue.poll();
+				int curSum = queueSum.poll();
+				
+				if(currentNode.left == null && currentNode.right == null && curSum == sum) {
+					return true;
+				}
+				
+				if(currentNode.left != null) {
+					queue.offer(currentNode.left);
+					queueSum.offer(curSum + currentNode.left.val);
+				}
+				if(currentNode.right != null) {
+					queue.offer(currentNode.right);
+					queueSum.offer(curSum + currentNode.right.val);
+				}
 			}
 		}
 		return false;
 	}
+	
+	//DFS
+	public boolean hasPathSum3(TreeNode root, int sum) {
+		Stack<TreeNode> stack = new Stack<TreeNode>();
+		Stack<Integer> stackSum = new Stack<Integer>();
+		//TreeNode cur = root;
+		int curSum = 0;
+		
+		while(root != null || !stack.isEmpty()) {
+			if(root != null) {
+				stack.push(root);
+				curSum = curSum + root.val;
+				stackSum.push(curSum);
+				root = root.left;
+			} else {
+				root = stack.pop();
+				curSum = stackSum.pop();
+				if(root.left == null && root.right == null && curSum == sum) {
+					return true;
+				}
+				root = root.right;
+			}
+		}
+		return false;
+	}
+	
 	public static void main(String[] args) {
 		n112_Path_Sum obj = new n112_Path_Sum();
 		TreeNode p1 = obj.new TreeNode(5);
@@ -96,5 +129,6 @@ public class n112_Path_Sum {
 
 		System.out.println(obj.hasPathSum(p1, 22));
 		System.out.println(obj.hasPathSum2(p1, 22));
+		System.out.println(obj.hasPathSum3(p1, 22));
 	}
 }
