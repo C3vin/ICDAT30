@@ -25,7 +25,7 @@ public class n145_Binary_Tree_Postorder_Traversal {
 		TreeNode(int x) { val = x; }
 	}
 	
-	//Recursive
+	//Recursion
 	public List<Integer> postorderTraversal(TreeNode root) {
 		List<Integer> res = new ArrayList<Integer>();
 		helper(root, res);
@@ -42,7 +42,7 @@ public class n145_Binary_Tree_Postorder_Traversal {
 		res.add(root.val);
 	}
 	
-	//Iteratively DFS
+	//Iteration DFS
 	public List<Integer> postorderTraversal2(TreeNode root) {
 		List<Integer> res = new ArrayList<Integer>();
 		Stack<TreeNode> stack = new Stack<TreeNode>();

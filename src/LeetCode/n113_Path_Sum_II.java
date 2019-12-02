@@ -4,6 +4,9 @@ import java.util.ArrayList;
 import java.util.Deque;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Stack;
+
+import LeetCode.n145_Binary_Tree_Postorder_Traversal.TreeNode;
 
 /*
 Given a binary tree and a sum, find all root-to-leaf paths where each path's sum equals the given sum.
@@ -35,34 +38,36 @@ public class n113_Path_Sum_II {
 			val = x; 
 		}
 	}
-	
-	//dfs
+
+	//Recursion
 	public List<List<Integer>> pathSum(TreeNode root, int sum) {
 		List<List<Integer>> allPaths = new ArrayList<List<Integer>>();
 		List<Integer> currentPath = new ArrayList<Integer>();
-		findPathsRecursive(root, sum, currentPath, allPaths);
-		
+		helper(root, sum, currentPath, allPaths);
+
 		return allPaths;
 	}
-	private static void findPathsRecursive(TreeNode currentNode, int sum, List<Integer> currentPath,
-		      List<List<Integer>> allPaths) {
+	private static void helper(TreeNode currentNode, int sum, List<Integer> currentPath,
+			List<List<Integer>> allPaths) {
 		if(currentNode == null) {
 			return;
 		}
-		
+
 		currentPath.add(currentNode.val);
-		
+
 		if(currentNode.val == sum && currentNode.left == null && currentNode.right == null) {
 			allPaths.add(new ArrayList<Integer>(currentPath));
 		} else {
-			findPathsRecursive(currentNode.left, sum-currentNode.val, currentPath, allPaths);
-			findPathsRecursive(currentNode.right, sum-currentNode.val, currentPath, allPaths);
+			helper(currentNode.left, sum-currentNode.val, currentPath, allPaths);
+			helper(currentNode.right, sum-currentNode.val, currentPath, allPaths);
 		}
-		
-		currentPath.remove(currentPath.size()-1);
+
+		currentPath.remove(currentPath.size()-1);		//Don't forget
 	}
-	
-	//iterate
+
+	//We are not using LC112 BFS approach, cuz we need too many lists to store all paths!!!
+
+	//Iteration
 	public List<List<Integer>> pathSum2(TreeNode root, int sum) {
 		List<List<Integer>> res = new LinkedList<List<Integer>>();
 		if(root == null)
@@ -71,7 +76,7 @@ public class n113_Path_Sum_II {
 		queue.offer(root);
 		Deque<Integer> level = new LinkedList<Integer>();
 		level.offer(1);
-		
+
 		List<Integer> curList = new LinkedList<Integer>();
 		int curSum = 0;
 
@@ -79,14 +84,14 @@ public class n113_Path_Sum_II {
 			TreeNode tmp = queue.pollLast();
 			int curLevel = level.pollLast();
 			curSum = curSum + tmp.val;
-			
+
 			// remove list elements
 			while(curList.size() >= curLevel) {
 				curSum = curSum - curList.get(curList.size()-1);
 				curList.remove(curList.size() - 1);
 			}
 			curList.add(tmp.val);	//need to remove one node before add to the curList
-			
+
 			if(tmp.left == null && tmp.right == null && curSum == sum) {
 				res.add(new LinkedList<Integer>(curList));
 			}
@@ -101,6 +106,42 @@ public class n113_Path_Sum_II {
 		}
 		return res;
 	}
+
+	//DFS Iteration
+	//LC145 post-order approach
+	public List<List<Integer>> pathSum3(TreeNode root, int sum) {
+		List<List<Integer>> allPaths = new ArrayList<List<Integer>>();
+		List<Integer> currentPath = new ArrayList<Integer>();
+		Stack<TreeNode> stack = new Stack<TreeNode>();
+
+		//TreeNode cur = root;
+		int curSum = 0;
+		TreeNode last = null;
+
+		while(root != null || !stack.isEmpty()) {
+			if(root != null) {
+				stack.push(root);
+				curSum = curSum + root.val;
+				currentPath.add(root.val);
+				root = root.left;
+			} else {
+				TreeNode tmpNode = stack.peek();
+				if(tmpNode.left == null && tmpNode.right == null && curSum == sum) {
+					allPaths.add(new ArrayList<Integer>(currentPath));
+				}
+				
+				if(tmpNode.right != null && tmpNode.right != last) {
+					root = tmpNode.right;
+				} else {
+					last = tmpNode;
+					curSum = curSum - stack.pop().val; 
+					currentPath.remove(currentPath.size()-1);
+				}
+			}
+		}
+		return allPaths;
+	}
+
 	public static void main(String[] args) {
 		n113_Path_Sum_II obj = new n113_Path_Sum_II();
 		TreeNode p1 = obj.new TreeNode(5);
@@ -122,8 +163,9 @@ public class n113_Path_Sum_II {
 		p4.right = p8;
 		p6.left = p9;
 		p6.right = p10;
-		
+
 		System.out.println(obj.pathSum(p1, 22));
 		System.out.println(obj.pathSum2(p1, 22));
+		System.out.println(obj.pathSum3(p1, 22));
 	}
 }
