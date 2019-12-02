@@ -38,12 +38,18 @@ public class n112_Path_Sum {
 			return false;
 		}
 		
+		return helper(root, sum);
+	}
+	private boolean helper(TreeNode root, int sum) {
+		if(root == null) {
+			return false;
+		}
+		
 		if(root.left == null && root.right == null && root.val == sum) {
 			return true;
 		}
 		
-		//F: || not &&
-		return hasPathSum(root.left, sum - root.val) || hasPathSum(root.right, sum - root.val);
+		return helper(root.left, sum - root.val) || helper(root.right, sum - root.val);
 	}
 
 	//BFS
