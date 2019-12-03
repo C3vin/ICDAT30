@@ -43,11 +43,11 @@ public class n200_Number_of_Islands {
 	}
 
 	private void dfs(char[][] grid, int i, int j) {
-		if(i<0 || j<0 || j >= grid.length || i >= grid[0].length || grid[i][j] != '1') {
+		if(i<0 || j<0 || i >= grid.length || j >= grid[0].length || grid[i][j] != '1') {
 			return;
 		}
 
-		grid[i][j] = 'X';//F: need to change
+		grid[i][j] = 'X';   //F: Must change
 
 		//up
 		dfs(grid, i-1, j);
