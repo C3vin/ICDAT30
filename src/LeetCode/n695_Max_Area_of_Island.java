@@ -45,6 +45,7 @@ public class n695_Max_Area_of_Island {
 		
 		grid[i][j] = 0; 
 		
+			//self + up + down + left + right
 		area = 1 + dfs(grid, i-1, j) + dfs(grid, i+1, j) + dfs(grid, i, j-1) + dfs(grid, i, j+1);
 		
 		return area;
