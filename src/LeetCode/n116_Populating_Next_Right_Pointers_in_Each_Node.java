@@ -87,6 +87,34 @@ public class n116_Populating_Next_Right_Pointers_in_Each_Node {
 		return root;
 	}
 	
+	//space:O(1)
+	public Node connect2(Node root) {
+		if(root == null) {
+			return root;
+		}
+		
+		Node start = root;
+		Node pre = root;
+		Node cur = null;
+		
+		while(pre.left != null) {
+			if(cur == null) {
+				pre.left.next = pre.right;
+				
+				pre = start.left;
+				cur = start.right;
+				start = pre;
+			} else {
+				pre.left.next = pre.right;
+				pre.right.next = cur.left;
+				pre = cur;	//pre = pre.next;
+				cur = cur.next;
+			}
+		}
+		
+		return root;
+	}
+	
 	public static void main(String[] args) {
 		n116_Populating_Next_Right_Pointers_in_Each_Node obj = new n116_Populating_Next_Right_Pointers_in_Each_Node();
 		Node p1 = obj.new Node(1);
@@ -104,5 +132,6 @@ public class n116_Populating_Next_Right_Pointers_in_Each_Node {
 		p3.right = p7;
 		
 		System.out.println(obj.connect(p1));
+		System.out.println(obj.connect2(p1));
 	}
 }
