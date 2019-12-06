@@ -1,6 +1,7 @@
 package LeetCode;
 
-import LeetCode.n102_BinaryTreeLevelOrderTraversal.TreeNode;
+import java.util.LinkedList;
+import java.util.Queue;
 
 /*
 You are given a perfect binary tree where all leaves are on the same level, and every parent has two children. The binary tree has the following definition:
@@ -42,21 +43,54 @@ public class n116_Populating_Next_Right_Pointers_in_Each_Node {
 			next = _next;
 		}
 	};
+	//BFS 
 	public Node connect(Node root) {
-
+		if(root == null) {
+			return root;
+		}
+		
+		Queue<Node> queue = new LinkedList<Node>();
+		queue.offer(root);
+		
+		while(!queue.isEmpty()) {
+			int levelSize = queue.size();
+			Node pre = null;
+			
+			for(int i=0; i<levelSize; i++) {
+				Node currentNode = queue.poll();
+				
+				if(i > 0) {
+					pre.next = currentNode;
+				}
+				pre = currentNode;
+				
+				if(currentNode.left != null) {
+					queue.offer(currentNode.left);
+				}
+				if(currentNode.right != null) {
+					queue.offer(currentNode.right);
+				}
+			}
+		}
+		return root;
 	}
 	
 	public static void main(String[] args) {
 		n116_Populating_Next_Right_Pointers_in_Each_Node obj = new n116_Populating_Next_Right_Pointers_in_Each_Node();
-		Node p1 = obj.new Node(3);
-		Node p2 = obj.new Node(9);
-		Node p3 = obj.new Node(20);
-		Node p4 = obj.new Node(null);
-		Node p5 = obj.new Node(null);
-		Node p6 = obj.new Node(15);
+		Node p1 = obj.new Node(1);
+		Node p2 = obj.new Node(2);
+		Node p3 = obj.new Node(3);
+		Node p4 = obj.new Node(4);
+		Node p5 = obj.new Node(5);
+		Node p6 = obj.new Node(6);
 		Node p7 = obj.new Node(7);
+		p1.left = p2;
+		p1.right = p3;
+		p2.left = p4;
+		p2.right = p5;
+		p3.left = p6;
+		p3.right = p7;
 		
-		
-		System.out.println(obj.connect(root));
+		System.out.println(obj.connect(p1));
 	}
 }
