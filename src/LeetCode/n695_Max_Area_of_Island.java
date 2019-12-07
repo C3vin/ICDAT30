@@ -1,5 +1,8 @@
 package LeetCode;
 
+import java.util.LinkedList;
+import java.util.Queue;
+
 /*
 Given a non-empty 2D array grid of 0's and 1's, an island is a group of 1's (representing land) 
 connected 4-directionally (horizontal or vertical.) You may assume all four edges of the grid are surrounded by water.
@@ -89,6 +92,57 @@ public class n695_Max_Area_of_Island {
 		dfs2(grid, i, j+1, count);
 	}
 	
+	public int maxAreaOfIsland3(int[][] grid) {
+		if(grid == null || grid.length == 0 || grid[0].length == 0) {
+			return 0;
+		}
+		
+		int res = 0;
+		for(int i=0; i<grid.length; i++) {
+			for(int j=0; j<grid[0].length; j++) {
+				if(grid[i][j] == 1) {
+					res = Math.max(res, bfs(grid, i, j));
+				}
+			}
+		}
+		return res;
+	}
+	private int bfs(int[][] grid, int x, int y) {
+		if(grid[x][y] == 0) {
+			return 0;
+		}
+		int area = 0;
+		grid[x][y] = 0;//F: need to change
+		
+		Queue<Integer> queue = new LinkedList<Integer>();
+		queue.offer(x * grid[0].length + y);
+		
+		while(!queue.isEmpty()) {
+			area++;
+			int id = queue.poll();
+			int i = id / grid[0].length;	//row
+			int j = id % grid[0].length;	//col
+
+			if(i>0 && grid[i-1][j] == 1) {
+				queue.offer((i-1) * grid[0].length + j);
+				grid[i-1][j] = 0;
+			}
+			if(i<grid.length-1 && grid[i+1][j] == 1) {
+				queue.offer((i+1) * grid[0].length + j);
+				grid[i+1][j] = 0;
+			}
+			if(j>0 && grid[i][j-1] == 1) {
+				queue.offer(i * grid[0].length + j-1);
+				grid[i][j-1] = 0;
+			}
+			if(j<grid[0].length-1 && grid[i][j+1] == 1) {
+				queue.offer(i * grid[0].length + j+1);
+				grid[i][j+1] = 0;
+			}
+		}
+		return area;
+	}
+	
 	public static void main(String[] args) {
 		n695_Max_Area_of_Island obj = new n695_Max_Area_of_Island();
 		int[][] grid = 
@@ -101,6 +155,7 @@ public class n695_Max_Area_of_Island {
 					{0,0,0,0,0,0,0,1,1,1,0,0,0},
 					{0,0,0,0,0,0,0,1,1,0,0,0,0}};
 		//System.out.println(obj.maxAreaOfIsland(grid));
-		System.out.println(obj.maxAreaOfIsland2(grid));
+		//System.out.println(obj.maxAreaOfIsland2(grid));
+		System.out.println(obj.maxAreaOfIsland3(grid));
 	}
 }
