@@ -3,41 +3,46 @@ package LeetCode;
 import java.util.LinkedList;
 import java.util.Queue;
 
-import LeetCode.n117_Populating_Next_Right_Pointers_in_Each_Node_II.Node;
+import LeetCode.n116_Populating_Next_Right_Pointers_in_Each_Node.Node;
 
 /*
-You are given a perfect binary tree where all leaves are on the same level, and every parent has two children. The binary tree has the following definition:
+Given a binary tree
 struct Node {
   int val;
   Node *left;
   Node *right;
   Node *next;
 }
-Populate each next pointer to point to its next right node. If there is no next right node, the next pointer should be set to NULL.
+Populate each next pointer to point to its next right node. If there is no next right node, the next pointer 
+should be set to NULL.
 Initially, all next pointers are set to NULL.
 Follow up:
+
 You may only use constant extra space.
 Recursive approach is fine, you may assume implicit stack space does not count as extra space for this problem.
 
 Example 1:
-Input: root = [1,2,3,4,5,6,7]
-Output: [1,#,2,3,#,4,5,6,7,#]
-Given the following perfect binary tree,
+Given the following binary tree,
           1
         /  \
        2    3
       / \  / \
-     4  5  6  7
+     4  5     7
 After calling your function, the tree should look like:
          1 -> NULL
         /  \
        2 -> 3 -> NULL
       / \  / \
-     4->5->6->7 -> NULL
-Explanation: Given the above perfect binary tree (Figure A), your function should populate each next pointer to point to its next right node, 
-just like in Figure B. The serialized output is in level order as connected by the next pointers, with '#' signifying the end of each level.
+     4->5----->7 -> NULL
+Input: root = [1,2,3,4,5,null,7]
+Output: [1,#,2,3,#,4,5,7,#]
+Explanation: Given the above binary tree (Figure A), your function should populate each next pointer to point to its next right node, just like in Figure B. The serialized output is in level order as connected by the next pointers, with '#' signifying the end of each level.
+
+Constraints:
+The number of nodes in the given tree is less than 6000.
+-100 <= node.val <= 100
  */
-public class n116_Populating_Next_Right_Pointers_in_Each_Node {
+public class n117_Populating_Next_Right_Pointers_in_Each_Node_II {
 	class Node {
 		public int val;
 		public Node left;
@@ -57,7 +62,8 @@ public class n116_Populating_Next_Right_Pointers_in_Each_Node {
 			next = _next;
 		}
 	};
-	//BFS 
+	
+	//BFS same as LC116
 	public Node connect(Node root) {
 		if(root == null) {
 			return root;
@@ -69,7 +75,6 @@ public class n116_Populating_Next_Right_Pointers_in_Each_Node {
 		while(!queue.isEmpty()) {
 			int levelSize = queue.size();
 			Node pre = null;
-			
 			for(int i=0; i<levelSize; i++) {
 				Node currentNode = queue.poll();
 				
@@ -89,8 +94,8 @@ public class n116_Populating_Next_Right_Pointers_in_Each_Node {
 		return root;
 	}
 	
-	//Same as LC 117 [LC 116 - LC 117]
-	public Node connectSP(Node root) {
+	//Same as LC 116 [LC 116 - LC 117]
+	public Node connect2(Node root) {
 		if(root == null) {
 			return root;
 		}
@@ -128,75 +133,8 @@ public class n116_Populating_Next_Right_Pointers_in_Each_Node {
 		return root;
 	}
 	
-	//space:O(1)
-	//start v1
-	public Node connect2(Node root) {
-		if(root == null) {
-			return root;
-		}
-		
-		Node pre = root;
-		Node cur = null;
-		Node start = root;
-		
-		while(pre.left != null) {
-			if(cur == null) {
-				pre.left.next = pre.right; 
-				
-				pre = start.left;			//move to next level
-				cur = start.right;
-				start = pre;
-			} else {
-				pre.left.next = pre.right;
-				pre.right.next = cur.left;
-				pre = cur;	//pre = pre.next;
-				cur = cur.next;
-			}
-		}
-		
-		return root;
-	}
-	//start v2
-	public Node connect2v2(Node root) {
-		if(root == null) {
-			return root;
-		}
-		
-		Node start = root;
-		while(start != null) {
-			Node cur = start;
-			while(cur != null) {
-				if(cur.left != null) {
-					cur.left.next = cur.right;
-				} 
-				if(cur.next != null && cur.right != null) {
-					cur.right.next = cur.next.left;
-				}
-				cur = cur.next;
-			}
-			start = start.left;
-		}
-		return root;
-	}
-
-	public Node connect3(Node root) {
-		if(root == null) {
-			return root;
-		}
-		if(root.left != null) {
-			root.left.next = root.right;
-		}
-		if(root.next != null && root.right != null) {
-			root.right.next = root.next.left;
-		}
-		connect3(root.left);
-		connect3(root.right);
-		
-		return root;
-	}
-
 	public static void main(String[] args) {
-		n116_Populating_Next_Right_Pointers_in_Each_Node obj = new n116_Populating_Next_Right_Pointers_in_Each_Node();
+		n117_Populating_Next_Right_Pointers_in_Each_Node_II obj = new n117_Populating_Next_Right_Pointers_in_Each_Node_II();
 		Node p1 = obj.new Node(1);
 		Node p2 = obj.new Node(2);
 		Node p3 = obj.new Node(3);
@@ -213,6 +151,5 @@ public class n116_Populating_Next_Right_Pointers_in_Each_Node {
 		
 		System.out.println(obj.connect(p1));
 		System.out.println(obj.connect2(p1));
-		System.out.println(obj.connect3(p1));
 	}
 }
