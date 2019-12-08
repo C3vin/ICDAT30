@@ -88,6 +88,7 @@ public class n116_Populating_Next_Right_Pointers_in_Each_Node {
 	}
 	
 	//space:O(1)
+	//start v1
 	public Node connect2(Node root) {
 		if(root == null) {
 			return root;
@@ -99,9 +100,9 @@ public class n116_Populating_Next_Right_Pointers_in_Each_Node {
 		
 		while(pre.left != null) {
 			if(cur == null) {
-				pre.left.next = pre.right;
+				pre.left.next = pre.right; 
 				
-				pre = start.left;
+				pre = start.left;			//move to next level
 				cur = start.right;
 				start = pre;
 			} else {
@@ -114,7 +115,45 @@ public class n116_Populating_Next_Right_Pointers_in_Each_Node {
 		
 		return root;
 	}
+	//start v2
+	public Node connect2v2(Node root) {
+		if(root == null) {
+			return root;
+		}
+		
+		Node start = root;
+		while(start != null) {
+			Node cur = start;
+			while(cur != null) {
+				if(cur.left != null) {
+					cur.left.next = cur.right;
+				} 
+				if(cur.next != null && cur.right != null) {
+					cur.right.next = cur.next.left;
+				}
+				cur = cur.next;
+			}
+			start = start.left;
+		}
+		return root;
+	}
 	
+	public Node connect3(Node root) {
+		if(root == null) {
+			return root;
+		}
+		if(root.left != null) {
+			root.left.next = root.right;
+		}
+		if(root.next != null && root.right != null) {
+			root.right.next = root.next.left;
+		}
+		connect3(root.left);
+		connect3(root.right);
+		
+		return root;
+	}
+
 	public static void main(String[] args) {
 		n116_Populating_Next_Right_Pointers_in_Each_Node obj = new n116_Populating_Next_Right_Pointers_in_Each_Node();
 		Node p1 = obj.new Node(1);
@@ -133,5 +172,6 @@ public class n116_Populating_Next_Right_Pointers_in_Each_Node {
 		
 		System.out.println(obj.connect(p1));
 		System.out.println(obj.connect2(p1));
+		System.out.println(obj.connect3(p1));
 	}
 }
