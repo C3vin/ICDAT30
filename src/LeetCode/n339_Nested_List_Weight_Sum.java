@@ -125,15 +125,14 @@ public class n339_Nested_List_Weight_Sum {
 	//Recursive
 	//DFS
 	public int depthSum(List<NestedInteger> nestedList) {
-		int depth = 1;
-		return helper(nestedList, depth);
-	}
-
-	private int helper(List<NestedInteger> nestedList, int depth) {
 		if(nestedList.size() == 0 || nestedList == null) {
 			return 0;
 		}
 		
+		return helper(nestedList, 1);
+	}
+
+	private int helper(List<NestedInteger> nestedList, int depth) {
 		int sum = 0;
 		
 		for(NestedInteger nest : nestedList) {
@@ -141,7 +140,7 @@ public class n339_Nested_List_Weight_Sum {
 				if(nest.isInteger()) {
 					sum = sum + nest.getInteger() * depth;
 				} else {
-					sum = sum + helper(nest.getList(), depth+1);
+					sum = sum + helper(nest.getList(), depth+1);	//F: need sum
 				}
 			}
 		}
@@ -159,6 +158,8 @@ public class n339_Nested_List_Weight_Sum {
 		int sum = 0;
 		
 		Queue<NestedInteger> queue = new LinkedList<NestedInteger>(nestedList);		//F: assigned when we created 
+		//Queue<NestedInteger> queue = new LinkedList<NestedInteger>();		
+		//queue.addAll(nestedList);
 		
 		while(!queue.isEmpty()) {
 			int levelSize = queue.size();
@@ -168,7 +169,7 @@ public class n339_Nested_List_Weight_Sum {
 				if(nest.isInteger()) {
 					sum = sum + nest.getInteger() * depth;
 				} else {
-					queue.addAll(nest.getList());
+					queue.addAll(nest.getList());			//F: no need sum, not Recursive!	
 				}
 			}
 			depth++;
