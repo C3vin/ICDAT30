@@ -12,8 +12,17 @@ Given binary tree [3,9,20,null,null,15,7],
     /  \
    15   7
 return its minimum depth = 2.
+
+case2:
+     3
+    / \
+   9   20
+  /   /  \
+ 8   15   7
+return its minimum depth = 2.
  */
 import java.util.LinkedList;
+import java.util.Queue;
 public class n111_Minimum_Depth_of_Binary_Tree {
 	public class TreeNode {
 		int val;
@@ -21,53 +30,65 @@ public class n111_Minimum_Depth_of_Binary_Tree {
 		TreeNode right;
 		TreeNode(int x) { val = x; }
 	}
-	//sol1: Recursive
+	
+	//Recursive
     public int minDepth(TreeNode root) {
         if(root == null) {
             return 0;
         }
         
-        int minleft = minDepth(root.left);
-        int minright = minDepth(root.right);
+        if(root.left != null && root.right != null) {
+        	return Math.min(minDepth(root.left), minDepth(root.right))+1;	//min
+        } else {
+        	return Math.max(minDepth(root.left), minDepth(root.right))+1;	//max for case2
+        }
+    }
+    public int minDepth3(TreeNode root) {
+        if(root == null) {
+            return 0;
+        }
         
-        if(minleft==0 || minright==0)			//!!! e.g. 4, 2
-            return minleft >= minright ? minleft+1 : minright+1;
-            
-        return Math.min(minleft, minright)+1;
+        if(root.left == null) {		//no left, ONLY check right
+        	return minDepth3(root.right)+1;
+        }
+        if(root.right == null) {	//no right, ONLY check left
+        	return minDepth3(root.left)+1;
+        }
+        
+        return Math.min(minDepth(root.left), minDepth(root.right))+1;
     }
     
-    //sol2: Non-recursive
+    //BFS (LC104 template)
     public int minDepth2(TreeNode root) {
-    	if(root == null) return 0;
+    	if(root == null) {
+    		return 0;
+    	}
     	
-    	int level = 1;		//root, start depth at 1
-    	LinkedList<TreeNode> queue = new LinkedList<TreeNode>();
-    	queue.add(root);
-    	int curNum = 1;		//num of nodes left in current level  
-    	int nextNum = 0;	//num of nodes in next level  
+    	int depth = 1;
+    	
+    	Queue<TreeNode> queue = new LinkedList<TreeNode>();
+    	queue.offer(root);
     	
     	while(!queue.isEmpty()) {
-    		TreeNode tmp = queue.poll();	//poll one node from queue
-    		curNum--;						//curNum--
-    		
-    		if(tmp.left == null && tmp.right == null) {			//F: && e.g.3
-    			return level;									
+    		int levelSize = queue.size();
+    		for(int i=0; i<levelSize; i++) {
+    			TreeNode currentNode = queue.poll();
+    			
+    			if(currentNode.left == null && currentNode.right == null) {
+    				return depth;
+    			}
+    			
+    			if(currentNode.left != null) {
+    				queue.offer(currentNode.left);
+    			}
+    			if(currentNode.right != null) {
+    				queue.offer(currentNode.right);
+    			}
     		}
-    		if(tmp.left != null) {
-    			queue.add(tmp.left);
-    			nextNum++;
-    		}
-    		if(tmp.right != null) {
-    			queue.add(tmp.right);
-    			nextNum++;
-    		}
-    		if(curNum == 0) {			//reset
-    			curNum = nextNum;	
-    			nextNum = 0;
-    			level++;		//!!! if curNum didn't to 0, you won't do level++
-    		}
+    		depth++;
     	}
-    	return level;
+    	
+    	return depth;
     }
     
 	public static void main(String[] args) {
@@ -81,5 +102,6 @@ public class n111_Minimum_Depth_of_Binary_Tree {
 		p2.left = p4;
 		System.out.println(obj.minDepth(p1));
 		System.out.println(obj.minDepth2(p1));
+		System.out.println(obj.minDepth3(p1));
 	}
 }

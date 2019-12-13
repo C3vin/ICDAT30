@@ -5,7 +5,23 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Queue;
 
-@Alg(type="BFS", com="L,AA,A,M$,F", level="easy", num=102)
+/*
+Given a binary tree, return the level order traversal of its nodes' values. (ie, from left to right, level by level).
+
+For example:
+Given binary tree [3,9,20,null,null,15,7],
+    3
+   / \
+  9  20
+    /  \
+   15   7
+return its level order traversal as:
+[
+  [3],
+  [9,20],
+  [15,7]
+]
+ */
 public class n102_BinaryTreeLevelOrderTraversal {
 	public class TreeNode {
 		int val;
@@ -78,41 +94,10 @@ public class n102_BinaryTreeLevelOrderTraversal {
 		System.out.println(results);
 		return results;*/
 	}
+	
+	//DFS
 	public List<List<Integer>> levelOrder2(TreeNode root) {
-		List<List<Integer>> res = new ArrayList<List<Integer>>();
-		if(root == null)
-			return res;
 		
-		Queue<TreeNode> queue = new LinkedList<TreeNode>();	
-		queue.offer(root);
-		queue.offer(null);
-
-		LinkedList<Integer> cur = new LinkedList<Integer>();
-		
-		while(!queue.isEmpty()) {
-			TreeNode tmp = queue.poll();
-			if(tmp != null) {
-				cur.add(tmp.val);
-				if(tmp.left != null)
-					queue.offer(tmp.left);
-				if(tmp.right != null)
-					queue.offer(tmp.right);
-			} else {
-/*				ArrayList<Integer> c_cur = new ArrayList<Integer>(cur);
-				res.add(c_cur);
-				cur.clear();
-				if(!queue.isEmpty())
-					queue.add(null);*/
-				
-				res.add(cur);
-				//cur.clear();	//can't use it, will update the res
-				cur = new LinkedList<Integer>();
-				if(!queue.isEmpty())
-					queue.offer(null);
-			}
-		}
-		
-		return res;
 	}
 	public static void main(String[] args) {
 		//[3,9,20,null,null,15,7]
