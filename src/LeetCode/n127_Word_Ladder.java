@@ -10,41 +10,6 @@ import java.util.Set;
 
 public class n127_Word_Ladder {
 	public int ladderLength(String beginWord, String endWord, Set<String> wordList) {
-		if(beginWord==null || endWord==null || beginWord.length()==0 || endWord.length()==0 || beginWord.length()!=endWord.length())  
-			return 0;  
-		LinkedList<String> queue = new LinkedList<String>();  
-		HashSet<String> visited = new HashSet<String>();  
-		int level= 1;  
-		int lastNum = 1;  
-		int curNum = 0;  
-		queue.offer(beginWord);  
-		visited.add(beginWord);  
-
-		while(!queue.isEmpty()) {  
-			String cur = queue.poll();  
-			lastNum--;  
-			for(int i=0;i<cur.length();i++) {  
-				char[] charCur = cur.toCharArray();
-				for(char c='a';c<='z';c++)  {  
-					charCur[i] = c;  
-					String temp = new String(charCur);  
-					if(temp.equals(endWord))   				//Need temp because we need to use String to compare with endWord  
-						return level+1;  
-					if(wordList.contains(temp) && !visited.contains(temp)) {  
-						curNum++;  							
-						queue.offer(temp);  
-						visited.add(temp);  
-					}  
-				}  
-			}
-			if(lastNum==0) {  
-				lastNum = curNum;  
-				curNum = 0;  
-				level++;  
-			}  
-		}  
-		return 0;  
-
 		/*        if (beginWord == null || beginWord.isEmpty() || endWord == null || endWord.isEmpty())
             return 0;
 
@@ -79,40 +44,38 @@ public class n127_Word_Ladder {
         return 0;*/
 	}
 
+	//BFS
 	public int ladderLength2(String beginWord, String endWord, List<String> wordList) {
-		if(!wordList.contains(endWord)) {	//make sure endWord is in the list
-            return 0;
-        }
-		
-		int level = 0;
+		HashSet<String> set = new HashSet<String>(wordList);				//wordList
+
 		Queue<String> queue = new LinkedList<String>();
 		queue.offer(beginWord);
-		
+
+		int step = 1;
+
 		while(!queue.isEmpty()) {
 			int levelSize = queue.size();
 			for(int i=0; i<levelSize; i++) {
 				String cur = queue.poll();
-				if(cur.equals(endWord)) {
-					return level+1;
-				}
-				
 				for(int j=0; j<cur.length(); j++) {
-					char[] word = cur.toCharArray();
+					StringBuilder newWord = new StringBuilder(cur);
 					for(char ch='a'; ch<'z'; ch++) {
-						word[j] = ch;
-						String check = new String(word);
-						if(!check.equals(cur) && wordList.contains(check)) {
-							queue.add(check);
-							wordList.remove(check);
+						newWord.setCharAt(j, ch);
+						if(set.contains(newWord.toString())) {				//stringBuild need toString
+							if(newWord.toString().equals(endWord)) {		//stringBuild need toString
+								return step+1;
+							}
+							set.remove(newWord.toString());					//stringBuild need toString
+							queue.offer(newWord.toString());				//stringBuild need toString
 						}
 					}
 				}
 			}
-			level++;
+			step++;
 		}
 		return 0;
 	}
-	
+
 	public static void main(String[] args) {
 		n127_Word_Ladder obj = new n127_Word_Ladder();
 		String[] wordLists=  {"hot","dot","dog","lot","log", "cog"};
@@ -122,7 +85,7 @@ public class n127_Word_Ladder {
 		}
 		System.out.println("WordLists: "+Arrays.toString(wordLists) + "\nFirst: "+"hit" + " \nEnd: "+"cog");
 		System.out.println(obj.ladderLength("hit", "cog", wordList));
-		
+
 		List<String> wordList1 = new ArrayList<String>();
 		wordList1.add("hot");
 		wordList1.add("dot");
