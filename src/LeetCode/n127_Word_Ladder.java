@@ -1,8 +1,11 @@
 package LeetCode;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.LinkedList;
+import java.util.List;
+import java.util.Queue;
 import java.util.Set;
 
 public class n127_Word_Ladder {
@@ -76,14 +79,57 @@ public class n127_Word_Ladder {
         return 0;*/
 	}
 
+	public int ladderLength2(String beginWord, String endWord, List<String> wordList) {
+		if(!wordList.contains(endWord)) {	//make sure endWord is in the list
+            return 0;
+        }
+		
+		int level = 0;
+		Queue<String> queue = new LinkedList<String>();
+		queue.offer(beginWord);
+		
+		while(!queue.isEmpty()) {
+			int levelSize = queue.size();
+			for(int i=0; i<levelSize; i++) {
+				String cur = queue.poll();
+				if(cur.equals(endWord)) {
+					return level+1;
+				}
+				
+				for(int j=0; j<cur.length(); j++) {
+					char[] word = cur.toCharArray();
+					for(char ch='a'; ch<'z'; ch++) {
+						word[j] = ch;
+						String check = new String(word);
+						if(!check.equals(cur) && wordList.contains(check)) {
+							queue.add(check);
+							wordList.remove(check);
+						}
+					}
+				}
+			}
+			level++;
+		}
+		return 0;
+	}
+	
 	public static void main(String[] args) {
 		n127_Word_Ladder obj = new n127_Word_Ladder();
-		String[] wordLists=  {"hot","dot","dog","lot","log"};
+		String[] wordLists=  {"hot","dot","dog","lot","log", "cog"};
 		Set<String> wordList = new HashSet<String>();
 		for(int i=0; i<wordLists.length; i++) {
 			wordList.add(wordLists[i]);
 		}
 		System.out.println("WordLists: "+Arrays.toString(wordLists) + "\nFirst: "+"hit" + " \nEnd: "+"cog");
 		System.out.println(obj.ladderLength("hit", "cog", wordList));
+		
+		List<String> wordList1 = new ArrayList<String>();
+		wordList1.add("hot");
+		wordList1.add("dot");
+		wordList1.add("dog");
+		wordList1.add("lot");
+		wordList1.add("log");
+		wordList1.add("cog");
+		System.out.println(obj.ladderLength2("hit", "cog", wordList1));
 	}
 }
