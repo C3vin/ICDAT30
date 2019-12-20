@@ -7,6 +7,7 @@ import java.util.HashSet;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 import java.util.Queue;
 import java.util.Set;
 
@@ -52,14 +53,14 @@ public class n126_Word_Ladder_II {
 		if(beginWord.compareTo(endWord) == 0) {
 			return res;
 		}
-		
+
 		Set<String> visited = new HashSet<String>();
 		Set<String> cur = new HashSet<String>();
 		cur.add(beginWord);
 		HashMap<String, ArrayList<String>> graph = new HashMap<String, ArrayList<String>>();
 		graph.put(endWord,new ArrayList<String>());
 		boolean found = false;
-		
+
 		while (cur.isEmpty() == false && found == false) {
 			Set<String> queue = new HashSet<String>();
 			for(Iterator<String> it=cur.iterator();it.hasNext();) {
@@ -176,7 +177,63 @@ public class n126_Word_Ladder_II {
 		return res;
 	}
 	//http://www.voidcn.com/article/p-udyjpbrr-b.html
-	@@@
+	public List<List<String>> findLadders3(String beginWord, String endWord, List<String> wordList) {
+		Map<String, Integer> distMap = new HashMap<String, Integer>();
+		getDistance(beginWord, endWord, wordList, distMap);
+		List<List<String>> res = new ArrayList<List<String>>();
+		dfs(res, new ArrayList<String>(), distMap, endWord, beginWord);
+
+		return res;
+	}
+	private void dfs(List<List<String>> res, List<String> cur, Map<String, Integer> distMap, String endWord, String beginWord) {
+		if(endWord.equals(beginWord)) {
+			List<String> list = new ArrayList<String>(cur);
+			list.add(beginWord);
+			Collections.reverse(list);
+			res.add(list);
+			return;
+		}
+
+		cur.add(endWord);
+		for(int i = 0; i < endWord.length(); i++) {
+			char[] chars = endWord.toCharArray();
+			for (char c = 'a'; c <= 'z'; c++) {
+				chars[i] = c;
+				String nextWord = new String(chars);
+				if (distMap.containsKey(nextWord) && distMap.containsKey(endWord) && distMap.get(nextWord) == distMap.get(endWord) - 1) {
+					dfs(res, cur, distMap, nextWord, beginWord);
+				}
+			}
+		}
+		cur.remove(cur.size() - 1);
+	}
+
+	private void getDistance(String beginWord, String endWord, List<String> wordList, Map<String, Integer> distMap) {
+		distMap.put(beginWord, 1);
+		Queue<String> queue = new LinkedList<String>();
+		queue.add(beginWord);
+
+		while(!queue.isEmpty()) {
+			int levelSize = queue.size();
+			for(int i=0; i<levelSize; i++) {
+				String cur = queue.poll();
+				for(int j=0; j<cur.length(); j++) {
+					StringBuilder newWord = new StringBuilder(cur);
+					for(char ch='a'; ch<='z'; ch++) {
+						newWord.setCharAt(j, ch);
+						if(newWord.toString().equals(endWord) && wordList.contains(endWord)) {
+							distMap.put(newWord.toString(), distMap.get(cur) + 1);
+							return;
+						}
+						if(wordList.contains(newWord.toString()) && !distMap.containsKey(newWord.toString())) {
+							distMap.put(newWord.toString(), distMap.get(cur) + 1);
+							queue.add(newWord.toString());
+						}
+					}
+				}
+			}
+		}
+	}
 	public static void main(String[] args) {
 		n126_Word_Ladder_II obj = new n126_Word_Ladder_II();
 		List<String> wordList1 = new ArrayList<String>();
@@ -185,8 +242,14 @@ public class n126_Word_Ladder_II {
 		wordList1.add("dog");
 		wordList1.add("lot");
 		wordList1.add("log");
-		wordList1.add("cog");
+		//wordList1.add("cog");
 		System.out.println(obj.findLadders("hit", "cog", wordList1));
 		System.out.println(obj.findLadders2("hit", "cog", wordList1));
+		System.out.println(obj.findLadders3("hit", "cog", wordList1));
+/*		wordList1.add("hot");
+		wordList1.add("dot");
+		wordList1.add("dog");
+		System.out.println(obj.findLadders("hot", "dog", wordList1));
+		System.out.println(obj.findLadders3("hot", "dog", wordList1));*/
 	}
 }
