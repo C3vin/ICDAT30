@@ -55,9 +55,9 @@ public class n126_Word_Ladder_II {
 		
 		Set<String> visited = new HashSet<String>();
 		Set<String> cur = new HashSet<String>();
+		cur.add(beginWord);
 		HashMap<String, ArrayList<String>> graph = new HashMap<String, ArrayList<String>>();
 		graph.put(endWord,new ArrayList<String>());
-		cur.add(beginWord);
 		boolean found = false;
 		
 		while (cur.isEmpty() == false && found == false) {
@@ -175,7 +175,8 @@ public class n126_Word_Ladder_II {
 		}
 		return res;
 	}
-
+	//http://www.voidcn.com/article/p-udyjpbrr-b.html
+	@@@
 	public static void main(String[] args) {
 		n126_Word_Ladder_II obj = new n126_Word_Ladder_II();
 		List<String> wordList1 = new ArrayList<String>();
