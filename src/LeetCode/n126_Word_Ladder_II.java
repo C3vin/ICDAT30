@@ -1,11 +1,12 @@
 package LeetCode;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Map;
 import java.util.Queue;
 import java.util.Set;
 
@@ -44,88 +45,85 @@ Output: []
 Explanation: The endWord "cog" is not in wordList, therefore no possible transformation.
  */
 public class n126_Word_Ladder_II {
-	Set<String> dict;
-	Map<String, List<String>> mutation = new HashMap<>();
-	Map<String, Integer> distance = new HashMap<>();
 	//https://github.com/awangdev/LintCode/blob/master/Java/Word%20Ladder%20II.java
+	//https://wdxtub.com/interview/14520607221562.html
 	public List<List<String>> findLadders(String beginWord, String endWord, List<String> wordList) {
-		List<List<String>> rst = new ArrayList<>();
-		dict = new HashSet<>(wordList);
-		if (!dict.contains(endWord)) return rst;
-
-		prep(beginWord);
-		//dfs(start, end, new ArrayList<>(), rst); // option1
-		bfs(beginWord, endWord, rst); // option2
-		return rst;
-	}
-	//BFS/Prep to populate mutation and distance map.
-	public void prep(String start) {
-		//Init
-		Queue<String> queue = new LinkedList<>();
-		dict.add(start);
-		queue.offer(start);
-		distance.put(start, 0);
-		for (String s : dict) {
-			mutation.put(s, new ArrayList<>());
+		List<List<String>> res = new ArrayList<List<String>>();
+		if(beginWord.compareTo(endWord) == 0) {
+			return res;
 		}
-		// process queue
-		while(!queue.isEmpty()) {
-			String str = queue.poll();
-			List<String> list = transform(str);
-
-			for (String s : list) {
-				mutation.get(s).add(str);
-				if (!distance.containsKey(s)) { // only record dist->s once, as shortest
-					distance.put(s, distance.get(str) + 1);
-					queue.offer(s);
-				}
+		
+		Set<String> visited = new HashSet<String>();
+		Set<String> cur = new HashSet<String>();
+		HashMap<String, ArrayList<String>> graph = new HashMap<String, ArrayList<String>>();
+		graph.put(endWord,new ArrayList<String>());
+		cur.add(beginWord);
+		boolean found = false;
+		
+		while (cur.isEmpty() == false && found == false) {
+			Set<String> queue = new HashSet<String>();
+			for(Iterator<String> it=cur.iterator();it.hasNext();) {
+				visited.add(it.next());
 			}
-		}
-	}
-
-	// Option2: bfs, bi-directional search
-	public void bfs(String start, String end, List<List<String>> rst) {
-		Queue<List<String>> queue = new LinkedList<>();
-		List<String> list = new ArrayList<>();
-		list.add(end);
-		queue.offer(new ArrayList<>(list));
-		while (!queue.isEmpty()) {
-			int size = queue.size();
-			while (size > 0) {
-				list = queue.poll();
-				String str = list.get(0);
-
-				for (String s : mutation.get(str)) {//All prior-mutation sources
-					list.add(0, s);
-					if (s.equals(start)) {
-						rst.add(new ArrayList<>(list));
-					} else if (distance.containsKey(s) && distance.get(str) - 1 == distance.get(s)) {
-						//Only pick those that's 1 step away: keep minimum steps for optimal solution
-						queue.offer(new ArrayList<>(list));
+			for(Iterator<String> it=cur.iterator();it.hasNext();) {
+				String str = it.next();
+				char[] word = str.toCharArray();
+				for (int j = 0; j < word.length; ++j) {
+					char before = word[j];
+					for (char ch = 'a'; ch <= 'z'; ++ch) {
+						if (ch == before) continue;
+						word[j] = ch;
+						String temp = new String(word);
+						if (wordList.contains(temp) == false) {
+							continue;
+						}
+						if (found == true && endWord.compareTo(temp) != 0) {
+							continue;
+						}
+						if (endWord.compareTo(temp) == 0) {
+							found = true;
+							(graph.get(endWord)).add(str);
+							continue;
+						}
+						if (visited.contains(temp) == false) {
+							queue.add(temp);
+							if (graph.containsKey(temp) == false) {
+								ArrayList<String> l = new ArrayList<String>();
+								l.add(str);
+								graph.put(temp,l);
+							} else {
+								(graph.get(temp)).add(str);
+							}
+						}
 					}
-					list.remove(0);
+					word[j] = before;
 				}
-				size--;
 			}
+			cur = queue;
 		}
+		if (found == true) {
+			ArrayList<String> path = new ArrayList<String>();
+			trace(res, graph, path, beginWord, endWord);
+		}
+		return res;
 	}
-	//Generate all possible mutations for word. Check against dic and skip word itself.
-	private List<String> transform(String word) {
-		List<String> candidates = new ArrayList<>();
-		StringBuffer sb = new StringBuffer(word);
-		for (int i = 0; i < sb.length(); i++) {
-			char temp = sb.charAt(i);
-			for (char c = 'a'; c <= 'z'; c++) {
-				if (temp == c) continue;
-				sb.setCharAt(i, c);
-				String newWord = sb.toString();
-				if (dict.contains(newWord)) {
-					candidates.add(newWord);
-				}
-			}
-			sb.setCharAt(i, temp);//backtrack
-		}    
-		return candidates;
+	public void trace(List<List<String>> res, 
+			HashMap<String, ArrayList<String>> graph,
+			ArrayList<String> path,
+			String start, String now) {
+		path.add(now);
+		if (now.compareTo(start) == 0) {
+			ArrayList<String> ans = new ArrayList<String>(path);
+			Collections.reverse(ans);
+			res.add(ans);
+			path.remove(path.size()-1);
+			return;
+		}
+		ArrayList<String> cur = graph.get(now);
+		for (int i = 0; i < cur.size(); ++i) {
+			trace(res,graph,path,start,cur.get(i));
+		}
+		path.remove(path.size()-1);
 	}
 
 	public List<List<String>> findLadders2(String beginWord, String endWord, List<String> wordList) {
