@@ -46,7 +46,7 @@ public class n127_Word_Ladder {
 
 	//BFS
 	public int ladderLength2(String beginWord, String endWord, List<String> wordList) {
-		HashSet<String> set = new HashSet<String>(wordList);				//wordList
+		HashSet<String> dict = new HashSet<String>(wordList);				//wordList
 
 		Queue<String> queue = new LinkedList<String>();
 		queue.offer(beginWord);
@@ -61,12 +61,12 @@ public class n127_Word_Ladder {
 					StringBuilder newWord = new StringBuilder(cur);
 					for(char ch='a'; ch<'z'; ch++) {
 						newWord.setCharAt(j, ch);
-						if(set.contains(newWord.toString())) {				//stringBuild need toString
+						if(dict.contains(newWord.toString())) {				//stringBuild need toString
 							if(newWord.toString().equals(endWord)) {		//stringBuild need toString
 								return step+1;
 							}
-							set.remove(newWord.toString());					//stringBuild need toString
-							queue.offer(newWord.toString());				//stringBuild need toString
+							dict.remove(newWord.toString());				//need to remove, Time Limit Exceeded
+							queue.offer(newWord.toString());				
 						}
 					}
 				}
@@ -84,7 +84,7 @@ public class n127_Word_Ladder {
 			wordList.add(wordLists[i]);
 		}
 		System.out.println("WordLists: "+Arrays.toString(wordLists) + "\nFirst: "+"hit" + " \nEnd: "+"cog");
-		System.out.println(obj.ladderLength("hit", "cog", wordList));
+		//System.out.println(obj.ladderLength("hit", "cog", wordList));
 
 		List<String> wordList1 = new ArrayList<String>();
 		wordList1.add("hot");
