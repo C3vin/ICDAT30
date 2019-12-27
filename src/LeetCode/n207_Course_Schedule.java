@@ -53,7 +53,7 @@ public class n207_Course_Schedule {
 	        return true;
 	    }
 	    visited[currentCourse] = 1;
-	    for (int preCourse : graph[currentCourse]) {
+	    for (int preCourse : graph.get(currentCourse)) {
 	        if (!dfs(graph, preCourse, visited)) {
 	            return false;
 	        }
@@ -61,7 +61,7 @@ public class n207_Course_Schedule {
 	    visited[currentCourse] = 2;
 	    return true;
 	}
-	
+	also http://www.noteanddata.com/leetcode-207-Course-Schedule-Amazon-interview-problem-dfs-java-solution-note.html
 	public static void main(String[] args) {
 		n207_Course_Schedule obj = new n207_Course_Schedule();
 		System.out.println(obj.canFinish(2, new int[][] {{1,0}}));
