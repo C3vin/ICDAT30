@@ -28,13 +28,27 @@ You may assume that there are no duplicate edges in the input prerequisites.
 public class n207_Course_Schedule {
 	//https://leetcode.flowerplayer.com/2019/06/13/leetcode-207-course-schedule%E8%A7%A3%E9%A2%98%E6%80%9D%E8%B7%AF%E5%88%86%E6%9E%90/
 	public boolean canFinish(int numCourses, int[][] prerequisites) {
-		List<Integer> graph = new ArrayList<Integer>();
-		//		for(int i=0; i<numCourses; i++) {
-		//			graph[i] = new ArrayList<Integer>();
-		//		}
-		for(int i=0; i<prerequisites.length; i++) {
-			graph.add(prerequisites[i][0]);
-			graph.add(prerequisites[i][1]);
+		if(prerequisites.length == 0) {
+			return false;
+		}
+		List<Integer>[] graph1 = new ArrayList[numCourses];
+		for (int i = 0; i < numCourses; i++) {
+			graph1[i] = new ArrayList<>();
+		}
+		for (int[] prerequisite : prerequisites) {
+			graph1[prerequisite[0]].add(prerequisite[1]);
+		}
+		List<List<Integer>> graph = new ArrayList<List<Integer>>();
+		for(int i=0; i<numCourses; i++) 
+		graph.add(new ArrayList<Integer>());
+		
+		for(int[] prerequisite : prerequisites) {
+			List<Integer> x = new ArrayList<Integer>();
+			int a = prerequisite[0];
+			int b = prerequisite[1];
+			x.add(prerequisite[1]);
+			//x.add(prerequisite[1]);
+			graph.add(a, x);
 		}
 		int[] visited = new int[numCourses];
 		for(int i = 0; i < numCourses; i++) {
@@ -45,25 +59,30 @@ public class n207_Course_Schedule {
 
 		return true;
 	}
-	private boolean dfs(List<Integer> graph, int currentCourse, int[] visited) {
-	    if (visited[currentCourse] == 1) {
-	        return false;
-	    }
-	    if (visited[currentCourse] == 2) {
-	        return true;
-	    }
-	    visited[currentCourse] = 1;
-	    for (int preCourse : graph.get(currentCourse)) {
-	        if (!dfs(graph, preCourse, visited)) {
-	            return false;
-	        }
-	    }
-	    visited[currentCourse] = 2;
-	    return true;
+	private boolean dfs(List<List<Integer>> graph, int currentCourse, int[] visited) {
+		if(visited[currentCourse] == 1) {
+			return false;
+		}
+		if(visited[currentCourse] == 2) {
+			return true;
+		}
+		visited[currentCourse] = 1;
+
+		if(graph.size() < currentCourse) {
+			for(int preCourse : graph.get(currentCourse)) {
+				if(!dfs(graph, preCourse, visited)) {
+					return false;
+				}
+			}
+		}
+		visited[currentCourse] = 2;
+		return true;
 	}
-	also http://www.noteanddata.com/leetcode-207-Course-Schedule-Amazon-interview-problem-dfs-java-solution-note.html
+	//http://www.noteanddata.com/leetcode-207-Course-Schedule-Amazon-interview-problem-dfs-java-solution-note.html
 	public static void main(String[] args) {
 		n207_Course_Schedule obj = new n207_Course_Schedule();
-		System.out.println(obj.canFinish(2, new int[][] {{1,0}}));
+		int[][] prerequisites = new int[][] {{1,0}};
+		//System.out.println(obj.canFinish(2, prerequisites));
+		System.out.println(obj.canFinish(2, new int[][] {{1,0}, {0,1}}));
 	}
 }
