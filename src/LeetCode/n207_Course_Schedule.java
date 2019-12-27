@@ -44,11 +44,8 @@ public class n207_Course_Schedule {
 		
 		for(int[] prerequisite : prerequisites) {
 			List<Integer> x = new ArrayList<Integer>();
-			int a = prerequisite[0];
-			int b = prerequisite[1];
 			x.add(prerequisite[1]);
-			//x.add(prerequisite[1]);
-			graph.add(a, x);
+			graph.set(prerequisite[0], x);
 		}
 		int[] visited = new int[numCourses];
 		for(int i = 0; i < numCourses; i++) {
@@ -68,13 +65,13 @@ public class n207_Course_Schedule {
 		}
 		visited[currentCourse] = 1;
 
-		if(graph.size() < currentCourse) {
+		//if(graph.size() < currentCourse) {
 			for(int preCourse : graph.get(currentCourse)) {
 				if(!dfs(graph, preCourse, visited)) {
 					return false;
 				}
 			}
-		}
+		//}
 		visited[currentCourse] = 2;
 		return true;
 	}
@@ -83,6 +80,6 @@ public class n207_Course_Schedule {
 		n207_Course_Schedule obj = new n207_Course_Schedule();
 		int[][] prerequisites = new int[][] {{1,0}};
 		//System.out.println(obj.canFinish(2, prerequisites));
-		System.out.println(obj.canFinish(2, new int[][] {{1,0}, {0,1}}));
+		System.out.println(obj.canFinish(3, new int[][] {{1,0}, {1,2}, {0,1}}));
 	}
 }
