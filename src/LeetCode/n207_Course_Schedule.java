@@ -1,6 +1,7 @@
 package LeetCode;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 /*
@@ -28,50 +29,45 @@ You may assume that there are no duplicate edges in the input prerequisites.
 public class n207_Course_Schedule {
 	//https://leetcode.flowerplayer.com/2019/06/13/leetcode-207-course-schedule%E8%A7%A3%E9%A2%98%E6%80%9D%E8%B7%AF%E5%88%86%E6%9E%90/
 	public boolean canFinish(int numCourses, int[][] prerequisites) {
-		if(prerequisites.length == 0) {
-			return false;
-		}
-		List<Integer>[] graph1 = new ArrayList[numCourses];
-		for (int i = 0; i < numCourses; i++) {
-			graph1[i] = new ArrayList<>();
-		}
-		for (int[] prerequisite : prerequisites) {
-			graph1[prerequisite[0]].add(prerequisite[1]);
-		}
-		List<List<Integer>> graph = new ArrayList<List<Integer>>();
-		for(int i=0; i<numCourses; i++) 
-		graph.add(new ArrayList<Integer>());
+		HashMap<Integer, ArrayList<Integer>> graph = new HashMap<Integer, ArrayList<Integer>>();
 		
 		for(int[] prerequisite : prerequisites) {
-			List<Integer> x = new ArrayList<Integer>();
-			x.add(prerequisite[1]);
-			graph.set(prerequisite[0], x);
+			if(graph.containsKey(prerequisite[1])) {
+				graph.get(prerequisite[1]).add(prerequisite[0]);
+			} else {
+				ArrayList<Integer> x = new ArrayList<Integer>();
+				x.add(prerequisite[0]);
+				graph.put(prerequisite[1], x);
+			}
 		}
+		
 		int[] visited = new int[numCourses];
 		for(int i = 0; i < numCourses; i++) {
-			if (!dfs(graph, i, visited)) {
+			if(!dfs(graph, i, visited)) {
 				return false;
 			}
 		}
 
 		return true;
 	}
-	private boolean dfs(List<List<Integer>> graph, int currentCourse, int[] visited) {
+	private boolean dfs(HashMap<Integer,ArrayList<Integer>> graph, int currentCourse, int[] visited) {
 		if(visited[currentCourse] == 1) {
 			return false;
 		}
 		if(visited[currentCourse] == 2) {
 			return true;
 		}
+		
 		visited[currentCourse] = 1;
 
-		//if(graph.size() < currentCourse) {
-			for(int preCourse : graph.get(currentCourse)) {
-				if(!dfs(graph, preCourse, visited)) {
+		if(graph.containsKey(currentCourse)) {
+			for(int i : graph.get(currentCourse)) {
+				if(!dfs(graph, i, visited)) {
 					return false;
 				}
 			}
-		//}
+		}
+	
 		visited[currentCourse] = 2;
 		return true;
 	}
@@ -80,6 +76,6 @@ public class n207_Course_Schedule {
 		n207_Course_Schedule obj = new n207_Course_Schedule();
 		int[][] prerequisites = new int[][] {{1,0}};
 		//System.out.println(obj.canFinish(2, prerequisites));
-		System.out.println(obj.canFinish(3, new int[][] {{1,0}, {1,2}, {0,1}}));
+		System.out.println(obj.canFinish(3, new int[][] {{1,0}, {1,2}, {0,2}}));
 	}
 }
