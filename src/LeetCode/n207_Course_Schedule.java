@@ -41,6 +41,7 @@ public class n207_Course_Schedule {
 			}
 		}
 		
+		//0: unvisited; 1: visiting 2: visited
 		int[] visited = new int[numCourses];
 		for(int i = 0; i < numCourses; i++) {
 			if(!dfs(graph, i, visited)) {
@@ -58,17 +59,18 @@ public class n207_Course_Schedule {
 			return true;
 		}
 		
-		visited[currentCourse] = 1;
+		visited[currentCourse] = 1;				//must setup
 
 		if(graph.containsKey(currentCourse)) {
-			for(int i : graph.get(currentCourse)) {
-				if(!dfs(graph, i, visited)) {
+			for(int preCourse : graph.get(currentCourse)) {
+				if(!dfs(graph, preCourse, visited)) {
 					return false;
 				}
 			}
 		}
 	
 		visited[currentCourse] = 2;
+		
 		return true;
 	}
 	//http://www.noteanddata.com/leetcode-207-Course-Schedule-Amazon-interview-problem-dfs-java-solution-note.html
@@ -76,6 +78,6 @@ public class n207_Course_Schedule {
 		n207_Course_Schedule obj = new n207_Course_Schedule();
 		int[][] prerequisites = new int[][] {{1,0}};
 		//System.out.println(obj.canFinish(2, prerequisites));
-		System.out.println(obj.canFinish(3, new int[][] {{1,0}, {1,2}, {0,2}}));
+		System.out.println(obj.canFinish(3, new int[][] {{1,0}, {1,2}, {0,1}}));
 	}
 }
