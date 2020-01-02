@@ -1,7 +1,5 @@
 package LeetCode;
 
-import java.util.Arrays;
-
 /*
 Given a positive integer n, find the least number of perfect square numbers (for example, 1, 4, 9, 16, ...) which sum to n.
 
@@ -16,27 +14,18 @@ Output: 2
 Explanation: 13 = 4 + 9.
  */
 public class n279_Perfect_Squares {
+	//LC322 dp
 	public int numSquares(int n) {
 		int[] dp = new int[n+1];
-		//Arrays.fill(dp, Integer.MAX_VALUE);
 		dp[0] = 0;
 		
 		for(int i=1; i<=n; i++) {
 			dp[i] = Integer.MAX_VALUE;
-			for(int j=1; j*j<=i; j++) {
-				//min = Math.min(min, dp[i-j*j]+1);
-				dp[i] = Math.min(dp[i], dp[i-j*j]+1);
+			for(int j=1; j*j<=i; j++) {					//<=i range 	
+				dp[i] = Math.min(dp[i], dp[i-j*j]+1);	//+1, add j*j
 			}
-
-			if(dp[i] == Integer.MAX_VALUE) {
-				dp[i] = -1;
-			}
-/*			if(min == Integer.MAX_VALUE) {
-				dp[i] = -1;
-			} else {
-				dp[i] = min;				
-			}*/
 		}
+
 		return dp[n];
 	}
 	public static void main(String[] args) {

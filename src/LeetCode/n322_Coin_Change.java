@@ -21,31 +21,23 @@ You may assume that you have an infinite number of each kind of coin.
 public class n322_Coin_Change {
 	public int coinChange(int[] coins, int amount) {
 		int[] dp = new int[amount+1];					//must + 1
-
-		Arrays.sort(coins);
 		dp[0] = 0;
+		
+		//Arrays.sort(coins);
 
 		for(int i=1; i<=amount; i++) {					//must start from 1
-			//int min = Integer.MAX_VALUE;				//MAX_VALUE not MIN_VALUE
 			dp[i] = Integer.MAX_VALUE;
 			for(int k=0; k<coins.length; k++) {   
 				if(i>=coins[k] && dp[i-coins[k]] != -1) {
+					System.out.println("@: "+dp[i-coins[k]]);
 					dp[i] = Math.min(dp[i], dp[i-coins[k]]+1);
-					//min = Math.min(min,dp[i-coins[k]]+1);
 				}
 			}
-			
 			if(dp[i] == Integer.MAX_VALUE) {
 				dp[i] = -1;
 			}
-			
-/*			if(min == Integer.MAX_VALUE) {
-				dp[i] = -1;
-			} else {
-				dp[i] = min;				
-			}*/
 		}
-
+		
 		return dp[amount];
 	}
 	public static void main(String[] args) {
