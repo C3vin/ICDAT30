@@ -23,14 +23,11 @@ public class n322_Coin_Change {
 		int[] dp = new int[amount+1];					//must + 1
 		dp[0] = 0;
 		
-		//Arrays.sort(coins);
-
-		for(int i=1; i<=amount; i++) {					//must start from 1
+		for(int i=1; i<=amount; i++) {					//must start from 1, skip default 0
 			dp[i] = Integer.MAX_VALUE;
 			for(int k=0; k<coins.length; k++) {   
-				if(i>=coins[k] && dp[i-coins[k]] != -1) {
-					System.out.println("@: "+dp[i-coins[k]]);
-					dp[i] = Math.min(dp[i], dp[i-coins[k]]+1);
+				if(i>=coins[k] && dp[i-coins[k]] != -1) {		//must check value != -1 for case2
+					dp[i] = Math.min(dp[i], dp[i-coins[k]]+1);	//i-coins[k]: current amount - coins[k]	
 				}
 			}
 			if(dp[i] == Integer.MAX_VALUE) {
@@ -42,6 +39,7 @@ public class n322_Coin_Change {
 	}
 	public static void main(String[] args) {
 		n322_Coin_Change obj = new n322_Coin_Change();
-		System.out.println(obj.coinChange(new int[] {1, 2, 5}, 11));
+		//System.out.println(obj.coinChange(new int[] {1, 2, 5}, 11));
+		System.out.println(obj.coinChange(new int[] {2}, 3));
 	}
 }

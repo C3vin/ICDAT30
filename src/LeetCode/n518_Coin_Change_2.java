@@ -31,7 +31,17 @@ the answer is guaranteed to fit into signed 32-bit integer
  */
 public class n518_Coin_Change_2 {
 	public int change(int amount, int[] coins) {
+		int[] dp = new int[amount+1];
+		dp[0] = 1;    							//no mater what coin, only 1 way can change (Do nothing for amount of '0')
 		
+		for(int i=0; i<coins.length; i++) {
+			for(int j=coins[i]; j<=amount; j++) {	//why j=coins[i], cuz no need to check unfit amount for new coin
+				//not use coin: dp[j], use coin: dp[j-coins[i]]
+				dp[j] = dp[j] + dp[j-coins[i]];	//j-coins[i]: current amount - coins[i]	
+			}
+		}
+		
+		return dp[amount];
 	}
 	public static void main(String[] args) {
 		n518_Coin_Change_2 obj = new n518_Coin_Change_2();
