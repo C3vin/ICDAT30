@@ -38,12 +38,13 @@ public class n301_Remove_Invalid_Parentheses {
 
 			if(count<0) {
 				for(int j=y; j<=i; j++) {
-					//((s.charAt(j) == par[1] && s.charAt(j - 1) != par[1]) || (s.charAt(j) == par[1] && j == last_j))
+					//if(s.charAt(j) == close && (j == 0 || s.charAt(j-1) != close)) {
+					//if((s.charAt(j) == close && s.charAt(j - 1) != close) || (s.charAt(j) == close && j == y)) {
 					if(s.charAt(j) == close && (j == y || s.charAt(j-1) != close)) {
 						dfs(res, s.substring(0, j)+s.substring(j+1), i, j, open, close);
 					}
 				}
-				return;		//must
+				return;		//must!!!
 			}
 		}
 
@@ -55,6 +56,25 @@ public class n301_Remove_Invalid_Parentheses {
 		}
 	}
 	
+/* https://leetcode.com/problems/remove-invalid-parentheses/discuss/75027/Easy-Short-Concise-and-Fast-Java-DFS-3-ms-solution
+ (s.charAt(j) == pairs[1] && (j == last_j || s.charAt(j-1) != pairs[1])) 
+ Is just saying if the current character is the closed parenthesis for this recursive call (open bracket
+ in the reversed recursive call) and the first character is a bracket which made the expression invalid 
+ or the previous character does not lead to a valid expression (e.g. for string ()())() and i == 4 and 
+ j == 1 i made the expression invalid so to make this expression valid again when removing the jth character, 
+ the j-1th character must be opposite to form a well formed expression as it leads to => s.substring(0, j) = ( 
+ and s.substring(j + 1) = ())() which equals (())() a valid expression! Remember from OPs post we are removing 
+ the first invalid parenthesis we see so s.charAt(j-1) != pairs[1] just says for example if I am a closed bracket 
+ at j then the j-1th character should not be a closed bracket because if it was the prefix would be invalid (The 
+ reason for this is we know i made the expression invalid, so removing first j will make it valid again.
+ 
+ 0 1 2 3 4 5 6
+ ( ) ( ) ) ( )
+         i
+   j 
+s.substring(0, j)+s.substring(j+1)
+         (       +   ())() 
+=>    (())() valid expression       */
 	//https://segmentfault.com/a/1190000013676627  good!
 	public static void main(String[] args) {
 		n301_Remove_Invalid_Parentheses obj = new n301_Remove_Invalid_Parentheses();
