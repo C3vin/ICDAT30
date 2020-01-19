@@ -35,16 +35,16 @@ public class n301_Remove_Invalid_Parentheses {
 			if(s.charAt(i) == close) {
 				count--;
 			}
-
+			//found invalid case
 			if(count<0) {
 				for(int j=y; j<=i; j++) {
 					//if(s.charAt(j) == close && (j == 0 || s.charAt(j-1) != close)) {
 					//if((s.charAt(j) == close && s.charAt(j - 1) != close) || (s.charAt(j) == close && j == y)) {
-					if(s.charAt(j) == close && (j == y || s.charAt(j-1) != close)) {
+					if(s.charAt(j) == close && (j ==y || s.charAt(j-1) != close)) {	//j==y for test first char in this case: ')' 
 						dfs(res, s.substring(0, j)+s.substring(j+1), i, j, open, close);
 					}
 				}
-				return;		//must!!!
+				return;	 //The recursion keeps running until they are all valid parentheses, so we do not need to loop again.
 			}
 		}
 
@@ -55,6 +55,7 @@ public class n301_Remove_Invalid_Parentheses {
 			res.add(reverse);
 		}
 	}
+	
 	
 /* https://leetcode.com/problems/remove-invalid-parentheses/discuss/75027/Easy-Short-Concise-and-Fast-Java-DFS-3-ms-solution
  (s.charAt(j) == pairs[1] && (j == last_j || s.charAt(j-1) != pairs[1])) 
@@ -78,9 +79,10 @@ s.substring(0, j)+s.substring(j+1)
 	//https://segmentfault.com/a/1190000013676627  good!
 	public static void main(String[] args) {
 		n301_Remove_Invalid_Parentheses obj = new n301_Remove_Invalid_Parentheses();
-		System.out.println(obj.removeInvalidParentheses("()())()"));
+		//System.out.println(obj.removeInvalidParentheses("()())()"));
 		//System.out.println(obj.removeInvalidParentheses("(a)())()"));
-		//System.out.println(obj.removeInvalidParentheses(")("));
+		System.out.println(obj.removeInvalidParentheses(")("));
+		System.out.println(obj.removeInvalidParentheses(")()("));
 		//System.out.println(obj.removeInvalidParentheses("()(()"));
 		//System.out.println(obj.removeInvalidParentheses("()"));
 	}
