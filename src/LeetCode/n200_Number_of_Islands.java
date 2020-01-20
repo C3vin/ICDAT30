@@ -67,14 +67,13 @@ public class n200_Number_of_Islands {
 			return 0;
 		}
 
-		boolean[][] marked = new boolean[grid.length][grid[0].length];
 		int[][] direction = {{-1,0}, {1,0}, {0,-1}, {0,1}};
 
 		int count = 0;
 		for(int i=0; i<grid.length; i++) {
 			for(int j=0; j<grid[0].length; j++) {
 				if(grid[i][j] == '1') {
-					bfs(grid, i, j, marked, direction);
+					bfs(grid, i, j, direction);
 					count++;
 				}
 			}
