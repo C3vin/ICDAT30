@@ -25,6 +25,7 @@ Input:
 Output: 3
  */
 public class n200_Number_of_Islands {
+	//DFS
 	public int numIslands(char[][] grid) {
 		if(grid == null || grid.length == 0 || grid[0].length == 0) {
 			return 0;
@@ -60,7 +61,52 @@ public class n200_Number_of_Islands {
 		dfs(grid, i, j+1);
 	}
 
+	//BFS 
 	public int numIslands2(char[][] grid) {
+		if(grid == null || grid.length == 0 || grid[0].length == 0) {
+			return 0;
+		}
+
+		boolean[][] marked = new boolean[grid.length][grid[0].length];
+		int[][] direction = {{-1,0}, {1,0}, {0,-1}, {0,1}};
+
+		int count = 0;
+		for(int i=0; i<grid.length; i++) {
+			for(int j=0; j<grid[0].length; j++) {
+				if(grid[i][j] == '1') {
+					bfs(grid, i, j, marked, direction);
+					count++;
+				}
+			}
+		}
+		return count;
+	}
+	private void bfs(char[][] grid, int i, int j, int[][] direction) {
+		Queue<int[]> queue = new LinkedList<int[]>();
+		queue.offer(new int[] {i,j});
+		// bfs
+		while(queue.size() > 0) {
+			int levelSize = queue.size();
+			for(int k=0; k<levelSize; k++) {
+				int[] curr = queue.poll();
+
+				for(int[] dir : direction) {
+					int x = curr[0] + dir[0];		//search 4 direction 
+					int y = curr[1] + dir[1];
+					if(x >= 0 && x < grid.length && y >= 0 && y < grid[0].length) {
+						if (grid[x][y] == '1') {
+							queue.offer(new int[] { x, y });
+							grid[x][y] = '0';		//after add to queue, change to '0' -> visited
+						}
+					}
+				}
+			}
+		}
+	}
+
+
+	//BFS
+	public int numIslands3(char[][] grid) {
 		if(grid == null || grid.length == 0  || grid[0].length == 0) {
 			return 0;
 		}
@@ -69,7 +115,7 @@ public class n200_Number_of_Islands {
 		for(int i=0; i<grid.length; i++) {
 			for(int j=0; j<grid[0].length; j++) {
 				if(grid[i][j] == '1') {
-					bfs(grid, i, j);
+					bfs3(grid, i, j);
 					count++;
 				}
 			}
@@ -77,7 +123,7 @@ public class n200_Number_of_Islands {
 		return count;
 	}
 
-	private void bfs(char[][] grid, int x, int y) {
+	private void bfs3(char[][] grid, int x, int y) {
 		grid[x][y] = 'X';//F: need to change
 
 		Queue<Integer> queue = new LinkedList<Integer>();
@@ -110,17 +156,23 @@ public class n200_Number_of_Islands {
 	public static void main(String[] args) {
 		n200_Number_of_Islands obj = new n200_Number_of_Islands();
 		char[][] grid = 
-					{{'1','1','0','0'},
+			{{'1','1','0','0'},
 					{'1','1','0','0'},
 					{'0','0','0','1'},
 					{'0','1','0','1'}};
 		System.out.println(obj.numIslands(grid));
 		char[][] grid1 = 
-					{{'1','1','0','0'},
+			{{'1','1','0','0'},
 					{'1','1','0','0'},
 					{'0','0','0','1'},
 					{'0','1','0','1'}};
 		System.out.println(obj.numIslands2(grid1));
+		char[][] grid2 = 
+			{{'1','1','0','0'},
+					{'1','1','0','0'},
+					{'0','0','0','1'},
+					{'0','1','0','1'}};
+		System.out.println(obj.numIslands3(grid2));
 	}
 }
 
