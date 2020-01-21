@@ -45,8 +45,9 @@ public class n261_Graph_Valid_Tree {
 		}
 		//validate if all edge connected: # of visited node should match graph size
 		//return visited.size() == graph.size();
-		return visited.size() == n;
+		return visited.size() == n;		//important: handle last 3 cases, because edges number is different than n 
 	}
+
 	private boolean dfs(HashMap<Integer, ArrayList<Integer>> graph, Set<Integer> visited, int curr, int pre) {
 		if(visited.contains(curr)) {
 			return false;
