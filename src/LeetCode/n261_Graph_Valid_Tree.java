@@ -36,7 +36,8 @@ public class n261_Graph_Valid_Tree {
 			graph.get(edge[0]).add(edge[1]);
 			graph.get(edge[1]).add(edge[0]);
 		}
-
+        //graph: {0=[1, 2, 3], 1=[0, 4], 2=[0], 3=[0], 4=[1]}
+        
 		//dfs(graph, visited, i, -1) and validate cycle
 		Set<Integer> visited = new HashSet<>();
 		if(!dfs(graph, visited, 0, -1)) {
