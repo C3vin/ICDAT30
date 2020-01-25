@@ -39,7 +39,7 @@ public class n026_Remove_Duplicates_from_Sorted_Array {
 		return count + 1;
 	}
 
-	//cs
+	//cs   [LC26 - LC27 template]
 	//time:O(n) space:O(1)
 	public int removeDuplicates1(int[] nums) {
 		if(nums == null || nums.length == 0) {

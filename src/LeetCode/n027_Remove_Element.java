@@ -30,7 +30,7 @@ for (int i = 0; i < len; i++) {
 */
 
 public class n027_Remove_Element {
-	//cs
+	//cs  [LC26 - LC27 template]
 	//time:O(n) space:O(1)
 	 public int removeElement(int[] nums, int val) {
 		 if(nums.length == 0) 
