@@ -1,5 +1,7 @@
 package LeetCode;
 
+import java.util.Arrays;
+
 /*
 Given an array nums of n integers and an integer target, find three integers in nums such that the sum is closest to target. 
 Return the sum of the three integers. You may assume that each input would have exactly one solution.
@@ -11,7 +13,28 @@ The sum that is closest to the target is 2. (-1 + 2 + 1 = 2).
 public class n016_3Sum_Closest {
 	//https://leetcode.wang/leetCode-16-3Sum-Closest.html
 	public int threeSumClosest(int[] nums, int target) {
+		Arrays.sort(nums);
+		int sum = 0;
+		int sub = Integer.MAX_VALUE;
 		
+		for(int i=0; i<nums.length; i++) {
+			int low = i+1;
+			int high = nums.length-1;
+			
+			while(low < high) {
+				if(Math.abs(nums[i] + nums[low] + nums[high] - target) < sub) {
+					sum = nums[i] + nums[low] + nums[high];
+					sub = Math.abs(sum - target);
+				}
+				if(nums[i] + nums[low] + nums[high] > target) {
+					high--;					//F: 
+				} else {
+					System.out.println(nums[i] + nums[low] + nums[high]);
+					low++;
+				}
+			}
+		}
+		return sum;
 	}
 	
 	public int threeSumClosest2(int[] nums, int target) {
