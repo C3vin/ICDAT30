@@ -17,29 +17,33 @@ Output: [-1,-1]
  */
 public class n034_Search_for_a_Range {
 	//https://leetcode.wang/leetCode-34-Find-First-and-Last-Position-of-Element-in-Sorted-Array.html
+	//Binary search solution       almost [LC33 - LC34]
 	public int[] searchRange(int[] nums, int target) {
-		int[] res = {-1,-1};
-		if(nums==null || nums.length==0) return res; 
+		int[] res = new int[] {-1,-1};
+		if(nums == null || nums.length == 0) {
+			return res; 
+		}
 
 		int ll = 0;
 		int lr = nums.length-1;
 		while(ll <= lr) {						
-			int m = (ll + lr)/2;
-			if(nums[m] < target) {				//F: <
-				ll = m+1;
+			int mid = (ll + lr)/2;
+			
+			if(nums[mid] < target) {				//F: <   need to lock ll to the first index
+				ll = mid+1;
 			} else {
-				lr = m-1;
+				lr = mid-1;
 			}
 		}
 
 		int rl =0;
 		int rr = nums.length-1;
 		while(rl <= rr) {
-			int m = (rl + rr)/2;
-			if(nums[m] <= target) {				//F: <=
-				rl = m+1;
+			int mid = (rl + rr)/2;
+			if(nums[mid] <= target) {				//F: <=    need to lock rr to the last index
+				rl = mid+1;
 			} else {
-				rr = m-1;
+				rr = mid-1;
 			}
 		}
 		
