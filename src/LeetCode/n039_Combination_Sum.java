@@ -32,7 +32,7 @@ A solution set is:
  */
 public class n039_Combination_Sum {
 	//backtrack: DFS
-	//LC39 - LC40 templete
+	//LC39 - LC40 template
 	public List<List<Integer>> combinationSum(int[] candidates, int target) {
 		List<List<Integer>> res = new ArrayList<List<Integer>>();
 		List<Integer> tmp = new ArrayList<Integer>();

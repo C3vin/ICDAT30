@@ -62,6 +62,7 @@ public class n040_Combination_Sum_II {
 		}
 	}
 
+	//LC39 - LC40 template, diff with LC39, i>start and add i+1 to helper()
 	public List<List<Integer>> combinationSum2_2(int[] candidates, int target) {
 		List<List<Integer>> res = new ArrayList<List<Integer>>();
 		List<Integer> tmp = new ArrayList<Integer>();
