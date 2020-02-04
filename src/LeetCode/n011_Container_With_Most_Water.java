@@ -19,7 +19,7 @@ public class n011_Container_With_Most_Water {
 		int r = height.length-1;
 		
 		while(l < r) {
-			res = Math.max(res, Math.min(height[l], height[r]) * (r - l));
+			res = Math.max(res, Math.min(height[l], height[r]) * (r - l));	//length * width = square!
 			if(height[l] < height[r]) {
 				l++;
 			} else {
