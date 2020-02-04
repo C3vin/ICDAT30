@@ -16,21 +16,13 @@ Output: 1
 Note: Your algorithm should run in O(n) time and uses constant extra space.
  */
 public class n041_First_Missing_Positive {
-/*	[0,1,2,3]
-	[1,2,-1,4]  => 3
-	
-	[0,1,2,3]
-	[1,2,3,4]
-	[3,4,-1,1]
-	[1,-1,3,4] => 2
-	nums[nums[i] - 1]
-	i=0 nums[0]=3 => nums[2]=-1 != 3
-*/	public int firstMissingPositive(int[] nums) {
+	public int firstMissingPositive(int[] nums) {
+		//https://leetcode.wang/leetCode-41-First-Missing-Positive.html
 		if(nums == null || nums.length == 0) {
 			return 1;
 		}
 		for(int i=0; i<nums.length; i++) {
-			//nums[nums[i] - 1] this is for avoid swap itself
+			//while not if, cuz need to keep check even after swap
 			while(nums[i] > 0 && nums[i] <= nums.length && nums[nums[i] - 1] != nums[i]) {
 				int tmp = nums[nums[i] - 1];
 				nums[nums[i] - 1] = nums[i];
@@ -42,9 +34,9 @@ public class n041_First_Missing_Positive {
 				return i+1;
 			}
 		}
-		return nums.length + 1;
+		return nums.length + 1;		//case []
 	} 
-	
+
 	public static void main(String[] args) {
 		n041_First_Missing_Positive obj = new n041_First_Missing_Positive();
 		System.out.println(obj.firstMissingPositive(new int[] {1,2,0}));

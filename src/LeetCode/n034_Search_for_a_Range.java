@@ -19,7 +19,9 @@ public class n034_Search_for_a_Range {
 	//https://leetcode.wang/leetCode-34-Find-First-and-Last-Position-of-Element-in-Sorted-Array.html
 	public int[] searchRange(int[] nums, int target) {
 		int[] res = {-1,-1};
-		if(nums==null || nums.length==0) return res; 
+		if(nums==null || nums.length==0) {
+			return res; 
+		}
 
 		int ll = 0;
 		int lr = nums.length-1;
@@ -49,10 +51,38 @@ public class n034_Search_for_a_Range {
 		}
 		return res;
 	}
-
+	
+	public int[] searchRange2(int[] nums, int target) {
+		int[] targetRange = {-1, -1};
+		
+		//left -> right
+		for(int i=0; i<nums.length; i++) {
+			if(nums[i] == target) {
+				targetRange[0] = i;
+				break;
+			}
+		}
+		
+		//if can't find any target, just return -1,-1
+		if(targetRange[0] == -1) {
+			return targetRange;
+		}
+		
+		//right -> left
+		for(int j=nums.length-1; j>=0; j--) {		//length-1
+			if(nums[j] == target) {
+				targetRange[1] = j;
+				break;
+			}
+		}
+		
+		return targetRange;
+	}
+	
 	public static void main(String[] args) {
 		n034_Search_for_a_Range obj = new n034_Search_for_a_Range();
 		int[] nums = {5,7,7,8,8,10};
 		System.out.println(Arrays.toString(obj.searchRange(nums, 8)));
+		System.out.println(Arrays.toString(obj.searchRange2(nums, 8)));
 	}
 }
