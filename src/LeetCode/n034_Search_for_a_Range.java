@@ -17,44 +17,46 @@ Output: [-1,-1]
  */
 public class n034_Search_for_a_Range {
 	//https://leetcode.wang/leetCode-34-Find-First-and-Last-Position-of-Element-in-Sorted-Array.html
+	//Binary search solution       almost [LC33 - LC34]
 	public int[] searchRange(int[] nums, int target) {
-		int[] res = {-1,-1};
-		if(nums==null || nums.length==0) {
+		int[] res = new int[] {-1,-1};
+		if(nums == null || nums.length == 0) {
 			return res; 
 		}
 
 		int ll = 0;
 		int lr = nums.length-1;
 		while(ll <= lr) {						
-			int m = (ll + lr)/2;
-			if(nums[m] < target) {				//F: <
-				ll = m+1;
+			int mid = (ll + lr)/2;
+
+			if(nums[mid] < target) {				//F: <   need to lock ll to the first index
+				ll = mid+1;
 			} else {
-				lr = m-1;
+				lr = mid-1;
 			}
 		}
 
 		int rl =0;
 		int rr = nums.length-1;
 		while(rl <= rr) {
-			int m = (rl + rr)/2;
-			if(nums[m] <= target) {				//F: <=
-				rl = m+1;
+			int mid = (rl + rr)/2;
+			if(nums[mid] <= target) {				//F: <=    need to lock rr to the last index
+				rl = mid+1;
 			} else {
-				rr = m-1;
+				rr = mid-1;
 			}
 		}
-		
+
 		if(ll <= rr) {
 			res[0] = ll;
 			res[1] = rr;
 		}
 		return res;
 	}
-	
+
 	public int[] searchRange2(int[] nums, int target) {
 		int[] targetRange = {-1, -1};
-		
+
 		//left -> right
 		for(int i=0; i<nums.length; i++) {
 			if(nums[i] == target) {
@@ -62,12 +64,12 @@ public class n034_Search_for_a_Range {
 				break;
 			}
 		}
-		
+
 		//if can't find any target, just return -1,-1
 		if(targetRange[0] == -1) {
 			return targetRange;
 		}
-		
+
 		//right -> left
 		for(int j=nums.length-1; j>=0; j--) {		//length-1
 			if(nums[j] == target) {
@@ -75,10 +77,10 @@ public class n034_Search_for_a_Range {
 				break;
 			}
 		}
-		
+
 		return targetRange;
 	}
-	
+
 	public static void main(String[] args) {
 		n034_Search_for_a_Range obj = new n034_Search_for_a_Range();
 		int[] nums = {5,7,7,8,8,10};

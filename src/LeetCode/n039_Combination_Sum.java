@@ -31,82 +31,34 @@ A solution set is:
 ]
  */
 public class n039_Combination_Sum {
+	//backtrack: DFS
+	//LC39 - LC40 template
 	public List<List<Integer>> combinationSum(int[] candidates, int target) {
 		List<List<Integer>> res = new ArrayList<List<Integer>>();
 		List<Integer> tmp = new ArrayList<Integer>();
+		Arrays.sort(candidates);		//no need it, but looks more sorted
 		helper(candidates, target, res, tmp, 0);
+		
 		return res;
 	}
 
 	private void helper(int[] candidates, int target, List<List<Integer>> res, List<Integer> tmp, int start) {
-		if(target < 0) 			//deal Neg and return 
-			return;				
+		if(target < 0) {			//deal negative case and return 
+			return;		
+		}
+		
 		if(target == 0) {		//meet the target request, and return [2,2,3]
-			List<Integer> list = new ArrayList<Integer>(tmp);
-			res.add(list);
-			return;				//F: Don't forget! 
+			res.add(new ArrayList<Integer>(tmp));
+			return;			//F: Don't forget! 
 		}
 		for(int i=start; i<candidates.length; i++) {
-			if(i>0 && candidates[i] == candidates[i-1]) {
-				continue;
-			}
+//			if(i>0 && candidates[i] == candidates[i-1]) {
+//				continue;		//no need for LC 39, not contain duplicate combinations. for LC40
+//			}
 			tmp.add(candidates[i]);
 			helper(candidates, target-candidates[i], res, tmp, i);	//why not i+1,the same repeated number may be use unlimited 
 			tmp.remove(tmp.size()-1);
 		}
-	}
-
-	//sol1: backtrack:dfs
-	public List<List<Integer>> combinationSum2(int[] candidates, int target) {
-		List<List<Integer>> res = new ArrayList<List<Integer>>();
-		List<Integer> tmp = new ArrayList<Integer>();
-		Arrays.sort(candidates);
-		dfs(candidates, target, 0, tmp, res);
-
-		return res;
-	}
-
-	private void dfs(int[] candidates, int target, int start, List<Integer> tmp, List<List<Integer>> res) {
-		if(target == 0) {
-			//List<Integer> list = new ArrayList<Integer>(tmp);		//need new list, cuz will remove the old value from tmp
-			//res.add(list);
-			res.add(new ArrayList<Integer>(tmp));
-			return;
-		}
-
-		for(int i=start; i<candidates.length; i++) {
-			if(target < candidates[i]) {
-				continue;
-			}
-			tmp.add(candidates[i]);
-			dfs(candidates, target-candidates[i], i, tmp, res);
-			tmp.remove(tmp.size()-1);
-		}
-	}
-
-	//sol3
-	public List<List<Integer>> combinationSum3(int[] candidates, int target) {
-		List<List<Integer>> res = new ArrayList<>();
-		Arrays.sort(candidates);
-		backtrack(res, new ArrayList<Integer>(), candidates, target, 0);
-		return res;
-	}
-
-	private void backtrack(List<List<Integer>> res, List<Integer> tempList, int[] cand, int remain, int start) {
-		if (remain < 0) {
-			return; /** no solution */
-		}
-		else if (remain == 0) {
-			res.add(new ArrayList<>(tempList));
-		}
-		else {
-			for (int i = start; i < cand.length; i++) { 
-				tempList.add(cand[i]);
-				backtrack(res, tempList, cand, remain-cand[i], i);
-				tempList.remove(tempList.size()-1);
-			} 
-		}
-
 	}
 
 	public static void main(String[] args) {
@@ -116,11 +68,6 @@ public class n039_Combination_Sum {
 		int[] candidates1 = {8,7,4,3};
 		int target1 =11;
 		System.out.println(obj.combinationSum(candidates, target));
-		System.out.println(obj.combinationSum2(candidates, target));
-		System.out.println(obj.combinationSum3(candidates, target));
-		
 		System.out.println(obj.combinationSum(candidates1, target1));
-		System.out.println(obj.combinationSum2(candidates1, target1));
-		System.out.println(obj.combinationSum3(candidates1, target1));
 	}
 }

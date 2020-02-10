@@ -26,11 +26,11 @@ public class n015_3Sum {
 		List<List<Integer>> res = new ArrayList<List<Integer>>();
 		Arrays.sort(nums);
 		
-		for(int i=0; i<nums.length-2; i++) {			//make sure we have 3 nums
-			if(i==0 || nums[i] != nums[i-1]) {			//remove duplicate also F: need i==0
-				int low = i+1;							//start with next one, i+1, cuz sum will use 'i'
-				int high = nums.length-1;
-				int sum = 0 - nums[i];
+		for(int i=0; i<nums.length-2; i++) {			//make sure we have 3 nums, i / i+1 / nums.ength-1
+			if(i == 0 || nums[i] != nums[i-1]) {		//remove duplicate also F: need i==0 (for the first element)
+				int low = i+1;							//i+1
+				int high = nums.length-1;				//nums.ength-1
+				int sum = 0 - nums[i];					//i
 				
 				while(low < high) {
 					if(nums[low] + nums[high] == sum) {
@@ -43,14 +43,13 @@ public class n015_3Sum {
 						while(low < high && nums[high] == nums[high-1]) {
 							high--;
 						}
-						
-						low++;
+						low++;					//e.g. (2:5), (3:4)
 						high--;
 						
-					} else if(nums[low] + nums[high] < sum) {
-						low++;                 //why? cuz sort already
+					} else if(nums[low] + nums[high] < sum) {	//e.g. -1+2 < 4 
+						low++;                  //why? cuz sort already and still need to check rest of the elements
 					} else {
-						high--;
+						high--;					//e.g. 1+2 > 0
 					}
 				}
 			}

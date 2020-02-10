@@ -62,31 +62,32 @@ public class n040_Combination_Sum_II {
 		}
 	}
 
+	//LC39 - LC40 template, diff with LC39, i>start and add i+1 to helper()
 	public List<List<Integer>> combinationSum2_2(int[] candidates, int target) {
 		List<List<Integer>> res = new ArrayList<List<Integer>>();
 		List<Integer> tmp = new ArrayList<Integer>();
 		Arrays.sort(candidates);							//need sort first
-		dfs(candidates, target, 0, tmp, res);
+		dfs(candidates, target, res, tmp, 0);
 		return res;
 	}
 
 	//dfs
-	private void dfs(int[] candidates, int target, int start, List<Integer> tmp, List<List<Integer>> res) {
+	private void dfs(int[] candidates, int target, List<List<Integer>> res, List<Integer> tmp, int start) {
+		if(target < 0) {
+			return;
+		}
+
 		if(target == 0) {
 			res.add(new ArrayList<Integer>(tmp));
 			return;
 		}
 
 		for(int i=start; i<candidates.length; i++) {
-			//target < candidates[i]
-			if(target < 0) {
-				return;
-			}
-			if(i > start  && candidates[i] == candidates[i-1]) {		//i > start, not the first num			
+			if(i>start  && candidates[i] == candidates[i-1]) {			//i > start, not the first num, e.g. 1134 diff 1s	
 				continue;
 			}
 			tmp.add(candidates[i]);
-			dfs(candidates, target-candidates[i], i+1, tmp, res);		//why i+1, make sure no duplicates
+			dfs(candidates, target-candidates[i], res, tmp, i+1);		//why i+1, make sure no duplicates! no like LC39
 			tmp.remove(tmp.size()-1);
 		}
 	}
@@ -97,7 +98,7 @@ public class n040_Combination_Sum_II {
 		int target = 8;
 		System.out.println(obj.combinationSum2(candidates, target));
 		System.out.println(obj.combinationSum2_2(candidates, target));
-		
+
 		int[] candidates1 = {14,6,25,9,30,20,33,34,28,30,16,12,31,9,9,12,34,16,25,32,8,7,30,12,33,20,21,29,24,17,27,34,11,17,30,6,32,21,27,17,16,8,24,12,12,28,11,33,10,32,22,13,34,18,12};
 		int target1 = 27;
 		System.out.println(obj.combinationSum2(candidates1, target1));
