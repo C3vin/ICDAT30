@@ -1,5 +1,7 @@
 package LeetCode;
 
+import java.util.Stack;
+
 /*
 Given n non-negative integers representing an elevation map where the width of each bar is 1, 
 compute how much water it is able to trap after raining.
@@ -73,10 +75,38 @@ public class n042_Trapping_Rain_Water {
 		return res;
 	}
 
+	//stack sol#5
+	//https://leetcode.wang/leetCode-42-Trapping-Rain-Water.html 
+	public int trap3(int[] height) {
+		int sumArea = 0;
+		Stack<Integer> stack = new Stack<Integer>();
+		int current = 0;
+		
+		while(current < height.length) {
+			while(!stack.isEmpty() && height[current] > height[stack.peek()]) {
+				int h = height[stack.peek()];
+				stack.pop();
+				
+				if(stack.isEmpty()) {
+					break;
+				}
+				
+				int distance = current - stack.peek() - 1;
+				int min = Math.min(height[stack.peek()], height[current]);
+				sumArea = sumArea + distance * (min - h);						//height * width 
+			}
+			stack.push(current);
+			current++;
+		}
+		
+		return sumArea;
+	}
+	
 	public static void main(String[] artgs) {
 		n042_Trapping_Rain_Water obj = new n042_Trapping_Rain_Water();
 		int[] height = {0,1,0,2,1,0,1,3,2,1,2,1};
 		System.out.println(obj.trap(height));
 		System.out.println(obj.trap2(height));
+		System.out.println(obj.trap3(height));
 	}
 }
