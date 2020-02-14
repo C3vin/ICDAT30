@@ -29,7 +29,7 @@ public class n937_Reorder_Data_in_Log_Files {
 		if(logs.length == 0) {		//no JAVA for String[] == null
 			return logs;
 		}
-		 HashMap<String,String> map = new HashMap<String, String>();
+		HashMap<String,String> map = new HashMap<String, String>();
 		List<String> letterLogs = new ArrayList<String>();
 		List<String> digitLogs = new ArrayList<String>();
 
@@ -37,38 +37,42 @@ public class n937_Reorder_Data_in_Log_Files {
 			if(Character.isDigit(log.charAt(log.length()-1))) {
 				digitLogs.add(log);
 			} else {
-				String key = log.substring(log.indexOf(" ")+1);
-				String value = log.substring(0, log.indexOf(" "));
-				letterLogs.add(key);
+				String value = log.substring(log.indexOf(" ")+1);
+				String key = log.substring(0, log.indexOf(" "));
+				letterLogs.add(value);
 				map.put(key, value);
 			}
 		}
 		Collections.sort(letterLogs);
-		System.out.println("@: "+letterLogs + " : "+ digitLogs +" m: "+map);	
+		System.out.println(map);
 		String[] res = new String[logs.length];
 
 		StringBuilder sb = new StringBuilder();
-		int i = 0;
-		for(i=0; i<letterLogs.size(); i++) {
+		for(int i=0; i<letterLogs.size(); i++) {
 			sb = new StringBuilder(map.get(letterLogs.get(i)));
-			sb.append(" "+ letterLogs.get(i));
+			sb.append(" "+ letterLogs.get(i) + " ");
 			res[i] = sb.toString();
-			System.out.println("#: "+sb);
 		}
+		//System.out.println("#size: "+res.length + " : " + res[res.length-1]);
 		
-		
-		for(int j=0; j<digitLogs.size(); j++) {
-			res[i++] = digitLogs.get(j);
+		for(int i=0; i<res.length; i++) {
+			if(res[i] == null) {
+				for(int j=0; j<digitLogs.size(); j++) {
+					res[i] = digitLogs.get(j);
+					i++;
+				}
+			}
 		}
 
-		//https://www.itread01.com/content/1543067163.html
-/*		for(String s : res) {
+		//https://www.itread01.com/content/1543067163.html   ISSUE with same letterLog
+		//https://leetcode.com/problems/reorder-data-in-log-files/discuss/193872/Java-Nothing-Fancy-15-lines-2ms-all-clear.
+		for(String s : res) {
 			System.out.println(s);
-		}*/
+		}
 		//separateLettersDigits(logs, letterLogs, digitLogs);
 		//sortLetterLogs(letterLogs);
 		//return generateOutput(letterLogs, digitLogs);
-		return new String[] {};
+		return res;
 	}
 	//"dig1 8 1 5 1","let1 art can","dig2 3 6","let2 own kit dig","let3 art zero"
 	private void separateLettersDigits(String[] logs, List<String> letterLogs, List<String> digitLogs) {
@@ -138,7 +142,8 @@ public class n937_Reorder_Data_in_Log_Files {
 	}
 	public static void main(String[] args) {
 		n937_Reorder_Data_in_Log_Files obj = new n937_Reorder_Data_in_Log_Files();
-		System.out.println(obj.reorderLogFiles(new String[] {"dig1 8 1 5 1","let1 art can","dig2 3 6","let2 own kit dig","let3 art zero"}));
+		//System.out.println(obj.reorderLogFiles(new String[] {"dig1 8 1 5 1","let1 art can","dig2 3 6","let2 own kit dig","let3 art zero"}));
+		System.out.println(obj.reorderLogFiles(new String[] {"a1 9 2 3 1","g1 act car","zo4 4 7","ab1 off key dog","a8 act zoo","a2 act car"}));
 		//System.out.println(obj.reorderLogFiles2(new String[] {"dig1 8 1 5 1","let1 art can","dig2 3 6","let2 own kit dig","let3 art zero"}));
 	}
 }
