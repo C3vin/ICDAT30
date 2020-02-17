@@ -23,7 +23,7 @@ public class n084_Largest_Rectangle_in_Histogram {
 		
 		for(int h : heightSet) {
 			int width = 0;
-			int maxWidth = 1;		//?
+			int maxWidth = 1;		//must set default to 1
 			for(int i=0; i<heights.length; i++) {
 				if(heights[i] >= h) {
 					width++;
@@ -39,65 +39,32 @@ public class n084_Largest_Rectangle_in_Histogram {
 		return maxArea;
 	}
 	
-	public int largestRectangleArea2(int[] heights) {
-		if(heights == null || heights.length == 0) {
-			return 0;
-		}
-		Stack<Integer> stack = new Stack<Integer>();
-		
-		int res = 0;
-		
-		for(int i=0; i<heights.length; i++) {
-			//int h = i == heights.length ? 0 : heights[i];
-			
-			int h = 0;
-			if(i == heights.length) {
-				h = 0;
-			} else {
-				h = heights[i];
-			}
-			
-			//System.out.println("h: "+h);
-			
-			while(!stack.isEmpty() && h<heights[stack.peek()]) {
-				int height = heights[stack.pop()];
-				int start = stack.isEmpty() ? -1 : stack.peek(); //?
-				int area = height * (i - start -1);
-				
-				res = Math.max(res, area);
-			}
-			stack.push(i);
-		}
-		
-		return res;
-	}
-	
 	// LC42-LC84 Stack template
-	public int largestRectangleArea3(int[] heights) {
+	public int largestRectangleArea2(int[] heights) {
 		Stack<Integer> stack = new Stack<Integer>();
-		stack.push(-1);
+		stack.push(-1);		//mark the end 
 		
 		int maxArea = 0;
 		int current = 0;
 		
 		while(current < heights.length) {
 			//why not using isEmpty to check, cuz '-1' is always in stack (mark the end)
-			while(stack.peek() != -1 && heights[current] <= heights[stack.peek()]) {
+			while(stack.peek() != -1 && heights[current] <= heights[stack.peek()]) {		//F: diff than 42
 				int h = heights[stack.pop()];
-				
 				int distance = current - stack.peek() - 1;
+				
 				maxArea = Math.max(maxArea, distance * h);
 			}
 			stack.push(current);
 			current++;
 		}
-
-		while(stack.peek() != -1) {
+		//reach the end of the array, we pop all the elements of the stack e.g. handle index 1,4,5 
+		while(stack.peek() != -1) {			
 			int h = heights[stack.pop()];
-			int distance = heights.length - stack.peek() - 1;
+			int distance = heights.length - stack.peek() - 1;			//F: not current 
+			
 			maxArea = Math.max(maxArea, distance * h);
 		}
-		
 		
 		return maxArea;
 	}
@@ -106,6 +73,5 @@ public class n084_Largest_Rectangle_in_Histogram {
 		n084_Largest_Rectangle_in_Histogram obj = new n084_Largest_Rectangle_in_Histogram();
 		System.out.println(obj.largestRectangleArea(new int[] {2,1,5,6,2,3}));
 		System.out.println(obj.largestRectangleArea2(new int[] {2,1,5,6,2,3}));
-		System.out.println(obj.largestRectangleArea3(new int[] {2,1,5,6,2,3}));
 	}
 }

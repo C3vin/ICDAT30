@@ -78,8 +78,9 @@ public class n042_Trapping_Rain_Water {
 	//stack sol#5
 	//https://leetcode.wang/leetCode-42-Trapping-Rain-Water.html 
 	public int trap3(int[] height) {
-		int sumArea = 0;
 		Stack<Integer> stack = new Stack<Integer>();
+		
+		int sumArea = 0;
 		int current = 0;
 		
 		while(current < height.length) {
@@ -87,13 +88,14 @@ public class n042_Trapping_Rain_Water {
 				int h = height[stack.peek()];
 				stack.pop();
 				
-				if(stack.isEmpty()) {
+				if(stack.isEmpty()) {			//must check! 
 					break;
 				}
 				
 				int distance = current - stack.peek() - 1;
-				int min = Math.min(height[stack.peek()], height[current]);
-				sumArea = sumArea + distance * (min - h);						//height * width 
+				
+				int min = Math.min(height[stack.peek()], height[current]);		//diff than LC84
+				sumArea = sumArea + distance * (min - h);						//width * height(min)  
 			}
 			stack.push(current);
 			current++;
