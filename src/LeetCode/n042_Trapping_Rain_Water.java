@@ -102,7 +102,7 @@ public class n042_Trapping_Rain_Water {
 		}
 		
 		return sumArea;
-	}
+	} 
 	
 	public static void main(String[] artgs) {
 		n042_Trapping_Rain_Water obj = new n042_Trapping_Rain_Water();
