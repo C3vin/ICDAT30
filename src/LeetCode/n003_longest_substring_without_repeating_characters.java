@@ -2,11 +2,25 @@ package LeetCode;
 
 import java.util.HashMap;
 import java.util.HashSet;
+/*
+Given a string, find the length of the longest substring without repeating characters.
 
-//Given "abcabcbb", the answer is "abc", which the length is 3.
-//Given "bbbbb", the answer is "b", with the length of 1.
-//Given "pwwkew", the answer is "wke", with the length of 3. 
-//Note that the answer must be a substring, "pwke" is a subsequence and not a substring.
+Example 1:
+Input: "abcabcbb"
+Output: 3 
+Explanation: The answer is "abc", with the length of 3. 
+
+Example 2:
+Input: "bbbbb"
+Output: 1
+Explanation: The answer is "b", with the length of 1.
+
+Example 3:
+Input: "pwwkew"
+Output: 3
+Explanation: The answer is "wke", with the length of 3. 
+             Note that the answer must be a substring, "pwke" is a subsequence and not a substring.
+*/
 //abcabcbb
 //iiiiiiii
 //ssss s s
@@ -76,28 +90,32 @@ public class n003_longest_substring_without_repeating_characters {
 	
 	//Sliding Window, HashMap
 	public int lengthOfLongestSubstring3(String s) {
-		HashMap<Character, Integer> map = new HashMap<Character, Integer>();
+		HashMap<Character, Integer> map = new HashMap<Character, Integer>();		//Character not String type
 
-		int n = s.length();
 		int res = 0;
-		int i=0;
-		int j=0;
+		int start = 0;
+		int current = 0;
 		
-		while(i < n && j < n) {
-			if(map.containsKey(s.charAt(j))) {
-				i = Math.max(map.get(s.charAt(j)), i);	//need this Math.max, cuz i might take old value! 
+		while(start < s.length() && current < s.length()) {
+			if(map.containsKey(s.charAt(current))) {
+				start = Math.max(map.get(s.charAt(current))+1, start);	//need this Math.max, cuz i might take old value! 
 			}
-			res = Math.max(res, j-i+1);
-			map.put(s.charAt(j), j+1);		//add or update value
-			j++;
+			map.put(s.charAt(current), current);		//add or update value
+			res = Math.max(res, current-start+1);
+			current++;
 		}
 		return res;
 	}
 	public static void main(String[] args) {
 		n003_longest_substring_without_repeating_characters obj = new n003_longest_substring_without_repeating_characters();
-		String s = "tmmzuxt";
-		System.out.println(obj.lengthOfLongestSubstring(s));
-		System.out.println(obj.lengthOfLongestSubstring2(s));
-		System.out.println(obj.lengthOfLongestSubstring3(s));
+		System.out.println(obj.lengthOfLongestSubstring("abcabcbb"));
+		System.out.println(obj.lengthOfLongestSubstring2("abcabcbb"));
+		System.out.println(obj.lengthOfLongestSubstring3("abcabcbb"));
+		System.out.println(obj.lengthOfLongestSubstring("bbbbb"));
+		System.out.println(obj.lengthOfLongestSubstring2("bbbbb"));
+		System.out.println(obj.lengthOfLongestSubstring3("bbbbb"));
+		System.out.println(obj.lengthOfLongestSubstring("pwwkew"));
+		System.out.println(obj.lengthOfLongestSubstring2("pwwkew"));
+		System.out.println(obj.lengthOfLongestSubstring3("pwwkew"));
 	}
 }
