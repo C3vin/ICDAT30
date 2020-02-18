@@ -21,27 +21,71 @@ public class n238_Product_of_Array_Except_Self {
 			res[i] = res[i-1] * nums[i-1];
 		}
 		
-		for(int i=0; i<len; i++)
-			System.out.println("left: " + res[i]);
-		
 		int right = 1;
 		for (int i=len-1; i>=0; i--) {
 			res[i] = res[i] * right;
 			right = right * nums[i];
 			
-			System.out.println(i+ " : " +res[i] + " : " + right);
+			//System.out.println(i+ " : " +res[i] + " : " + right);
 			/*res[i] *= right;
 			right *= nums[i];*/
 		}
 
-		for(int i=0; i<len; i++)
-			System.out.println(res[i]);
-
 		return res;
 	}
+	
+	//https://www.cnblogs.com/grandyang/p/4650187.html
+	public int[] productExceptSelf2(int[] nums) {
+		int[] res = new int[nums.length];
+		int[] fwd = new int[nums.length];
+		int[] bwd = new int[nums.length];
+		fwd[0] = 1;
+		bwd[nums.length-1] = 1;
+		
+		for(int i=1; i<nums.length; i++) {
+			fwd[i] = fwd[i-1] * nums[i-1];
+		}
+		for(int i=nums.length-2; i>=0; i--) {		//-2 not -1
+			bwd[i] = bwd[i+1] * nums[i+1];
+		}
+		for(int i=0; i<nums.length; i++) {
+			res[i] = fwd[i] * bwd[i]; 
+		}
+		
+//		for(int i=nums.length-1; i>=0; i--) {
+//			res[i] = fwd[i] * bwd[i];
+//		}
+		
+		for(int r : res) 
+			System.out.println(r);
+		
+		return res;
+	}
+	public int[] productExceptSelf3(int[] nums) {
+		int[] res = new int[nums.length];
+		res[0] = 1;
+		
+		int bwd = 1;
+		
+		for(int i=1; i<nums.length; i++) {
+			res[i] = res[i-1] * nums[i-1];
+		}
+		for(int i=nums.length-1; i>=0; i--) {
+			res[i] = res[i] * bwd;
+			bwd = bwd * nums[i];				//bwd[i] = bwd[i+1] * nums[i+1] e.g. bwd[3] = bwd[4] * nums[4]
+		}
+		
+		for(int r : res) 
+			System.out.println(r);
+		
+		return res;
+	}
+	
 	public static void main(String[] args) {
 		n238_Product_of_Array_Except_Self obj = new n238_Product_of_Array_Except_Self();
 		int[] nums = {1,2,3,4};
 		System.out.println(obj.productExceptSelf(nums));
+		System.out.println(obj.productExceptSelf2(nums));
+		System.out.println(obj.productExceptSelf3(nums));
 	}
 }
