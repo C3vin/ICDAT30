@@ -12,30 +12,8 @@ Follow up:
 Could you solve it with constant space complexity? (The output array does not count as extra space for the purpose of space complexity analysis.)
  */
 public class n238_Product_of_Array_Except_Self {
-	public int[] productExceptSelf(int[] nums) {
-		int len = nums.length;
-		int[] res = new int[len];
-
-		res[0] = 1;
-		for (int i=1; i<len; i++) {
-			res[i] = res[i-1] * nums[i-1];
-		}
-		
-		int right = 1;
-		for (int i=len-1; i>=0; i--) {
-			res[i] = res[i] * right;
-			right = right * nums[i];
-			
-			//System.out.println(i+ " : " +res[i] + " : " + right);
-			/*res[i] *= right;
-			right *= nums[i];*/
-		}
-
-		return res;
-	}
-	
 	//https://www.cnblogs.com/grandyang/p/4650187.html
-	public int[] productExceptSelf2(int[] nums) {
+	public int[] productExceptSelf(int[] nums) {
 		int[] res = new int[nums.length];
 		int[] fwd = new int[nums.length];
 		int[] bwd = new int[nums.length];
@@ -48,20 +26,16 @@ public class n238_Product_of_Array_Except_Self {
 		for(int i=nums.length-2; i>=0; i--) {		//-2 not -1
 			bwd[i] = bwd[i+1] * nums[i+1];
 		}
+		
 		for(int i=0; i<nums.length; i++) {
 			res[i] = fwd[i] * bwd[i]; 
 		}
-		
-//		for(int i=nums.length-1; i>=0; i--) {
-//			res[i] = fwd[i] * bwd[i];
-//		}
-		
-		for(int r : res) 
-			System.out.println(r);
-		
+
 		return res;
 	}
-	public int[] productExceptSelf3(int[] nums) {
+	
+	//optimization
+	public int[] productExceptSelf2(int[] nums) {
 		int[] res = new int[nums.length];
 		res[0] = 1;
 		
@@ -75,9 +49,6 @@ public class n238_Product_of_Array_Except_Self {
 			bwd = bwd * nums[i];				//bwd[i] = bwd[i+1] * nums[i+1] e.g. bwd[3] = bwd[4] * nums[4]
 		}
 		
-		for(int r : res) 
-			System.out.println(r);
-		
 		return res;
 	}
 	
@@ -86,6 +57,5 @@ public class n238_Product_of_Array_Except_Self {
 		int[] nums = {1,2,3,4};
 		System.out.println(obj.productExceptSelf(nums));
 		System.out.println(obj.productExceptSelf2(nums));
-		System.out.println(obj.productExceptSelf3(nums));
 	}
 }
