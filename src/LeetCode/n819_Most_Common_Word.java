@@ -63,8 +63,8 @@ public class n819_Most_Common_Word {
 	}
 	public static void main(String[] args) {
 		n819_Most_Common_Word obj = new n819_Most_Common_Word();
-		//System.out.println(obj.mostCommonWord("Bob hit a ball, the hit BALL flew far after it was hit.", new String[] {"hit"}));
-		//System.out.println(obj.mostCommonWord("Bob!", new String[] {"hit"}));
+		System.out.println(obj.mostCommonWord("Bob hit a ball, the hit BALL flew far after it was hit.", new String[] {"hit"}));
+		System.out.println(obj.mostCommonWord("Bob!", new String[] {"hit"}));
 		System.out.println(obj.mostCommonWord("Bob. hit!, ..baLl?", new String[] {"bob", "hit"}));
 	}
 }
