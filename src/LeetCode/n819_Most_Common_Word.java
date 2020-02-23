@@ -46,10 +46,11 @@ public class n819_Most_Common_Word {
 			if(!set.contains(word) && !word.equals("")) {			//deal with "" buz regex will created "" after split
 				map.put(word, map.getOrDefault(word, 0)+1);
 				
-				int count = map.get(word);
+				max = Math.max(max, map.get(word));
+			/*	int count = map.get(word);
 				if(count > max) {
 					max = count;
-				}
+				}*/
 			}
 		}
 		
