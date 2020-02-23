@@ -19,13 +19,13 @@ public class n268_Missing_Number {
     public int missingNumber(int[] nums) {
     	Arrays.sort(nums);
     	
-        if(nums.length == 0 || nums[0] != 0) {
+        if(nums.length == 0 || nums[0] != 0) {				//handle [1] -> 0
     		return 0;
     	}
     	
     	for(int i=1; i<nums.length; i++) {
     		if(nums[i] - nums[i-1] != 1) {
-    			return nums[i-1]+1;
+    			return i;	//OK: nums[i-1]+1;
     		}
     	}
     	
