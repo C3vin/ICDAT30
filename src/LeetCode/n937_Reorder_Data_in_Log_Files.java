@@ -27,6 +27,8 @@ Output: ["let1 art can","let3 art zero","let2 own kit dig","dig1 8 1 5 1","dig2 
  */
 public class n937_Reorder_Data_in_Log_Files {
 	//Amazon
+	//https://www.itread01.com/content/1543067163.html   ISSUE with same letterLog
+	//https://leetcode.com/problems/reorder-data-in-log-files/discuss/193872/Java-Nothing-Fancy-15-lines-2ms-all-clear
 	public String[] reorderLogFiles(String[] logs) {
 		if(logs.length == 0) {		//no JAVA for String[] == null
 			return logs;
@@ -65,8 +67,6 @@ public class n937_Reorder_Data_in_Log_Files {
 			res[i] = letterLogs.get(i);
 		}
 
-		//https://www.itread01.com/content/1543067163.html   ISSUE with same letterLog
-		//https://leetcode.com/problems/reorder-data-in-log-files/discuss/193872/Java-Nothing-Fancy-15-lines-2ms-all-clear.
 		for(String s : res) {
 			System.out.println("res: "+s);
 		}
@@ -119,7 +119,7 @@ public class n937_Reorder_Data_in_Log_Files {
 		}
 		
 		for(String s : output) {
-			System.out.println("@: "+s);
+			System.out.println("output: "+s);
 		}
 		
 		return output;  
