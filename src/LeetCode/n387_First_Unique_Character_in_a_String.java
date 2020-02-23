@@ -35,7 +35,7 @@ public class n387_First_Unique_Character_in_a_String {
 		int[] count = new int[26];
 		
 		for(int i=0; i<s.length(); i++) {
-			count[s.charAt(i) - 'a']++;
+			count[s.charAt(i) - 'a']++;					//F: need ++ 
 		}
 		
 		for(int i=0; i<s.length(); i++) {
