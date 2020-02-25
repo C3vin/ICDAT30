@@ -39,29 +39,27 @@ public class n001_two_sum {
 	}
 	
 	//Hash Table
-	public int[] twoSum_hash(int[] nums, int target) {
+	public int[] twoSum2(int[] nums, int target) {
 		Map<Integer, Integer> map = new HashMap<Integer, Integer> ();
 		int[] res = new int[2];
+		
 		for (int i=0; i<nums.length; i++) {
 			int complement = target - nums[i];
 			if (map.containsKey(complement)) {		//first map is empty 
 				res[0] = map.get(complement);
 				res[1] = i;
-				return res;
+				//return res;
  				//return new int[] {map.get(complement), i};
 			}
 			map.put(nums[i], i);
 		}
-		return null;
+		return res;				//return null, cuz move res in here
 	}
 
 	public static void main(String[] args) {
 		n001_two_sum obj = new n001_two_sum();
-		int [] nums = {3,2,4};
-		int [] nums1 = {3,2,4};
-		int target = 6;
 
-		//System.out.println(Arrays.toString(obj.twoSum(nums, target)));		//The reason order int array
-		System.out.println(Arrays.toString(obj.twoSum_hash(nums1, target)));	
+		System.out.println(Arrays.toString(obj.twoSum(new int[] {2,7,11,15}, 9)));		//The reason order int array
+		System.out.println(Arrays.toString(obj.twoSum2(new int[] {2,7,11,15}, 9)));	
 	}
 }
