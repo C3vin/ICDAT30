@@ -98,7 +98,9 @@ public class n003_longest_substring_without_repeating_characters {
 		
 		while(start < s.length() && current < s.length()) {
 			if(map.containsKey(s.charAt(current))) {
-				start = Math.max(map.get(s.charAt(current))+1, start);	//need this Math.max, cuz i might take old value! 
+				//e.g. pwwkew
+				//     s ss    (0->2->3)
+				start = Math.max(map.get(s.charAt(current))+1, start);	
 			}
 			map.put(s.charAt(current), current);		//add or update value
 			res = Math.max(res, current-start+1);
