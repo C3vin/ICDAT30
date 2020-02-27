@@ -27,7 +27,9 @@ public class n015_3Sum {
 		Arrays.sort(nums);
 		
 		for(int i=0; i<nums.length-2; i++) {			//make sure we have 3 nums, i / i+1 / nums.ength-1
-			if(i == 0 || nums[i] != nums[i-1]) {		//remove duplicate also F: need i==0 (for the first element)
+			//remove duplicate also F: need i==0 (for the first element)
+			//nums[i-1] not nums[i+1] cuz low = i+1, if check nums[i+1] will miss (-1,-1,2) 
+			if(i == 0 || nums[i] != nums[i-1]) {		
 				int low = i+1;							//i+1
 				int high = nums.length-1;				//nums.ength-1
 				int sum = 0 - nums[i];					//i
@@ -36,13 +38,14 @@ public class n015_3Sum {
 					if(nums[low] + nums[high] == sum) {
 						res.add(Arrays.asList(nums[i], nums[low], nums[high]));
 						
-						//handle duplicate here
-						while(low < high && nums[low] == nums[low+1]) {
+						//handle duplicate case e.g. -4,-1,-1,-1,1,2 (-1,-1,2) so no need another (-1,-1,2) 
+						while(low < high && nums[low] == nums[low+1]) {			
 							low++;
 						}
 						while(low < high && nums[high] == nums[high-1]) {
 							high--;
 						}
+						//MOST add these two, for the normal case
 						low++;					//e.g. (2:5), (3:4)
 						high--;
 						
