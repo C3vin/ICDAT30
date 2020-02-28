@@ -22,16 +22,16 @@ public class n016_3Sum_Closest {
 			int high = nums.length-1;
 			
 			while(low < high) {
-				if(Math.abs(nums[i] + nums[low] + nums[high] - target) < sub) {
+				if(Math.abs(nums[i] + nums[low] + nums[high] - target) < sub) {		//F: target
 					sum = nums[i] + nums[low] + nums[high];
 					sub = Math.abs(sum - target);
 				}
-				if(nums[i] + nums[low] + nums[high] > target) {
-					high--;					//F: 
-				} else {
-					System.out.println(nums[i] + nums[low] + nums[high]);
-					low++;
-				}
+					
+				if(nums[i]+nums[low]+nums[high] < target) {
+                    low++;
+                } else {
+                    high--;
+                }
 			}
 		}
 		return sum;
