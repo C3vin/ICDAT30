@@ -73,13 +73,15 @@ public class n013_roman_to_integer {
 				break;
 			}
 		}
+
 		int sum = 0;
-		for(int i=0; i<transfer.length-1; i++) {
+		for(int i=0; i<transfer.length-1; i++) {	 	//transfer.length-1, for the return
 			if(transfer[i] < transfer[i+1])
-				sum = sum - transfer[i];			//why? e.g. IV, sum = 0 - 1 = -1. when return will do (-1) + last (5) = 4
+				sum = sum - transfer[i];				//why? e.g. IV, sum = 0 - 1 = -1. when return will do (-1) + last (5) = 4
 			else {
 				sum = sum + transfer[i];
 			}
+			System.out.println(sum);
 		}
 		return sum + transfer[transfer.length-1]; 		//F: need to add last value, because we use 0 ~ transfer.length-1
 	}
@@ -127,9 +129,11 @@ public class n013_roman_to_integer {
 		System.out.println(obj.romanToInt("VI"));
 		System.out.println(obj.romanToInt("CV"));
 		System.out.println(obj.romanToInt("IV"));
+		System.out.println(obj.romanToInt("MCMXCIV"));
 		
 		System.out.println(obj.romanToInt2("VI"));
 		System.out.println(obj.romanToInt2("CV"));
 		System.out.println(obj.romanToInt2("IV"));
+		System.out.println(obj.romanToInt2("MCMXCIV"));
 	}
 }
