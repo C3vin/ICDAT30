@@ -40,10 +40,10 @@ public class n101_Symmetric_Tree {
 		if(pLeft == null && pRight == null) {		//must on the top, handle leaf
 			return true;
 		}
-		if(pLeft.val != pRight.val) {
+		if(pLeft == null || pRight == null) {		//must before != case, handle null
 			return false;
 		}
-		if(pLeft == null || pRight == null) {
+		if(pLeft.val != pRight.val) {
 			return false;
 		}
 
