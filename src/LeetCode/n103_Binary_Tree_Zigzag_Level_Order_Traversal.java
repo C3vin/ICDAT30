@@ -4,7 +4,26 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Queue;
 
+/*
+Given a binary tree, return the zigzag level order traversal of its nodes' values. 
+(ie, from left to right, then right to left for the next level and alternate between).
+
+For example:
+Given binary tree [3,9,20,null,null,15,7],
+    3
+   / \
+  9  20
+    /  \
+   15   7
+return its zigzag level order traversal as:
+[
+  [3],
+  [20,9],
+  [15,7]
+]
+ */
 public class n103_Binary_Tree_Zigzag_Level_Order_Traversal {
 	public class TreeNode {
 		int val;
@@ -14,49 +33,45 @@ public class n103_Binary_Tree_Zigzag_Level_Order_Traversal {
 		TreeNode(int x) { val = x; }
 		TreeNode(String v) { v = null; }
 	}
+
 	public List<List<Integer>> zigzagLevelOrder(TreeNode root) {
-		List<List<Integer>> res = new ArrayList<List<Integer>>();
-		if(root == null) return res;
-		
-		LinkedList<TreeNode> stack = new LinkedList<TreeNode>();
-		stack.push(root);
-		int lastlevel = 1;
-		int curlevel = 0;
-		List<Integer> tmp = new ArrayList<Integer>();
-		boolean flag = false;
-		
-		while(!stack.isEmpty()) {
-			TreeNode cur = stack.pollLast();
-			tmp.add(cur.val);
-			lastlevel--;
-			
-			if(cur.left != null) {
-				stack.push(cur.left);
-				curlevel++;
-			}
-			if(cur.right != null) {
-				stack.push(cur.right);
-				curlevel++;
-			}
-			if(lastlevel == 0) {
-				lastlevel = curlevel;
-				curlevel = 0;
-				if(flag) {
-					Collections.reverse(tmp);
-					flag = false;
-				}
-				else
-					flag = true;
-				
-				res.add(tmp);
-				tmp = new ArrayList<Integer>();
-			}
-			
+		ArrayList<List<Integer>> res = new ArrayList<List<Integer>>();
+		if(root == null) {
+			return res;
 		}
-		
+
+		Queue<TreeNode> queue = new LinkedList<TreeNode>();
+		queue.offer(root);
+        boolean flag = true;
+        
+		while(!queue.isEmpty()) {
+			int levelSize = queue.size();
+			List<Integer> node = new ArrayList<Integer>();
+
+			for(int i=0; i<levelSize; i++) {
+				TreeNode tmp = queue.poll();
+				if(tmp != null) {
+					if(flag) {
+						node.add(tmp.val);
+					} else {
+						node.add(0, tmp.val);
+					}
+				}
+				if(tmp.left != null) {
+					queue.offer(tmp.left);
+				}
+				if(tmp.right != null) {
+					queue.offer(tmp.right);
+				}
+
+			}
+
+			flag = flag ? false : true;				//F: do the zigzag
+			res.add(node);
+		}
+
 		return res;
 	}
-	
 	public static void main(String[] args) {
 		n103_Binary_Tree_Zigzag_Level_Order_Traversal obj = new n103_Binary_Tree_Zigzag_Level_Order_Traversal();
 		TreeNode p1 = obj.new TreeNode(3);
