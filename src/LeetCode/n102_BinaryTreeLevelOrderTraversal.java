@@ -31,74 +31,60 @@ public class n102_BinaryTreeLevelOrderTraversal {
 		TreeNode(int x) { val = x; }
 		TreeNode(String v) { v = null; }
 	}
+	
+	//BFS
 	public List<List<Integer>> levelOrder(TreeNode root) {
 		List<List<Integer>> res = new ArrayList<List<Integer>>();
-		List<Integer> tmp = new ArrayList<Integer>();
-		if(root == null) return res;
-
-		LinkedList<TreeNode> queue = new LinkedList<TreeNode>(); 
-		queue.add(root);
-
-		int curlevel = 0;
-		int lastlevel = 1;
-
+		if(root == null) {
+			return res;
+		}
+		
+		Queue<TreeNode> queue = new LinkedList<TreeNode>();
+		queue.offer(root);
+		
 		while(!queue.isEmpty()) {
-			TreeNode cur = queue.poll();
-			lastlevel--;
-			tmp.add(cur.val);
-
-			if(cur.left != null) {
-				queue.add(cur.left);		//queue not tmp
-				curlevel++;
+			int levelSize = queue.size();
+			List<Integer> node = new ArrayList<Integer>(); 				//Need 
+			for(int i=0; i<levelSize; i++) {
+				TreeNode tmp = queue.poll();
+				if(tmp != null) {
+					node.add(tmp.val);
+				}
+				if(tmp.left != null) {
+					queue.offer(tmp.left);
+				}
+				if(tmp.right != null) {
+					queue.offer(tmp.right);
+				}
 			}
-			if(cur.right != null) {
-				queue.add(cur.right);
-				curlevel++;
-			}
-			if(lastlevel == 0) {
-				lastlevel = curlevel;
-				curlevel = 0;
-				res.add(tmp);
-				tmp = new ArrayList<Integer>();
-			}
+			res.add(node);												//No need to new again!
 		}
 		return res;
-
-		//Jidong
-		/*		List<List<Integer>> results = new ArrayList<List<Integer>>();
-		LinkedList<TreeNode> queue = new LinkedList<TreeNode>();
-
-		if(root != null) 
-			queue.add(root);
-		else
-			return results;
-		int current = 1;
-
-		List<Integer> tmp = new ArrayList<Integer>();
-		while(queue.size() > 0) {
-			TreeNode p = queue.poll();
-			System.out.println(p.val);
-			tmp.add(p.val);
-			System.out.println("queue size: "+queue.size());
-			if(p.left != null) queue.add(p.left);
-			if(p.right != null) queue.add(p.right);
-
-			if(tmp.size() == current) {
-				System.out.println("r: " +tmp.size() + " w: " +current);
-				System.out.println("queue size2: "+queue.size());
-				current = queue.size();
-				results.add(tmp);
-				tmp = new ArrayList<Integer>();
-			}
-		}
-		System.out.println(results);
-		return results;*/
 	}
 	
 	//DFS
 	public List<List<Integer>> levelOrder2(TreeNode root) {
+		List<List<Integer>> res = new ArrayList<List<Integer>>();
+		DFS(root, 0, res);
+		
+		return res;
+	}
+	private void DFS(TreeNode root, int level, List<List<Integer>> res) {
+		if(root == null) {
+			return;
+		}
+
+		if(res.size() <= level) {
+			res.add(new ArrayList<Integer>());
+		}
+		
+		res.get(level).add(root.val);
+		
+		DFS(root.left, level+1, res);
+		DFS(root.right, level+1, res);
 		
 	}
+	
 	public static void main(String[] args) {
 		//[3,9,20,null,null,15,7]
 		/**
@@ -125,7 +111,7 @@ public class n102_BinaryTreeLevelOrderTraversal {
 		p3.left = p6;
 
 		System.out.println(p1.val + " " + p1.left.val + " " + p1.right.val + " "+ p2.left.v + " " + p2.right.v + " " + p3.left.val + " " +p3.right.val);
-		//System.out.println(obj.levelOrder(p1));
+		System.out.println(obj.levelOrder(p1));
 		System.out.println(obj.levelOrder2(p1));
 	}
 }
