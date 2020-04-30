@@ -50,7 +50,7 @@ public class n126_Word_Ladder_II {
 	public List<List<String>> findLadders(String beginWord, String endWord, List<String> wordList) {
 		List<List<String>> res = new ArrayList<List<String>>();
 		Map<String, Integer> distMap = new HashMap<String, Integer>();
-		HashSet<String> dict = new HashSet<>(wordList);						//wordList
+		HashSet<String> dict = new HashSet<String>(wordList);				//wordList
 
 		bfs(beginWord, endWord, dict, distMap);  							//begin, end
 		dfs(endWord, beginWord, new ArrayList<String>(), distMap, res);  	//end, begin
@@ -64,25 +64,27 @@ public class n126_Word_Ladder_II {
 			res.add(newPath);  
 			return;  
 		}  
-		if (!distMap.containsKey(cur)) {			//must!!!
+		
+		if (!distMap.containsKey(cur)) {			//must!!! for no match case and need to distMap.get(cur); //NullPointerException
             return;
         }
-		
-		newPath.add(cur);  							//start with 'endWord'
+ 		newPath.add(cur);  							//start with 'endWord'
 		int next_deep = distMap.get(cur);  			//distance for cur
+		
 		for (int i=0; i<cur.length(); i++){  
 			StringBuilder newWord = new StringBuilder(cur);
 			for (char ch='a'; ch<='z'; ch++){
-				newWord.setCharAt(i, ch);
+				newWord.setCharAt(i, ch); 
 				//distance between cur & newWord need to be '1'
 				if (distMap.get(newWord.toString()) != null && distMap.get(newWord.toString()) == next_deep-1) {  
-					List<String> newPathArray = new ArrayList<String>(newPath);    
+					List<String> newPathArray = new ArrayList<String>(newPath);
 					dfs(newWord.toString(), end, newPathArray, distMap, res);  
 				}
 			}  
 		}  
-	}  
-	private void bfs(String beginWord, String endWord, Set<String> dict, Map<String, Integer> distMap){ 
+	}
+	
+	private void bfs(String beginWord, String endWord, Set<String> dict, Map<String, Integer> distMap) { 
 		distMap.put(beginWord, 1);						//add 1
 
 		Queue<String> queue = new LinkedList<String>();
@@ -96,8 +98,8 @@ public class n126_Word_Ladder_II {
 					StringBuilder newWord = new StringBuilder(cur);			
 					for(char ch='a'; ch<='z'; ch++) {
 						newWord.setCharAt(j, ch);
-						//set -> contains, map -> containsKey
-						if(dict.contains(newWord.toString()) && !distMap.containsKey(newWord.toString())) {   
+						//set -> contains, map -> containsKey	 
+						if(dict.contains(newWord.toString()) && !distMap.containsKey(newWord.toString())) {   //check distMap handle beginWord in wordList
 							if(newWord.toString().equals(endWord)) {
 								distMap.put(newWord.toString(), distMap.get(cur)+1);	//get cur, cuz it transform from cur
 								return;
@@ -120,12 +122,13 @@ public class n126_Word_Ladder_II {
 		wordList1.add("dog");
 		wordList1.add("lot");
 		wordList1.add("log");
-		//wordList1.add("cog");
+		wordList1.add("cog");
 		System.out.println(obj.findLadders("hit", "cog", wordList1));
-		/*		wordList1.add("hot");
-		wordList1.add("dot");
-		wordList1.add("dog");
-		System.out.println(obj.findLadders("hot", "dog", wordList1));
-		System.out.println(obj.findLadders3("hot", "dog", wordList1));*/
+		
+		List<String> wordList2 = new ArrayList<String>();
+		wordList2.add("hot");
+		wordList2.add("dot");
+		wordList2.add("dog");
+		System.out.println(obj.findLadders("hot", "dog", wordList2));
 	}
 }
