@@ -73,8 +73,8 @@ public class n102_BinaryTreeLevelOrderTraversal {
 		if(root == null) {
 			return;
 		}
-
-		if(res.size() <= level) {
+		//level: 0->1->2->2->1->2->2
+		if(res.size() <= level) {				//in order to let get() working
 			res.add(new ArrayList<Integer>());
 		}
 		
