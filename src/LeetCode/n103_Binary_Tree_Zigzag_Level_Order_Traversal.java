@@ -88,7 +88,6 @@ public class n103_Binary_Tree_Zigzag_Level_Order_Traversal {
 		}
 		
 		if(level >= res.size()) {				//F: 'next' level >= current res size
-			System.out.println(level+ " : "+res.size());
 			res.add(new ArrayList<Integer>());
 		}
 		
