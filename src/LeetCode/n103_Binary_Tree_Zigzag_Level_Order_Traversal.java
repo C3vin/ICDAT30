@@ -34,6 +34,7 @@ public class n103_Binary_Tree_Zigzag_Level_Order_Traversal {
 		TreeNode(String v) { v = null; }
 	}
 
+	//BFS
 	public List<List<Integer>> zigzagLevelOrder(TreeNode root) {
 		ArrayList<List<Integer>> res = new ArrayList<List<Integer>>();
 		if(root == null) {
@@ -72,6 +73,35 @@ public class n103_Binary_Tree_Zigzag_Level_Order_Traversal {
 
 		return res;
 	}
+	
+	//DFS
+	public List<List<Integer>> zigzagLevelOrder2(TreeNode root) {
+		List<List<Integer>> res = new ArrayList<List<Integer>>();
+		dfs(root, 0, res);
+		
+		return res;
+	}
+	
+	private void dfs(TreeNode root, int level, List<List<Integer>> res) {
+		if(root == null) {
+			return;
+		}
+		
+		if(level >= res.size()) {				//F: 'next' level >= current res size
+			System.out.println(level+ " : "+res.size());
+			res.add(new ArrayList<Integer>());
+		}
+		
+		if((level % 2)  == 0) {
+			res.get(level).add(root.val);
+		} else {
+			res.get(level).add(0, root.val);
+		}
+		
+		dfs(root.left, level+1, res);
+		dfs(root.right, level+1, res);
+	}
+	
 	public static void main(String[] args) {
 		n103_Binary_Tree_Zigzag_Level_Order_Traversal obj = new n103_Binary_Tree_Zigzag_Level_Order_Traversal();
 		TreeNode p1 = obj.new TreeNode(3);
@@ -91,5 +121,6 @@ public class n103_Binary_Tree_Zigzag_Level_Order_Traversal {
 
 		System.out.println(p1.val + " " + p1.left.val + " " + p1.right.val + " "+ p2.left.v + " " + p2.right.v + " " + p3.left.val + " " +p3.right.val);
 		System.out.println(obj.zigzagLevelOrder(p1));
+		System.out.println(obj.zigzagLevelOrder2(p1));
 	}
 }
