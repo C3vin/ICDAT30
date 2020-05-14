@@ -1,8 +1,6 @@
 package LeetCode;
 
 import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
 
 /*
 An undirected, connected tree with N nodes labelled 0...N-1 and N-1 edges are given.
