@@ -30,7 +30,6 @@ The value of each color in image[i][j] and newColor will be an integer in [0, 65
 public class n733_Flood_Fill {
 	//BFS
 	public int[][] floodFill(int[][] image, int sr, int sc, int newColor) {
-		//int[][] res = new int[image.length][image[0].length]; 
 		int[][] directions = new int[][] {{-1,0},{0,-1},{0,1},{1,0}};
 		int oldColor = image[sr][sc];
 		if(oldColor == newColor) {					//if starting pixel color is same as newColor, we don't need to change anything 
