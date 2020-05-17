@@ -63,7 +63,7 @@ public class n675_Cut_Off_Trees_for_Golf_Event {
 			for(int j=0; j<forest.get(0).size(); j++) {
 				int height = forest.get(i).get(j);
 				if(height > 1) {
-					tree3.add(new ArrayList<Integer>(Arrays.asList(i, j, height)));
+					tree3.add(new ArrayList<Integer>(Arrays.asList(i, j, height)));		//Initialization using asList()
 				}
 				
 			}
