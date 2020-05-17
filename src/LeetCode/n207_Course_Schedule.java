@@ -1,6 +1,7 @@
 package LeetCode;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 
@@ -32,18 +33,18 @@ public class n207_Course_Schedule {
 		HashMap<Integer, ArrayList<Integer>> graph = new HashMap<Integer, ArrayList<Integer>>();
 		
 		for(int[] prerequisite : prerequisites) {
-			if(graph.containsKey(prerequisite[1])) {
-				graph.get(prerequisite[1]).add(prerequisite[0]);
+			if(graph.containsKey(prerequisite[0])) {
+				graph.get(prerequisite[0]).add(prerequisite[1]);
 			} else {
-				ArrayList<Integer> x = new ArrayList<Integer>();
-				x.add(prerequisite[0]);
-				graph.put(prerequisite[1], x);
+				/*ArrayList<Integer> x = new ArrayList<Integer>();
+				x.add(prerequisite[1]);
+				graph.put(prerequisite[0], x);*/
+				graph.put(prerequisite[0], new ArrayList<Integer>(Arrays.asList(prerequisite[1])));
 			}
 		}
-		
 		//0: unvisited; 1: visiting 2: visited
 		int[] visited = new int[numCourses];
-		for(int i = 0; i < numCourses; i++) {
+		for(int i = 0; i < numCourses; i++) {	//course 0 to n-1
 			if(!dfs(graph, i, visited)) {
 				return false;
 			}
@@ -63,13 +64,14 @@ public class n207_Course_Schedule {
 
 		if(graph.containsKey(currentCourse)) {
 			for(int preCourse : graph.get(currentCourse)) {
+				System.out.println(currentCourse +" : "+preCourse);
 				if(!dfs(graph, preCourse, visited)) {
 					return false;
 				}
 			}
 		}
 	
-		visited[currentCourse] = 2;
+		visited[currentCourse] = 2;				//must setup
 		
 		return true;
 	}
@@ -77,7 +79,7 @@ public class n207_Course_Schedule {
 	public static void main(String[] args) {
 		n207_Course_Schedule obj = new n207_Course_Schedule();
 		int[][] prerequisites = new int[][] {{1,0}};
-		//System.out.println(obj.canFinish(2, prerequisites));
-		System.out.println(obj.canFinish(3, new int[][] {{1,0}, {1,2}, {0,1}}));
+		System.out.println(obj.canFinish(2, prerequisites));
+		System.out.println(obj.canFinish(4, new int[][] {{1,0}, {1,2}, {0,1}, {3,2}}));
 	}
 }
