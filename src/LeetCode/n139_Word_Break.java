@@ -1,59 +1,55 @@
 package LeetCode;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
+/*
+Given a non-empty string s and a dictionary wordDict containing a list of non-empty words, determine if s can be segmented 
+into a space-separated sequence of one or more dictionary words.
+
+Note:
+The same word in the dictionary may be reused multiple times in the segmentation.
+You may assume the dictionary does not contain duplicate words.
+
+Example 1:
+Input: s = "leetcode", wordDict = ["leet", "code"]
+Output: true
+Explanation: Return true because "leetcode" can be segmented as "leet code".
+
+Example 2:
+Input: s = "applepenapple", wordDict = ["apple", "pen"]
+Output: true
+Explanation: Return true because "applepenapple" can be segmented as "apple pen apple".
+             Note that you are allowed to reuse a dictionary word.
+Example 3:
+Input: s = "catsandog", wordDict = ["cats", "dog", "sand", "and", "cat"]
+Output: false
+ */
 public class n139_Word_Break {
-	public boolean wordBreak(String s, Set<String> wordDict) {
-		/*		boolean[] t = new boolean[s.length()+1];
-		t[0] = true; //set first to be true, why?
-		//Because we need initial state
-
-		for(int i=0; i<s.length(); i++){
-			//should continue from match position
-			if(!t[i]) 
-				continue;
-
-			System.out.println("@@");
-			for(String a: wordDict){
-				int len = a.length();
-				int end = i + len;
-				if(end > s.length())
-					continue;
-
-				if(t[end]) continue;
-
-				if(s.substring(i, end).equals(a)){
-					t[end] = true;
+	//DP
+	public boolean wordBreak(String s, List<String> wordDict) {
+		boolean[] dp = new boolean[s.length()+1];
+		dp[0] = true;
+		
+		for(int i=1; i<=s.length(); i++) {
+			for(int j=0; j<i; j++) {		//F: substring 0 -> i 
+				//why check dp[j], cuz need to check if s1 match, then check s2 is in the wordDict
+				if(dp[j] && wordDict.contains(s.subSequence(j, i))) {
+					dp[i] = true;
+					break;
 				}
 			}
 		}
-		return t[s.length()];*/
-
-		//code ganker sol
-		if(s==null || s.length()==0)  
-			return true;  
-		boolean[] res = new boolean[s.length()+1];  //why need +1? cuz res[0]
-		res[0] = true;  
-		for(int i=0; i<s.length(); i++)  {  		//F: not <=
-			StringBuilder str = new StringBuilder(s.substring(0,i+1));  
-			System.out.println(str);
-			for(int j=0; j<=i; j++)  {  			//Need <=
-				if(res[j] && wordDict.contains(str.toString()))  {  //F: Need res[j] true
-					res[i+1] = true;  
-					break;  
-				}  
-				str.deleteCharAt(0);  //delete the first element and check rest
-			}  
-		}  
-		return res[s.length()];  
+		
+		return dp[s.length()];
 	}
-
+	
 	public static void main(String[] args) {
 		n139_Word_Break obj = new n139_Word_Break();
-		String s = "leetcode";
-		Set<String> wordDict = new HashSet<String>(Arrays.asList("leet", "code"));
-		System.out.println(obj.wordBreak(s, wordDict));
+		System.out.println(obj.wordBreak("leetcode", new ArrayList<String>(Arrays.asList("leet", "code"))));
+		System.out.println(obj.wordBreak("catsandog", new ArrayList<String>(Arrays.asList("cats","dog","sand","and","cat"))));
 	}
 }
