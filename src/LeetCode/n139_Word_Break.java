@@ -37,8 +37,8 @@ public class n139_Word_Break {
 		for(int i=1; i<=s.length(); i++) {
 			for(int j=0; j<i; j++) {		//F: substring 0 -> i 
 				//why check dp[j], cuz need to check if s1 match, then check s2 is in the wordDict
-				if(dp[j] && wordDict.contains(s.subSequence(j, i))) {
-					dp[i] = true;
+				if(dp[j] && wordDict.contains(s.substring(j, i))) {
+					dp[i] = true;			//set i not j
 					break;
 				}
 			}
