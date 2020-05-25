@@ -25,6 +25,11 @@ public class stack {
 		return queue.peek();
 	}
 	
+	public boolean empty() {
+		return queue.isEmpty();
+		//or we can use queue.size() == 0
+	}
+	
 	public static void main(String[] args) {
 		stack obj = new stack();
 		obj.push(10);
