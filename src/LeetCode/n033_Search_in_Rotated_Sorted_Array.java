@@ -24,7 +24,7 @@ public class n033_Search_in_Rotated_Sorted_Array {
 
 		while(left <= right) {										//Boundary <=
 			int mid = (left+right)/2;
-			if(nums[mid] == target) 
+			if(nums[mid] == target) 								//nums[mid] not only mid !!!
 				return mid;
 
 			if(nums[left] <= nums[mid]) {		//e.g. 3,4,5,6,1,2			
