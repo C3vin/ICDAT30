@@ -58,14 +58,17 @@ public class n004_Median_of_Two_Sorted_Arrays {
 	 * y -> y1 y2 y3 y4 y5 | y6 y7 y8
 	 *         (5)             (3)
 	 * 
+	 *         7     |      7  equal half partition 
+	 * if match (x2 <= y6, y5 <= x3), we can get the median avg(max(x2,y5), min(x3, y6))
+	 * 
 	 *    1  3   8   9   15
 	 * =========================
 	 *   |  |  |   |   |   |   |
 	 *   0  1  2   3   4   5   6  (partition)
 	 * =========================
 	 *    7  11  18  19  21  25
-	 *  start = 0, end = 4
-	 *  partitionX = (0+4)/2=2
+	 *  start = 0, end = 4       //this is index, e,g. index 4 is 15
+	 *  partitionX = (0+4)/2=2   //1,3 | 8,9,15
 	 *  partitionY = (5+6+1)/2 - 2(partitionX) = 4   
 	 *  based on formula: partitionX + partitionY = (x+y+1)/2 
 	 *  
@@ -73,7 +76,7 @@ public class n004_Median_of_Two_Sorted_Arrays {
 	 *  y: 7,11,18,19 | 21,25   for first run
 	 *  and do "Binary search!!!"
 	 *  
-	 *  start = 2+1=3, end = 4
+	 *  start = 2+1=3 (partitionX + 1), end = 4
 	 *  partitionX = (3+4)/2=3
 	 *  partitionY = (5+6+1)/2 - 3(partitionX) = 3    
 	 *  based on formula: partitionX + partitionY = (x+y+1)/2 
@@ -90,6 +93,33 @@ public class n004_Median_of_Two_Sorted_Arrays {
 	 *  x: 1,3,8,9 | 15
 	 *  y: 7,11 | 18,19,21,25   for three run
 	 *  max(9,11) = 11 in this odd case
+	 *  
+	 *  Another even case
+	      23  26   31   35
+	 * =========================
+	 *   |  |  |  |  |   |   |
+	 *   0  1  2  3  4   5   6  (partition)
+	 * =========================
+	 *    3  5  7  9  11  16
+	 *  start = 0, end = 4       
+	 *  partitionX = (0+4)/2=2   
+	 *  partitionY = (4+6+1)/2 - 2(partitionX) = 3   
+	 *  based on formula: partitionX + partitionY = (x+y+1)/2 
+	 *  
+	 *  x: 23,26 | 31,35
+	 *  y: 3,5,7 | 9,11,16  for first run
+	 *  and do "Binary search!!!"
+	 *  
+	 *  start = 0, end = 1 (partitionX -1)      !!!!!!!!!!!!!       
+	 *  partitionX = (0+1)/2= 0   
+	 *  partitionY = (4+6+1)/2 - 0(partitionX) = 5   
+	 *  based on formula: partitionX + partitionY = (x+y+1)/2 
+	 *  
+	 *  x:     -INF    | 23,26,31,35
+	 *  y: 3,5,7, 9,11 | 16            for second run
+	 *  Found it
+	 *  avg(max(-INF, 11), min(23,16)) = avg(11,16) = 13.5
+	 *  	 
 	 */
 	public double findMedianSortedArrays2(int[] nums1, int[] nums2) {
 		if(nums1.length > nums2.length ) {
