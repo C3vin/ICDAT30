@@ -15,51 +15,27 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class n001_two_sum {
-
-	//LR 
-	public int[] twoSum(int[] nums, int target) {
-		int[] res = new int[2];
-		if(nums == null || nums.length < 2) return null;
-		Arrays.sort(nums);  		//Order
-		int l=0;
-		int r=nums.length-1;
-		while(l<r) {
-			if(nums[l] + nums[r] == target) {
-				res[0]=l;
-				res[1]=r;
-				return res;
-			}
-			else if(nums[l] + nums[r] > target) {
-				r--;
-			} else {
-				l++;
-			}
-		}
-		return null;
-	}
+	//Can't use Sorted & LR sol
 	
 	//Hash Table
-	public int[] twoSum2(int[] nums, int target) {
+	public int[] twoSum(int[] nums, int target) {
 		Map<Integer, Integer> map = new HashMap<Integer, Integer> ();
 		int[] res = new int[2];
 		
-		for (int i=0; i<nums.length; i++) {
+		for(int i=0; i<nums.length; i++) {
 			int complement = target - nums[i];
 			if (map.containsKey(complement)) {		//first map is empty 
 				res[0] = map.get(complement);
 				res[1] = i;
-				//return res;
- 				//return new int[] {map.get(complement), i};
 			}
-			map.put(nums[i], i);
+			map.put(nums[i], i);					//{2=0, 7=1, 11=2, 15=3}
 		}
+		
 		return res;				//return null, cuz move res in here
 	}
 
 	public static void main(String[] args) {
 		n001_two_sum obj = new n001_two_sum();
-
-		System.out.println(Arrays.toString(obj.twoSum(new int[] {2,7,11,15}, 9)));		//The reason order int array
-		System.out.println(Arrays.toString(obj.twoSum2(new int[] {2,7,11,15}, 9)));	
+		System.out.println(Arrays.toString(obj.twoSum(new int[] {2,7,11,15}, 9)));	
 	}
 }
