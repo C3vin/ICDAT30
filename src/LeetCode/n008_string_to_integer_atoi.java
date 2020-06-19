@@ -41,7 +41,7 @@ public class n008_string_to_integer_atoi {
 		}
 		
 
-		long res = 0;
+		long res = 0;				//long
 		int sign = 1;
 		int start = 0;
 
@@ -64,12 +64,12 @@ public class n008_string_to_integer_atoi {
 			if(sign == 1 && res > Integer.MAX_VALUE) {
 				return Integer.MAX_VALUE;
 			}
-			if(sign == -1 && res > Integer.MAX_VALUE) {
-				return Integer.MIN_VALUE;
+			if(sign == -1 && res > Integer.MAX_VALUE) {				//Integer.MAX_VALUE
+				return Integer.MIN_VALUE;                           //but here use MIN_VALUE
 			}
 		}
 
-		return (int)res * sign;
+		return (int)res * sign;							//convert
 	}
 
 	public float myAtof(String str) {

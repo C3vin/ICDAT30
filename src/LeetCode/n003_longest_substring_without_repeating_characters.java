@@ -110,12 +110,12 @@ public class n003_longest_substring_without_repeating_characters {
 	}
 	public static void main(String[] args) {
 		n003_longest_substring_without_repeating_characters obj = new n003_longest_substring_without_repeating_characters();
-		System.out.println(obj.lengthOfLongestSubstring("abcabcbb"));
-		System.out.println(obj.lengthOfLongestSubstring2("abcabcbb"));
-		System.out.println(obj.lengthOfLongestSubstring3("abcabcbb"));
-		System.out.println(obj.lengthOfLongestSubstring("bbbbb"));
-		System.out.println(obj.lengthOfLongestSubstring2("bbbbb"));
-		System.out.println(obj.lengthOfLongestSubstring3("bbbbb"));
+//		System.out.println(obj.lengthOfLongestSubstring("abcabcbb"));
+//		System.out.println(obj.lengthOfLongestSubstring2("abcabcbb"));
+//		System.out.println(obj.lengthOfLongestSubstring3("abcabcbb"));
+//		System.out.println(obj.lengthOfLongestSubstring("bbbbb"));
+//		System.out.println(obj.lengthOfLongestSubstring2("bbbbb"));
+//		System.out.println(obj.lengthOfLongestSubstring3("bbbbb"));
 		System.out.println(obj.lengthOfLongestSubstring("pwwkew"));
 		System.out.println(obj.lengthOfLongestSubstring2("pwwkew"));
 		System.out.println(obj.lengthOfLongestSubstring3("pwwkew"));
