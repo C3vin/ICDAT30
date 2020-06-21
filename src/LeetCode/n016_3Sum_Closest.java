@@ -15,7 +15,7 @@ public class n016_3Sum_Closest {
 	public int threeSumClosest(int[] nums, int target) {
 		Arrays.sort(nums);
 		int sum = 0;
-		int sub = Integer.MAX_VALUE;
+		int sub = Integer.MAX_VALUE;				//LC15 int sum = 0 - nums[i]; a+b+c = 0 but LC16 need to update later
 		
 		for(int i=0; i<nums.length; i++) {
 			int low = i+1;
@@ -23,8 +23,9 @@ public class n016_3Sum_Closest {
 			
 			while(low < high) {
 				if(Math.abs(nums[i] + nums[low] + nums[high] - target) < sub) {		//F: target
-					sum = nums[i] + nums[low] + nums[high];
+					sum = nums[i] + nums[low] + nums[high];			//update sum
 					sub = Math.abs(sum - target);
+					System.out.println(nums[i] +" : "+ nums[low] +" : "+ nums[high]+" : "+ "sum: "+sum + " sub: " + sub);
 				}
 					
 				if(nums[i]+nums[low]+nums[high] < target) {
@@ -57,6 +58,6 @@ public class n016_3Sum_Closest {
 	public static void main(String[] args) {
 		n016_3Sum_Closest obj = new n016_3Sum_Closest();
 		System.out.println(obj.threeSumClosest(new int[] {-1,2,1,-4}, 1));
-		System.out.println(obj.threeSumClosest2(new int[] {-1,2,1,-4}, 1));
+		//System.out.println(obj.threeSumClosest2(new int[] {-1,2,1,-4}, 1));
 	}
 }
