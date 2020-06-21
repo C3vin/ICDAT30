@@ -1,9 +1,16 @@
 package LeetCode;
 
 import java.util.HashMap;
+/*
+Given a string S and a string T, find the minimum window in S which will contain all the characters in T in complexity O(n).
 
-//Given a string S and a string T, find the minimum window in S which will contain all the characters in T in complexity O(n).
-//S = "ADOBECODEBANC", T = "ABC"  =>  Minimum window is "BANC".
+Example:
+Input: S = "ADOBECODEBANC", T = "ABC"
+Output: "BANC"
+Note:
+If there is no such window in S that covers all characters in T, return the empty string "".
+If there is such window, you are guaranteed that there will always be only one unique minimum window in S.
+ */
 public class n076_Minimum_Window_Substring {
 	public String minWindow(String s, String t) {
 		String res = "";
@@ -47,11 +54,14 @@ public class n076_Minimum_Window_Substring {
 	//better and faster, Sliding Window! same as 438
 	public String minWindow2(String s, String t) {
 		String res = "";
-		int[] target = new int[256];
+		int[] target = new int[128];
 		//int[] target = new int[26];		//can't use size 26, because we don't know low case or high case! 
 		//record each character in t to target
-		for(int i=0; i<t.length(); i++) {
+		/*for(int i=0; i<t.length(); i++) {
 			target[t.charAt(i)]++;
+		}*/
+		for(char c : t.toCharArray()) {
+			target[c]++;
 		}
 		
 		int left = 0;
@@ -65,15 +75,18 @@ public class n076_Minimum_Window_Substring {
 					minlen = right - left;				//update minlen
 					res = s.substring(left, right);		//update string res, reference
 				}
+				
 				if(target[s.charAt(left)] >= 0) {		//>=0, not <=0. Because before at least 1
 					count++;
 				}
+				
 				target[s.charAt(left)]++;
 				left++;
 			} else {
-				if(target[s.charAt(right)] >= 1) {
+				if(target[s.charAt(right)] >= 1) {		//found it
 					count--;
 				}
+				
 				target[s.charAt(right)]--;
 				right++;
 			}
