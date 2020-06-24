@@ -9,8 +9,8 @@ push(x) -- Push element x to the back of queue.
 pop() -- Removes the element from in front of queue.
 peek() -- Get the front element.
 empty() -- Return whether the queue is empty.
-Example:
 
+Example:
 MyQueue queue = new MyQueue();
 
 queue.push(1);
@@ -25,46 +25,46 @@ Depending on your language, stack may not be supported natively. You may simulat
 You may assume that all operations are valid (for example, no pop or peek operations will be called on an empty queue).
  */
 public class n232_Implement_Queue_using_Stacks {
-	 Stack<Integer> s1;
-	    Stack<Integer> s2;
-	    
-	    /** Initialize your data structure here. */
-	    public n232_Implement_Queue_using_Stacks() {
-	        s1 = new Stack<Integer>();
-	        s2 = new Stack<Integer>();
-	    }
-	    
-	    /** Push element x to the back of queue. */
-	    public void push(int x) {
-	        s1.push(x);
-	    }
-	    
-	    /** Removes the element from in front of queue and returns that element. */
-	    public int pop() {
-	        if(!s2.isEmpty()) {
-	            return s2.pop();
-	        } else {
-	            while(!s1.isEmpty()) {
-	                s2.push(s1.pop());
-	            }
-	            return s2.pop();
-	        }
-	    }
-	    
-	    /** Get the front element. */
-	    public int peek() {
-	        if(!s2.isEmpty()) {
-	            return s2.peek();
-	        } else {
-	            while(!s1.isEmpty()) {
-	                s2.push(s1.pop());
-	            }
-	            return s2.peek();
-	        }
-	    }
-	    
-	    /** Returns whether the queue is empty. */
-	    public boolean empty() {
-	        return s1.isEmpty() && s2.isEmpty();
-	    }
+	Stack<Integer> s1;
+	Stack<Integer> s2;
+
+	/** Initialize your data structure here. */
+	public n232_Implement_Queue_using_Stacks() {
+		s1 = new Stack<Integer>();
+		s2 = new Stack<Integer>();
+	}
+
+	/** Push element x to the back of queue. */
+	public void push(int x) {
+		s1.push(x);
+	}
+
+	/** Removes the element from in front of queue and returns that element. */
+	public int pop() {
+		if(!s2.isEmpty()) {
+			return s2.pop();
+		} else {
+			while(!s1.isEmpty()) {
+				s2.push(s1.pop());
+			}
+			return s2.pop();
+		}
+	}
+
+	/** Get the front element. */
+	public int peek() {
+		if(!s2.isEmpty()) {
+			return s2.peek();
+		} else {
+			while(!s1.isEmpty()) {
+				s2.push(s1.pop());
+			}
+			return s2.peek();
+		}
+	}
+
+	/** Returns whether the queue is empty. */
+	public boolean empty() {
+		return s1.isEmpty() && s2.isEmpty();				//need to check s1 and s2
+	}
 }
