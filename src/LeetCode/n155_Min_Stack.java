@@ -2,6 +2,33 @@ package LeetCode;
 
 import java.util.Stack;
 
+/*
+Design a stack that supports push, pop, top, and retrieving the minimum element in constant time.
+
+push(x) -- Push element x onto stack.
+pop() -- Removes the element on top of the stack.
+top() -- Get the top element.
+getMin() -- Retrieve the minimum element in the stack.
+
+Example 1:
+
+Input
+["MinStack","push","push","push","getMin","pop","top","getMin"]
+[[],[-2],[0],[-3],[],[],[],[]]
+
+Output
+[null,null,null,null,-3,null,0,-2]
+
+Explanation
+MinStack minStack = new MinStack();
+minStack.push(-2);
+minStack.push(0);
+minStack.push(-3);
+minStack.getMin(); // return -3
+minStack.pop();
+minStack.top();    // return 0
+minStack.getMin(); // return -2
+ */
 public class n155_Min_Stack {
 	/** initialize your data structure here. */
 	class NNode {
@@ -17,79 +44,52 @@ public class n155_Min_Stack {
 			max = this;
 		}
 	}
-	Stack<Integer> data;
-	Stack<Integer> minStack;
+
+	private Stack<Integer> stack;
+	private Stack<Integer> minStack;
+
 	public n155_Min_Stack() {			//MinStack
-		data = new Stack<Integer>();
+		stack = new Stack<Integer>();
 		minStack = new Stack<Integer>();
 	}
 
 	public void push(int x) {
-		data.push(x);
-		if(minStack.isEmpty() || minStack.peek() >= x)
-			minStack.push(x);
-/*		else {
-			if(minStack.peek() >= x)
+		stack.push(x);
+
+		if(!minStack.isEmpty()) {
+			int peek = minStack.peek();
+			if(minStack.peek() >= x) {				//need to check if it is smaller 
 				minStack.push(x);
-		}*/
+			}
+		} else {
+			minStack.push(x);
+		}
 	}
 
 	public void pop() {
-		int val = data.pop();
-		if(!minStack.isEmpty() && minStack.peek() == val)		//== not >=
-			minStack.pop();
+		int pop = stack.pop();						//get the value
+
+		if(!minStack.isEmpty()) {
+			if(pop == minStack.peek()) {			//need to check if those are the same
+				minStack.pop();
+			}
+		}
 	}
 
 	public int top() {
-		return data.peek();
+		return stack.peek();
 	}
 
 	public int getMin() {
 		return minStack.peek();
 	}
 
-	/*	//private NNode top;
-	ArrayList<Integer> stack = new ArrayList<Integer>();
-	ArrayList<Integer> minStack = new ArrayList<Integer>();
-
-	public n155_Min_Stack() {
-		//top = new NNode(0);
-	}
-
-	public void push(int x) {
-		stack.add(x);
-		if(minStack.isEmpty() || minStack.get(minStack.size()-1) >= x){		//if latest element bigger than x, than found the min element need to add to minStack
-			minStack.add(x);
-		}
-	}
-
-	public void pop() {
-		if(stack.isEmpty()) 
-			return;
-		int elem = stack.remove(stack.size()-1);  
-		if(!minStack.isEmpty() && elem == minStack.get(minStack.size()-1))  
-		{  
-			minStack.remove(minStack.size()-1);  
-		}  
-	}
-
-	public int top() {
-		if(!stack.isEmpty())  
-			return stack.get(stack.size()-1);  
-		return 0; 
-	}
-
-	public int getMin() {
-		if(!minStack.isEmpty())  
-			return minStack.get(minStack.size()-1);  
-		return 0; 
-	}*/
 	public static void main(String[] args) {
 		n155_Min_Stack minStack = new n155_Min_Stack();
-		minStack.push(-3);
+		minStack.push(-2);
 		minStack.push(0);
-		minStack.push(1);
-		minStack.push(4);
+		minStack.push(-3);
+		minStack.getMin();
 		minStack.pop();
 		System.out.println("Top: " + minStack.top());
 		System.out.println("minStack: " + minStack.getMin());
