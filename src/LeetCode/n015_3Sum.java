@@ -25,34 +25,34 @@ public class n015_3Sum {
 		//https://leetcode.wang/leetCode-15-3Sum.html
 		List<List<Integer>> res = new ArrayList<List<Integer>>();
 		Arrays.sort(nums);
-		
+
 		for(int i=0; i<nums.length-2; i++) {			//make sure we have 3 nums, i / i+1 / nums.ength-1
 			//remove duplicate also F: need i==0 (for the first element)
 			//nums[i-1] not nums[i+1] cuz low = i+1, if check nums[i+1] will miss (-1,-1,2) 
 			if(i == 0 || nums[i] != nums[i-1]) {		
-				int low = i+1;							//i+1
-				int high = nums.length-1;				//nums.ength-1
+				int left = i+1;							//i+1
+				int right = nums.length-1;				//nums.ength-1
 				int sum = 0 - nums[i];					//i
-				
-				while(low < high) {
-					if(nums[low] + nums[high] == sum) {
-						res.add(Arrays.asList(nums[i], nums[low], nums[high]));
-						
+
+				while(left < right) {
+					if(nums[left] + nums[right] == sum) {
+						res.add(Arrays.asList(nums[i], nums[left], nums[right]));
+
 						//handle duplicate case e.g. -4,-1,-1,-1,1,2 (-1,-1,2) so no need another (-1,-1,2) 
-						while(low < high && nums[low] == nums[low+1]) {			
-							low++;
+						while(left < right && nums[left] == nums[left+1]) {			
+							left++;
 						}
-						while(low < high && nums[high] == nums[high-1]) {
-							high--;
+						while(left < right && nums[right] == nums[right-1]) {
+							right--;
 						}
 						//MOST add these two, for the normal case
-						low++;					//e.g. (2:5), (3:4)
-						high--;
-						
-					} else if(nums[low] + nums[high] < sum) {	//e.g. -1+2 < 4 
-						low++;                  //why? cuz sort already and still need to check rest of the elements
+						left++;					//e.g. (2:5), (3:4)
+						right--;
+
+					} else if(nums[left] + nums[right] < sum) {	//e.g. -1+2 < 4 
+						left++;                  //why? cuz sort already and still need to check rest of the elements
 					} else {
-						high--;					//e.g. 1+2 > 0
+						right--;					//e.g. 1+2 > 0
 					}
 				}
 			}
@@ -93,14 +93,14 @@ public class n015_3Sum {
 		return false;
 	}
 
-	
+
 	public static void main(String[] args) {
 		n015_3Sum obj = new n015_3Sum();
 		int[] nums = {-1, 0, 1, 2, -1, -4};
 		//int[] nums = {1,2,-2,-1};
 		System.out.println(obj.threeSum(nums));
 		System.out.println(obj.threeSum2(nums));
-		
+
 		System.out.println(obj.threeSum(new int[] {-2,0,1,1,2}));
 		System.out.println(obj.threeSum2(new int[] {-2,0,1,1,2}));
 	}
