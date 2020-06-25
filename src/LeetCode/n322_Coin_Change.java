@@ -25,12 +25,14 @@ public class n322_Coin_Change {
 		
 		for(int i=1; i<=amount; i++) {					//must start from 1, skip default 0
 			dp[i] = Integer.MAX_VALUE;					//must setup in here, not in side below for loop
+			
 			for(int k=0; k<coins.length; k++) {   
 				if(i>=coins[k] && dp[i-coins[k]] != -1) {		//must check value != -1 for case2
 					//why +1, cuz add the one current coin e.g 5
 					dp[i] = Math.min(dp[i], dp[i-coins[k]]+1);	//i-coins[k]: current amount - coins[k]	
 				}
 			}
+			
 			if(dp[i] == Integer.MAX_VALUE) {
 				dp[i] = -1;
 			}
@@ -38,9 +40,9 @@ public class n322_Coin_Change {
 		
 		return dp[amount];
 	}
-	public static void main(String[] args) {
+	public static void main(String[] args) { 
 		n322_Coin_Change obj = new n322_Coin_Change();
-		System.out.println(obj.coinChange(new int[] {1, 2, 5}, 11));
+		System.out.println(obj.coinChange(new int[] {1, 2, 5}, 5));
 		System.out.println(obj.coinChange(new int[] {2}, 3));
 	}
 }
