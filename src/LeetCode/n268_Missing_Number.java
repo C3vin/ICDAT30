@@ -24,12 +24,12 @@ public class n268_Missing_Number {
     	}
     	
     	for(int i=1; i<nums.length; i++) {
-    		if(nums[i] - nums[i-1] != 1) {
+    		if(nums[i] - nums[i-1] != 1) {					//can't do nums[i+1] - nums[i], handle [0] case
     			return i;	//OK: nums[i-1]+1;
     		}
     	}
     	
-    	return nums.length;
+    	return nums.length;									//F: handle [0,1,2] case
     }
     
     public static void main(String[] args) {
