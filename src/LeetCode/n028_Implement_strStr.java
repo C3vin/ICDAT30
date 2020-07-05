@@ -1,42 +1,35 @@
 package LeetCode;
 
-//Implement strStr().
-//Returns the index of the first occurrence of needle in haystack, or -1 if needle is not part of haystack.
+/*
+Implement strStr().
+Return the index of the first occurrence of needle in haystack, or -1 if needle is not part of haystack.
+
+Example 1:
+Input: haystack = "hello", needle = "ll"
+Output: 2
+
+Example 2:
+Input: haystack = "aaaaa", needle = "bba"
+Output: -1
+
+Clarification:
+What should we return when needle is an empty string? This is a great question to ask during an interview.
+For the purpose of this problem, we will return 0 when needle is an empty string. 
+This is consistent to C's strstr() and Java's indexOf().
+ */
 public class n028_Implement_strStr {
-	//Brute Force
+	//Substring: Linear Time Slice
 	public int strStr(String haystack, String needle) {
-		if(haystack == null || needle == null)
-			return 0;
-		/*if(haystack.length() < needle.length())
-			return 0;*/
-		if(needle.length() == 0)
-			return 0;
-		for(int i=0; i <= haystack.length()-needle.length(); i++) {		//need =, e.g. 6-4=2 but 0~2 will return -1, need 0~3. so need <= 
-			for(int j=0; j < needle.length(); j++) {
-				if(haystack.charAt(i+j) != needle.charAt(j)) {			//use != much easy than == in this case
-					break;
-				}
-				if(j == needle.length()-1)		//F: need to needle.length() - 1
-					return i;
-			}
-		}
-		return -1;
-
-		/*if(haystack == null || needle == null) return -1;
-		if(needle.length() > haystack.length()) return -1;
-		//if(needle.equals(haystack)) return 0;
-
-		for(int i=0; i<=haystack.length() - needle.length(); i++) {
-			int j=0;
-			while(j < needle.length() && haystack.charAt(i+j) == needle.charAt(j)) {
-				j++;
-				System.out.println("j: " +j);
-			}
-			System.out.println("#i: " +i);
-			if(j == needle.length()) 
+		int hlen = haystack.length();
+		int nlen = needle.length();
+		
+		for(int i=0; i<hlen-nlen+1; i++) {
+			if(haystack.substring(i, i+nlen).equals(needle)) {
 				return i;
+			}
 		}
-		return -1;*/
+		
+		return -1;
 	}
 
 	//BM (Boyer-Moore)
@@ -68,5 +61,7 @@ public class n028_Implement_strStr {
 		n028_Implement_strStr obj = new n028_Implement_strStr();
 		System.out.println(obj.strStr("111234", "1234"));
 		System.out.println(obj.strStrBM("111234", "1234"));
+		System.out.println(obj.strStr("hello", "ll"));
+		System.out.println(obj.strStrBM("hello", "ll"));
 	}
 }
