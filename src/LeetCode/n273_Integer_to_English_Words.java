@@ -20,12 +20,13 @@ Input: 1234567891
 Output: "One Billion Two Hundred Thirty Four Million Five Hundred Sixty Seven Thousand Eight Hundred Ninety One"
  */
 public class n273_Integer_to_English_Words {
+	//why need "" cuz need to match the index
 	private final String[] belowTen = new String[] {"", "One", "Two", "Three", "Four", "Five", "Six", "Seven", "Eight", "Nine"};
 	private final String[] belowTwenty = new String[] {"Ten", "Eleven", "Twelve", "Thirteen", "Fourteen", "Fifteen", "Sixteen", "Seventeen", "Eighteen", "Nineteen"};
 	private final String[] belowHundred = new String[] {"", "Ten", "Twenty", "Thirty", "Forty", "Fifty", "Sixty", "Seventy", "Eighty", "Ninety"};
 	
 	public String numberToWords(int num) {
-		if(num == 0) {
+		if(num == 0) {		//For primitive types (int), you have to use ==
 			return "Zero";
 		}
 		return helper(num);
@@ -33,6 +34,7 @@ public class n273_Integer_to_English_Words {
 	
 	private String helper(int num) {
 		String res = new String();
+		
 		if(num < 10) {
 			res = belowTen[num];
 		} else if(num < 20) {
@@ -48,7 +50,7 @@ public class n273_Integer_to_English_Words {
 		} else {
 			res = helper(num / 1000000000) + " Billion " + helper(num % 1000000000);
 		}
-		return res.trim();
+		return res.trim();		//handle case e.g. 20 "Twenty " -> "Twenty"
 	}
 	
 	public static void main(String[] args) {
