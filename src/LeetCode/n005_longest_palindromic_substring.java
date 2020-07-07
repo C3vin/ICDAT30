@@ -1,16 +1,28 @@
 package LeetCode;
 
-//Input: "babad"   Output: "bab" 	Note: "aba" is also a valid answer.
-//Input: "cbbd"	   Output: "bb"
+/*
+Given a string s, find the longest palindromic substring in s. You may assume that the maximum length of s is 1000.
+
+Example 1:
+Input: "babad"
+Output: "bab"
+Note: "aba" is also a valid answer.
+
+Example 2:
+Input: "cbbd"
+Output: "bb"
+ */
 public class n005_longest_palindromic_substring {
 	//For a string is palindrome, it must be mirrored across a central point. 
 	//Here we must consider both the even and odd length of the string.
 	//So we can iterate the string and check its left and right points to see if it is mirrored. 
 	public String longestPalindrome(String s) {  
-		if (s.length() == 0)
+		if (s.length() == 0) {
 			return null;
-		if (s.length() == 1)
+		}
+		if (s.length() == 1) {
 			return s;
+		}
 	 
 		String longest = s.substring(0, 1);				//F: Need this because need to compare with tmp value
 		for (int i = 0; i < s.length(); i++) {
@@ -38,6 +50,31 @@ public class n005_longest_palindromic_substring {
 			end++;					//!!! end ++ , because we want go right
 		}
 		return s.substring(begin + 1, end);			//use substring attribute (with +1) to get the string
+	}
+	
+	
+	String res = new String();  //global variable
+	
+	public String longestPalindrome2(String s) {  
+		for(int i=0; i<s.length(); i++) {
+			helper2(s, i, i);
+			helper2(s, i, i+1);
+		}
+		
+		return res;
+	}
+	
+	private void helper2(String s, int start, int end) {
+		while(start >= 0 && end < s.length() && s.charAt(start) == s.charAt(end)) {
+			start--;
+			end++;
+		}
+		
+		String longest = s.substring(start+1, end);			//need start + 1
+		if(longest.length() > res.length()) {				//need to check with length()
+			res = longest;
+		}
+		
 	}
 	
 	//DP
@@ -68,7 +105,10 @@ public class n005_longest_palindromic_substring {
 		n005_longest_palindromic_substring obj = new n005_longest_palindromic_substring();
 		System.out.println(obj.longestPalindrome(""));
 		System.out.println(obj.longestPalindrome("babad"));
-		//System.out.println(obj.longestPalindromeDP("babad"));
-		//System.out.println(obj.longestPalindromeDP("cbbd"));
+		System.out.println(obj.longestPalindrome("cbbd"));
+		System.out.println(obj.longestPalindrome2("babad"));
+		System.out.println(obj.longestPalindrome2("cbbd"));
+		System.out.println(obj.longestPalindromeDP("babad"));
+		System.out.println(obj.longestPalindromeDP("cbbd"));
 	}
 }
