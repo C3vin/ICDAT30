@@ -55,16 +55,18 @@ public class n003_longest_substring_without_repeating_characters {
 		int start = 0;
 		int current = 0;
 		
-		while(start < s.length() && current < s.length()) {
+		while(current < s.length()) {						//no need (start < s.length() && 
 			if(map.containsKey(s.charAt(current))) {
 				//e.g. pwwkew
-				//     s ss    (0->2->3)
-				start = Math.max(map.get(s.charAt(current))+1, start);	
-			}
-			map.put(s.charAt(current), current);		//add or update value
+				//     s s    (0->2)
+				start = Math.max(start, map.get(s.charAt(current))+1);	//update start
+			}   //no else 
+			
+			map.put(s.charAt(current), current);		                //either add or update value
 			res = Math.max(res, current-start+1);
 			current++;
 		}
+		
 		return res;
 	}
 	public static void main(String[] args) {
