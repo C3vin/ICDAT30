@@ -47,7 +47,7 @@ public class n003_longest_substring_without_repeating_characters {
         return res;
  	}
 	
-	//Sliding Window, HashMap
+	//Sliding Window, HashMap Better! 
 	public int lengthOfLongestSubstring3(String s) {
 		HashMap<Character, Integer> map = new HashMap<Character, Integer>();		//Character not String type
 
@@ -59,8 +59,8 @@ public class n003_longest_substring_without_repeating_characters {
 			if(map.containsKey(s.charAt(current))) {
 				//e.g. pwwkew
 				//     s s    (0->2)
-				start = Math.max(start, map.get(s.charAt(current))+1);	//update start
-			}   //no else 
+				start = Math.max(start, map.get(s.charAt(current))+1);	//update start, need to use Max cuz handle back to first match char index e.g. "abba"
+			} //no else 
 			
 			map.put(s.charAt(current), current);		                //either add or update value
 			res = Math.max(res, current-start+1);
