@@ -52,7 +52,7 @@ public class n005_longest_palindromic_substring {
 		return s.substring(begin + 1, end);			//use substring attribute (with +1) to get the string
 	}
 	
-	
+	//Better! 
 	String res = new String();  //global variable
 	
 	public String longestPalindrome2(String s) {  
@@ -65,7 +65,7 @@ public class n005_longest_palindromic_substring {
 	}
 	
 	private void helper2(String s, int start, int end) {
-		while(start >= 0 && end < s.length() && s.charAt(start) == s.charAt(end)) {
+		while(start >= 0 && end < s.length() && s.charAt(start) == s.charAt(end)) {		//while not if !!!!!!!!!!!
 			start--;
 			end++;
 		}
@@ -89,6 +89,7 @@ public class n005_longest_palindromic_substring {
 	    // i(<---) | j(--->)
 	    for(int i=s.length()-1; i>=0; i--) {  
 	        for(int j=i; j<s.length(); j++) {  
+	        	System.out.println("i: "+i +" J: "+j);
 	            if(s.charAt(i) == s.charAt(j) && (j-i<=2 || palin[i+1][j-1])) {  
 	            	palin[i][j] = true;  
 	                if(maxLen < j-i+1) {  
