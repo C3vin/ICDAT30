@@ -42,12 +42,13 @@ randomSet.getRandom();
 public class n380_Insert_Delete_GetRandom_O_1 {
 	HashMap<Integer, Integer> map;	
 	List<Integer> list;
-	Random rand = new Random();
+	Random rand;
 	
     /** Initialize your data structure here. */
     public n380_Insert_Delete_GetRandom_O_1() {
         map = new HashMap<Integer, Integer>();				//<val for insert/remove, index for ArrayList>
         list = new ArrayList<Integer>();
+        rand = new Random();
     }
     
     /** Inserts a value to the set. Returns true if the set did not already contain the specified element. */
@@ -82,5 +83,16 @@ public class n380_Insert_Delete_GetRandom_O_1 {
     /** Get a random element from the set. */
     public int getRandom() {
         return list.get(rand.nextInt(list.size()));
+    }
+    
+    public static void main(String[] args) {
+    	n380_Insert_Delete_GetRandom_O_1 obj = new n380_Insert_Delete_GetRandom_O_1();
+    	System.out.println(obj.insert(1));
+    	System.out.println(obj.remove(2));
+    	System.out.println(obj.insert(2));
+    	System.out.println(obj.getRandom());
+    	System.out.println(obj.remove(1));
+    	System.out.println(obj.insert(2));
+    	System.out.println(obj.getRandom());
     }
 }
