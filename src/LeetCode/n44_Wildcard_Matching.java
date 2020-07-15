@@ -77,12 +77,19 @@ public class n44_Wildcard_Matching {
 		return pp == p.length();
 	}
 	
+	/* s: adceb  p: *a*b
+	 *           B  A  B  C  C  C  A
+	 * sp   : 0,    1,    2, 3, 4, 5
+	 * pp   : 0, 1, 2, 3, 3, 3, 3, 4
+	 * match: 0, 0,    1, 2, 3, 4, 
+	 * start: 0, 0,    2, 
+	 */
 	public static void main(String[] args) {
 		n44_Wildcard_Matching obj = new n44_Wildcard_Matching();
-		System.out.println(obj.isMatch("aa", "a"));
-		System.out.println(obj.isMatch("aa", "*"));
-		System.out.println(obj.isMatch("cb", "?a"));
+//		System.out.println(obj.isMatch("aa", "a"));
+//		System.out.println(obj.isMatch("aa", "*"));
+//		System.out.println(obj.isMatch("cb", "?a"));
 		System.out.println(obj.isMatch("adceb", "*a*b"));
-		System.out.println(obj.isMatch("acdcb", "a*c?b"));
+		//System.out.println(obj.isMatch("acdcb", "a*c?b"));
 	}
 }

@@ -92,6 +92,7 @@ public class n010_regular_expression_matching {
 		}
 	}
 
+	//Better!
 	public boolean isMatch3(String s, String p) {
 		if(p.isEmpty()) {
 			return s.isEmpty();
@@ -100,14 +101,16 @@ public class n010_regular_expression_matching {
 		boolean first = (!s.isEmpty() && (p.charAt(0) == s.charAt(0) || p.charAt(0) == '.'));
 		
 		if(p.length() >= 2 && p.charAt(1) == '*') {
-			boolean v1 = isMatch3(s, p.substring(2));
-			boolean v2 = (first && isMatch3(s.substring(1), p));
+			boolean v1 = isMatch3(s, p.substring(2));					//why substring(2), check before * are showing '0' time
+			boolean v2 = (first && isMatch3(s.substring(1), p));		//why substring(1), first s element already match, p no need (*) e.g. s:ab p:a*b
+			
 			return v1 || v2;
-//			return (isMatch3(s, p.substring(2)) || (first && isMatch3(s.substring(1), p)));
 		} else {
-			return first && isMatch3(s.substring(1), p.substring(1));
+			System.out.println("s: "+s +" p: "+p);
+			return first && isMatch3(s.substring(1), p.substring(1));	//e.g. s:"ab", p:"a*b" => [s:ab, p:b](not really, first:F), [s:b, p:b](real, first:T)
 		}
 	}
+	
 	//sol: DP
 	public boolean isMatch2(String s, String p) {
 		if (s == null || p == null) {
@@ -115,6 +118,7 @@ public class n010_regular_expression_matching {
 		}
 		boolean[][] dp = new boolean[s.length()+1][p.length()+1];
 		dp[0][0] = true;
+		
 		for (int i = 0; i < p.length(); i++) {
 			if (p.charAt(i) == '*' && dp[0][i-1]) {
 				dp[0][i+1] = true;
@@ -142,7 +146,7 @@ public class n010_regular_expression_matching {
 	
 	public static void main(String[] args) {
 		n010_regular_expression_matching obj = new n010_regular_expression_matching();
-		System.out.println("aa, a: " + obj.isMatch("aa", "a"));
+/*		System.out.println("aa, a: " + obj.isMatch("aa", "a"));
 		System.out.println("aa, aa: " + obj.isMatch("aa", "aa"));
 		System.out.println("aaa, aa: " + obj.isMatch("aaa", "aa"));
 		System.out.println("aa, a*: " +obj.isMatch("aa", "a*"));
@@ -150,21 +154,24 @@ public class n010_regular_expression_matching {
 		System.out.println("ab, .*: " + obj.isMatch("ab", ".*"));
 		System.out.println("a, .*: " + obj.isMatch("a", ".*"));
 		System.out.println("abb, .*: " + obj.isMatch("abb", ".*"));
-		System.out.println("aab, c*a*b: " +obj.isMatch("aab", "c*a*b"));
+		System.out.println("aab, c*a*b: " +obj.isMatch("aab", "c*a*b"));*/
 		
-		System.out.println("Recursive");
-		System.out.println("aa, a: " + obj.isMatch3("aa", "a"));
-		System.out.println("aa, aa: " + obj.isMatch3("aa", "aa"));
-		System.out.println("aaa, aa: " + obj.isMatch3("aaa", "aa"));
-		System.out.println("aa, a*: " +obj.isMatch3("aa", "a*"));
-		System.out.println("aa, .*: " +obj.isMatch3("aa", ".*"));
-		System.out.println("ab, .*: " + obj.isMatch3("ab", ".*"));
-		System.out.println("a, .*: " + obj.isMatch3("a", ".*"));
-		System.out.println("abb, .*: " + obj.isMatch3("abb", ".*"));
-		System.out.println("aab, c*a*b: " +obj.isMatch3("aab", "c*a*b"));
+		//
+		System.out.println("#Recursive");
+		//System.out.println(", a*: " + obj.isMatch3("", "a*"));
+		System.out.println("ab, a*b: " + obj.isMatch3("ab", "a*b"));
+//		System.out.println("aa, a: " + obj.isMatch3("aa", "a"));
+//		System.out.println("aa, aa: " + obj.isMatch3("aa", "aa"));
+//		System.out.println("aaa, aa: " + obj.isMatch3("aaa", "aa"));
+//		System.out.println("aa, a*: " +obj.isMatch3("aa", "a*"));
+//		System.out.println("aa, .*: " +obj.isMatch3("aa", ".*"));
+//		System.out.println("ab, .*: " + obj.isMatch3("ab", ".*"));
+//		System.out.println("a, .*: " + obj.isMatch3("a", ".*"));
+//		System.out.println("abb, .*: " + obj.isMatch3("abb", ".*"));
+//		System.out.println("aab, c*a*b: " +obj.isMatch3("aab", "c*a*b"));
 		
 		//DP
-		System.out.println("DP");
+		System.out.println("#DP");
 		System.out.println("aa, a: " + obj.isMatch2("aa", "a"));
 		System.out.println("aa, aa: " + obj.isMatch2("aa", "aa"));
 		System.out.println("aaa, aa: " + obj.isMatch2("aaa", "aa"));
