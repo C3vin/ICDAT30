@@ -61,16 +61,16 @@ public class n004_Median_of_Two_Sorted_Arrays {
 	 *         7     |      7  equal half partition 
 	 * if match (x2 <= y6, y5 <= x3), we can get the median avg(max(x2,y5), min(x3, y6))
 	 * 
-	 *    1  3   8   9   15
+	 *    1  3   8   9   15       x: 5 elements
 	 * =========================
 	 *   |  |  |   |   |   |   |
 	 *   0  1  2   3   4   5   6  (partition)
 	 * =========================
-	 *    7  11  18  19  21  25
+	 *    7  11  18  19  21  25   y: 6 elements
 	 *  start = 0, end = 4       //this is index, e,g. index 4 is 15
 	 *  partitionX = (0+4)/2=2   //1,3 | 8,9,15
-	 *  partitionY = (5+6+1)/2 - 2(partitionX) = 4   
-	 *  based on formula: partitionX + partitionY = (x+y+1)/2 
+	 *  partitionY = (5+6+1)/2 - 2(this is partitionX) = 4   
+	 *  based on formula: partitionX + partitionY = (x+y+1)/2 ps: +1 cuz for even and odd num of elements
 	 *  
 	 *  x: 1,3 | 8,9,15
 	 *  y: 7,11,18,19 | 21,25   for first run
@@ -138,8 +138,8 @@ public class n004_Median_of_Two_Sorted_Arrays {
 			
 			//if partitionX is 0 it means nothing is there on left side. Use -INF for maxLeftX
             //if partitionX is length of input then there is nothing on right side. Use +INF for minRightX
-			int maxLeftX = (partitionX == 0) ? Integer.MIN_VALUE : nums1[partitionX - 1];  	
-			int minRightX = (partitionX == x) ? Integer.MAX_VALUE : nums1[partitionX];
+			int maxLeftX = (partitionX == 0) ? Integer.MIN_VALUE : nums1[partitionX - 1];  	//why -1, cuz need to match the index
+			int minRightX = (partitionX == x) ? Integer.MAX_VALUE : nums1[partitionX];		//cuz match the index
 			
 			int maxLeftY = (partitionY == 0) ? Integer.MIN_VALUE : nums2[partitionY - 1];
 			int minRightY = (partitionY == y) ? Integer.MAX_VALUE : nums2[partitionY];
@@ -153,10 +153,10 @@ public class n004_Median_of_Two_Sorted_Arrays {
 				} else {
 					return (double)Math.max(maxLeftX, maxLeftY);
 				}
-			} else if(maxLeftX > minRightY) {
+			} else if(maxLeftX > minRightY) {		//to far on right side for pX, go to left side
 				end = partitionX - 1;
-			} else {
-				start = partitionX + 1;
+			} else {  //maxLeftY > minRightX
+				start = partitionX + 1;				//to far on left side for pX, go to right side
 			}
 		}
 		return 0;
