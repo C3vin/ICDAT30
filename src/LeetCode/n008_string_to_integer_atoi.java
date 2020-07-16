@@ -60,11 +60,13 @@ public class n008_string_to_integer_atoi {
 			if(!Character.isDigit(str.charAt(i))) {
 				return (int)res * sign;
 			}
+			
 			res = res * 10 + str.charAt(i) - '0';
+			
 			if(sign == 1 && res > Integer.MAX_VALUE) {
 				return Integer.MAX_VALUE;
 			}
-			if(sign == -1 && res > Integer.MAX_VALUE) {				//Integer.MAX_VALUE
+			if(sign == -1 && res > Integer.MAX_VALUE) {				//Integer.MAX_VALUE !!!!!!!!
 				return Integer.MIN_VALUE;                           //but here use MIN_VALUE
 			}
 		}
