@@ -11,6 +11,8 @@ Example:
 Input: "23"
 Output: ["ad", "ae", "af", "bd", "be", "bf", "cd", "ce", "cf"].
  */
+
+//Better!
 public class n017_letter_combinations_of_a_phone_number {
 	String[] dicts = new String[]{" ", "", "abc", "def", "ghi", "jkl", "mno", "pqrs", "tuv", "wxyz"};
 
@@ -39,7 +41,7 @@ public class n017_letter_combinations_of_a_phone_number {
 		}
 	}
 
-	//dfs
+	//dfs Better!
 	public List<String> letterCombinations_dfs(String digits) {
 		List<String> combin = new ArrayList<String>();
 		dfs(digits, "", combin);
@@ -50,18 +52,18 @@ public class n017_letter_combinations_of_a_phone_number {
 		if(digits.isEmpty()) {
 			return;
 		} else if(digits.length() == 1) {
-			for(Character letter : dicts[digits.charAt(0) - '0'].toCharArray()) {
+			for(char letter : dicts[digits.charAt(0) - '0'].toCharArray()) {		//Character is okay!
 				combin.add(path + letter);
 			}
 		} else {
-			for(Character letter : dicts[digits.charAt(0) - '0'].toCharArray()) {
+			for(char letter : dicts[digits.charAt(0) - '0'].toCharArray()) {
 				dfs(digits.substring(1), path + letter, combin);
 			}
 		}
 	}
 	
 	//sol2
-	public List<String> letterCombinations(String digits) {
+/*	public List<String> letterCombinations(String digits) {
 		List<String> combin = new ArrayList<String>();
 		if(digits.length() == 0) {
 			return combin;
@@ -87,13 +89,12 @@ public class n017_letter_combinations_of_a_phone_number {
 			}
 		}
 		return combin;
-	}
+	}*/
 
 	public static void main(String[] args) {
 		n017_letter_combinations_of_a_phone_number obj = new n017_letter_combinations_of_a_phone_number();
 		System.out.println(obj.letterCom("23"));
 		System.out.println(obj.letterCom("6"));
-//		System.out.println(obj.letterCombinations("23"));
-//		System.out.println(obj.letterCombinations_dfs("23"));
+		System.out.println(obj.letterCombinations_dfs("23"));
 	}
 }
