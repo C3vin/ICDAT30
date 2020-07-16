@@ -81,9 +81,9 @@ public class n013_roman_to_integer {
 			else {
 				sum = sum + transfer[i];
 			}
-			System.out.println(sum);
+			//System.out.println(sum);
 		}
-		return sum + transfer[transfer.length-1]; 		//F: need to add last value, because we use 0 ~ transfer.length-1
+		return sum + transfer[transfer.length-1]; 		//F: need to add last value (b4 is not adding last value), because we use 0 ~ transfer.length-1
 	}
 	
 	public int romanToInt2(String s) {
