@@ -92,6 +92,7 @@ public class n017_letter_combinations_of_a_phone_number {
 	public static void main(String[] args) {
 		n017_letter_combinations_of_a_phone_number obj = new n017_letter_combinations_of_a_phone_number();
 		System.out.println(obj.letterCom("23"));
+		System.out.println(obj.letterCom("6"));
 //		System.out.println(obj.letterCombinations("23"));
 //		System.out.println(obj.letterCombinations_dfs("23"));
 	}
