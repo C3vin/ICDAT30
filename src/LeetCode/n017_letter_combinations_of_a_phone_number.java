@@ -18,19 +18,24 @@ public class n017_letter_combinations_of_a_phone_number {
 		List<String> result = new ArrayList<String>();
 
 		String tmp = new String();
-		if(digits == null || digits.equals("")) 
+		if(digits == null || digits.equals("")) {
 			return result;
+		}
+		
 		generate(result, dicts, digits, tmp, 0);
+		
 		return result;
 	}
 	private void generate(List<String> result, String[] dicts, String digits, String tmp, int index) {
-		if(index == digits.length()) {
+		if(index == digits.length()) {			//need to match the digits numbers
 			result.add(tmp);
 			return;
 		}
+		
 		int num = digits.charAt(index) - '0';
+
 		for(int i=0; i<dicts[num].length(); i++) {		//if we choose 7, the length will become 4
-			generate(result, dicts, digits, tmp+dicts[num].charAt(i), index+1); //tmp+letter[num].charAt(i)
+			generate(result, dicts, digits, tmp+dicts[num].charAt(i), index+1); 		//tmp+letter[num].charAt(i) !!! and index+1 not i+1
 		}
 	}
 
@@ -87,7 +92,7 @@ public class n017_letter_combinations_of_a_phone_number {
 	public static void main(String[] args) {
 		n017_letter_combinations_of_a_phone_number obj = new n017_letter_combinations_of_a_phone_number();
 		System.out.println(obj.letterCom("23"));
-		System.out.println(obj.letterCombinations("23"));
-		System.out.println(obj.letterCombinations_dfs("23"));
+//		System.out.println(obj.letterCombinations("23"));
+//		System.out.println(obj.letterCombinations_dfs("23"));
 	}
 }
