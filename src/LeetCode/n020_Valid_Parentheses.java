@@ -78,7 +78,7 @@ public class n020_Valid_Parentheses {
 				}
 			}
 		}
-		return stack.isEmpty();		//handle "[" case
+		return stack.isEmpty();		//handle one side case e.g. '[' !!!!!!!!!!! 
 	}
 	
 	public static void main(String[] args) {
