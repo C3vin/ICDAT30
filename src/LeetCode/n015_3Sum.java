@@ -29,7 +29,7 @@ public class n015_3Sum {
 		for(int i=0; i<nums.length-2; i++) {			//make sure we have 3 nums, i / i+1 / nums.ength-1
 			//remove duplicate also F: need i==0 (for the first element)
 			//nums[i-1] not nums[i+1] cuz low = i+1, if check nums[i+1] will miss (-1,-1,2) 
-			if(i == 0 || nums[i] != nums[i-1]) {		
+			if(i == 0 || nums[i] != nums[i-1]) {		//Must!!!!!!!!!!!!!!!
 				int left = i+1;							//i+1
 				int right = nums.length-1;				//nums.ength-1
 				int sum = 0 - nums[i];					//i
