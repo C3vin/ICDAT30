@@ -20,8 +20,9 @@ public class n022_generate_parenthesis {
 	public List<String> generateParenthesis(int n) {
 		List<String> res = new ArrayList<String>();
 		String path = new String();
-		//if(n <= 0) return res;
+		
 		helper(n, n, res, path);
+		
 		return res;
 	}
 	private void helper(int left, int right, List<String> res, String path) {
