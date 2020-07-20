@@ -35,8 +35,7 @@ public class n031_Next_Permutation {
 		
 		//handle special case
 		if(i < 0) {
-			reverse(nums, 0);
-			//System.out.println("special");	//3,2,1
+			reverse(nums, 0, nums.length-1); 	//3,2,1
 			return;
 		}
 		
@@ -46,14 +45,14 @@ public class n031_Next_Permutation {
 		}
 		
 		swap(nums, i, j);
-		reverse(nums, i+1);
+		reverse(nums, i+1, nums.length-1);
 		
 		for(int n:nums)
 			System.out.print(n);
 		System.out.print("\n");
 	}
-	private void reverse(int[] nums, int start) {
-		int end = nums.length-1;
+	private void reverse(int[] nums, int start, int end) {
+		//int end = nums.length-1;
 		while(start < end) {				//swap index start and end 1 by 1, use 'while'
 			swap(nums, start, end);
 			start++;
@@ -68,6 +67,7 @@ public class n031_Next_Permutation {
 	
 	public static void main(String[] args) {
 		n031_Next_Permutation obj = new n031_Next_Permutation();
+		obj.nextPermutation(new int[] {1});
 		obj.nextPermutation(new int[] {1, 2, 3});
 		obj.nextPermutation(new int[] {3, 2, 1});
 		obj.nextPermutation(new int[] {1, 2, 7, 4, 3, 1});
