@@ -24,6 +24,7 @@ public class n033_Search_in_Rotated_Sorted_Array {
 
 		while(left <= right) {										//Boundary <=
 			int mid = (left+right)/2;
+			
 			if(nums[mid] == target) 								//nums[mid] not only mid !!!
 				return mid;
 
@@ -77,7 +78,7 @@ public class n033_Search_in_Rotated_Sorted_Array {
 	public static void main(String[] args) {
 		n033_Search_in_Rotated_Sorted_Array obj = new n033_Search_in_Rotated_Sorted_Array();
 		int[] nums = {4,5,6,7,0,1,2};
-		System.out.println(obj.search(nums, 5));
+		System.out.println(obj.search(nums, 0));
 		System.out.println(obj.search2(nums, 5));
 		
 		System.out.println(obj.search(new int[] {5,1,3}, 3));
