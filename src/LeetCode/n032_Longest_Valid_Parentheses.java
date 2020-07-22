@@ -1,8 +1,21 @@
 package LeetCode;
 
 import java.util.LinkedList;
+import java.util.Stack;
 
-//e.g. example is ")()())", where the longest valid parentheses substring is "()()", which has length = 4.
+/*
+Given a string containing just the characters '(' and ')', find the length of the longest valid (well-formed) parentheses substring.
+
+Example 1:
+Input: "(()"
+Output: 2
+Explanation: The longest valid parentheses substring is "()"
+
+Example 2:
+Input: ")()())"
+Output: 4
+Explanation: The longest valid parentheses substring is "()()"
+ */
 public class n032_Longest_Valid_Parentheses {
 	//Brute Force [Time Limit Exceeded]
 	public int longestValidParentheses(String s) {
@@ -29,40 +42,43 @@ public class n032_Longest_Valid_Parentheses {
 		}	
 		return stack.isEmpty();	//isempty()
 	}
-	
-	//Stack
+
+	//Stack better! 
 	public int longestValidParentheses2(String s) {
-		int maxLen = 0;
-		LinkedList<Integer> stack = new LinkedList<Integer>();
-		stack.push(-1);		//dummy
-		
+		int max = 0;
+		Stack<Integer> stack = new Stack<Integer>();
+		stack.push(-1);                 //need to handle () case, 1 - (-1) = 2
+
 		for(int i=0; i<s.length(); i++) {
 			if(s.charAt(i) == '(') {
-				stack.push(i);
+				stack.push(i);        
 			} else {
 				stack.pop();
-				if(stack.isEmpty())
+
+				if(stack.isEmpty()) {   //update if empty
 					stack.push(i);
-				
-				maxLen = Math.max(maxLen, i - stack.peek());
+				}
+
+				max = Math.max(max, i - stack.peek());
 			}
 		}
-		return maxLen;
+
+		return max;
 	}
-	
+
 	//Without extra space
 	public int longestValidParentheses3(String s) {
 		int left = 0;
 		int right = 0;
 		int maxLen = 0;
-		
+
 		//start from left
 		for(int i=0; i<s.length(); i++) {
 			if(s.charAt(i) == '(')
 				left++;
 			else 
 				right++;
-			
+
 			if(left == right) {
 				maxLen = Math.max(maxLen, right*2);
 			} else if(right >= left) {
@@ -70,17 +86,17 @@ public class n032_Longest_Valid_Parentheses {
 				right = 0;
 			}
 		}
-		
+
 		left = 0; 	//Need to reset!!!
 		right = 0;
-		
+
 		//start from right
 		for(int i=s.length()-1; i>=0; i--) {
 			if(s.charAt(i) == ')') 
 				right++;
 			else
 				left++;
-			
+
 			if(left == right) {
 				maxLen = Math.max(maxLen, left*2);
 			} else if(left >= right) {				//handle )((()), from right to left, need to avoid left = 3, right = 3 in wrong order
@@ -90,7 +106,7 @@ public class n032_Longest_Valid_Parentheses {
 		}
 		return maxLen;
 	}
-	
+
 	public static void main(String[] args) {
 		n032_Longest_Valid_Parentheses obj = new n032_Longest_Valid_Parentheses();
 		String s = ")()())";
