@@ -20,6 +20,7 @@ public class n034_Search_for_a_Range {
 	//Binary search solution       almost [LC33 - LC34]
 	public int[] searchRange(int[] nums, int target) {
 		int[] res = new int[] {-1,-1};
+		
 		if(nums == null || nums.length == 0) {
 			return res; 
 		}
@@ -40,20 +41,22 @@ public class n034_Search_for_a_Range {
 		int rr = nums.length-1;
 		while(rl <= rr) {
 			int mid = (rl + rr)/2;
-			if(nums[mid] <= target) {				//F: <=    need to lock rr to the last index
+			if(nums[mid] <= target) {				//F: <=  need to lock rr to the last index
 				rl = mid+1;
 			} else {
 				rr = mid-1;
 			}
 		}
 
-		if(ll <= rr) {
+		if(ll <= rr) {				//handle ll > rr case. e.g. target = 6, ll=1, rr=0 
 			res[0] = ll;
 			res[1] = rr;
 		}
+		
 		return res;
 	}
 
+	//Good, check from left and from right
 	public int[] searchRange2(int[] nums, int target) {
 		int[] targetRange = {-1, -1};
 
@@ -84,7 +87,8 @@ public class n034_Search_for_a_Range {
 	public static void main(String[] args) {
 		n034_Search_for_a_Range obj = new n034_Search_for_a_Range();
 		int[] nums = {5,7,7,8,8,10};
-		System.out.println(Arrays.toString(obj.searchRange(nums, 8)));
+		//System.out.println(Arrays.toString(obj.searchRange(nums, 8)));
+		System.out.println(Arrays.toString(obj.searchRange(nums, 6)));
 		System.out.println(Arrays.toString(obj.searchRange2(nums, 8)));
 	}
 }
