@@ -19,9 +19,11 @@ public class n038_Count_and_Say {
 
 		String result = "1";
 		int round = 1;
+		
 		while (round < n) {
 			StringBuilder sb = new StringBuilder();
 			int count = 1;			
+			
 			for (int i=1; i<result.length(); i++) {
 				//same value
 				if (result.charAt(i) == result.charAt(i - 1)) {
@@ -30,7 +32,7 @@ public class n038_Count_and_Say {
 					//new value
 					sb.append(count);
 					sb.append(result.charAt(i - 1));	//1211, '21' i=2 so i-1 -> '12' 
-					count = 1;							//reset
+					count = 1;							//reset, cuz new value
 				}
 			}
 			sb.append(count);
@@ -39,6 +41,7 @@ public class n038_Count_and_Say {
 			
 			round++;				 
 		}
+		
 		return result;
 	}
 	
@@ -49,5 +52,6 @@ public class n038_Count_and_Say {
 		System.out.println(obj.countAndSay(3));
 		System.out.println(obj.countAndSay(4));
 		System.out.println(obj.countAndSay(5));
+		System.out.println(obj.countAndSay(6));
 	}
 }
