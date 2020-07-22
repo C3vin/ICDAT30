@@ -21,6 +21,8 @@ Example 4:
 Input: [1,3,5,6], 0
 Output: 0
  */
+
+//[same as LC33, LC34. Most like LC34 it is sorted and in ascending order]
 public class n035_Search_Insert_Position {
 	public int searchInsert(int[] nums, int target) {
 		if(nums == null || nums.length == 0) {
@@ -32,20 +34,26 @@ public class n035_Search_Insert_Position {
 		
 		while(left <= right) {
 			int Mid = (left+right)/2;
+			
 			if(nums[Mid] == target) {
 				return Mid;
 			}
+			
 			if(nums[Mid] < target) {
 				left = Mid+1;
 			} else
 				right = Mid-1;
 		}
-		return left;								//return left
+		
+		return left;								//why left, cuz it will stay in the current index
 	}
 	
 	public static void main(String[] args) {
 		n035_Search_Insert_Position obj = new n035_Search_Insert_Position();
 		int[] nums = {1,3,5,6};
 		System.out.println(obj.searchInsert(nums, 5));
+		System.out.println(obj.searchInsert(nums, 2));
+		System.out.println(obj.searchInsert(nums, 7));
+		System.out.println(obj.searchInsert(nums, 0));
 	}
 }
