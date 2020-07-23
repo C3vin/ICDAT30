@@ -40,6 +40,7 @@ public class n041_First_Missing_Positive {
 				return i+1;
 			}
 		}
+		
 		return nums.length + 1;		//handle last element case
 	} 
 
