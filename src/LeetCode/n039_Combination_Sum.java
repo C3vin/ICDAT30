@@ -48,15 +48,19 @@ public class n039_Combination_Sum {
 		}
 		
 		if(target == 0) {		//meet the target request, and return [2,2,3]
-			res.add(new ArrayList<Integer>(tmp));
+			res.add(new ArrayList<Integer>(tmp));			//can't use res.add(tmp) need new instance, cuz tmp will remove later and will change the res value 
+
 			return;			//F: Don't forget! 
 		}
+		
 		for(int i=start; i<candidates.length; i++) {
 //			if(i>0 && candidates[i] == candidates[i-1]) {
 //				continue;		//no need for LC 39, not contain duplicate combinations. for LC40
 //			}
 			tmp.add(candidates[i]);
+			
 			helper(candidates, target-candidates[i], res, tmp, i);	//why not i+1,the same repeated number may be use unlimited 
+			
 			tmp.remove(tmp.size()-1);
 		}
 	}

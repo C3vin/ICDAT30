@@ -87,7 +87,9 @@ public class n040_Combination_Sum_II {
 				continue;
 			}
 			tmp.add(candidates[i]);
+			//i -> i+1 cuz every number can Only use once, so next loop can't start itself, so must i+1
 			dfs(candidates, target-candidates[i], res, tmp, i+1);		//why i+1, make sure no duplicates! no like LC39
+			
 			tmp.remove(tmp.size()-1);
 		}
 	}
