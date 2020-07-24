@@ -36,7 +36,9 @@ public class n039_Combination_Sum {
 	public List<List<Integer>> combinationSum(int[] candidates, int target) {
 		List<List<Integer>> res = new ArrayList<List<Integer>>();
 		List<Integer> tmp = new ArrayList<Integer>();
+		
 		Arrays.sort(candidates);		//no need it, but looks more sorted
+		
 		helper(candidates, target, res, tmp, 0);
 		
 		return res;

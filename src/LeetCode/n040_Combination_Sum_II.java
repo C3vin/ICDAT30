@@ -66,8 +66,11 @@ public class n040_Combination_Sum_II {
 	public List<List<Integer>> combinationSum2_2(int[] candidates, int target) {
 		List<List<Integer>> res = new ArrayList<List<Integer>>();
 		List<Integer> tmp = new ArrayList<Integer>();
+		
 		Arrays.sort(candidates);							//need sort first
+		
 		dfs(candidates, target, res, tmp, 0);
+		
 		return res;
 	}
 
@@ -86,6 +89,7 @@ public class n040_Combination_Sum_II {
 			if(i>start  && candidates[i] == candidates[i-1]) {			//i > start, not the first num, e.g. 1134 diff 1s	
 				continue;
 			}
+			
 			tmp.add(candidates[i]);
 			//i -> i+1 cuz every number can Only use once, so next loop can't start itself, so must i+1
 			dfs(candidates, target-candidates[i], res, tmp, i+1);		//why i+1, make sure no duplicates! no like LC39
