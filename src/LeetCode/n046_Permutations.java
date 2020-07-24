@@ -27,19 +27,24 @@ public class n046_Permutations {
 		dfs(nums, used, tmp, res);
 		return res;
 	}
-	//dfs
+	//dfs  [LC46 & LC47] Must study this sol for the LC47.
 	private void dfs(int[] nums, boolean[] used, List<Integer> tmp, List<List<Integer>> res) {
 		if(tmp.size() == nums.length) {
 			res.add(new ArrayList<Integer>(tmp));
+			
 			return;
 		}
+		
 		for(int i=0; i<nums.length; i++) {
 			if(used[i]) {
 				continue;
 			}
+			
 			tmp.add(nums[i]);
 			used[i] = true;
+			
 			dfs(nums, used, tmp, res);
+			
 			tmp.remove(tmp.size()-1);
 			used[i] = false;							//reset
 		}
@@ -50,19 +55,24 @@ public class n046_Permutations {
 		List<List<Integer>> res = new ArrayList<List<Integer>>();
 		List<Integer> tmp = new ArrayList<Integer>();
 		dfs2(nums, tmp, res);
+		
 		return res;
 	}
 	private void dfs2(int[] nums, List<Integer> tmp, List<List<Integer>> res) {
 		if(tmp.size() == nums.length) {
 			res.add(new ArrayList<Integer>(tmp));
-			return;
+			return;										//don't forget
 		}
+		
 		for(int i=0; i<nums.length; i++) {
 			if(tmp.contains(nums[i])) {					//smart! not need used!
 				continue;
 			}
+			
 			tmp.add(nums[i]);
+			
 			dfs2(nums, tmp, res);
+			
 			tmp.remove(tmp.size()-1);
 		}
 		
