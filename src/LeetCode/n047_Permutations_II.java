@@ -60,17 +60,29 @@ public class n047_Permutations_II {
 	//dfs
 	private void dfs(int[] nums, boolean[] used, List<Integer> tmp, List<List<Integer>> res) {
 		if(tmp.size() == nums.length) {
+			// if(res.contains(tmp)) {
+			// 	return;                         //ps: works but too slow
+			// }
+			
 			res.add(new ArrayList<Integer>(tmp));
+			
 			return;
 		}
-		for(int i=0; i<nums.length; i++) {	
+		for(int i=0; i<nums.length; i++) {
+            // if(used[i]) {
+            //     continue;                    //ps: works but too slow
+            // }
+			
 			//why length-1? cuz handle later array i+1
 			if(used[i] || i<nums.length-1 && nums[i] == nums[i+1] && !used[i+1]) {		
 				continue;										//remove duplicates
 			}
+			
 			tmp.add(nums[i]);
 			used[i] = true;
+			
 			dfs(nums, used, tmp, res);
+			
 			tmp.remove(tmp.size()-1);
 			used[i] = false;
 		}
