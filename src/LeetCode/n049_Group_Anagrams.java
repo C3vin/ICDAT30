@@ -42,6 +42,7 @@ public class n049_Group_Anagrams {
 				map.put(ns, list);
 			}
 		}
+		
 		res = new ArrayList<List<String>>(map.values());
 
 		return res;
@@ -52,39 +53,45 @@ public class n049_Group_Anagrams {
 		if(strs.length == 0 || strs == null) {
 			return new ArrayList<List<String>>();
 		}
+		
 		HashMap<String, List<String>> map = new HashMap<String, List<String>>();
 
 		for(String s : strs) {
 			char[] ch = s.toCharArray();		//convert string to ch array
+			
 			Arrays.sort(ch);
 			
 			String key = String.valueOf(ch);	//convert ch array to string
-			if(!map.containsKey(key))
-				map.put(key, new ArrayList<String>());
+			if(!map.containsKey(key)) {
+				map.put(key, new ArrayList<String>());			//just create the space!
+			}
 			map.get(key).add(s);				//Tip: get value(List) and add the string s. e.g. eat, tea in map
 			//System.out.println(map);			//{aet=[eat, tea, ate], abt=[bat], ant=[tan, nat]}
 		} 
+		
 		return new ArrayList<List<String>>(map.values());
 	}
 	
-	//sol3
+	//sol3 Good! 
 	public List<List<String>> groupAnagrams3(String[] strs) {
 		if(strs.length == 0 || strs == null) {
 			return new ArrayList<List<String>>();
 		}
+		
 		HashMap<String, List<String>> map = new HashMap<String, List<String>>();
 
 		for(String s : strs) {
-			char[] c = s.toCharArray();
-			Arrays.sort(c);
+			char[] ch = s.toCharArray();
+			Arrays.sort(ch);
 
-			String key = String.valueOf(c);
+			String key = String.valueOf(ch);
 			if(map.containsKey(key)) {
 				map.get(key).add(s);
 			} else {
 				map.put(key, new ArrayList<String>(Arrays.asList(s)));	//default value need Arrays.asList() 
 			}
 		}
+		
 		return new ArrayList<List<String>>(map.values());				//need map.values()!
 	}
 
