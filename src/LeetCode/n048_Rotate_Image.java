@@ -34,13 +34,13 @@ rotate the input matrix in-place such that it becomes:
   [12, 6, 8, 9],
   [16, 7,10,11]
 ]
-*/
+ */
 public class n048_Rotate_Image {
 	//Same as ctci 1.7
-	//sol1
+	//Need one int array, cope orig to new, then copy back to orig
 	public void rotate(int[][] matrix) {
-		int m = matrix.length;  			//row
-		int n = matrix[0].length;			//col
+		int m = matrix.length;  			//row   -> 
+		int n = matrix[0].length;			//col    ^
 		int[][] result = new int[m][n];
 
 		for(int i=0; i<m; i++) {
@@ -48,11 +48,13 @@ public class n048_Rotate_Image {
 				result[j][n-1-i] = matrix[i][j];		//(0,0) -> (0,2)
 			}
 		}
-		for(int i=0; i<m; i++) {		//reset
+
+		for(int i=0; i<m; i++) {			//copy back
 			for(int j=0; j<n; j++) {
 				matrix[i][j] = result[i][j];
 			}
 		}
+
 		for(int i=0; i<m; i++) {
 			for(int j=0; j<n; j++) {
 				System.out.print(matrix[i][j]);
@@ -62,7 +64,7 @@ public class n048_Rotate_Image {
 	}
 
 	//sol: In place
-	public void rotateIP(int[][] matrix) {
+	public void rotate2(int[][] matrix) {
 		int m = matrix.length;
 		int n = matrix[0].length;
 		/***
@@ -73,16 +75,31 @@ public class n048_Rotate_Image {
 			i: 1 j: 1
 			i: 1 j: 2
 		 */
-		for(int i=0; i<m/2; i++) {					//2 loop
+		/*for(int i=0; i<m/2; i++) {					//2 loop
 			for(int j=0; j<(m+1)/2; j++) {			//4 sides
-				//System.out.println(i+" : "+j);
+				System.out.println(i+" : "+j);
 				int tmp = matrix[i][j];
 				matrix[i][j] = matrix[m-1-j][i];
 				matrix[m-1-j][i] = matrix[m-1-i][m-1-j];
 				matrix[m-1-i][m-1-j] = matrix[j][m-1-i];
 				matrix[j][m-1-i] = tmp;
 			}
+		}*/
+		
+		//https://javabypatel.blogspot.com/2016/11/rotate-matrix-by-90-degrees-inplace.html
+		int length = matrix.length-1;
+		
+		for (int i = 0; i <= (length)/2; i++) {
+			for (int j = i; j < length-i; j++) {
+				//System.out.println(i+" : "+j);
+				int tmp = matrix[i][j];
+				matrix[i][j] = matrix[length-j][i];
+				matrix[length-j][i] = matrix[length-i][length-j];
+				matrix[length-i][length-j] = matrix[j][length-i];
+				matrix[j][length-i] = tmp;
+			}
 		}
+
 		for(int i=0; i<m; i++) {
 			for(int j=0; j<n; j++) {
 				System.out.print(matrix[i][j]);
@@ -94,32 +111,38 @@ public class n048_Rotate_Image {
 		n048_Rotate_Image obj = new n048_Rotate_Image();
 
 		int[][] matrix = 
-						
-			{{1,2,3,4},
-			 {1,5,6,7},
-			 {1,8,9,0},
-			 {1,1,2,3}};
-			
+				   {{1, 2, 3, 4, 5},
+					{6, 7, 8, 9, 10},
+					{11,12,13,14,15},
+					{16,17,18,19,20},
+					{21,22,23,24,25}};
 
-/*			   {{1,2,0,4,5},
+		/*			   {{1,2,0,4,5},
 				{1,2,3,0,6},
 				{1,0,0,4,6},
 				{1,2,0,4,5},
 				{1,2,3,4,6}};*/
 
-		obj.rotate(matrix);
+		obj.rotate2(matrix);
+		System.out.println("");
+
+		//		obj.rotate(new int[][] 
+		//			{{1,2,3},
+		//			{4,5,6},
+		//			{7,8,9},});
+
 		System.out.println("");
 
 		int[][] matrix1 = 
-	/*		{{1,2,3,4},
-			 {1,6,7,8},
-			 {1,2,0,4},
-			 {1,2,3,4}};*/
+					{{1,2,3,4},
+					{5,6,7,8},
+					{9,10,11,12},
+					{13,14,15,16}};
 
-			   {{1,2,3},
+		/* {{1,2,3},
 				{4,5,6},
 				{7,8,9},
-				};
-		obj.rotateIP(matrix1);
+				};*/
+		//obj.rotate2(matrix1);
 	}
 }
