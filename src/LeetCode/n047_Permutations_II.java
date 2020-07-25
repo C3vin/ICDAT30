@@ -53,8 +53,11 @@ public class n047_Permutations_II {
 		List<List<Integer>> res = new ArrayList<List<Integer>>();
 		List<Integer> tmp = new ArrayList<Integer>();
 		boolean[] used = new boolean[nums.length];
-		Arrays.sort(nums);										//need sort first!
+		
+		Arrays.sort(nums);										//need sort first!!!
+		
 		dfs(nums, used, tmp, res);
+		
 		return res;
 	}
 	//dfs
@@ -74,7 +77,7 @@ public class n047_Permutations_II {
             // }
 			
 			//why length-1? cuz handle later array i+1
-			if(used[i] || i<nums.length-1 && nums[i] == nums[i+1] && !used[i+1]) {		
+			if(used[i] || i<nums.length-1 && nums[i] == nums[i+1] && !used[i+1]) {			//need !used[i+1] to check if next use or not	
 				continue;										//remove duplicates
 			}
 			
