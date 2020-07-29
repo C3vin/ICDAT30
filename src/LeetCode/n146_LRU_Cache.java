@@ -25,7 +25,7 @@ cache.put(4, 4);    // evicts key 1
 cache.get(1);       // returns -1 (not found)
 cache.get(3);       // returns 3
 cache.get(4);       // returns 4
-*/
+ */
 
 public class n146_LRU_Cache {
 	class Node {
@@ -38,7 +38,7 @@ public class n146_LRU_Cache {
 			value = v;
 		}
 	}
-	
+
 	private int capacity;
 	private HashMap<Integer, Node> map;
 	private Node head;
@@ -56,39 +56,17 @@ public class n146_LRU_Cache {
 			Node node = map.get(key);
 			remove(node);
 			setHead(node);
+
 			return node.value;
-		}
-		return -1;
-	}
-	private void remove(Node node) {
-		if(node.pre != null) {			 
-			node.pre.next = node.next;
 		} else {
-			head = node.next;	 		//F: means n is head
-		}
-		if(node.next != null) {
-			node.next.pre = node.pre;
-		} else {
-			tail = node.pre;
+			return -1;
 		}
 	}
-	private void setHead(Node node) {
-		node.next = head;
-		node.pre = null;
-		if(head != null) {
-			head.pre = node;
-		}
-		
-		head = node;		 
-		
-		if(tail == null) {
-			tail = head;				//F: must have this do deal with first time put
-		}
-	}
+
 	public void put(int key, int value) {
 		if(map.containsKey(key)) {
 			Node old = map.get(key);
-			old.value = value;			//F: need to assign new value!!!
+			old.value = value;			//F: need to assign new value!!! update the value
 			remove(old);
 			setHead(old);
 		} else {
@@ -100,12 +78,41 @@ public class n146_LRU_Cache {
 			} else {
 				setHead(created);
 			}
+
 			map.put(key, created);	
+		}
+	}
+
+	private void remove(Node node) {
+		if(node.pre != null) {			 
+			node.pre.next = node.next;
+		} else {
+			head = node.next;	 		//F: means n is head
+		}
+
+		if(node.next != null) {
+			node.next.pre = node.pre;
+		} else {
+			tail = node.pre;
+		}
+	}
+	
+	private void setHead(Node node) {
+		if(head != null) {				//1. check head != null or not
+			head.pre = node;
+		}
+
+		node.next = head;				//2. setup node pre and next
+		node.pre = null;
+		head = node;		 			//3. assign head to node
+
+		if(tail == null) {				//4. check if tail is null
+			tail = head;				//F: must have this do deal with first time add
 		}
 	}
 	
 	public static void main(String[] args) {
-/*		n146_LRU_Cache obj = new n146_LRU_Cache(2);
+		/*		n146_LRU_Cache obj = new n146_LRU_Cache(2);
 		obj.set(1, 23);
 		obj.set(2, 33);
 		obj.set(3, 56);
