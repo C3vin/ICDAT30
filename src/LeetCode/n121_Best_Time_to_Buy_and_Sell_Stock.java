@@ -17,13 +17,17 @@ Output: 0
 Explanation: In this case, no transaction is done, i.e. max profit = 0.
  */
 public class n121_Best_Time_to_Buy_and_Sell_Stock {
+	//LC53-LC121 sol
 	public int maxProfit(int[] prices) {
-		if(prices.length == 0) return 0;
+		if(prices.length == 0) {
+			return 0;
+		}
 
-		int local = 0;
+		int local = 0;				//not like LC53, not prices[i] is 0
 		int global = 0;
-		for(int i=0; i<prices.length-1; i++) {		//cuz prices[i+1]
-			local = Math.max(local + prices[i+1]-prices[i], 0);
+		
+		for(int i=0; i<prices.length-1; i++) {		//cuz prices[i+1]! Range!
+			local = Math.max(local + prices[i+1]-prices[i], 0);			//important sell price can't be negative number!!!
 			global = Math.max(local, global);
 		}
 		return global;

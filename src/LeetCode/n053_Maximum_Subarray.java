@@ -12,12 +12,14 @@ Follow up:
 If you have figured out the O(n) solution, try coding another solution using the divide and conquer approach, which is more subtle.
  */
 public class n053_Maximum_Subarray {
+	//LC53 - LC121 sol
 	public int maxSubArray(int[] nums) {
 		if(nums == null || nums.length==0) {  
 			return 0;  
 		}
 		int global = nums[0];  					//default, will update later
 		int local = nums[0];  					//default
+		
 		for(int i=1; i<nums.length; i++) {		//i=1, cuz we don't need to check first element  
 			local = Math.max(nums[i], local+nums[i]);  		//find MAX between "cur" & "cur+past"
 			global = Math.max(local, global);
