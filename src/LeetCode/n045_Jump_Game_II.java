@@ -17,18 +17,19 @@ public class n045_Jump_Game_II {
 	//cs
 	//time:O(n) space:O(1)
 	public int jump(int[] nums) {
-		int res = 0;
+		int steps = 0;
 		int curMaxArea = 0;
 		int maxNext = 0;
 		
-		for(int i=0; i<nums.length-1; i++) {		//need length-1
-			maxNext = Math.max(maxNext, nums[i]+i);
+		for(int i=0; i<nums.length-1; i++) {		//need length-1, why cuz index 0 will go into if loop and steps++, so need to -1
+			maxNext = Math.max(maxNext, nums[i]+i); //nums[i]+i, start index i and can jump nums[i] value size
+			
 			if(i == curMaxArea) {
-				res++;
 				curMaxArea = maxNext;
+				steps++;
 			}
 		}
-		return res;
+		return steps;
 	}
 	//Greedy algorithm
 	//https://www.hackerearth.com/practice/algorithms/greedy/basics-of-greedy-algorithms/tutorial/
