@@ -31,9 +31,33 @@ public class n055_Jump_Game {
 	}
 	//Greedy algorithm
 	//https://www.hackerearth.com/practice/algorithms/greedy/basics-of-greedy-algorithms/tutorial/
+	
+	//LC45 - LC55 sol
+	public boolean canJump2(int[] nums) {
+		int curMaxArea = 0;
+		int maxPosition = 0;
+		
+		for(int i=0; i<nums.length-1; i++) {
+			if(i > curMaxArea) {
+				return false;
+			}
+			
+			maxPosition = Math.max(maxPosition, nums[i]+i);		//find max index
+			
+			if(i == curMaxArea) {
+				curMaxArea = maxPosition;
+			}
+		}
+		
+		return maxPosition >= nums.length-1;			// >= and length-1 (check index)
+	}
+	
 	public static void main(String[] args) {
 		n055_Jump_Game obj = new n055_Jump_Game();
 		System.out.println(obj.canJump(new int[] {2,3,1,1,4}));
 		System.out.println(obj.canJump(new int[] {3,2,1,0,4}));
+		
+		System.out.println(obj.canJump2(new int[] {2,3,1,1,4}));
+		System.out.println(obj.canJump2(new int[] {3,2,1,0,4}));
 	}
 }
