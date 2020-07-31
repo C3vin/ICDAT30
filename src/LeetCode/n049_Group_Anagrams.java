@@ -23,38 +23,13 @@ All inputs will be in lowercase.
 The order of your output does not matter.
  */
 public class n049_Group_Anagrams {
-	public List<List<String>> groupAnagrams(String[] strs) {
-		List<List<String>> res = new ArrayList<List<String>>();
-		HashMap<String, ArrayList<String>> map = new HashMap<String, ArrayList<String>>();
-
-		for(String str : strs) {
-			//System.out.println(str); eat tea .... 
-			char[] arr = new char[26];
-			for(int i=0; i<str.length(); i++) {
-				arr[str.charAt(i) - 'a']++;		//F: need - 'a'
-			}
-			String ns = new String(arr);
-			if(map.containsKey(ns)) {
-				map.get(ns).add(str);
-			} else {
-				ArrayList<String> list = new ArrayList<String>();
-				list.add(str);
-				map.put(ns, list);
-			}
-		}
-		
-		res = new ArrayList<List<String>>(map.values());
-
-		return res;
-	}
-
 	//convert and sort
 	public List<List<String>> groupAnagrams2(String[] strs) {
 		if(strs.length == 0 || strs == null) {
 			return new ArrayList<List<String>>();
 		}
 		
-		HashMap<String, List<String>> map = new HashMap<String, List<String>>();
+		HashMap<String, List<String>> map = new HashMap<String, List<String>>();			//value: List<String>
 
 		for(String s : strs) {
 			char[] ch = s.toCharArray();		//convert string to ch array
@@ -72,19 +47,21 @@ public class n049_Group_Anagrams {
 		return new ArrayList<List<String>>(map.values());
 	}
 	
-	//sol3 Good! 
+	//sol3 Better!
 	public List<List<String>> groupAnagrams3(String[] strs) {
 		if(strs.length == 0 || strs == null) {
 			return new ArrayList<List<String>>();
 		}
 		
-		HashMap<String, List<String>> map = new HashMap<String, List<String>>();
+		HashMap<String, List<String>> map = new HashMap<String, List<String>>();		//value: List<String>
 
 		for(String s : strs) {
-			char[] ch = s.toCharArray();
-			Arrays.sort(ch);
+			char[] ch = s.toCharArray();			//convert string to ch array
+			
+			Arrays.sort(ch);						//must sort!
 
-			String key = String.valueOf(ch);
+			String key = String.valueOf(ch);		//convert ch array to string
+			
 			if(map.containsKey(key)) {
 				map.get(key).add(s);
 			} else {
@@ -98,7 +75,6 @@ public class n049_Group_Anagrams {
 	public static void main(String[] args) {
 		n049_Group_Anagrams obj = new n049_Group_Anagrams();
 		String[] s = {"eat", "tea", "tan", "ate", "nat", "bat"};
-		System.out.println(obj.groupAnagrams(s));
 		System.out.println(obj.groupAnagrams2(s));
 		System.out.println(obj.groupAnagrams3(s));
 	}
