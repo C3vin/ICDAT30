@@ -38,7 +38,7 @@ public class n056_Merge_Intervals {
 		}
 	}*/
 
-	class Interval {
+/*	class Interval {
 		int start;
 		int end;
 
@@ -46,11 +46,12 @@ public class n056_Merge_Intervals {
 			start = s;
 			end = e;
 		}
-	}
+	}*/
 
 	public int[][] merge(int[][] intervals) {
 		LinkedList<int[]> merged = new LinkedList<int[]>();		//need 'LinkedList' cuz getLast() and toArray (convert Linkedlist to Array!)
-
+		//List<int[]> list = Collections.synchronizedList(merged);		//no need this just for testing for Linked list is not synchronized
+		
 		Arrays.sort(intervals, (int[] a, int[] b) -> {			//Arrays for int array
 			return a[0] - b[0];
 		});
@@ -62,13 +63,13 @@ public class n056_Merge_Intervals {
 				merged.getLast()[1] = Math.max(merged.getLast()[1], interval[1]);
 			}
 		}
-
-
+		
 /*		int[][] res = new int[merged.size()][];
 		for(int i=0; i<merged.size(); i++) {
 			res[i] = merged.get(i);
 		}*/
-		
+			
+		//return list.toArray(new int[list.size()][]);					//no need this just for testing for Linked list is not synchronized
 		return merged.toArray(new int[merged.size()][]);						//LinkedList convert to Array!
 	}
 	
