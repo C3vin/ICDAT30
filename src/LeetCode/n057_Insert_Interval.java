@@ -1,56 +1,104 @@
 package LeetCode;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.LinkedList;
 import java.util.List;
 
+/*
+Given a set of non-overlapping intervals, insert a new interval into the intervals (merge if necessary).
+
+You may assume that the intervals were initially sorted according to their start times.
+
+Example 1:
+Input: intervals = [[1,3],[6,9]], newInterval = [2,5]
+Output: [[1,5],[6,9]]
+
+Example 2:
+Input: intervals = [[1,2],[3,5],[6,7],[8,10],[12,16]], newInterval = [4,8]
+Output: [[1,2],[3,10],[12,16]]
+Explanation: Because the new interval [4,8] overlaps with [3,5],[6,7],[8,10].
+
+NOTE: input types have been changed on April 15, 2019. Please reset to default code definition to get new method signature
+ */
 public class n057_Insert_Interval {
-	public class Interval {
-		int start;
-		int end;
-		Interval() { 
-			start = 0; 
-			end = 0; 
-		}
-		Interval(int s, int e) { 
-			start = s; 
-			end = e; 
-		}
-		public String toString() {
-			return "[" + start + ", " + end + "]";
-		}
-	}
-	public List<Interval> insert(List<Interval> intervals, Interval newInterval) {
-		List<Interval> res = new ArrayList<Interval>();
+	//Good!
+	public int[][] insert(int[][] intervals, int[] newInterval) {
+		List<int[]> list = new ArrayList<int[]>();
 		
-		for(Interval inter : intervals) {
-			if(inter.end < newInterval.start)
-				res.add(inter);
-			else if(inter.start > newInterval.end) {
-				//System.out.println(inter + " : " +newInterval);
-				res.add(newInterval);
-				newInterval = inter;	//add newInterval(3, 10) first and update newInterval to inter(12,16), so we can add in res later(out for loop)
+		int i=0;
+		while(i<intervals.length && intervals[i][1] < newInterval[0]) {
+			list.add(intervals[i]);
+			i++;
+		}
+		
+		while(i<intervals.length && intervals[i][0] <= newInterval[1]) {		//<= also need to check newInterval[1] not [0] !!!
+			newInterval[0] = Math.min(newInterval[0], intervals[i][0]);
+			newInterval[1] = Math.max(newInterval[1], intervals[i][1]);
+			i++;
+		}
+		
+		list.add(newInterval);
+		
+		while(i<intervals.length) {
+			list.add(intervals[i]);
+			i++;
+		}
+		
+		return list.toArray(new int[list.size()][]);
+	}
+		
+	//Good also
+	//Use LC56 Sol, just add newInterval to the intervals and use LC56 
+	public int[][] insert2(int[][] intervals, int[] newInterval) {
+		int[][] intervalsList = new int[intervals.length+1][];
+		for(int i=0; i<intervals.length; i++) {
+			intervalsList[i] = intervals[i];
+		}
+		intervalsList[intervalsList.length-1] = newInterval;
+		
+/*		Arrays.sort(intervalsList, (int[] a, int[] b) -> {			//no need to sort in here, do it later
+			return a[0] - b[0];
+		});*/
+		
+		return merge(intervalsList);
+	}
+	
+	//LC 56 sol cp here
+	public int[][] merge(int[][] intervals) {
+		LinkedList<int[]> merged = new LinkedList<int[]>();		//need 'LinkedList' cuz getLast() and toArray (convert Linkedlist to Array!)
+		
+		Arrays.sort(intervals, (int[] a, int[] b) -> {			//Arrays for int array
+			return a[0] - b[0];
+		});
+
+		for(int[] interval : intervals) {
+			if(merged.isEmpty() || merged.getLast()[1] < interval[0]) {			//compare with interval[0] not 1 
+				merged.add(interval);
 			} else {
-				System.out.println(inter + " : " +newInterval);
-				int nStart = Math.min(inter.start, newInterval.start);
-				int nEnd = Math.max(inter.end, newInterval.end);
-				newInterval = new Interval(nStart, nEnd);			//update newInterval(4, 9) to (3, 9) to (3, 10)
-				System.out.println("@: "+newInterval);
+				merged.getLast()[1] = Math.max(merged.getLast()[1], interval[1]);
 			}
 		}
-		res.add(newInterval);
-		return res;
+			
+		return merged.toArray(new int[merged.size()][]);						//LinkedList convert to Array!
 	}
 	
 	public static void main(String[] args) {
 		n057_Insert_Interval obj = new n057_Insert_Interval();
-		List<Interval> intervals = new ArrayList<Interval>();
-		intervals.add(obj.new Interval(1, 2));
-		intervals.add(obj.new Interval(3, 5));
-		intervals.add(obj.new Interval(6, 7));
-		intervals.add(obj.new Interval(8, 10));
-		intervals.add(obj.new Interval(12, 16));
-		Interval newInterval = obj.new Interval(4, 9);
-		System.out.println(intervals + " : " + newInterval);
-		System.out.println(obj.insert(intervals, newInterval));
+		int[][] intervals = 
+		       {{1,2},
+				{3,5},
+				{6,7},
+				{8,10},
+				{12,16}};
+		System.out.println(obj.insert(intervals, new int[] {4,9}));
+		
+		int[][] intervals2 = 
+		       {{1,2},
+				{3,5},
+				{6,7},
+				{8,10},
+				{12,16}};
+		System.out.println(obj.insert2(intervals2, new int[] {4,9}));
 	}
 }
