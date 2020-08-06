@@ -91,7 +91,6 @@ public class n048_Rotate_Image {
 		
 		for (int i = 0; i <= (length)/2; i++) {
 			for (int j = i; j < length-i; j++) {
-				//System.out.println(i+" : "+j);
 				int tmp = matrix[i][j];
 				matrix[i][j] = matrix[length-j][i];
 				matrix[length-j][i] = matrix[length-i][length-j];
@@ -103,7 +102,7 @@ public class n048_Rotate_Image {
 		for(int i=0; i<m; i++) {
 			for(int j=0; j<n; j++) {
 				System.out.print(matrix[i][j]);
-			}System.out.print("\n");
+			} System.out.print("\n");
 		}
 	}
 
@@ -125,24 +124,5 @@ public class n048_Rotate_Image {
 
 		obj.rotate2(matrix);
 		System.out.println("");
-
-		//		obj.rotate(new int[][] 
-		//			{{1,2,3},
-		//			{4,5,6},
-		//			{7,8,9},});
-
-		System.out.println("");
-
-		int[][] matrix1 = 
-					{{1,2,3,4},
-					{5,6,7,8},
-					{9,10,11,12},
-					{13,14,15,16}};
-
-		/* {{1,2,3},
-				{4,5,6},
-				{7,8,9},
-				};*/
-		//obj.rotate2(matrix1);
 	}
 }
