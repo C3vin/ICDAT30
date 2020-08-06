@@ -14,50 +14,54 @@ Output: ["ad", "ae", "af", "bd", "be", "bf", "cd", "ce", "cf"].
 
 //Better!
 public class n017_letter_combinations_of_a_phone_number {
-	String[] dicts = new String[]{" ", "", "abc", "def", "ghi", "jkl", "mno", "pqrs", "tuv", "wxyz"};
-
 	public List<String> letterCom(String digits) {
+		String[] dicts = new String[]{" ", "", "abc", "def", "ghi", "jkl", "mno", "pqrs", "tuv", "wxyz"};
 		List<String> result = new ArrayList<String>();
 
-		String tmp = new String();
+		String path = new String();
 		if(digits == null || digits.equals("")) {
 			return result;
 		}
 		
-		generate(result, dicts, digits, tmp, 0);
+		helper(digits, result, path, dicts, 0);	//0: place, place of position 
 		
 		return result;
 	}
-	private void generate(List<String> result, String[] dicts, String digits, String tmp, int index) {
-		if(index == digits.length()) {			//need to match the digits numbers
+	private void helper(String digits, List<String> result, String tmp, String[] dicts, int place) {
+		if(place == digits.length()) {			//need to match the digits numbers size
 			result.add(tmp);
 			return;
 		}
 		
-		int num = digits.charAt(index) - '0';
+		int num = digits.charAt(place) - '0';		
 
 		for(int i=0; i<dicts[num].length(); i++) {		//if we choose 7, the length will become 4
-			generate(result, dicts, digits, tmp+dicts[num].charAt(i), index+1); 		//tmp+letter[num].charAt(i) !!! and index+1 not i+1
+			helper(digits, result, tmp+dicts[num].charAt(i), dicts, place+1); 		//tmp+letter[num].charAt(i) !!! and place+1 not i+1
 		}
 	}
 
-	//dfs Better!
+	//dfs Better! But greedy! easy to forget in dfs part
 	public List<String> letterCombinations_dfs(String digits) {
-		List<String> combin = new ArrayList<String>();
-		dfs(digits, "", combin);
-		return combin;
+		String[] dicts = new String[]{" ", "", "abc", "def", "ghi", "jkl", "mno", "pqrs", "tuv", "wxyz"};
+		List<String> res = new ArrayList<String>();
+		String path = new String();
+		
+		dfs(digits, res, path, dicts);
+		
+		return res;
 	}
 	
-	private void dfs(String digits, String path, List<String> combin) {
+	private void dfs(String digits, List<String> res, String path, String[] dicts) {
 		if(digits.isEmpty()) {
 			return;
+			
 		} else if(digits.length() == 1) {
 			for(char letter : dicts[digits.charAt(0) - '0'].toCharArray()) {		//Character is okay!
-				combin.add(path + letter);
+				res.add(path + letter);
 			}
 		} else {
 			for(char letter : dicts[digits.charAt(0) - '0'].toCharArray()) {
-				dfs(digits.substring(1), path + letter, combin);
+				dfs(digits.substring(1), res, path+letter, dicts);
 			}
 		}
 	}
@@ -93,7 +97,7 @@ public class n017_letter_combinations_of_a_phone_number {
 
 	public static void main(String[] args) {
 		n017_letter_combinations_of_a_phone_number obj = new n017_letter_combinations_of_a_phone_number();
-		System.out.println(obj.letterCom("23"));
+		System.out.println(obj.letterCom("27"));
 		System.out.println(obj.letterCom("6"));
 		System.out.println(obj.letterCombinations_dfs("23"));
 	}
