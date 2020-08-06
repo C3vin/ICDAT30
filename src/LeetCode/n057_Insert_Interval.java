@@ -53,8 +53,9 @@ public class n057_Insert_Interval {
 	public int[][] insert2(int[][] intervals, int[] newInterval) {
 		int[][] intervalsList = new int[intervals.length+1][];
 		for(int i=0; i<intervals.length; i++) {
-			intervalsList[i] = intervals[i];
+			intervalsList[i] = intervals[i];						//can't just clone to new array, cuz array fixed the size after clone
 		}
+		
 		intervalsList[intervalsList.length-1] = newInterval;
 		
 /*		Arrays.sort(intervalsList, (int[] a, int[] b) -> {			//no need to sort in here, do it later
