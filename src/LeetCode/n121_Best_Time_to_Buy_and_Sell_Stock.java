@@ -26,29 +26,15 @@ public class n121_Best_Time_to_Buy_and_Sell_Stock {
 		int local = 0;				//not like LC53, not prices[i] is 0
 		int global = 0;
 		
-		for(int i=0; i<prices.length-1; i++) {		//cuz prices[i+1]! Range!
+		for(int i=0; i<prices.length-1; i++) {		//cuz prices[i+1]! Range!		also, i=0 not LC53 i=1 !!!
+			System.out.println(prices[i+1] + " :@: "+prices[i]);
 			local = Math.max(local + prices[i+1]-prices[i], 0);			//important sell price can't be negative number!!!
-			global = Math.max(local, global);
+			global = Math.max(local, global);      
 		}
 		return global;
 	}
 
-	/**
-	 * Go through the string and maintain one min sell price, and keep one largest profit.
-	 * Better to understand
-	 */
-	public int maxProfit2(int[] prices) {
-		int min = Integer.MAX_VALUE;		//MAX_VALUE
-		int max = 0;
-		
-		for(int i=0; i<prices.length; i++) {
-			min = Math.min(min, prices[i]);
-			max = Math.max(max, prices[i] - min);
-		}
-		return max;
-	}
-
-	//cs
+	//cs   Better!!!
 	//time:O(n) space:O(1)
 	public int maxProfit3(int[] prices) {
 		if(prices == null || prices.length < 2) {
@@ -69,7 +55,6 @@ public class n121_Best_Time_to_Buy_and_Sell_Stock {
 		n121_Best_Time_to_Buy_and_Sell_Stock obj = new n121_Best_Time_to_Buy_and_Sell_Stock();
 		int stock[] = {7, 1, 5, 3, 6, 4};
 		System.out.println(obj.maxProfit(stock));
-		System.out.println(obj.maxProfit2(stock));
 		System.out.println(obj.maxProfit3(stock));
 	}
 }
