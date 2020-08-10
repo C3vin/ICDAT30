@@ -19,13 +19,14 @@ public class n045_Jump_Game_II {
 	public int jump(int[] nums) {
 		int steps = 0;
 		int curMaxArea = 0;
-		int maxNext = 0;
+		int maxPosition = 0;
 		
 		for(int i=0; i<nums.length-1; i++) {		//need length-1, why cuz index 0 will go into if loop and steps++, so need to -1
-			maxNext = Math.max(maxNext, nums[i]+i); //nums[i]+i, start index i and can jump nums[i] value size
+			
+			maxPosition = Math.max(maxPosition, nums[i]+i); //nums[i]+i, start index i and can jump nums[i] value size
 			
 			if(i == curMaxArea) {
-				curMaxArea = maxNext;
+				curMaxArea = maxPosition;
 				steps++;
 			}
 		}
