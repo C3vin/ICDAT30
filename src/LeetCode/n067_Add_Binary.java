@@ -36,11 +36,12 @@ public class n067_Add_Binary {
 				j--;
 			}
 			
-			sb.insert(0, carry%2);			//sb.insert, tip: from head to tail ->
+			sb.insert(0, carry%2);			//MUSE use insert(), tip: from head to tail ->
 			carry = carry/2;
 		}
-		if(carry == 1)
-			sb.insert(0, 1);
+		if(carry == 1) {
+			sb.insert(0, 1);				//insert()
+		}
 		
 		return sb.toString();
 	}
