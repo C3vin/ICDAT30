@@ -16,6 +16,7 @@ You can assume that you can always reach the last index.
 public class n045_Jump_Game_II {
 	//cs
 	//time:O(n) space:O(1)
+	//LC45 - LC55 sol
 	public int jump(int[] nums) {
 		int steps = 0;
 		int curMaxArea = 0;

@@ -37,7 +37,7 @@ public class n055_Jump_Game {
 		int curMaxArea = 0;
 		int maxPosition = 0;
 		
-		for(int i=0; i<nums.length-1; i++) {
+		for(int i=0; i<nums.length-1; i++) {		//need length-1, why cuz index 0 will go into if loop and steps++, so need to -1
 			if(i > curMaxArea) {
 				return false;
 			}
@@ -49,7 +49,7 @@ public class n055_Jump_Game {
 			}
 		}
 		
-		return maxPosition >= nums.length-1;			// >= and length-1 (check index)
+		return maxPosition >= nums.length-1;			// >= not just > and length-1 (check index)
 	}
 	
 	public static void main(String[] args) {
