@@ -103,7 +103,7 @@ public class n068_Text_Justification {
 				int extraSpace = (maxWidth - count) % rest;			//ave extra space add for each words
 				
 				for(int i=index+1; i<last; i++) {			//F: why index+1, cuz first word already append. last not rest!!!
-					for(int k=space; k>0; k--) {
+					for(int k=space; k>0; k--) {			//>0 not >=0 !!! careful !
 						sb.append(" ");
 					}
 					if(extraSpace > 0) {								//F: > 0  , if!!!
