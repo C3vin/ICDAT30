@@ -62,13 +62,13 @@ public class n071_Simplify_Path {
 		}
 		
 		return res;
-		
 	}
 	
+	//Must read for String.split() https://zhuanlan.zhihu.com/p/45151144
 	public static void main(String[] args) {
 		n071_Simplify_Path obj = new n071_Simplify_Path();
-/*		System.out.println(obj.simplifyPath("/home/"));
-		System.out.println(obj.simplifyPath("/../"));*/
+		System.out.println(obj.simplifyPath("/home/"));
+		System.out.println(obj.simplifyPath("/../"));
 		System.out.println(obj.simplifyPath("/home//foo/"));
 		System.out.println(obj.simplifyPath("/a/./b/../../c/"));
 		System.out.println(obj.simplifyPath("/a/../../b/../c//.//"));
