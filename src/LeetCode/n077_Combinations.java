@@ -22,18 +22,22 @@ public class n077_Combinations {
 		List<List<Integer>> res = new ArrayList<List<Integer>>();
 		List<Integer> tmp = new ArrayList<Integer>();
 		dfs2(n, k, 1, tmp, res);						//because it need to begin from 1~n
+		
 		return res;
 	}
 	private void dfs2(int n, int k, int start, List<Integer> tmp, List<List<Integer>> res) {
 		if(tmp.size() > k) {				
 			return;
 		}
-		for(int i=start; i<=n; i++) {
+		for(int i=start; i<=n; i++) {					//need <= not just < !!!
 			tmp.add(i);
+			
 			if(tmp.size() == k) {
 				res.add(new ArrayList<Integer>(tmp));
 			}
+			
 			dfs2(n, k, i+1, tmp, res);					// after selecting number for current position, process next position 
+			
 			tmp.remove(tmp.size()-1);					//clear the current position to try next possible number 
 
 		}
