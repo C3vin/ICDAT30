@@ -27,7 +27,7 @@ public class n079_Word_Search {
 	public boolean exist(char[][] board, String word) {
 		for(int i=0; i<board.length; i++) {
 			for(int j=0; j<board[0].length; j++) {
-				if(dfs(board, word, i, j, 0)) {
+				if(dfs(board, word, i, j, 0)) {			//why can't return dfs(board, word, i, j, 0)...cuz need to go through all the values
 					return true;
 				}
 			}
@@ -47,15 +47,15 @@ public class n079_Word_Search {
 		if(board[i][j] == word.charAt(start)) {
 			start++;
 			
-			char c = board[i][j];
-			board[i][j] = '#';
+			char ctmp = board[i][j];		//tmp store board[i][j] value
+			board[i][j] = '#';				//update to '#'
 			
 			boolean res = dfs(board, word, i+1, j, start) || dfs(board, word, i-1, j, start) 
 					|| dfs(board, word, i, j+1, start) || dfs(board, word, i, j-1, start);
 			
-			board[i][j] = c;
+			board[i][j] = ctmp;				//restore to original value
 			
-			return res;
+ 			return res;
 		}
 		
 		return false;
