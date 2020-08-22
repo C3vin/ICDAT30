@@ -27,15 +27,18 @@ public class n078_Subsets {
 		List<List<Integer>> res = new ArrayList<List<Integer>>();
 		List<Integer> tmp = new ArrayList<Integer>();
 		dfs(nums, 0, tmp, res);
+		
 		return res;
 	}
-	//dfs
+	//dfs add-dfs-remove
 	private void dfs(int[] nums, int start, List<Integer> tmp, List<List<Integer>> res) {
-		res.add(new ArrayList<Integer>(tmp));
+		res.add(new ArrayList<Integer>(tmp));			//will add the [] on the first time 
 		
 		for(int i=start; i<nums.length; i++) {
 			tmp.add(nums[i]);
+			
 			dfs(nums, i+1, tmp, res);
+			
 			tmp.remove(tmp.size()-1);
 		}
 	}

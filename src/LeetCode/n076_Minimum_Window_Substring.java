@@ -76,7 +76,7 @@ public class n076_Minimum_Window_Substring {
 					res = s.substring(left, right);		//update string res, reference
 				}
 				
-				if(target[s.charAt(left)] >= 0) {		//>=0, not <=0. Because before at least 1
+				if(target[s.charAt(left)] >= 0) {		//>=0, not <=0. Because before at least 1 (find the String t values)
 					count++;
 				}
 				
