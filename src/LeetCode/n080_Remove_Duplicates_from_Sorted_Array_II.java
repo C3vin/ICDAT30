@@ -24,7 +24,8 @@ public class n080_Remove_Duplicates_from_Sorted_Array_II {
 		if(nums.length <= 2) {
 			return nums.length;
 		}
-		int count = 2;
+		
+		int count = 2;						//LC26 - LC 27 sol
 		for(int i=2; i<nums.length; i++) {
 			
 			if(nums[i] != nums[count-2]) {
@@ -32,6 +33,7 @@ public class n080_Remove_Duplicates_from_Sorted_Array_II {
 				count++;
 			}
 		}
+		
 		return count;
 	}
 	public static void main(String[] args) {
