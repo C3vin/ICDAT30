@@ -17,13 +17,14 @@ Input: nums = [4,5,6,7,0,1,2], target = 3
 Output: -1
  */
 public class n033_Search_in_Rotated_Sorted_Array {
+	//LC33 - LC81 template 
 	//sol1: Iterative
 	public int search(int[] nums, int target) {
 		int left = 0;
 		int right = nums.length-1;
 
 		while(left <= right) {										//Boundary <=
-			int mid = (left+right)/2;
+			int mid = left + (right-left)/2; 	//we can changed this rather than (left+right)/2;
 			
 			if(nums[mid] == target) 								//nums[mid] not only mid !!!
 				return mid;
