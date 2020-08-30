@@ -32,17 +32,20 @@ public class n033_Search_in_Rotated_Sorted_Array {
 			if(nums[left] <= nums[mid]) {		//e.g. 3,4,5,6,1,2			
 				if(nums[left] <= target && target < nums[mid]) {	//Boundary <=
 					right = mid-1;
-				} else
+				} else {
 					left = mid +1;
+				}
 			} else {							//e.g. 5,6,1,2,3,4
 				//Pivot element is smaller than the first element of the array, i.e. the rotation index is somewhere between 0 and mid. 
 				//That means that the part of array from the pivot element to the last one is non-rotated.
-				if(nums[right] >= target && target > nums[mid]) {	
+				if(nums[mid] < target && target <= nums[right]) {	
 					left = mid+1;
-				} else
+				} else {
 					right = mid-1;
+				}
 			}
 		}
+		
 		return -1;
 	}
 
