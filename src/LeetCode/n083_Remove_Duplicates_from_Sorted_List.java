@@ -1,22 +1,34 @@
 package LeetCode;
 
-//Given a sorted linked list, delete all duplicates such that each element appear only once.
-//For example,
-//Given 1->1->2, return 1->2.
-//Given 1->1->2->3->3, return 1->2->3.
+/*
+Given a sorted linked list, delete all duplicates such that each element appear only once.
+
+Example 1:
+Input: 1->1->2
+Output: 1->2
+
+Example 2:
+Input: 1->1->2->3->3
+Output: 1->2->3
+ */
 public class n083_Remove_Duplicates_from_Sorted_List {
 	public class ListNode {
 		int val;
 		ListNode next;
-		ListNode(int x) { val = x; }
+		ListNode(int x) { 
+			val = x; 
+		}
 	}
 
 	public ListNode deleteDuplicates(ListNode head) {
 		// one tmp sol
-		if(head == null || head.next == null) return head;
-		
+		if(head == null || head.next == null) {
+			return head;
+		}
+
 		ListNode p = head;
-		while(p!=null && p.next!=null) {
+		
+		while(p!=null && p.next!=null) {		//while!
 			if(p.val == p.next.val) {
 				p.next = p.next.next;
 				//p = p.next;         //F: No need, cuz need to compare with the rest!!!
@@ -24,28 +36,12 @@ public class n083_Remove_Duplicates_from_Sorted_List {
 				p = p.next;
 			}
 		}
+		
 		System.out.println(head.val + " -> " + head.next.val + " -> " + head.next.next.val);
+		
 		return head;
-		
-		// two tmp sol
-/*		if(head == null || head.next == null) return head;  //F: not null, is head
-		
-		ListNode pre = head;
-		ListNode p = head.next;
-		
-		while(p != null) {				//F: OMG is while! F: p not p.next
-			if(p.val == pre.val) {
-				pre.next = p.next;
-				//reset, F: no pre, cuz need to compare with the rest
-				p = p.next;
-			} else {
-				pre = p;
-				p = p.next;
-			}
-		}
-		System.out.println(head.val + " -> " + head.next.val + " -> " + head.next.next.val);
-		return head;*/
 	}
+
 	public static void main(String[] args) {
 		n083_Remove_Duplicates_from_Sorted_List obj = new n083_Remove_Duplicates_from_Sorted_List();
 		ListNode p1 = obj.new ListNode(1);
