@@ -33,7 +33,7 @@ public class n082_Remove_Duplicates_from_Sorted_List_II {
 			
 			if(p.next.val == p.next.next.val) {					//why this, cuz p = t and t.next = head!
 				dup = p.next.val;
-				while(p.next.val == dup && p.next != null) {	//F: !!! while loop !!!
+				while(p.next != null && p.next.val == dup) {	//F: !!! while loop and check the next first
 					p.next = p.next.next;						//F: move and remove dup node, keep move to right(dup) until diff val, "remove p.next"
 				}
 				
