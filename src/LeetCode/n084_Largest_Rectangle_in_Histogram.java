@@ -42,7 +42,7 @@ public class n084_Largest_Rectangle_in_Histogram {
 	// LC42-LC84 Stack template
 	public int largestRectangleArea2(int[] heights) {
 		Stack<Integer> stack = new Stack<Integer>();
-		stack.push(-1);		//mark the end 
+		stack.push(-1);		//mark the end 		diff than LC42
 		
 		int maxArea = 0;
 		int current = 0;
