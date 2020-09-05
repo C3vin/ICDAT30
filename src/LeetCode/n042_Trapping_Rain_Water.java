@@ -85,18 +85,18 @@ public class n042_Trapping_Rain_Water {
 		
 		while(current < height.length) {
 			while(!stack.isEmpty() && height[current] > height[stack.peek()]) {		//diff than LC84 
-				int h = height[stack.peek()];
-				stack.pop();
+				int h = height[stack.pop()];
 				
-				if(stack.isEmpty()) {			//must check! 
+				if(stack.isEmpty()) {			//must check!!! for later distance and minH 
 					break;
 				}
 				
 				int distance = current - stack.peek() - 1;
 				
-				int min = Math.min(height[stack.peek()], height[current]);		//diff than LC84, find the lowest h
-				sumArea = sumArea + distance * (min - h);						//width * height(min)  min will always larger than h
+				int minH = Math.min(height[stack.peek()], height[current]);		//diff than LC84, find the lowest h
+				sumArea = sumArea + distance * (minH - h);						//width * height(min)  min will always larger than h
 			}
+			
 			stack.push(current);
 			current++;
 		}
