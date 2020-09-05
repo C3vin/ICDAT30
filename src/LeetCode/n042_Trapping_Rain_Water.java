@@ -84,7 +84,7 @@ public class n042_Trapping_Rain_Water {
 		int current = 0;
 		
 		while(current < height.length) {
-			while(!stack.isEmpty() && height[current] > height[stack.peek()]) {		//diff than LC84 
+			while(!stack.isEmpty() && height[current] > height[stack.peek()]) {		//diff than LC84, 'while' not if
 				int h = height[stack.pop()];
 				
 				if(stack.isEmpty()) {			//must check!!! for later distance and minH 
