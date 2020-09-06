@@ -39,7 +39,7 @@ public class n088_Merge_Sorted_Array {
 
 	public void merge2(int[] nums1, int m, int[] nums2, int n) {
 		int i = m - 1;							//m: number of the value e.g. m=3, [1,2,3]
-		int j = n - 1;					
+		int j = n - 1;
 		int k = m + n - 1;
 
 		while(j >= 0) {
