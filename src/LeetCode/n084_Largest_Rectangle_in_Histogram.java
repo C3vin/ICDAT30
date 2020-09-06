@@ -39,29 +39,41 @@ public class n084_Largest_Rectangle_in_Histogram {
 		return maxArea;
 	}
 	
-	// LC42-LC84 Stack template
+	// LC42-LC84-LC85 Stack template better!
 	public int largestRectangleArea2(int[] heights) {
 		Stack<Integer> stack = new Stack<Integer>();
-		stack.push(-1);		//mark the end 		diff than LC42
 		
 		int maxArea = 0;
 		int current = 0;
 		
 		while(current < heights.length) {
 			//why not using isEmpty to check, cuz '-1' is always in stack (mark the end)
-			while(stack.peek() != -1 && heights[current] <= heights[stack.peek()]) {		//F: diff than 42
+			while(!stack.isEmpty() && heights[current] <= heights[stack.peek()]) {		//F: diff than 42
 				int h = heights[stack.pop()];
-				int distance = current - stack.peek() - 1;
 				
+				int distance = 0;
+				if(stack.isEmpty()) {			//must check! 
+					distance = current;
+				} else {
+					distance = current - stack.peek() - 1;
+				}
 				maxArea = Math.max(maxArea, distance * h);
 			}
+			
 			stack.push(current);
 			current++;
 		}
 		//reach the end of the array, we pop all the elements of the stack e.g. handle index 1,4,5 
-		while(stack.peek() != -1) {			
-			int h = heights[stack.pop()];
-			int distance = heights.length - stack.peek() - 1;			//F: not current 
+		while(!stack.isEmpty()) {			
+			int h = heights[stack.pop()];					//inside heights[] 
+			
+/*			int distance = 0;
+			if(stack.isEmpty()) {
+				distance = heights.length - (-1) - 1;					//careful to deal with length - (-1) - 1, not just -1 			
+			} else {
+				distance = heights.length - stack.peek() - 1;
+			}*/
+			int distance = heights.length - (stack.isEmpty() ? -1 : stack.peek()) - 1;		//easy to deal with -1
 			
 			maxArea = Math.max(maxArea, distance * h);
 		}
@@ -73,5 +85,6 @@ public class n084_Largest_Rectangle_in_Histogram {
 		n084_Largest_Rectangle_in_Histogram obj = new n084_Largest_Rectangle_in_Histogram();
 		System.out.println(obj.largestRectangleArea(new int[] {2,1,5,6,2,3}));
 		System.out.println(obj.largestRectangleArea2(new int[] {2,1,5,6,2,3}));
+		System.out.println(obj.largestRectangleArea2(new int[] {1}));
 	}
 }
