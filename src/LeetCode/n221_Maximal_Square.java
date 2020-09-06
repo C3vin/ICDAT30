@@ -1,17 +1,20 @@
 package LeetCode;
 
-import java.util.Arrays;
+import java.util.Stack;
 
-/**
- * 
+/*
+Given a 2D binary matrix filled with 0's and 1's, find the largest square containing only 1's and return its area.
+
+Example:
+Input: 
+
 1 0 1 0 0
 1 0 1 1 1
 1 1 1 1 1
 1 0 0 1 0
+
+Output: 4
  */
-//http://www.itgo.me/a/x5969926053258658449/leetcode-
-//http://www.itgo.me/a/1007311568317016995/221-maximal-square-leetcode
-@Alg(type="DP", com="A,FB", level="med", num=221)
 public class n221_Maximal_Square {
 	public int maximalSquare(char[][] matrix) {
 		if(matrix == null || matrix.length == 0 || matrix[0].length == 0)
@@ -49,15 +52,80 @@ public class n221_Maximal_Square {
 		}
 		return max*max;
 	}
+	
+	// LC42-LC84-LC85 Stack template, almost same as LC85
+	public int maximalSquare2(char[][] matrix) {
+		if (matrix == null || matrix.length == 0) {
+			return 0;
+		}
+		
+		int m = matrix.length;
+		int n = matrix[0].length;
+		
+		int maxSide = 0;				//no need maxArea, this is for square
+		
+		int[] height = new int[n];
+		for(int i=0; i<m; i++) {
+			for(int j=0; j<n; j++) {
+				if(matrix[i][j] == '1') {
+					height[j] = height[j] + 1;
+				} else {
+					height[j] = 0;
+				}
+			}
+			
+			maxSide = Math.max(maxSide, helper(height));			//need to inside the for loop
+		}
+
+		return maxSide * maxSide;		//square
+	}
+	
+	private int helper(int[] height) {
+		Stack<Integer> stack = new Stack<Integer>();
+		
+		int current = 0;
+		int maxSide = 0;
+		
+		while(current < height.length) {
+			while(!stack.isEmpty() && height[current] <= height[stack.peek()]) {
+				int h = height[stack.pop()];
+				
+				int d = (stack.isEmpty() ? current : current - stack.peek() - 1);
+				int squareWide = Math.min(h, d);				//square, so compare the widths
+				
+				maxSide = Math.max(maxSide, squareWide);
+			}
+			
+			stack.push(current);
+			current++;
+		}
+		
+		while(!stack.isEmpty()) {
+			int h = height[stack.pop()];
+			
+			int d = height.length - (stack.isEmpty() ? -1 : stack.peek()) - 1;
+			int squareWide = Math.min(h, d);					//square, so compare the widths
+			
+			maxSide = Math.max(maxSide, squareWide);
+		}
+		
+		return maxSide;
+	}
+	
 	public static void main(String[] args){
 		n221_Maximal_Square obj = new n221_Maximal_Square();
 		char[][] matrix = new char[][]
-				{{'1'}};
-		/*char[][] matrix = new char[][]
+				{{'1', '1'}};
+		char[][] matrix2 = new char[][]
 				{{'1','0','1','0','0'},
 				 {'1','0','1','1','1'},
 				 {'1','1','1','1','1'},
-				 {'1','0','0','1','0'}};*/
+				 {'1','0','0','1','0'}};
+				 
 		System.out.println(obj.maximalSquare(matrix));
+		System.out.println(obj.maximalSquare2(matrix));
+		
+		System.out.println(obj.maximalSquare(matrix2));
+		System.out.println(obj.maximalSquare2(matrix2));
 	}
 }
