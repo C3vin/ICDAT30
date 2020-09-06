@@ -27,8 +27,11 @@ public class n090_SubsetsII {
 	public List<List<Integer>> subsets(int[] nums) {
 		List<List<Integer>> res = new ArrayList<List<Integer>>();
 		List<Integer> tmp = new ArrayList<Integer>();
+		
 		Arrays.sort(nums);								//must sort first, cuz n78 is distinct num
+		
 		dfs(nums, 0, tmp, res);
+		
 		return res;
 	}
 	//dfs
@@ -37,10 +40,13 @@ public class n090_SubsetsII {
 		
 		for(int i=start; i<nums.length; i++) {
 			if(i > start && nums[i] == nums[i-1]) {		//i > start, not the first num	
-				continue; 
+				continue; 								//why i > start can get [1,2,2], i=2, start =2, so won't go into this loop.
 			}
+			
 			tmp.add(nums[i]);
+			
 			dfs(nums, i+1, tmp, res);
+			
 			tmp.remove(tmp.size()-1);
 		}
 	}
