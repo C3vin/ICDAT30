@@ -1,12 +1,24 @@
 package LeetCode;
 
-/**
+/*
+A message containing letters from A-Z is being encoded to numbers using the following mapping:
+
 'A' -> 1
 'B' -> 2
 ...
-'Z' -> 26 
+'Z' -> 26
+Given a non-empty string containing only digits, determine the total number of ways to decode it.
+
+Example 1:
+Input: "12"
+Output: 2
+Explanation: It could be decoded as "AB" (1 2) or "L" (12).
+
+Example 2:
+Input: "226"
+Output: 3
+Explanation: It could be decoded as "BZ" (2 26), "VF" (22 6), or "BBF" (2 2 6).
  */
-@Alg(type="DP,String", com="FB,M$", level="med", num=91)
 public class n091_Decode_Ways {
 	public int numDecodings(String s) {
 		if (s.length()==0||s==null||s=="0") 			//F: "0", 
@@ -26,7 +38,7 @@ public class n091_Decode_Ways {
 				dp[i] = dp[i] + dp[i-2];  
 			}
 		}  
-/*		for(int i=0; i<dp.length; i++)
+		/*		for(int i=0; i<dp.length; i++)
 		System.out.println(dp[i]);*/
 		return dp[s.length()];  
 	}  
@@ -36,10 +48,41 @@ public class n091_Decode_Ways {
 		int code = Integer.parseInt(s);  
 		return code>=1 && code<=26;  
 	}
+
+	//better, but need to understand
+	public int numDecodings2(String s) {
+		if(s.length() == 0 || s == null || s.charAt(0) == '0') {
+			return 0;
+		}
+
+		int c1 = 1;				//cur
+		int c2 = 1; 			//pre
+
+		for(int i=1; i<s.length(); i++) {		//why start at 1, cuz index 0 already check and also need to check i-1 later
+			if(s.charAt(i) == '0') {
+				c1 = 0;
+			}
+
+			if(s.charAt(i-1) == '1' || s.charAt(i-1) == '2' && s.charAt(i) <= '6') {
+				c1 = c1 + c2;
+				c2 = c1 - c2;
+			} else {
+				c2 = c1;
+			}
+		}
+
+		return c1;
+	}
+
 	public static void main(String[] args) {
 		n091_Decode_Ways obj = new n091_Decode_Ways();
 		System.out.println("12: "+obj.numDecodings("12"));
 		System.out.println("01: "+obj.numDecodings("01"));
-		System.out.println("36: "+obj.numDecodings("36"));
+		System.out.println("226: "+obj.numDecodings("226"));
+
+		System.out.println("12: "+obj.numDecodings2("12"));
+		System.out.println("01: "+obj.numDecodings2("01"));
+		System.out.println("226: "+obj.numDecodings2("226"));
+		System.out.println("1222: "+obj.numDecodings2("1222"));
 	}
 }
