@@ -36,7 +36,7 @@ public class n085_Maximal_Rectangle {
 				}
 			}
 
-			maxArea = Math.max(maxArea, helper(heights));
+			maxArea = Math.max(maxArea, helper(heights));		//need to inside the for loop !!!
 		}
 
 		return maxArea;
