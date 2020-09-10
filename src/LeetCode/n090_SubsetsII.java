@@ -39,6 +39,7 @@ public class n090_SubsetsII {
 		res.add(new ArrayList<Integer>(tmp));
 		
 		for(int i=start; i<nums.length; i++) {
+			//if(i!=start && nums[i] == nums[i-1]) {   //better right! easy
 			if(i > start && nums[i] == nums[i-1]) {		//i > start, not the first num	
 				continue; 								//why i > start can get [1,2,2], i=2, start =2, so won't go into this loop.
 			}
