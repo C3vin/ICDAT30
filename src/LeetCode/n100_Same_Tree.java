@@ -32,7 +32,7 @@ Input:     1         1
 Output: false
  */
 public class n100_Same_Tree {
-	public class TreeNode {
+	public static class TreeNode {
 		int val;
 		TreeNode left;
 		TreeNode right;
@@ -56,15 +56,15 @@ public class n100_Same_Tree {
 	
 	public static void main(String[] args) {
 		n100_Same_Tree obj = new n100_Same_Tree();
-		TreeNode p1 = obj.new TreeNode(2);
-		TreeNode p2 = obj.new TreeNode(1);
-		TreeNode p3 = obj.new TreeNode(3);
+		TreeNode p1 = new TreeNode(2);
+		TreeNode p2 = new TreeNode(1);
+		TreeNode p3 = new TreeNode(3);
 		p1.left = p2;
 		p1.right = p3;
 		System.out.println(p1.left.val + " " + p1.val + " " + p1.right.val);
-		TreeNode q1 = obj.new TreeNode(3);
-		TreeNode q2 = obj.new TreeNode(1);
-		TreeNode q3 = obj.new TreeNode(4);
+		TreeNode q1 = new TreeNode(3);
+		TreeNode q2 = new TreeNode(1);
+		TreeNode q3 = new TreeNode(4);
 		q1.left = q2;
 		q1.right = q3;
 		System.out.println(q1.left.val + " " + q1.val + " " + q1.right.val);
