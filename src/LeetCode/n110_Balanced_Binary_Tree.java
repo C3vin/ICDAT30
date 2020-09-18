@@ -59,15 +59,14 @@ public class n110_Balanced_Binary_Tree {
 			return -1;
 		}
 		
-		int diff = Math.abs(left-right);
-		if(diff > 1) {
-			return -1;
-		} else {
-			return Math.max(left, right) + 1;
-		}
+        if(Math.abs(left - right) > 1) {
+            return -1;
+        }
+        
+        return Math.max(left, right)+1;
 	}
 
-	//bottom-up
+	//bottom-up  //LC104
 	public boolean isBalanced2(TreeNode root) {
 		if(root == null) {
 			return true;
@@ -106,7 +105,7 @@ public class n110_Balanced_Binary_Tree {
 		p2.left = p4;
 		p3.left = p5;
 		p3.right = p6;
-		p4.left = p7; 	//if this, will be false
+		//p4.left = p7; 	//if this, will be false
 		System.out.println(p1.val + " " + p1.left.val + " " + p1.right.val + " "+ p2.left.val + " " + p3.left.val 
 				+ " " + p3.right.val);
 
