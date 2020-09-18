@@ -23,21 +23,25 @@ public class n108_Convert_Sorted_Array_to_Binary_Search_Tree {
 		TreeNode(int x) { val = x; }
 		TreeNode(String v) { v = null; }
 	}
+	
 	public TreeNode sortedArrayToBST(int[] nums) {
 		return helper(nums, 0, nums.length-1);
 	}
+	
 	private TreeNode helper(int[] nums, int start, int end) {
 		if(start > end) {
 			return null;
 		}
-		int mid = (end - start)/2 + start;
+		int mid = start + (end - start)/2; //(end - start)/2 + start;
 
 		TreeNode root = new TreeNode(nums[mid]);	//map to the new node
+		
 		root.left = helper(nums, start, mid-1);			
 		root.right = helper(nums, mid+1, end);			
 		
 		return root;
 	}
+	
 	public static void main(String[] args) {
 		n108_Convert_Sorted_Array_to_Binary_Search_Tree obj = new n108_Convert_Sorted_Array_to_Binary_Search_Tree();
 		int[] nums = {1,2,3,4,5,6,7};
