@@ -25,7 +25,7 @@ public class n104_Maximum_Depth_of_Binary_Tree {
 	}
 	//Recursive 
 	//DFS
-	//O(n) O(logn)
+	//O(n) O(logn) [LC104 - LC111 template]
 	public int maxDepth(TreeNode root) {
 		if(root == null) {
 			return 0;		

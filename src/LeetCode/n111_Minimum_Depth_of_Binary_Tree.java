@@ -32,68 +32,64 @@ public class n111_Minimum_Depth_of_Binary_Tree {
 		TreeNode right;
 		TreeNode(int x) { val = x; }
 	}
-	
+
 	//Recursive
-    public int minDepth(TreeNode root) {
-        if(root == null) {
-            return 0;
-        }
-        
-        if(root.left != null && root.right != null) {
-        	return Math.min(minDepth(root.left), minDepth(root.right))+1;	//min
-        } else {
-        	return Math.max(minDepth(root.left), minDepth(root.right))+1;	//max for case2
-        }
-    }
-    public int minDepth3(TreeNode root) {
-        if(root == null) {
-            return 0;
-        }
-        
-        if(root.left == null) {		//no left, ONLY check right
-        	return minDepth3(root.right)+1;
-        }
-        if(root.right == null) {	//no right, ONLY check left
-        	return minDepth3(root.left)+1;
-        }
-        
-        return Math.min(minDepth(root.left), minDepth(root.right))+1;
-    }
-    
-    //BFS [LC104 - LC111 template]
-    public int minDepth2(TreeNode root) {
-    	if(root == null) {
-    		return 0;
-    	}
-    	
+	//[LC104 - LC111 template]
+	public int minDepth(TreeNode root) {
+		if(root == null) {
+			return 0;
+		}
+
+		//so we can use he same LC104 template
+		if(root.left == null) {		//no left, ONLY check right
+			return minDepth(root.right)+1;
+		}
+
+		if(root.right == null) {	//no right, ONLY check left
+			return minDepth(root.left)+1;
+		}
+
+		int leftDepth = minDepth(root.left);
+		int rightDepth = minDepth(root.right);
+
+		return Math.min(leftDepth, rightDepth) + 1;
+	}
+
+	//BFS 
+	//[LC104 - LC111 template]
+	public int minDepth2(TreeNode root) {
+		if(root == null) {
+			return 0;
+		}
+
 		Queue<TreeNode> queue = new LinkedList<TreeNode>();
 		queue.offer(root);
-		
+
 		int level = 0;
-    	
-    	while(!queue.isEmpty()) {
-    		int levelSize = queue.size();
-    		for(int i=0; i<levelSize; i++) {
-    			TreeNode currentNode = queue.poll();
-    			
-    			if(currentNode.left == null && currentNode.right == null) {
-    				level++;			//so we can use he same LC104 template
-    				return level;
-    			}
-    			
-    			if(currentNode.left != null) {
-    				queue.offer(currentNode.left);
-    			}
-    			if(currentNode.right != null) {
-    				queue.offer(currentNode.right);
-    			}
-    		}
-    		level++;
-    	}
-    	
-    	return level;
-    }
-    
+
+		while(!queue.isEmpty()) {
+			int levelSize = queue.size();
+			for(int i=0; i<levelSize; i++) {
+				TreeNode currentNode = queue.poll();
+
+				if(currentNode.left == null && currentNode.right == null) {
+					level++;			//so we can use he same LC104 template
+					return level;
+				}
+
+				if(currentNode.left != null) {
+					queue.offer(currentNode.left);
+				}
+				if(currentNode.right != null) {
+					queue.offer(currentNode.right);
+				}
+			}
+			level++;
+		}
+
+		return level;
+	}
+
 	public static void main(String[] args) {
 		n111_Minimum_Depth_of_Binary_Tree obj = new n111_Minimum_Depth_of_Binary_Tree();
 		TreeNode p1 = obj.new TreeNode(1);
@@ -105,6 +101,5 @@ public class n111_Minimum_Depth_of_Binary_Tree {
 		p2.left = p4;
 		System.out.println(obj.minDepth(p1));
 		System.out.println(obj.minDepth2(p1));
-		System.out.println(obj.minDepth3(p1));
 	}
 }
