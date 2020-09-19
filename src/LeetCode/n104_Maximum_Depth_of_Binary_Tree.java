@@ -37,13 +37,15 @@ public class n104_Maximum_Depth_of_Binary_Tree {
 	}
 	
 	//Non-recursive
-	//BFS
+	//BFS		//[LC104 - LC111 template]
 	public int maxDepth2(TreeNode root) {
 		if(root == null) {
 			return 0;
 		}
+		
 		Queue<TreeNode> queue = new LinkedList<TreeNode>();
 		queue.offer(root);
+		
 		int level = 0;
 		
 		while(!queue.isEmpty()) {

@@ -23,6 +23,8 @@ return its minimum depth = 2.
  */
 import java.util.LinkedList;
 import java.util.Queue;
+
+import LeetCode.n104_Maximum_Depth_of_Binary_Tree.TreeNode;
 public class n111_Minimum_Depth_of_Binary_Tree {
 	public class TreeNode {
 		int val;
@@ -58,16 +60,16 @@ public class n111_Minimum_Depth_of_Binary_Tree {
         return Math.min(minDepth(root.left), minDepth(root.right))+1;
     }
     
-    //BFS (LC104 template)
+    //BFS [LC104 - LC111 template]
     public int minDepth2(TreeNode root) {
     	if(root == null) {
     		return 0;
     	}
     	
-    	int depth = 1;
-    	
-    	Queue<TreeNode> queue = new LinkedList<TreeNode>();
-    	queue.offer(root);
+		Queue<TreeNode> queue = new LinkedList<TreeNode>();
+		queue.offer(root);
+		
+		int level = 0;
     	
     	while(!queue.isEmpty()) {
     		int levelSize = queue.size();
@@ -75,7 +77,8 @@ public class n111_Minimum_Depth_of_Binary_Tree {
     			TreeNode currentNode = queue.poll();
     			
     			if(currentNode.left == null && currentNode.right == null) {
-    				return depth;
+    				level++;			//so we can use he same LC104 template
+    				return level;
     			}
     			
     			if(currentNode.left != null) {
@@ -85,10 +88,10 @@ public class n111_Minimum_Depth_of_Binary_Tree {
     				queue.offer(currentNode.right);
     			}
     		}
-    		depth++;
+    		level++;
     	}
     	
-    	return depth;
+    	return level;
     }
     
 	public static void main(String[] args) {
