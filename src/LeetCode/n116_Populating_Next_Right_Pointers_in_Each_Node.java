@@ -57,27 +57,28 @@ public class n116_Populating_Next_Right_Pointers_in_Each_Node {
 			next = _next;
 		}
 	};
-	//BFS 
+	
+	//BFS  not good
 	public Node connect(Node root) {
 		if(root == null) {
 			return root;
 		}
-		
+
 		Queue<Node> queue = new LinkedList<Node>();
 		queue.offer(root);
-		
+
 		while(!queue.isEmpty()) {
 			int levelSize = queue.size();
 			Node pre = null;
-			
+
 			for(int i=0; i<levelSize; i++) {
 				Node currentNode = queue.poll();
-				
+
 				if(i > 0) {
 					pre.next = currentNode;
 				}
 				pre = currentNode;
-				
+
 				if(currentNode.left != null) {
 					queue.offer(currentNode.left);
 				}
@@ -89,16 +90,45 @@ public class n116_Populating_Next_Right_Pointers_in_Each_Node {
 		return root;
 	}
 	
+	//Same as LC 117 [LC 116 - LC 117] 2020 !!!
+	public Node connect4(Node root) {
+		Node dummyHead = new Node(0);
+		Node pre = dummyHead;
+		Node cur = root;
+		
+		while(cur != null) {
+			if(cur.left != null) {
+				pre.next = cur.left;
+				pre = pre.next;
+			}
+			
+			if(cur.right != null) {
+				pre.next = cur.right;
+				pre = pre.next;
+			}
+			
+			cur = cur.next;
+			
+			if(cur == null) {
+				pre = dummyHead;			//update the pre pointer
+				cur = dummyHead.next;		//update cur, d(0)-rest of the tree we made 
+				dummyHead.next = null;		//clean the d.next 
+			}
+		}
+		
+		return root;
+	}
+	
 	//Same as LC 117 [LC 116 - LC 117]
 	public Node connectSP(Node root) {
 		if(root == null) {
 			return root;
 		}
-		
+
 		Node cur = root;
 		Node start = null;
 		Node end = null;
-		
+
 		while(cur != null) {
 			while(cur != null) {
 				if(cur.left != null) {
@@ -117,64 +147,13 @@ public class n116_Populating_Next_Right_Pointers_in_Each_Node {
 					}
 					end = cur.right;
 				}
-				
+
 				cur = cur.next;
 			}
 			//reset
 			cur = start;
 			start = null;
 			end = null;
-		}
-		return root;
-	}
-	
-	//space:O(1)
-	//start v1
-	public Node connect2(Node root) {
-		if(root == null) {
-			return root;
-		}
-		
-		Node pre = root;
-		Node cur = null;
-		Node start = root;
-		
-		while(pre.left != null) {
-			if(cur == null) {
-				pre.left.next = pre.right; 
-				
-				pre = start.left;			//move to next level
-				cur = start.right;
-				start = pre;
-			} else {
-				pre.left.next = pre.right;
-				pre.right.next = cur.left;
-				pre = cur;	//pre = pre.next;
-				cur = cur.next;
-			}
-		}
-		
-		return root;
-	}
-	//start v2
-	public Node connect2v2(Node root) {
-		if(root == null) {
-			return root;
-		}
-		
-		Node start = root;
-		while(start != null) {
-			Node cur = start;
-			while(cur != null) {
-				if(cur.left != null) {
-					cur.left.next = cur.right;
-				} 
-				if(cur.next != null && cur.right != null) {
-					cur.right.next = cur.next.left;
-				}
-				cur = cur.next;
-			}
-			start = start.left;
 		}
 		return root;
 	}
@@ -191,7 +170,7 @@ public class n116_Populating_Next_Right_Pointers_in_Each_Node {
 		}
 		connect3(root.left);
 		connect3(root.right);
-		
+
 		return root;
 	}
 
@@ -210,9 +189,10 @@ public class n116_Populating_Next_Right_Pointers_in_Each_Node {
 		p2.right = p5;
 		p3.left = p6;
 		p3.right = p7;
-		
-		System.out.println(obj.connect(p1));
-		System.out.println(obj.connect2(p1));
-		System.out.println(obj.connect3(p1));
+
+//		System.out.println(obj.connect(p1));
+//		System.out.println(obj.connect2(p1));
+//		System.out.println(obj.connect3(p1));
+		System.out.println(obj.connect4(p1));
 	}
 }

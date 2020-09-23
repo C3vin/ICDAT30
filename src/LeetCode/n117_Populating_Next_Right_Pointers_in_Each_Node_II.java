@@ -63,7 +63,7 @@ public class n117_Populating_Next_Right_Pointers_in_Each_Node_II {
 		}
 	};
 	
-	//BFS same as LC116
+	//BFS same as LC116 not good!
 	public Node connect(Node root) {
 		if(root == null) {
 			return root;
@@ -91,6 +91,35 @@ public class n117_Populating_Next_Right_Pointers_in_Each_Node_II {
 				}
 			}
 		}
+		return root;
+	}
+	
+	//Same as LC 117 [LC 116 - LC 117] 2020 !!!
+	public Node connect3(Node root) {
+		Node dummyHead = new Node(0);
+		Node pre = dummyHead;
+		Node cur = root;
+		
+		while(cur != null) {
+			if(cur.left != null) {
+				pre.next = cur.left;
+				pre = pre.next;
+			}
+			
+			if(cur.right != null) {
+				pre.next = cur.right;
+				pre = pre.next;
+			}
+			
+			cur = cur.next;
+			
+			if(cur == null) {
+				pre = dummyHead;			//update the pre pointer
+				cur = dummyHead.next;		//update cur, d(0)-rest of the tree we made 
+				dummyHead.next = null;		//clean the d.next 
+			}
+		}
+		
 		return root;
 	}
 	
@@ -140,16 +169,17 @@ public class n117_Populating_Next_Right_Pointers_in_Each_Node_II {
 		Node p3 = obj.new Node(3);
 		Node p4 = obj.new Node(4);
 		Node p5 = obj.new Node(5);
-		Node p6 = obj.new Node(6);
+		//Node p6 = obj.new Node(6);
 		Node p7 = obj.new Node(7);
 		p1.left = p2;
 		p1.right = p3;
 		p2.left = p4;
 		p2.right = p5;
-		p3.left = p6;
+		//p3.left = p6;
 		p3.right = p7;
 		
-		System.out.println(obj.connect(p1));
-		System.out.println(obj.connect2(p1));
+	/*	System.out.println(obj.connect(p1));
+		System.out.println(obj.connect2(p1));*/
+		System.out.println(obj.connect3(p1));
 	}
 }
