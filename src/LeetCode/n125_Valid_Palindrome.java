@@ -28,7 +28,7 @@ public class n125_Valid_Palindrome {
         	char c1 = s.charAt(i);
         	char c2 = s.charAt(j);
 
-        	if (!((c1 >= '0' && c1 <= '9') || (c1>='a' && c1 <= 'z'))) {		//skip special char, but need 0-9 becasue it is not special char
+        	if (!((c1 >= '0' && c1 <= '9') || (c1>='a' && c1 <= 'z'))) {		//skip special char, but need 0-9 because it is not special char!
 				i++;
 				continue;
 			}
@@ -38,7 +38,7 @@ public class n125_Valid_Palindrome {
 			}
 
 			if(c1 == c2) {
-				i++;
+				i++;			//don't forget need to move next if they match! 
 				j--;
 			} else {
 				return false;
