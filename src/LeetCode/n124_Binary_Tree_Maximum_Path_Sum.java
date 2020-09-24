@@ -39,17 +39,21 @@ public class n124_Binary_Tree_Maximum_Path_Sum {
 			val = x;
 		}
 	}
-	int max = Integer.MIN_VALUE;		//global variable
+	
+	int max = Integer.MIN_VALUE;							//global variable, very important!!!
+	
 	public int maxPathSum(TreeNode root) {
 		helper(root);
 		
 		return max;
 	}
+	
 	private int helper(TreeNode root) {
 		if(root == null) {
 			return 0;
 		}
-		int left = Math.max(helper(root.left), 0);			//F: ignore negative  
+		
+		int left = Math.max(helper(root.left), 0);			//can't use abs, use max for ignore negtive
 		int right = Math.max(helper(root.right), 0);
 		
 		max = Math.max(max, root.val + left + right);
@@ -65,6 +69,17 @@ public class n124_Binary_Tree_Maximum_Path_Sum {
 		TreeNode p3 = obj.new TreeNode(3);
 		p1.left = p2;
 		p1.right = p3;
-		System.out.println(obj.maxPathSum(p1));
+		//System.out.println(obj.maxPathSum(p1));
+		
+		TreeNode q1 = obj.new TreeNode(-10);
+		TreeNode q2 = obj.new TreeNode(9);
+		TreeNode q3 = obj.new TreeNode(20);
+		TreeNode q4 = obj.new TreeNode(15);
+		TreeNode q5 = obj.new TreeNode(7);
+		q1.left = q2;
+		q1.right = q3;
+		q3.left = q4;
+		q3.right = q5;
+		System.out.println(obj.maxPathSum(q1));
 	}
 }
