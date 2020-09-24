@@ -32,27 +32,32 @@ public class n112_Path_Sum {
 		}
 	}
 
-	//Recursion
+	//Recursion [LC104 - LC111 template]
 	public boolean hasPathSum(TreeNode root, int sum) {
 		if(root == null) {
 			return false;
 		}
 		
-		return helper(root, sum);
+		if(root.left == null && root.right == null && root.val == sum) {		//root.val == sum, eg. 22-5-4-11 = 2(rest of the sum) 
+			return true;
+		}
+		
+		return hasPathSum(root.left, sum - root.val) || hasPathSum(root.right, sum - root.val);		// || not &&
+		//return helper(root, sum);
 	}
-	private boolean helper(TreeNode root, int sum) {
+/*	private boolean helper(TreeNode root, int sum) {
 		if(root == null) {
 			return false;
 		}
 		
-		if(root.left == null && root.right == null && root.val == sum) {
+		if(root.left == null && root.right == null && root.val == sum) {		//root.val == sum, eg. 22-5-4-11 = 2(rest of the sum) 
 			return true;
 		}
 		
 		return helper(root.left, sum - root.val) || helper(root.right, sum - root.val);
-	}
+	}*/
 
-	//BFS
+	//BFS [LC104 - LC111 template]
 	public boolean hasPathSum2(TreeNode root, int sum) {
 		if(root == null) {
 			return false;
@@ -69,17 +74,17 @@ public class n112_Path_Sum {
 				TreeNode currentNode = queue.poll();
 				int curSum = queueSum.poll();
 				
-				if(currentNode.left == null && currentNode.right == null && curSum == sum) {
+				if(currentNode.left == null && currentNode.right == null && curSum == sum) {		//curSum == sum
 					return true;
 				}
 				
 				if(currentNode.left != null) {
 					queue.offer(currentNode.left);
-					queueSum.offer(curSum + currentNode.left.val);
+					queueSum.offer(curSum + currentNode.left.val);				 //need curSum!!!
 				}
 				if(currentNode.right != null) {
 					queue.offer(currentNode.right);
-					queueSum.offer(curSum + currentNode.right.val);
+					queueSum.offer(curSum + currentNode.right.val);				 //need curSum!!!
 				}
 			}
 		}

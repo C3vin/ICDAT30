@@ -39,39 +39,40 @@ public class n113_Path_Sum_II {
 		}
 	}
 
-	//Recursion
+	//Recursion [LC112 - LC113 template] 
 	public List<List<Integer>> pathSum(TreeNode root, int sum) {
-		List<List<Integer>> allPaths = new ArrayList<List<Integer>>();
-		List<Integer> currentPath = new ArrayList<Integer>();
-		helper(root, sum, currentPath, allPaths);
+		List<List<Integer>> res = new ArrayList<List<Integer>>();
+		List<Integer> tmp = new ArrayList<Integer>();
 
-		return allPaths;
+		helper(root, sum, tmp, res);
+
+		return res;
 	}
-	private static void helper(TreeNode currentNode, int sum, List<Integer> currentPath,
-			List<List<Integer>> allPaths) {
-		if(currentNode == null) {
+	private static void helper(TreeNode root, int sum, List<Integer> tmp, List<List<Integer>> res) {
+		if(root == null) {
 			return;
 		}
 
-		currentPath.add(currentNode.val);
+		tmp.add(root.val);				//must add the last element before the res.add if applicable
 
-		if(currentNode.val == sum && currentNode.left == null && currentNode.right == null) {
-			allPaths.add(new ArrayList<Integer>(currentPath));
-		} else {
-			helper(currentNode.left, sum-currentNode.val, currentPath, allPaths);
-			helper(currentNode.right, sum-currentNode.val, currentPath, allPaths);
+		if(root.left == null && root.right == null && root.val == sum) {
+			res.add(new ArrayList<Integer>(tmp));
 		}
 
-		currentPath.remove(currentPath.size()-1);		//Don't forget
+		helper(root.left, sum - root.val, tmp, res);
+		helper(root.right, sum - root.val, tmp, res);
+
+		tmp.remove(tmp.size()-1);
 	}
 
 	//We are not using LC112 BFS approach, cuz we need too many lists to store all paths!!!
-
 	//Iteration
 	public List<List<Integer>> pathSum2(TreeNode root, int sum) {
 		List<List<Integer>> res = new LinkedList<List<Integer>>();
-		if(root == null)
+		if(root == null) {
 			return res;
+		}
+		
 		Deque<TreeNode> queue = new LinkedList<TreeNode>();
 		queue.offer(root);
 		Deque<Integer> level = new LinkedList<Integer>();
@@ -112,6 +113,7 @@ public class n113_Path_Sum_II {
 	public List<List<Integer>> pathSum3(TreeNode root, int sum) {
 		List<List<Integer>> allPaths = new ArrayList<List<Integer>>();
 		List<Integer> currentPath = new ArrayList<Integer>();
+		
 		Stack<TreeNode> stack = new Stack<TreeNode>();
 
 		//TreeNode cur = root;
@@ -129,7 +131,7 @@ public class n113_Path_Sum_II {
 				if(tmpNode.left == null && tmpNode.right == null && curSum == sum) {
 					allPaths.add(new ArrayList<Integer>(currentPath));
 				}
-				
+
 				if(tmpNode.right != null && tmpNode.right != last) {
 					root = tmpNode.right;
 				} else {
@@ -139,6 +141,7 @@ public class n113_Path_Sum_II {
 				}
 			}
 		}
+		
 		return allPaths;
 	}
 
