@@ -53,17 +53,22 @@ public class n127_Word_Ladder {
 
 		while(!queue.isEmpty()) {
 			int levelSize = queue.size();
+			
 			for(int i=0; i<levelSize; i++) {
 				String cur = queue.poll();
+				
 				for(int j=0; j<cur.length(); j++) {
 					StringBuilder newWord = new StringBuilder(cur);
 					//char[] newWord = cur.toCharArray();					//plan B
 					for(char ch='a'; ch<='z'; ch++) {
 						newWord.setCharAt(j, ch);							//setCharAt!!!
+						
 						if(dict.contains(newWord.toString())) {				 
 							if(newWord.toString().equals(endWord)) {		//stringBuild need toString
-								return step+1;
+								step++;										//don't foget!
+								return step;
 							}
+							
 							dict.remove(newWord.toString());				//need to remove, Time Limit Exceeded
 							queue.offer(newWord.toString());				//need to add to queue, for Next move	
 						}
