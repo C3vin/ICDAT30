@@ -90,7 +90,7 @@ public class n116_Populating_Next_Right_Pointers_in_Each_Node {
 		return root;
 	}
 	
-	//Same as LC 117 [LC 116 - LC 117] 2020 !!!
+	//Same as LC117 [LC116 - LC117] 2020 !!!
 	public Node connect4(Node root) {
 		Node dummyHead = new Node(0);
 		Node pre = dummyHead;
@@ -118,46 +118,8 @@ public class n116_Populating_Next_Right_Pointers_in_Each_Node {
 		
 		return root;
 	}
-	
-	//Same as LC 117 [LC 116 - LC 117]
-	public Node connectSP(Node root) {
-		if(root == null) {
-			return root;
-		}
 
-		Node cur = root;
-		Node start = null;
-		Node end = null;
-
-		while(cur != null) {
-			while(cur != null) {
-				if(cur.left != null) {
-					if(end != null) {
-						end.next = cur.left;
-					} else {
-						start = cur.left;
-					}
-					end = cur.left;
-				}
-				if(cur.right != null) {
-					if(end != null) {
-						end.next = cur.right;
-					} else {
-						start = cur.right;
-					}
-					end = cur.right;
-				}
-
-				cur = cur.next;
-			}
-			//reset
-			cur = start;
-			start = null;
-			end = null;
-		}
-		return root;
-	}
-
+	//BT template, but prefer use //Same as LC117 [LC116 - LC117] 2020 !!! for both
 	public Node connect3(Node root) {
 		if(root == null) {
 			return root;
@@ -168,12 +130,41 @@ public class n116_Populating_Next_Right_Pointers_in_Each_Node {
 		if(root.next != null && root.right != null) {
 			root.right.next = root.next.left;
 		}
+		
 		connect3(root.left);
 		connect3(root.right);
 
 		return root;
 	}
-
+	
+	//BT template
+    public Node connect2(Node root) {
+        if(root == null) {
+            return null;
+        }
+        
+        helper(root.left, root.right);
+        
+        return root;
+    }
+    
+    //BT template
+    private void helper(Node node1, Node node2) {
+        if(node1 == null || node2 == null) {
+            return;
+        }
+        
+        //pre-order
+        node1.next = node2;
+        
+        //under same father
+        helper(node1.left, node1.right);
+        helper(node2.left, node2.right);
+        
+        //under diff father
+        helper(node1.right, node2.left);
+    }
+	
 	public static void main(String[] args) {
 		n116_Populating_Next_Right_Pointers_in_Each_Node obj = new n116_Populating_Next_Right_Pointers_in_Each_Node();
 		Node p1 = obj.new Node(1);
@@ -192,7 +183,7 @@ public class n116_Populating_Next_Right_Pointers_in_Each_Node {
 
 //		System.out.println(obj.connect(p1));
 //		System.out.println(obj.connect2(p1));
-//		System.out.println(obj.connect3(p1));
+		System.out.println(obj.connect2(p1));
 		System.out.println(obj.connect4(p1));
 	}
 }
