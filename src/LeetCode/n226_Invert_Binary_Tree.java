@@ -27,6 +27,27 @@ to
 		TreeNode right;
 		TreeNode(int x) { val = x; }
 	}
+	
+	//BST template
+	public TreeNode invertTree3(TreeNode root) {
+		//base case
+		if(root == null) {
+			return null;
+		}
+		
+		//pre-order
+		//root need to swap it's left/right node
+		TreeNode tmp = root.left;
+		root.left = root.right;
+		root.right = tmp;
+		
+		//do left side and right side
+		invertTree3(root.left);
+		invertTree3(root.right);
+		
+		return root;
+	}
+	
 	public TreeNode invertTree(TreeNode root) {
 		if(root == null) return root;		//need to return root!
 
@@ -74,7 +95,8 @@ to
 		t3.left = t6;
 		t3.right = t7;
 		System.out.println(t1.val + " " + t1.left.val + " " + t1.right.val);
-		System.out.println(obj.invertTree(t1).left.val);
-		System.out.println(obj.invertTree2(t1).left.val);	//diff than sol1, cuz tree invert already
+		System.out.println(obj.invertTree3(t1).left.val);
+		/*System.out.println(obj.invertTree(t1).left.val);
+		System.out.println(obj.invertTree2(t1).left.val);*/	//diff than sol1, cuz tree invert already
 	}
 }
