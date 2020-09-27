@@ -45,7 +45,7 @@ public class n098_Validate_Binary_Search_Tree {
 		return helper(root, null, null);
 	}
 	
-	//BST template 
+	//BT template 
 	private boolean helper(TreeNode root, TreeNode min, TreeNode max) {
 		if(root == null) {
 			return true;
