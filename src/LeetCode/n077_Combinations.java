@@ -26,9 +26,9 @@ public class n077_Combinations {
 		return res;
 	}
 	private void dfs2(int n, int k, int start, List<Integer> tmp, List<List<Integer>> res) {
-		if(tmp.size() > k) {				
+/*		if(tmp.size() > k) {							//looks like we don't need this
 			return;
-		}
+		}*/
 		for(int i=start; i<=n; i++) {					//need <= not just < !!!
 			tmp.add(i);
 			

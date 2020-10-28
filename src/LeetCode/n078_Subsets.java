@@ -30,7 +30,7 @@ public class n078_Subsets {
 		
 		return res;
 	}
-	//dfs add-dfs-remove
+	//dfs add-dfs-remove //backtrack better
 	private void dfs(int[] nums, int start, List<Integer> tmp, List<List<Integer>> res) {
 		res.add(new ArrayList<Integer>(tmp));			//will add the [] on the first time 
 		
@@ -42,9 +42,30 @@ public class n078_Subsets {
 			tmp.remove(tmp.size()-1);
 		}
 	}
+	
+	//sol2 
+	public List<List<Integer>> subsets2(int[] nums) {
+		List<List<Integer>> res = new ArrayList<List<Integer>>();
+		res.add(new ArrayList<Integer>());
+		
+		for(int i=0; i<nums.length; i++) {
+			List<List<Integer>> lists = new ArrayList<List<Integer>>();
+			for(List<Integer> list : res) {
+				List<Integer> tmp = new ArrayList<Integer>(list);
+				tmp.add(nums[i]);
+				lists.add(tmp);
+			}
+			
+			res.addAll(lists);
+		}
+		
+		return res;
+	}
+	
 	public static void main(String[] args) {
 		n078_Subsets obj = new n078_Subsets();
 		int[] nums = {1, 2, 3};
 		System.out.println(obj.subsets(nums));
+		System.out.println(obj.subsets2(nums));
 	}
 }
