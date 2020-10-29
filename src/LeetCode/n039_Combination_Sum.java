@@ -44,8 +44,9 @@ public class n039_Combination_Sum {
 		return res;
 	}
 
+	//explain well: https://dzone.com/articles/stackoverflowerror-causes-amp-solutions
 	private void helper(int[] candidates, int target, List<List<Integer>> res, List<Integer> tmp, int start) {
-		if(target < 0) {			//deal negative case and return 
+		if(target < 0) {			//deal negative case and return (cuz we are minus each time, or StackOverflowError)
 			return;		
 		}
 		
