@@ -29,18 +29,18 @@ e.g.
 public class n031_Next_Permutation {
 	public void nextPermutation(int[] nums) {
 		int i = nums.length-2;
-		while(i>=0 && nums[i+1] <= nums[i]) {
+		while(i>=0 && nums[i+1] <= nums[i]) {	//find out first non-increasing 'index', keep while looping
 			i--;
 		}
 		
 		//handle special case
 		if(i < 0) {
 			reverse(nums, 0, nums.length-1); 	//3,2,1
-			return;
+			return;								//need this return to stop here
 		}
 		
 		int j = nums.length-1;
-		while(j>=0 && nums[j] <= nums[i]) {
+		while(j>=0 && nums[j] <= nums[i]) {		//find out first 'index' large than nums[i]
 			j--;
 		}
 		

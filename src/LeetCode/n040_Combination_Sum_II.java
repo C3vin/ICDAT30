@@ -69,6 +69,10 @@ public class n040_Combination_Sum_II {
 		
 		Arrays.sort(candidates);							//need sort first
 		
+		for(int c : candidates) 
+			System.out.print(c);
+		
+		System.out.println();
 		dfs(candidates, target, res, tmp, 0);
 		
 		return res;
@@ -86,7 +90,9 @@ public class n040_Combination_Sum_II {
 		}
 
 		for(int i=start; i<candidates.length; i++) {
+		
 			if(i>start  && candidates[i] == candidates[i-1]) {			//i > start, not the first num, e.g. 1134 diff 1s	
+				System.out.println(i + ": "+candidates[i] + " | "+ start+ ": "+candidates[i-1]);
 				continue;
 			}
 			
@@ -102,12 +108,17 @@ public class n040_Combination_Sum_II {
 		n040_Combination_Sum_II obj = new n040_Combination_Sum_II();
 		int[] candidates = {10,1,2,7,6,1,5};
 		int target = 8;
-		System.out.println(obj.combinationSum2(candidates, target));
-		System.out.println(obj.combinationSum2_2(candidates, target));
+//		System.out.println(obj.combinationSum2(candidates, target));
+//		System.out.println(obj.combinationSum2_2(candidates, target));
 
+		int[] candidates2 = {2,5,2,1,2};
+		int target2 = 5;
+		System.out.println(obj.combinationSum2(candidates2, target2));
+		System.out.println(obj.combinationSum2_2(candidates2, target2));
+		
 		int[] candidates1 = {14,6,25,9,30,20,33,34,28,30,16,12,31,9,9,12,34,16,25,32,8,7,30,12,33,20,21,29,24,17,27,34,11,17,30,6,32,21,27,17,16,8,24,12,12,28,11,33,10,32,22,13,34,18,12};
 		int target1 = 27;
-		System.out.println(obj.combinationSum2(candidates1, target1));
-		System.out.println(obj.combinationSum2_2(candidates1, target1));
+		/*System.out.println(obj.combinationSum2(candidates1, target1));
+		System.out.println(obj.combinationSum2_2(candidates1, target1));*/
 	}
 }
