@@ -49,6 +49,40 @@ public class n081_Search_in_Rotated_Sorted_Array_II {
 		return false; 
 	}
 	
+	public boolean search2(int[] nums, int target) {
+		return helper(nums, target, 0, nums.length-1);
+	}
+	
+	private boolean helper(int[] nums, int target, int left, int right) {
+         if(left > right) {
+             return false;    
+         }
+        
+        int mid = left + (right-left)/2;        //(left+right)/2
+        
+        if(nums[mid] == target) {
+            return true;
+        }
+        
+        if(nums[left] < nums[mid]) {   //e.g. 3,4,5,6,1,2
+            if(nums[left] <= target && target < nums[mid]) {
+                 helper(nums, target, left, mid-1);
+            } else {
+                 helper(nums, target, mid+1, right);
+            }
+        } else if(nums[left] > nums[mid]){                        //e.g. 5,6,1,2,3,4
+            if(nums[mid] < target && target <= nums[right]) {
+                 helper(nums, target, mid+1, right);
+            } else {
+                 helper(nums, target, left, mid-1);
+            }
+        } else {
+        	helper(nums, target, left+1, mid);					  //e.g. 3,3,5,0,0,1,2
+        }
+        
+        return false;
+    }
+	
 	public static void main(String[] args) {
 		n081_Search_in_Rotated_Sorted_Array_II obj = new n081_Search_in_Rotated_Sorted_Array_II();
 		int[] nums = {2,3,4,1,1,2};
@@ -58,5 +92,7 @@ public class n081_Search_in_Rotated_Sorted_Array_II {
 		//System.out.println(obj.search(new int[] {1,3,1,1,1}, 3));
 		System.out.println(obj.search(new int[] {1,3,5}, 1));
 		System.out.println(obj.search(new int[] {5,1,3}, 3));
+		
+		System.out.println(obj.search2(new int[] {3,1}, 1));
 	}
 }

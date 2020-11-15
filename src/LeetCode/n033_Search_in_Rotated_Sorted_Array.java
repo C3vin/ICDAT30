@@ -59,7 +59,7 @@ public class n033_Search_in_Rotated_Sorted_Array {
 			return -1;
 		}
 		
-		int mid = (left+right)/2;
+		int mid = left + (right-left)/2;
 		
 		if(nums[mid] == target) {
 			return mid;
