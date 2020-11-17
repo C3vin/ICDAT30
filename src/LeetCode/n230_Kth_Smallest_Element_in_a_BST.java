@@ -41,6 +41,7 @@ public class n230_Kth_Smallest_Element_in_a_BST {
 		}
 	}
 
+	//global 
 	int res = 0;
 	int rank = 0;
 	public int kthSmallest(TreeNode root, int k) {
@@ -53,7 +54,7 @@ public class n230_Kth_Smallest_Element_in_a_BST {
 			return;
 		}
 		
-		helper(root.left, k);
+		helper(root.left, k);		//when BST, think about 'in-order'
 		
 		rank++;
 		
