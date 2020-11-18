@@ -32,8 +32,9 @@ public class n108_Convert_Sorted_Array_to_Binary_Search_Tree {
 		if(start > end) {
 			return null;
 		}
-		int mid = start + (end - start)/2; //(end - start)/2 + start;
-
+	
+		int mid = start + (end - start)/2; 			//(end - start)/2 + start;
+		
 		TreeNode root = new TreeNode(nums[mid]);	//map to the new node
 		
 		root.left = helper(nums, start, mid-1);			
@@ -46,5 +47,6 @@ public class n108_Convert_Sorted_Array_to_Binary_Search_Tree {
 		n108_Convert_Sorted_Array_to_Binary_Search_Tree obj = new n108_Convert_Sorted_Array_to_Binary_Search_Tree();
 		int[] nums = {1,2,3,4,5,6,7};
 		System.out.println(obj.sortedArrayToBST(nums));
+		System.out.println(obj.sortedArrayToBST(new int[] {-10,-3,0,5,9}));
 	}
 }
