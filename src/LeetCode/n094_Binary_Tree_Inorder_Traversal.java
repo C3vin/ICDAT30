@@ -47,16 +47,18 @@ public class n094_Binary_Tree_Inorder_Traversal {
 		List<Integer> res = new ArrayList<Integer>();  
 		LinkedList<TreeNode> stack = new LinkedList<TreeNode>();  //Stack<TreeNode> stack = new Stack<TreeNode>();
 
-		while(root != null || !stack.isEmpty()) //F: Need while!!!
+		while(root != null || !stack.isEmpty()) {    //F: Need while!!!
 			if(root != null) {   
 				stack.push(root);
-				root = root.left;
+				root = root.left;		//left
 			} 
 			else {
-				root = stack.pop();  //preorder & inorder use pop()
+				root = stack.pop();  	//preorder & inorder use pop()
 				res.add(root.val);
-				root = root.right;
+				root = root.right;		//right
 			}
+		}
+		
 		return res;
 	}
 
