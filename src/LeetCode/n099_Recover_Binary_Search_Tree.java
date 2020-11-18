@@ -45,24 +45,29 @@ public class n099_Recover_Binary_Search_Tree {
 		TreeNode right;
 		TreeNode(int x) { val = x; }
 	}
-	//inorder approach
+	
+	//inorder approach [LC94]
 	//after find the reverse order, change to original order. small to larger
 	//case1: [13245], reverse order: 32. case2: [15342], reverse order: 53 & 42
+	
 	TreeNode first = null;					//F: first
 	TreeNode second = null;					//F: second
+	
 	public void recoverTree(TreeNode root) {
 		helper(root);
-		int tmp = first.val;
+		
+		int tmp = first.val;				//swap
 		first.val = second.val;
 		second.val = tmp;
 	}
+	
 	TreeNode pre = null;					//F: pre
 	private void helper(TreeNode root) {
 		if(root == null) {
 			return;
 		}
-		//inorder
-		helper(root.left);
+		
+		helper(root.left);			//inorder
 
 		if(pre != null && pre.val >= root.val) {
 			if(first == null) {     //find first time reverse order
@@ -77,13 +82,16 @@ public class n099_Recover_Binary_Search_Tree {
 		helper(root.right);
 	}
 
-	//Iteration
-	//Stack approach
+	//Iteration  good!
+	//Stack approach		[LC98 - LC99 (LC94 inorder)]
+	
 	TreeNode f = null;
 	TreeNode s = null;
+	
 	public void recoverTree2(TreeNode root) {
 		helper2(root);
-		int tmp = f.val;
+		
+		int tmp = f.val;			//swap
 		f.val = s.val;
 		s.val = tmp;
 	}

@@ -78,8 +78,8 @@ public class n098_Validate_Binary_Search_Tree {
 		return helper(root.left, min, root.val) && helper(root.right, root.val, max);
 	}
 	*/
-	//inorder approach
-	//LC 94
+	//inorder approach	good!
+	//Stack	[LC98 - LC99 (LC94 inorder)]
 	public boolean isValidBST2(TreeNode root) {
 		if(root == null) {
 			return true;
@@ -96,12 +96,38 @@ public class n098_Validate_Binary_Search_Tree {
 				if(pre != null && pre.val >= root.val) {
 					return false;
 				}
-				pre = root;
+				
+				pre = root;			//update pre
+				
 				root = root.right;
 			}
 		}
 		return true;
 	}
+	
+	//recursive inorder approach good!
+	TreeNode pre = null;
+    public boolean isValidBST3(TreeNode root) {
+        if(root == null) {
+            return true;
+        }
+        
+        if(!isValidBST(root.left)) {
+            return false;
+        }
+        
+        if(pre != null && pre.val >= root.val) {
+            return false;
+        }
+        
+        pre = root;		//update pre
+        
+        if(!isValidBST(root.right)) {
+            return false;
+        }
+        
+        return true;
+    }
 	
 	public static void main(String[] args) {
 		n098_Validate_Binary_Search_Tree obj = new n098_Validate_Binary_Search_Tree();
@@ -113,5 +139,6 @@ public class n098_Validate_Binary_Search_Tree {
 		System.out.println(t1.val + " " + t1.left.val + " " + t1.right.val);
 		System.out.println(obj.isValidBST(t1));
 		System.out.println(obj.isValidBST2(t1));
+		System.out.println(obj.isValidBST3(t1));
 	}
 }
