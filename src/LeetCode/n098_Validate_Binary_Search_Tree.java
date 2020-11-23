@@ -61,23 +61,7 @@ public class n098_Validate_Binary_Search_Tree {
 		
 		return helper(root.left, min, root) && helper(root.right, root, max);
 	}
-	
-/*	//need to use Integer for handle INF/-INF case, JAVA defaul auto-wrap 
-	private boolean helper(TreeNode root, Integer min, Integer max) {
-		if(root == null) {
-			return true;
-		}
-		if(min != null && root.val <= min) {	//Integer can compare null
-			return false;
-		}
-		if(max != null && root.val >= max) {
-			return false;
-		}
-		//left Child: (bound, parent node)
-		//right Child: (parent node, bound)
-		return helper(root.left, min, root.val) && helper(root.right, root.val, max);
-	}
-	*/
+
 	//inorder approach	good!
 	//Stack	[LC98 - LC99 (LC94 inorder)]
 	public boolean isValidBST2(TreeNode root) {
