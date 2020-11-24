@@ -122,6 +122,12 @@ public class n114_Flatten_Binary_Tree_to_Linked_List {
 		//obj.flatten(p1);
 		//obj.flatten2(p1);
 		obj.flatten3(p1);
-		System.out.println(p1.val + " -> " + p1.right.val);
+		while(p1 != null) {
+			System.out.print(p1.val + "-> ");
+			p1 = p1.right;
+			if(p1 == null) {
+				return;
+			}
+		}
 	}
 }
