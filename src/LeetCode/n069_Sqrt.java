@@ -27,13 +27,13 @@ public class n069_Sqrt {
 			if(mid*mid == x) {
 				return (int)mid;
 			} else if(mid*mid < x){					// x not right
-				left = (int)mid+1;
+				left = (int)mid+1;					//need covert (int)!
 			} else {
-				right = (int)mid-1;
+				right = (int)mid-1;					//need covert (int)!	
 			}
 		}
 
-		return (int)right;					//right e.g. 8
+		return (int)right;					//right e.g. 8 //need covert (int)!
 	}
 	
 	public static void main(String[] args) {
