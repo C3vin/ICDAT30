@@ -30,7 +30,7 @@ public class n033_Search_in_Rotated_Sorted_Array {
 				return mid;
 
 			if(nums[left] <= nums[mid]) {		//e.g. 3,4,5,6,1,2			
-				if(nums[left] <= target && target < nums[mid]) {	//Boundary <=
+				if(nums[left] <= target && target < nums[mid]) {	//Boundary <=  !can't do target <= nums[mid], check == before
 					right = mid-1;
 				} else {
 					left = mid +1;
