@@ -22,9 +22,13 @@ public class n216_Combination_Sum_III {
 	public List<List<Integer>> combinationSum3(int k, int n) {
 		List<List<Integer>> res = new ArrayList<List<Integer>>();
 		List<Integer> tmp = new ArrayList<Integer>();
+		
 		dfs(k, n, 1, tmp, res);
+		
 		return res;
 	}
+	
+	//[LC39-LC40]
 	private void dfs(int k, int n, int start, List<Integer> tmp, List<List<Integer>> res) {
 		if(k == 0 && n == 0) {
 			res.add(new ArrayList<Integer>(tmp));
@@ -32,11 +36,14 @@ public class n216_Combination_Sum_III {
 		}
 		
 		for(int i=start; i<=9; i++) {
-			if(i > n) {
+			if(i > n) {				//check 
 				return;
 			}
+			
 			tmp.add(i);
-			dfs(k-1, n-i, i+1, tmp, res);
+			
+			dfs(k-1, n-i, i+1, tmp, res); 	//why i+1, make sure no duplicates!
+			
 			tmp.remove(tmp.size()-1);
 		}
 	}
