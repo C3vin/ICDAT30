@@ -20,7 +20,7 @@ public class n977_Squares_of_a_Sorted_Array {
 		int left = 0;
 		int right = A.length-1;
 
-
+		//start with end, so no need to reverse later
 		for(int i=A.length-1; i>=0; i--) {					//no need to check the left<right for case [1]
 			if(Math.abs(A[left]) > Math.abs(A[right])) {
 				res[i] = A[left] * A[left];
