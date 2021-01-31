@@ -42,7 +42,7 @@ public class n153_Find_Minimum_in_Rotated_Sorted_Array {
 			}
 		}
 		
-		return nums[left];
+		return nums[right];
 	}
 	
 	public static void main(String[] args) {
