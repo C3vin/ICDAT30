@@ -32,7 +32,7 @@ public class n153_Find_Minimum_in_Rotated_Sorted_Array {
 		int left = 0;
 		int right = nums.length-1;
 		
-		while(left < right) {
+		while(left < right) {		//can't use <= need <, otherwise will go to Infinite loop (right = mid)
 			int mid = left + (right - left)/2;
 			
 			if(nums[mid] > nums[right]) {
@@ -47,6 +47,6 @@ public class n153_Find_Minimum_in_Rotated_Sorted_Array {
 	
 	public static void main(String[] args) {
 		n153_Find_Minimum_in_Rotated_Sorted_Array obj = new n153_Find_Minimum_in_Rotated_Sorted_Array();
-		System.out.println(obj.findMin(new int[] {3,4,5,0,1,2}));
+		System.out.println(obj.findMin(new int[] {3,4,5,1,2}));
 	}
 }
