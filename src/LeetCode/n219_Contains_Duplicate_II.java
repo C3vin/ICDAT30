@@ -41,8 +41,8 @@ public class n219_Contains_Duplicate_II {
 				if(i - map.get(nums[i]) <= k) {
 					return true;
 				}
-			}
-			map.put(nums[i], i);
+			}  	
+			map.put(nums[i], i);		//can't use else to handle this case [1,0,1,1]
 		}
 		return false;
 	}
