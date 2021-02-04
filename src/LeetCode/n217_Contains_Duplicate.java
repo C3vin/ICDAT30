@@ -21,18 +21,23 @@ Output: true
  */
 
 public class n217_Contains_Duplicate {
-	//hashset 21ms
+	//HaseSet 21ms
 	public boolean containsDuplicate(int[] nums) {
 		if(nums == null || nums.length == 0)
 			return false;
+
 		HashSet<Integer> set = new HashSet<Integer>();
+
 		for(int i=0; i<nums.length; i++) {
-			if(set.contains(nums[i]))
-					return true;
-			set.add(nums[i]);
+			if(set.contains(nums[i])) {
+				return true;
+			} else {
+				set.add(nums[i]);
+			}
 		}
 		return false;
 	}
+	
 	//cs
 	//time:O(n) space:O(n)
 	public boolean containsDuplicate2(int[] nums) {
@@ -58,6 +63,7 @@ public class n217_Contains_Duplicate {
 		}
 		return false;
 	}
+	
 	public static void main(String[] args) {
 		n217_Contains_Duplicate obj = new n217_Contains_Duplicate();
 		int[] nums = {1,2,4,4};
