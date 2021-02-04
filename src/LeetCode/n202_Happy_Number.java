@@ -27,7 +27,7 @@ public class n202_Happy_Number {
 	public boolean isHappy(int n) {
 		HashSet<Integer> set = new HashSet<Integer>();
 		
-		while(n != 1 && !set.contains(n)) {
+		while(n != 1 && !set.contains(n)) {			//need 'while' not if !!!
 			set.add(n);
 			n = getNext(n);
 		}
@@ -38,7 +38,7 @@ public class n202_Happy_Number {
 	private int getNext(int n) {
 		int sum = 0;
 		
-		while(n > 0) {
+		while(n > 0) {								//need 'while' to check all n
 			int d = n % 10;
 			n = n / 10;
 			
