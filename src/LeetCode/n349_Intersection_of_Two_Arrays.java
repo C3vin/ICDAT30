@@ -30,6 +30,7 @@ public class n349_Intersection_of_Two_Arrays {
 			System.out.println(res[p]);
 		return res;					//res[0]=2, res[1]=6
 	}
+	
 	//HashMap
 	public int[] intersection3(int[] nums1, int[] nums2) {
 		HashMap<Integer, Boolean> map = new HashMap<Integer, Boolean>();
@@ -43,7 +44,7 @@ public class n349_Intersection_of_Two_Arrays {
 		
 		for(int j=0; j<nums2.length; j++) {
 			if(map.containsKey(nums2[j]) && !intermap.containsKey(nums2[j])) {
-				intermap.put(nums2[j], true);
+				intermap.put(nums2[j], true); //Maybe use HashSet is more easy, this Boolean is useless.
 			}
 		}
 		
@@ -80,8 +81,8 @@ public class n349_Intersection_of_Two_Arrays {
 		n349_Intersection_of_Two_Arrays obj = new n349_Intersection_of_Two_Arrays();
 		int[] nums1 = {1,2,2,1,3,4,5,5,6};
 		int[] nums2 = {2,2,6};
-		//System.out.println(obj.intersection(nums1, nums2));
-		//System.out.println(obj.intersection2(nums1, nums2));
+		System.out.println(obj.intersection(nums1, nums2));
+		System.out.println(obj.intersection2(nums1, nums2));
 		System.out.println(obj.intersection3(nums1, nums2));
 	}
 }
