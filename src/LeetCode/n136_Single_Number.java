@@ -29,15 +29,25 @@ public class n136_Single_Number {
 		}
 		return res;
 	}
+	/*
+	 * Bitwise XOR Operation of 5 and 7
+  		0101
+	  ^ 0111
+     ________
+        0010  = 2 (In decimal) 
+	 */
+	
+	
 	//HashSet Time Complexity: O(N^2), Space Complexity: O(N);
 	public int singleNumber2(int[] nums) {
 		HashSet<Integer> set = new HashSet<Integer>();
 		
 		for(int i=0; i<nums.length; i++) {
-			if(set.contains(nums[i]))
+			if(set.contains(nums[i])) {
 				set.remove(nums[i]);
-			else
+			} else {
 				set.add(nums[i]);
+			}
 		}
 		
 		for(int i=0; i<nums.length; i++) {
