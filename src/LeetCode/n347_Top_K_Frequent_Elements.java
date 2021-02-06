@@ -37,7 +37,7 @@ public class n347_Top_K_Frequent_Elements {
 
 		List<Map.Entry<Integer, Integer>> list = new ArrayList<Map.Entry<Integer, Integer>>(map.entrySet());
 		list.sort((a,b) -> {
-			return b.getValue() - a.getValue();				//need b - a
+			return b.getValue() - a.getValue();	 //why need b - a, cuz most frequent k, if a - b will sort 1,2,3...
 		});
 
 
@@ -85,7 +85,8 @@ public class n347_Top_K_Frequent_Elements {
 
 	public static void main(String[] args) {
 		n347_Top_K_Frequent_Elements obj = new n347_Top_K_Frequent_Elements();
-		System.out.println(obj.topKFrequent(new int[] {1,1,1,2,2,3}, 2));
-		System.out.println(obj.topKFrequent2(new int[] {3,3,1,2,2,3}, 2));
+		//System.out.println(obj.topKFrequent(new int[] {1,1,1,2,2,3}, 2));
+		System.out.println(obj.topKFrequent(new int[] {1,3,2,2,2,3}, 2));
+		//System.out.println(obj.topKFrequent2(new int[] {3,3,1,2,2,3}, 2));
 	}
 }
