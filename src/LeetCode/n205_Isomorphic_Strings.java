@@ -27,7 +27,7 @@ public class n205_Isomorphic_Strings {
 		if(s.length() != t.length()) return false;
 		if(s == null || t == null) return false;
 
-		HashMap<Character, Character> map = new HashMap<Character, Character>();
+		HashMap<Character, Character> map = new HashMap<Character, Character>();	//Character
 
 		for(int i=0; i<s.length(); i++) {
 			char ss = s.charAt(i);
@@ -38,8 +38,10 @@ public class n205_Isomorphic_Strings {
 					return false;
 				}
 			} else {						
-				if(map.containsValue(tt)) 	//need "containValue"
+				if(map.containsValue(tt)) {	//need "containValue" handle "foa", "tet"
 					return false;
+				}
+				
 				map.put(ss, tt);
 			}
 		}
