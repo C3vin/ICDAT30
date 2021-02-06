@@ -32,7 +32,8 @@ public class n599_Minimum_Index_Sum_of_Two_Lists {
 		}
 
 		String[] res = new String[map.get(min).size()];			//good way to convert list to string
-		map.get(min).toArray(res);
+		map.get(min).toArray(res);	 //!!! toArray(a), a - is the array which of the list are to be stored
+		
 		System.out.println(map.get(min));
 		return res;
 	}
@@ -63,6 +64,7 @@ public class n599_Minimum_Index_Sum_of_Two_Lists {
 		System.out.println(list);
 		return res;
 	}
+	
 	public static void main(String[] args) {
 		n599_Minimum_Index_Sum_of_Two_Lists obj = new n599_Minimum_Index_Sum_of_Two_Lists();
 		String[] list1 = {"Shogun", "Tapioca Express", "Burger King", "KFC"};
