@@ -20,9 +20,11 @@ public class n142_Linked_List_Cycle_II {
 					slow = slow.next;
 					fast = fast.next;
 				}
+				
 				return slow;
 			}
 		}
+		
 		return null;
 	}
 	public static void main(String[] args) {
