@@ -50,7 +50,7 @@ public class n236_Lowest_Common_Ancestor_of_a_Binary_Tree {
 		return left == null ? right : left;
 	}
 	
-	
+	//better
 	public TreeNode lowestCommonAncestor2(TreeNode root, TreeNode p, TreeNode q) {
 		if(root == null || root == p || root == q) {
 			return root;
@@ -95,10 +95,10 @@ public class n236_Lowest_Common_Ancestor_of_a_Binary_Tree {
 		System.out.println(p1.val + " " + p1.left.val + " " + p1.right.val + " "+ p2.left.val + " " + p2.right.val 
 				+ " " + p3.left.val + " " +p3.right.val);
 
-		/*System.out.println(obj.lowestCommonAncestor(p1, p2, p3).val);
-		System.out.println(obj.lowestCommonAncestor(p1, p2, p9).val);*/
+		System.out.println(obj.lowestCommonAncestor(p1, p2, p3).val);
+		System.out.println(obj.lowestCommonAncestor(p1, p2, p9).val);
 		
-		//System.out.println(obj.lowestCommonAncestor2(p1, p2, p3).val);
-		System.out.println(obj.lowestCommonAncestor2(p1, p8, p9).val);
+		System.out.println(obj.lowestCommonAncestor2(p1, p2, p3).val);
+		System.out.println(obj.lowestCommonAncestor2(p1, p8, p9).val);	//this change p
 	}
 }
