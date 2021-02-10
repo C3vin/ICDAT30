@@ -43,7 +43,7 @@ public class n559_Maximum_Depth_of_N_ary_Tree {
             children = _children;
         }
 	};
-
+	//[LC104 - LC111 template]
 	//DFS
 	public int maxDepth(Node root) {
 		if(root == null) {
@@ -58,8 +58,8 @@ public class n559_Maximum_Depth_of_N_ary_Tree {
 		
 		return depth;
 	}
-
-	//BFS
+	//[LC104 - LC111 template]
+	//BFS 
 	public int maxDepth2(Node root) {
 		if(root == null) {
 			return 0;
@@ -77,6 +77,7 @@ public class n559_Maximum_Depth_of_N_ary_Tree {
 			
 			for(int i=0; i<levelSize; i++) {
 				Node current = queue.poll();
+				
 				for(Node node : current.children) {
 					queue.offer(node);
 				}
