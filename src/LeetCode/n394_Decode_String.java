@@ -45,9 +45,9 @@ public class n394_Decode_String {
 				int count = Integer.valueOf(sb.toString());
 				while(count > 0) {
 					for(char ch : sub.toCharArray()) {
-						stack.push(ch);
+						stack.push(ch);			//why need stack instead of another StringBuilder? to handle e.g. ["3[a2[c]]"]
 					}
-					count --;
+					count --;					//!!!
 				}
 			}
 		}
@@ -59,9 +59,11 @@ public class n394_Decode_String {
 		}
 		return res.toString();
 	}
+	
 	public static void main(String[] args) {
 		n394_Decode_String obj = new n394_Decode_String();
 		System.out.println(obj.decodeString("3[a]2[bc]"));
 		System.out.println(obj.decodeString(""));
+		System.out.println(obj.decodeString("3[a2[c]]"));
 	}
 }
