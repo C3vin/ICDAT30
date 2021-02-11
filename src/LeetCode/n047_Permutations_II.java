@@ -20,29 +20,37 @@ public class n047_Permutations_II {
 	public List<List<Integer>> permuteUnique(int[] nums) {
 		List<List<Integer>> res = new ArrayList<List<Integer>>();
 		boolean[] used = new boolean[nums.length];
-		List<Integer> tmp = new LinkedList<Integer>();
-		Arrays.sort(nums);
+		List<Integer> tmp = new ArrayList<Integer>();
+
+		Arrays.sort(nums);				//must handle e.g. [3,3,0,3]
+
 		helper(nums, res, tmp, used);
+
 		return res;
 	}
 
 	private void helper(int[] nums, List<List<Integer>> res, List<Integer> tmp, boolean[] used) {
 		if(tmp.size() == nums.length) {
-			List<Integer> list = new LinkedList<Integer>(tmp);			//don't miss tmp
-			res.add(list);
+			res.add(new ArrayList<Integer>(tmp));
+
+			return;
 		} 
+
 		for(int i=0; i<nums.length; i++) {
-			if(used[i])
+			if(used[i]) {
 				continue;
+			}
 
 			used[i] = true;
 			tmp.add(nums[i]);
+
 			helper(nums, res, tmp, used);
+
 			tmp.remove(tmp.size()-1);
 			used[i] = false;
 
 			//ignore duplicate 
-			while(i<nums.length-1 && nums[i] == nums[i+1]) {
+			while(i<nums.length-1 && nums[i] == nums[i+1]) {			//while and i++
 				i++;
 			}
 		}
@@ -53,39 +61,36 @@ public class n047_Permutations_II {
 		List<List<Integer>> res = new ArrayList<List<Integer>>();
 		List<Integer> tmp = new ArrayList<Integer>();
 		boolean[] used = new boolean[nums.length];
-		
-		Arrays.sort(nums);										//need sort first!!!
-		
+
+		Arrays.sort(nums);										//need sort first!!! [3,3,0,3]
+
 		dfs(nums, used, tmp, res);
-		
+
 		return res;
 	}
 	//dfs
 	private void dfs(int[] nums, boolean[] used, List<Integer> tmp, List<List<Integer>> res) {
 		if(tmp.size() == nums.length) {
-			// if(res.contains(tmp)) {
-			// 	return;                         //ps: works but too slow
-			// }
-			
 			res.add(new ArrayList<Integer>(tmp));
-			
+
 			return;
 		}
+		
 		for(int i=0; i<nums.length; i++) {
-            // if(used[i]) {
-            //     continue;                    //ps: works but too slow
-            // }
-			
+			// if(used[i]) {
+			//     continue;                    //ps: works but too slow
+			// }
+
 			//why length-1? cuz handle later array i+1
 			if(used[i] || i<nums.length-1 && nums[i] == nums[i+1] && !used[i+1]) {			//need !used[i+1] to check if next use or not	
 				continue;										//remove duplicates
 			}
-			
+
 			tmp.add(nums[i]);
 			used[i] = true;
-			
+
 			dfs(nums, used, tmp, res);
-			
+
 			tmp.remove(tmp.size()-1);
 			used[i] = false;
 		}
