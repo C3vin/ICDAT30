@@ -67,11 +67,13 @@ public class n146_LRU_Cache {
 		if(map.containsKey(key)) {
 			Node old = map.get(key);
 			old.value = value;			//F: need to assign new value!!! update the value
+			
 			remove(old);
 			setHead(old);
 		} else {
 			Node created = new Node(key, value);
-			if(map.size() >= capacity) { 	//map.size, >= !!!
+			
+			if(map.size() >= capacity) { 	//map.size, >= !!!!!!
 				map.remove(tail.key);  		//map.remove
 				remove(tail); 				//remove (Node)
 				setHead(created);
@@ -79,7 +81,7 @@ public class n146_LRU_Cache {
 				setHead(created);
 			}
 
-			map.put(key, created);	
+			map.put(key, created);			//don't forget to add it!	
 		}
 	}
 
