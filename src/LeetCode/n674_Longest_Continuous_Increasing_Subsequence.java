@@ -34,7 +34,7 @@ public class n674_Longest_Continuous_Increasing_Subsequence {
 			if(nums[i] > nums[i-1]) {
 				curLen++;
 			} else {
-				curLen = 1;
+				curLen = 1;						//reset curLen
 			}
 			
 			maxLen = Math.max(maxLen, curLen);
