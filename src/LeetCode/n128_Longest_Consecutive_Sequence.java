@@ -49,22 +49,22 @@ public class n128_Longest_Consecutive_Sequence {
 
 		Arrays.sort(nums);
 
-		int maxCount = 1;
-		int count = 1;
+		int maxLen = 1;
+		int curLen = 1;
 
 		for(int i=1; i<nums.length; i++) {
-			if(nums[i] != nums[i-1]) {					//to ignore duplicate element e.g second '0'
+			if(nums[i] != nums[i-1]) {					//to ignore duplicate element e.g second '0' [0,3,7,2,5,8,4,6,0,1]
 				if(nums[i] - nums[i-1] == 1) {
-					count++;
+					curLen++;
+					maxLen = Math.max(maxLen, curLen);	//maybe add here is easier than check in the end
 				} else {
-					maxCount = Math.max(maxCount, count);
-					count = 1;							//reset count to default
+					maxLen = Math.max(maxLen, curLen);
+					curLen = 1;							//reset count to default
 				}
 			} 
 		}
 
-
-		return Math.max(maxCount, count);
+		return maxLen;  	//Math.max(maxLen, curLen);				//must check!!!
 	}
 
 	public static void main(String[] args) {
