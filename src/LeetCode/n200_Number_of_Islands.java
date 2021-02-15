@@ -1,4 +1,4 @@
-package LeetCode;
+ package LeetCode;
 
 import java.util.LinkedList;
 import java.util.Queue;
@@ -36,7 +36,7 @@ public class n200_Number_of_Islands {
 			for(int j=0; j<grid[0].length; j++) {
 				if(grid[i][j] == '1') {
 					dfs(grid, i, j);
-					count++;
+					count++;								//!!!
 				}
 			}
 		}
@@ -61,48 +61,59 @@ public class n200_Number_of_Islands {
 		dfs(grid, i, j+1);
 	}
 
-	//BFS 
+	//BFS
 	public int numIslands2(char[][] grid) {
-		if(grid == null || grid.length == 0 || grid[0].length == 0) {
-			return 0;
-		}
-
-		int[][] direction = {{-1,0}, {1,0}, {0,-1}, {0,1}};
-
 		int count = 0;
+		
+		Queue<int[]> queue = new LinkedList<int[]>();
+		
 		for(int i=0; i<grid.length; i++) {
 			for(int j=0; j<grid[0].length; j++) {
 				if(grid[i][j] == '1') {
-					bfs(grid, i, j, direction);
-					count++;
-				}
-			}
-		}
-		return count;
-	}
-	private void bfs(char[][] grid, int i, int j, int[][] direction) {
-		Queue<int[]> queue = new LinkedList<int[]>();
-		queue.offer(new int[] {i,j});
-		// bfs
-		while(queue.size() > 0) {
-			int levelSize = queue.size();
-			for(int k=0; k<levelSize; k++) {
-				int[] curr = queue.poll();
-
-				for(int[] dir : direction) {
-					int x = curr[0] + dir[0];		//search 4 direction 
-					int y = curr[1] + dir[1];
-					if(x >= 0 && x < grid.length && y >= 0 && y < grid[0].length) {
-						if (grid[x][y] == '1') {
-							queue.offer(new int[] { x, y });
-							grid[x][y] = '0';		//after add to queue, change to '0' -> visited
+					
+					count++;								//don't forget to count++ !!!
+					
+					queue.offer(new int[] {i, j});
+					
+					while(!queue.isEmpty()) {
+						int levelSize = queue.size();
+						
+						for(int k=0; k<levelSize; k++) {
+							int[] cur = queue.poll();
+							int row = cur[0];
+							int col = cur[1];
+							
+							grid[row][col] = '2'; //visited
+							
+							//up
+							if(row-1 >= 0 && grid[row-1][col] == '1') {
+								grid[row-1][col] = '2';
+								queue.offer(new int[] {row-1, col});
+							}
+							//down
+							if(row+1 < grid.length && grid[row+1][col] == '1') {
+								grid[row+1][col] = '2';
+								queue.offer(new int[] {row+1, col});
+							}
+							//left
+							if(col-1 >= 0 && grid[row][col-1] == '1') {
+								grid[row][col-1] = '2';
+								queue.offer(new int[] {row, col-1});
+							}
+							//right
+							if(col+1 < grid[0].length && grid[row][col+1] == '1') {
+								grid[row][col+1] = '2';
+								queue.offer(new int[] {row, col+1});
+							}
 						}
 					}
 				}
 			}
 		}
+		
+		return count;
 	}
-
+	
 	public static void main(String[] args) {
 		n200_Number_of_Islands obj = new n200_Number_of_Islands();
 		char[][] grid = 
