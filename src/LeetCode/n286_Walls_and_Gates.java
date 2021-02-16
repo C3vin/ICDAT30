@@ -41,7 +41,11 @@ public class n286_Walls_and_Gates {
 	}
 	private void helper(int[][] rooms, int i, int j, int val) {
 		//ArrayIndexOutOfBoundsException must >=
-		if(i<0 || i>=rooms.length || j<0 || j>=rooms[0].length || rooms[i][j] < val) {	//why need check < val, cuz go to next neighbor, the val+1
+		if(i<0 || i>=rooms.length || j<0 || j>=rooms[0].length || rooms[i][j] < val) {	  //rooms[i][j] < val 
+			/* why rooms[i][j] < val
+			 * 1. updated already  2. -1 wall 3. out of boundary 
+			 */
+			
 			return;
 		}
 		
