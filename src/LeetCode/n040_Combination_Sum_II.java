@@ -35,50 +35,55 @@ public class n040_Combination_Sum_II {
 	public List<List<Integer>> combinationSum2(int[] candidates, int target) {
 		List<List<Integer>> res = new ArrayList<List<Integer>>();
 		List<Integer> tmp = new ArrayList<Integer>();
-		Arrays.sort(candidates);						//Sort first
 		boolean[] used = new boolean[candidates.length];
+		
+		Arrays.sort(candidates);						//Sort first
+		
 		helper(candidates, target, res, tmp, 0, used);
+		
 		return res;
 	}
 
 	private void helper(int[] candidates, int target, List<List<Integer>> res, List<Integer> tmp, int start, boolean[] used) {
-		if(target < 0)
-			return;
-		if(target == 0) {
-			List<Integer> list = new ArrayList<Integer>(tmp);
-			res.add(list);
+		if(target < 0) {
 			return;
 		}
+		
+		if(target == 0) {
+			res.add(new ArrayList<Integer>(tmp));
+			return;
+		}
+		
 		for(int i=start; i<candidates.length; i++) {
 			if(!used[i]) {
-				if(i>0 && candidates[i] == candidates[i-1] && used[i-1] == false)
+				if(i>0 && candidates[i] == candidates[i-1] && used[i-1] == false) {
 					continue;
+				}
+				
 				tmp.add(candidates[i]);
 				used[i] = true;
+				
 				helper(candidates, target-candidates[i], res, tmp, i+1, used);
+				
 				used[i] = false;
 				tmp.remove(tmp.size()-1);
 			}
 		}
 	}
 
-	//LC39 - LC40 template, diff with LC39, i>start and add i+1 to helper()
+	//LC39 - LC40 template, diff with LC39, i>start and add i+1 to helper() Good!!!
 	public List<List<Integer>> combinationSum2_2(int[] candidates, int target) {
 		List<List<Integer>> res = new ArrayList<List<Integer>>();
 		List<Integer> tmp = new ArrayList<Integer>();
 		
 		Arrays.sort(candidates);							//need sort first
 		
-		for(int c : candidates) 
-			System.out.print(c);
-		
-		System.out.println();
 		dfs(candidates, target, res, tmp, 0);
 		
 		return res;
 	}
 
-	//dfs
+	//DFS Good!!!
 	private void dfs(int[] candidates, int target, List<List<Integer>> res, List<Integer> tmp, int start) {
 		if(target < 0) {
 			return;
@@ -92,7 +97,7 @@ public class n040_Combination_Sum_II {
 		for(int i=start; i<candidates.length; i++) {
 		
 			if(i>start  && candidates[i] == candidates[i-1]) {			//i > start, not the first num, e.g. 1134 diff 1s	
-				System.out.println(i + ": "+candidates[i] + " | "+ start+ ": "+candidates[i-1]);
+				//System.out.println(i + ": "+candidates[i] + " | "+ start+ ": "+candidates[i-1]);
 				continue;
 			}
 			
