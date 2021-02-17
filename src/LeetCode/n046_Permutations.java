@@ -35,7 +35,7 @@ public class n046_Permutations {
 		}
 		
 		for(int i=0; i<nums.length; i++) {
-			if(tmp.contains(nums[i])) {					//smart! not need used!
+			if(tmp.contains(nums[i])) {					//smart! not need used! use List contains() API
 				continue;
 			}
 			
