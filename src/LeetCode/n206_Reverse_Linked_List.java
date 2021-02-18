@@ -21,10 +21,11 @@ public class n206_Reverse_Linked_List {
 	}*/
 	//Iterative Good!
 	public ListNode reverseList4(ListNode head) {
-		if(head==null||head.next==null)
+		if(head==null||head.next==null) {
 			return head;
+		}
 
-		ListNode p = null;
+		ListNode p = null;		//Must null can't do new ListNode(0)
 
 		//Null 1->2->3         Null<-1->2->3
 		//  p  h  tmp                p  h  tmp
@@ -32,7 +33,7 @@ public class n206_Reverse_Linked_List {
 			ListNode tmp = head.next;
 			head.next = p;	
 			//reset
-			p = head;
+			p = head;			//not p = p.next cuz NO next NOW
 			head = tmp;
 		}
 		return p;				//p not head
