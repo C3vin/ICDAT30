@@ -20,12 +20,12 @@ public class n237_Delete_Node_in_a_Linked_List {
 		}
 		
 		node.val = node.next.val;			//update node val
-		node.next = node.next.next;			//update next node
+		node.next = node.next.next;			//update next node, cuz next node already set to the cur node. so no need it anymore. 
 	}
 	
 	//Good red: https://leetcode.com/problems/delete-node-in-a-linked-list/discuss/461683/java-100-both-or-Solution-Explained
 	public void deleteNode2(ListNode node) {
-		while (true) {
+		while(true) {
 			node.val = node.next.val;
 			if (node.next.next == null) {
 				node.next = null;
