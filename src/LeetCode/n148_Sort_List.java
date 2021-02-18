@@ -1,54 +1,101 @@
 package LeetCode;
 
+
 public class n148_Sort_List {
-	public class ListNode {
+	public static class ListNode {
 		int val;
 		ListNode next;
-		ListNode(int x) { val = x; }
-	}
-	public ListNode sortList(ListNode head) {
-		if(head == null|| head.next == null)
-			return head;
-		ListNode slow = head, fast = head, firsthalf = head;
-		while(fast.next!=null&&fast.next.next!=null){
-			slow = slow.next;
-			fast = fast.next.next;
+		ListNode(int x) { 
+			val = x; 
 		}
-		ListNode secondhalf = slow.next;
+	}
+
+	public ListNode sortList(ListNode head) {
+		if(head == null || head.next == null) {
+			return head;
+		}
+
+		ListNode faster = head;
+		ListNode slow = head;
+
+		while(faster.next != null && faster.next.next != null) {
+			faster = faster.next.next;
+			slow = slow.next;
+		}
+
+		ListNode secondHead = slow.next;
 		slow.next = null;
 
-		ListNode leftlist = null, rightlist =null;
-		if(firsthalf!=secondhalf){
-			leftlist = sortList(firsthalf);
-			rightlist = sortList(secondhalf);
+		ListNode leftList = null; 
+		ListNode rightList = null;
+
+		if(head != secondHead) {
+			leftList = sortList(head);
+			rightList = sortList(secondHead);
 		}
-		return mergeTwoLists(leftlist, rightlist);
+
+		return mergeTwoLists(leftList, rightList);
 	}
-	public ListNode mergeTwoLists(ListNode leftlist, ListNode rightlist){
-		if(rightlist == null)
-			return leftlist;
-		if(leftlist == null)
-			return rightlist;
 
-		ListNode fakehead = new ListNode(-1);
-		ListNode ptr = fakehead;
-		while(rightlist!=null&&leftlist!=null){
-			if(rightlist.val<leftlist.val){
-				ptr.next = rightlist;
-				ptr = ptr.next;
-				rightlist = rightlist.next;
-			}else{
-				ptr.next = leftlist;
-				ptr = ptr.next;
-				leftlist = leftlist.next;
+	//this mergeTwoLists is LC 21 sol
+	public ListNode mergeTwoLists(ListNode l1, ListNode l2) {
+		ListNode dummy = new ListNode(0);
+		ListNode p = dummy;
+
+		while(l1 != null && l2 != null) {
+			if(l1.val < l2.val) {
+				p.next = l1;
+				l1 = l1.next;
+			} else {
+				p.next = l2;
+				l2 = l2.next;
 			}
+
+			p = p.next;                 //Need to move p after all
 		}
 
-		if(rightlist!=null)
-			ptr.next = rightlist;
-		if(leftlist!=null)
-			ptr.next = leftlist;
+		//extra nodes
+		if(l1 != null) {
+			p.next = l1;
+		} 
 
-		return fakehead.next;
+		if(l2 != null) {
+			p.next = l2;
+		}
+
+		return dummy.next;
+	}
+	//	public ListNode mergeTwoLists(ListNode leftList, ListNode rightList) {
+	//		ListNode dummy = new ListNode(0);
+	//		ListNode p = dummy;
+	//		while(leftList != null && rightList != null) {
+	//			if(leftList.val < rightList.val){
+	//				p.next = leftList;
+	//				leftList = leftList.next;
+	//			} else {
+	//				p.next = rightList;
+	//				rightList = rightList.next;
+	//			}
+	//			p = p.next;
+	//		}
+	//		if(leftList != null) {
+	//			p.next = leftList;
+	//		}
+	//		if(rightList != null) {
+	//			p.next = rightList;
+	//		}
+	//		return dummy.next;
+	//	}
+
+	public static void main(String[] args) {
+		n148_Sort_List obj = new n148_Sort_List();
+		ListNode t1 = new ListNode(4);
+		ListNode t2 = new ListNode(2);
+		ListNode t3 = new ListNode(1);
+		ListNode t4 = new ListNode(3);
+		t1.next = t2;
+		t2.next = t3;
+		t3.next = t4;
+		System.out.println(obj.sortList(t1));
 	}
 }
