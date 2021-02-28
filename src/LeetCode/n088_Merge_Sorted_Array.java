@@ -14,7 +14,10 @@ nums2 = [2,5,6],       n = 3
 Output: [1,2,2,3,5,6]
  */
 
+import java.util.Arrays;
+
 public class n088_Merge_Sorted_Array {
+	//Good! 
 	public void merge(int[] nums1, int m, int[] nums2, int n) {
 		for(int i=m+n-1; i>=0; i--) {
 			if(m>0 && n>0) {
@@ -33,8 +36,22 @@ public class n088_Merge_Sorted_Array {
 				n--;
 			}
 		}
-		/*		for(int i=0; i<nums1.length; i++)
-			System.out.println(nums1[i]);*/
+		for(int i=0; i<nums1.length; i++)
+			System.out.print(nums1[i]);
+		System.out.println("");
+	}
+
+	//merge and sort! 
+	public void merge3(int[] nums1, int m, int[] nums2, int n) {
+		for(int i=0; i<n; i++) {
+			nums1[i+m] = nums2[i];
+		}
+
+		Arrays.sort(nums1);
+
+		for(int i=0; i<nums1.length; i++)
+			System.out.print(nums1[i]);
+		System.out.println("");
 	}
 
 	public void merge2(int[] nums1, int m, int[] nums2, int n) {
@@ -63,17 +80,22 @@ public class n088_Merge_Sorted_Array {
 		}
 
 		for(int s=0; s<nums1.length; s++)
-			System.out.println(nums1[s]);
+			System.out.print(nums1[s]);
+		System.out.println("");
 	}
+
+
 
 	public static void main(String[] args) {
 		n088_Merge_Sorted_Array obj = new n088_Merge_Sorted_Array();
 
-		int[] nums1 = {1,2,3,0,0,0};
-		int[] nums2 = {2,5,6};
-		obj.merge(nums1, 3, nums2, 3);
+		obj.merge(new int[] {1,2,3,0,0,0}, 3, new int[] {2,5,6}, 3);
+		obj.merge(new int[] {0}, 0, new int[] {1}, 1);
+
 		obj.merge2(new int[] {1,2,3,0,0,0}, 3, new int[] {2,5,6}, 3);
-		
 		obj.merge2(new int[] {0}, 0, new int[] {1}, 1);
+
+		obj.merge3(new int[] {1,2,3,0,0,0}, 3, new int[] {2,5,6}, 3);
+		obj.merge3(new int[] {0}, 0, new int[] {1}, 1);
 	}
 }
