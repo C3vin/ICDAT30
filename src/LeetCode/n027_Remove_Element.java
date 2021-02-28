@@ -33,7 +33,7 @@ public class n027_Remove_Element {
 	//cs  [LC26 - LC27 template]
 	//time:O(n) space:O(1)
 	 public int removeElement(int[] nums, int val) {
-		 if(nums.length == 0) 
+		 if(nums.length == 0 || nums == null) 
 			 return 0;
 		 
 		 int res = 0;
