@@ -53,7 +53,7 @@ public class n005_longest_palindromic_substring {
 	}
 	
 	//Better! 
-	String res = new String();  //global variable
+	String res = new String();  //global variable, cuz if you passing it will reset all the time
 	
 	public String longestPalindrome2(String s) {  
 		for(int i=0; i<s.length(); i++) {
@@ -104,12 +104,12 @@ public class n005_longest_palindromic_substring {
 	
 	public static void main(String[] args) {
 		n005_longest_palindromic_substring obj = new n005_longest_palindromic_substring();
-		System.out.println(obj.longestPalindrome(""));
-		System.out.println(obj.longestPalindrome("babad"));
-		System.out.println(obj.longestPalindrome("cbbd"));
-		System.out.println(obj.longestPalindrome2("babad"));
+//		System.out.println(obj.longestPalindrome(""));
+//		System.out.println(obj.longestPalindrome("babad"));
+//		System.out.println(obj.longestPalindrome("cbbd"));
+//		System.out.println(obj.longestPalindrome2("babad"));
 		System.out.println(obj.longestPalindrome2("cbbd"));
-		System.out.println(obj.longestPalindromeDP("babad"));
-		System.out.println(obj.longestPalindromeDP("cbbd"));
+//		System.out.println(obj.longestPalindromeDP("babad"));
+//		System.out.println(obj.longestPalindromeDP("cbbd"));
 	}
 }
