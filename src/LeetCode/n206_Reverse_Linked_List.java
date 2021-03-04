@@ -38,27 +38,13 @@ public class n206_Reverse_Linked_List {
 		}
 		return p;				//p not head
 	}
-	
-	//Recursive	1ms
-/*	public ListNode reverseList2(ListNode head) {
-		if(head==null || head.next==null) 		// || not &&
-			return head;		
 
-		//get second node    
-		ListNode second = head.next;
-		//set first's next to be null
-		head.next = null;
-
-		ListNode rest = reverseList2(second);
-		second.next = head;
-
-		return rest;
-	}*/
-
+	//sol 2
 	public ListNode reverseList3(ListNode head) {
 		// case1: empty list or one element
-		if(head == null || head.next == null) 
+		if(head == null || head.next == null) {
 			return head;
+		}
 
 		// case: reverse from the rest after head
 		ListNode newHead = reverseList3(head.next);
