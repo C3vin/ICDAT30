@@ -35,6 +35,7 @@ public class n102_BinaryTreeLevelOrderTraversal {
 	//BFS
 	public List<List<Integer>> levelOrder(TreeNode root) {
 		List<List<Integer>> res = new ArrayList<List<Integer>>();
+		
 		if(root == null) {
 			return res;
 		}
@@ -45,11 +46,14 @@ public class n102_BinaryTreeLevelOrderTraversal {
 		while(!queue.isEmpty()) {
 			int levelSize = queue.size();
 			List<Integer> node = new ArrayList<Integer>(); 				//Need 
+			
 			for(int i=0; i<levelSize; i++) {
 				TreeNode tmp = queue.poll();
-				if(tmp != null) {
-					node.add(tmp.val);
-				}
+				
+				//if(tmp != null) {
+					node.add(tmp.val);									//no need 
+				//}
+				
 				if(tmp.left != null) {
 					queue.offer(tmp.left);
 				}
@@ -57,15 +61,23 @@ public class n102_BinaryTreeLevelOrderTraversal {
 					queue.offer(tmp.right);
 				}
 			}
+			
 			res.add(node);												//No need to new again!
 		}
+		
 		return res;
 	}
 	
 	//DFS
 	public List<List<Integer>> levelOrder2(TreeNode root) {
 		List<List<Integer>> res = new ArrayList<List<Integer>>();
-		DFS(root, 0, res);
+		if(root == null) {
+			return res;
+		}
+		
+		int level = 0;
+		
+		DFS(root, level, res);
 		
 		return res;
 	}
@@ -74,7 +86,7 @@ public class n102_BinaryTreeLevelOrderTraversal {
 			return;
 		}
 		//level: 0->1->2->2->1->2->2
-		if(res.size() <= level) {				//in order to let get() working
+		if(res.size() == level) {				//in order to let get() working
 			res.add(new ArrayList<Integer>());
 		}
 		
