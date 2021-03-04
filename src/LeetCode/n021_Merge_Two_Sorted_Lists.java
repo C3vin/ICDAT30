@@ -8,13 +8,17 @@ public class n021_Merge_Two_Sorted_Lists {
 		while(l1 != null && l2 != null) {
 			if(l1.val < l2.val) {
 				p.next = l1;
+				
 				l1 = l1.next;
+				p = p.next;
 			} else {
 				p.next = l2;
+				
 				l2 = l2.next;
+				p = p.next;
 			}
 			
-			p = p.next;			//Need to move p after all
+			//p = p.next;			//Need to move p after all, OR move to each if
 		}
 		//extra node
 		if(l1 != null) {
