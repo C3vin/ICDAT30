@@ -43,19 +43,7 @@ public class n112_Path_Sum {
 		}
 		
 		return hasPathSum(root.left, sum - root.val) || hasPathSum(root.right, sum - root.val);		// || not &&
-		//return helper(root, sum);
 	}
-/*	private boolean helper(TreeNode root, int sum) {
-		if(root == null) {
-			return false;
-		}
-		
-		if(root.left == null && root.right == null && root.val == sum) {		//root.val == sum, eg. 22-5-4-11 = 2(rest of the sum) 
-			return true;
-		}
-		
-		return helper(root.left, sum - root.val) || helper(root.right, sum - root.val);
-	}*/
 
 	//BFS [LC104 - LC111 template]
 	public boolean hasPathSum2(TreeNode root, int sum) {
