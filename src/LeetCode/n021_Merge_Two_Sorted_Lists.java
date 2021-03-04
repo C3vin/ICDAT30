@@ -2,8 +2,8 @@ package LeetCode;
 
 public class n021_Merge_Two_Sorted_Lists {
 	public ListNode mergeTwoLists(ListNode l1, ListNode l2) {
-		ListNode h = new ListNode(0);
-		ListNode p = h;
+		ListNode dummy = new ListNode(0);
+		ListNode p = dummy;
 		
 		while(l1 != null && l2 != null) {
 			if(l1.val < l2.val) {
@@ -23,7 +23,7 @@ public class n021_Merge_Two_Sorted_Lists {
 		if(l2 != null) {
 			p.next = l2;
 		}
-		return h.next;
+		return dummy.next;
 	}
 	public static void main(String[] args) {
 		n021_Merge_Two_Sorted_Lists obj = new n021_Merge_Two_Sorted_Lists();
