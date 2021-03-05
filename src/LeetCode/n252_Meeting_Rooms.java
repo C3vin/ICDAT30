@@ -19,6 +19,10 @@ intervals[i].length == 2
  */
 public class n252_Meeting_Rooms {
 	public boolean canAttendMeetings(int[][] intervals) {
+		if(intervals == null || intervals.length == 0) {
+            return true;
+        }
+		
 		Arrays.sort(intervals, (a, b) -> {
 			return a[0] - b[0];
 		});
