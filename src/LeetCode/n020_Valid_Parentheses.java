@@ -59,6 +59,7 @@ public class n020_Valid_Parentheses {
 		return stack.isEmpty();
 	}
 
+	//Good!!! 
 	public boolean isValid3(String s) {
 		if(s == null || s.length() == 0) {
 			return true;
