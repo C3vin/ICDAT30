@@ -49,7 +49,7 @@ public class n128_Longest_Consecutive_Sequence {
 
 		Arrays.sort(nums);
 
-		int maxLen = 1;
+		int maxLen = 1;									//both default 1 !!!!!!!!!!!!!!
 		int curLen = 1;
 
 		for(int i=1; i<nums.length; i++) {
