@@ -55,21 +55,26 @@ public class n049_Group_Anagrams {
 		
 		HashMap<String, List<String>> map = new HashMap<String, List<String>>();		//value: List<String>
 
-		for(String s : strs) {
-			char[] ch = s.toCharArray();			//convert string to ch array
+		for(String str : strs) {
+			char[] ch = str.toCharArray();			//convert string to ch array char[]!!! not char
 			
 			Arrays.sort(ch);						//must sort!
 
 			String key = String.valueOf(ch);		//convert ch array to string
 			
 			if(map.containsKey(key)) {
-				map.get(key).add(s);
+				map.get(key).add(str);
 			} else {
-				map.put(key, new ArrayList<String>(Arrays.asList(s)));	//default value need Arrays.asList() 
+                map.put(key, new ArrayList<String>());
+                map.get(key).add(str);
+				//map.put(key, new ArrayList<String>(Arrays.asList(s)));	//default value need Arrays.asList() 
 			}
 		}
 		
-		return new ArrayList<List<String>>(map.values());				//need map.values()!
+        List<List<String>> res = new ArrayList<List<String>>(map.values());
+        
+        return res;
+		//return new ArrayList<List<String>>(map.values());				//need map.values()!
 	}
 
 	public static void main(String[] args) {
