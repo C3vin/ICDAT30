@@ -54,7 +54,7 @@ public class n146_LRU_Cache {
 	public int get(int key) {
 		if(map.containsKey(key)) {
 			Node node = map.get(key);
-			remove(node);
+			remove(node);						//Don't forget!!!
 			setHead(node);
 
 			return node.value;
@@ -68,7 +68,7 @@ public class n146_LRU_Cache {
 			Node old = map.get(key);
 			old.value = value;			//F: need to assign new value!!! update the value
 			
-			remove(old);
+			remove(old);				//Don't forget!!!
 			setHead(old);
 		} else {
 			Node created = new Node(key, value);
@@ -76,11 +76,10 @@ public class n146_LRU_Cache {
 			if(map.size() >= capacity) { 	//map.size, >= !!!!!!
 				map.remove(tail.key);  		//map.remove
 				remove(tail); 				//remove (Node)
-				setHead(created);
-			} else {
-				setHead(created);
+//			} else {
+//				setHead(created);
 			}
-
+			setHead(created);
 			map.put(key, created);			//don't forget to add it!	
 		}
 	}
