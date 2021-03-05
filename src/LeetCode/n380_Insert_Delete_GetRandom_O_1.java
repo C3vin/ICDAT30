@@ -58,6 +58,7 @@ public class n380_Insert_Delete_GetRandom_O_1 {
         } else {
             map.put(val, list.size());
             list.add(list.size(), val);     //need to add by index
+            //list.add(val);
             
             return true;
         }
@@ -68,21 +69,22 @@ public class n380_Insert_Delete_GetRandom_O_1 {
     	if(!map.containsKey(val)) {
     		return false;
     	} else {
+    		//swap on the list
     		int index = map.get(val);					//get the ArrayList index
     		list.set(index, list.get(list.size()-1));	//set the last ArrayList element to the val index which will be remove ps: actually already remove val
     		map.put(list.get(list.size()-1), index);
-    		
+    		 
     		//remove
     		list.remove(list.size()-1);
     		map.remove(val);
-    		
+    		 
     		return true;
     	}
     }
     
     /** Get a random element from the set. */
     public int getRandom() {
-        return list.get(rand.nextInt(list.size()));
+        return list.get(rand.nextInt(list.size()));		//nextInt(int n): between 0 (inclusive) and n (exclusive)
     }
     
     public static void main(String[] args) {
