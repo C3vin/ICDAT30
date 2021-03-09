@@ -71,7 +71,7 @@ public class n1347_Minimum_Number_of_Steps_to_Make_Two_Strings_Anagram {
 		
 		//if the map contains one of the character with at least 1 frequency, we subtract the frequency
 		for(int i=0; i<t.length(); i++) {
-			if(map.containsKey(t.charAt(i)) && map.get(t.charAt(i)) > 0) {
+			if(map.containsKey(t.charAt(i)) && map.get(t.charAt(i)) > 0) {			//need to check > 0 !!!!!!!!!!!!!!!!!!!!!!!!!
 				map.put(t.charAt(i), map.get(t.charAt(i))-1);			//{c=0, t=0, d=1, e=2, l=1, o=1}
 			} else {
 				res++;		 //otherwise increment the steps needed to make t anagram
