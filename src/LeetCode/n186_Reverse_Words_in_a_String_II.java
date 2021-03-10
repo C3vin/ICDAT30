@@ -14,34 +14,35 @@ Follow up: Could you do it in-place without allocating extra space?
  */
 public class n186_Reverse_Words_in_a_String_II {
 	public void reverseWords(char[] s) {
-		if (s.length == 0) {
+		if(s.length == 0) {
 			return;
 		}
 
 		//1, reverse whole sentence 
-		reverseArray(s, 0, s.length-1);			
+		reverseArray(s, 0, s.length-1);						//["e","u","l","b"," ","s","i"," ","y","k","s"," ","e","h","t"]
 
 		//2, reverse each word
 		int start = 0;
-		for (int i=0; i<s.length; i++) {
-			if (s[i] == ' ') {
-				reverseArray(s, start, i-1);	
-				start = i + 1;					//update start index
+		for(int i=0; i<s.length; i++) {
+			if (s[i] == ' ') {	
+				reverseArray(s, start, i-1);				//["b","l","u","e"," ","i","s"," ","s","k","y"," ","e","h","t"]
+				start = i + 1;								//update start index
 			}
 		}
 		//3, revere the last word, if there is only one word this will solve the corner case
 		// also last word don't have ' ' so need this step to reverse last word
-		reverseArray(s, start, s.length-1);	
+		reverseArray(s, start, s.length-1);					//["b","l","u","e"," ","i","s"," ","s","k","y"," ","t","h","e"] reverse last str
 		
 		for(int i=0; i<s.length; i++)
 			System.out.print(s[i]);
 	}
 	public void reverseArray(char[] s, int l, int r) {
 		//swap
-		while (l < r) {
+		while(l < r) {
 			char temp = s[l];
 			s[l] = s[r];
 			s[r] = temp;
+			
 			l++;
 			r--;
 		}
