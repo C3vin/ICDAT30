@@ -22,6 +22,24 @@ Output: "example good a"
 Explanation: You need to reduce multiple spaces between two words to a single space in the reversed string.
  */
 public class n151_Reverse_Words_in_a_String {
+	//Good!
+	public String reverseWords3(String s) {
+        StringBuilder sb = new StringBuilder();
+        if(s == null || s.length() == 0) {
+            return sb.toString();
+        }
+        
+        String[] str = s.split(" ");
+        
+        for(int i=str.length-1; i>=0; i--) {
+            if(!str[i].isEmpty()) {           //"a good   example"
+                sb.append(str[i]).append(" ");
+            }
+        }
+        
+        return sb.substring(0, sb.length()-1);  //sb.toString().trim(); <- I like trim()
+	}
+	
 	public String reverseWords(String s) {
 		String[] str = s.split(" ");				// " " 
 		StringBuilder sb = new StringBuilder();
