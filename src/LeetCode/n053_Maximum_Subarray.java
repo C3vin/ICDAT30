@@ -13,6 +13,11 @@ If you have figured out the O(n) solution, try coding another solution using the
  */
 public class n053_Maximum_Subarray {
 	//LC53 - LC121 sol
+	//Greedy https://leetcode.com/problems/maximum-subarray/solution/
+	/*The algorithm is general and straightforward: iterate over the array and update at each step the standard set for such problems:
+	1. current element
+	2. current local maximum sum (at this given point)
+	3. global maximum sum seen so far. */
 	public int maxSubArray(int[] nums) {
 		if(nums == null || nums.length==0) {  
 			return 0;  
@@ -20,10 +25,15 @@ public class n053_Maximum_Subarray {
 		int global = nums[0];  					//default, will update later
 		int local = nums[0];  					//default
 		
-		for(int i=1; i<nums.length; i++) {		//i=1, cuz we don't need to check first element  
+		for(int i=1; i<nums.length; i++) {					//i=1, cuz we don't need to check first element  
 			local = Math.max(nums[i], local+nums[i]);  		//find MAX between "cur" & "cur+past"
 			global = Math.max(local, global);
 		}  
+		
+		//[-2, 1,-3, 4,-1, 2, 1,-5, 4]
+		//only #     #    these two # points local restart 
+		//[-2, 1,-2, 4, 3, 5, 6, 1, 5] 
+		
 		return global;  
 	}
 
