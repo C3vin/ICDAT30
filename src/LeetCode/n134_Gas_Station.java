@@ -64,7 +64,7 @@ public class n134_Gas_Station {
         }
 
         if(totalGaining < 0) {
-            return -1;
+            return -1;				//handle case e.g. gas = [2,3,4], cost = [3,4,3]
         } 
         
         return index;
