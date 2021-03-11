@@ -38,20 +38,36 @@ You cannot travel back to station 2, as it requires 4 unit of gas but you only h
 Therefore, you can't travel around the circuit once no matter where you start.
  */
 public class n134_Gas_Station {
-	public int canCompleteCircuit(int[] gas, int[] cost) {
-		int start = 0;
-		int remain = 0;
-		int debt = 0;
-		
-		for(int i=0; i<gas.length; i++) {
-			remain = remain + gas[i] - cost[i];
-			if(remain < 0) {
-				debt = debt + remain;
-				start = i+1;
-				remain = 0;
-			}
-		}
-		return remain + debt >= 0 ? start : -1;
+	//Greedy
+//	Keep a starting candidate
+//  Keep total gaining from the gas stations.
+//	Keep a current gaining from starting candidate to the current station
+//	If current gaining < 0 it means that our current candidate is not the one. Make the candidate the next element
+//	Iterate the arrays and if totalGaining >= 0, return the candidate, otherwise return -1
+	public int canCompleteCircuit(int[] gas, int[] cost) {	
+		if(gas == null || cost == null || gas.length == 0 || cost.length == 0 || gas.length != cost.length) {
+            return -1;
+        }
+        
+        int currentGaining = 0;
+        int totalGaining = 0;
+        int index = 0;
+        
+        for(int i=0; i<gas.length; i++) {
+            currentGaining = currentGaining + gas[i] - cost[i];
+            totalGaining = totalGaining + gas[i] - cost[i];
+            
+            if(currentGaining < 0) {
+                index = i+1; 
+                currentGaining = 0;
+            }
+        }
+
+        if(totalGaining < 0) {
+            return -1;
+        } 
+        
+        return index;
 	}
 	
 	//cs
@@ -72,10 +88,12 @@ public class n134_Gas_Station {
 		}
 		return remain < 0 ? -1 : start;
 	}
+	
 	public static void main(String[] args) {
 		n134_Gas_Station obj = new n134_Gas_Station();
 		System.out.println(obj.canCompleteCircuit(new int[] {1,2,3,4,5}, new int[] {3,4,5,1,2}));
 		System.out.println(obj.canCompleteCircuit(new int[] {2,3,4}, new int[] {3,4,3}));
+		
 		System.out.println(obj.canCompleteCircuit2(new int[] {1,2,3,4,5}, new int[] {3,4,5,1,2}));
 		System.out.println(obj.canCompleteCircuit2(new int[] {2,3,4}, new int[] {3,4,3}));
 	}
