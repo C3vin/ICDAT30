@@ -36,6 +36,9 @@ public class n392_Is_Subsequence {
 		return sidx == s.length();
 	}
 	
+	//this is for follow up Java Follow up solution - similar as Trie, O(len(s)) each search
+	//https://leetcode.com/problems/is-subsequence/discuss/679127/Java-Follow-up-solution-similar-as-Trie-O(len(s))-each-search
+	
 	//Greedy
 	public boolean isSubsequence2(String s, String t) {
 		if(s.isEmpty()) {
