@@ -48,7 +48,7 @@ public class n034_Search_for_a_Range {
 			}
 		}
 
-		if(ll <= rr) {				//handle ll > rr case. e.g. target = 6, ll=1, rr=0 
+		if(ll <= rr) {				//handle ll > rr case. e.g. target = 6, ll=1, rr=0 OR only 1 value case, [1] 1 -> [0,0]
 			res[0] = ll;
 			res[1] = rr;
 		}
