@@ -47,7 +47,12 @@ public class n062_Unique_Paths {
 
 	public static void main(String[] args) {
 		n062_Unique_Paths obj = new n062_Unique_Paths();
+		/*
+		      11     11       
+		      10  => 12   
+		      10     13
+		 */
 		System.out.println(obj.uniquePaths(3, 2));
-		System.out.println(obj.uniquePaths(7, 3));
+		System.out.println(obj.uniquePaths(3, 7));
 	}
 }
