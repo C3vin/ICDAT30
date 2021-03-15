@@ -52,8 +52,10 @@ public class n079_Word_Search {
 			char ctmp = board[i][j];		//tmp store board[i][j] value
 			board[i][j] = '#';				//update to '#'
 			
-			boolean res = dfs(board, word, i+1, j, start) || dfs(board, word, i-1, j, start) 
-					|| dfs(board, word, i, j+1, start) || dfs(board, word, i, j-1, start);
+			boolean res = dfs(board, word, i+1, j, start) || 
+					      dfs(board, word, i-1, j, start) || 
+					      dfs(board, word, i, j+1, start) || 
+					      dfs(board, word, i, j-1, start);
 			
 			board[i][j] = ctmp;				//restore to original value
 			
