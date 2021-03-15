@@ -59,10 +59,10 @@ public class n079_Word_Search {
 			
 			board[i][j] = ctmp;				//restore to original value
 			
- 			return res;
+ 			return res;						//need return res and need to in if loop, cuz need to run other dfs
 		}
 		
-		return false;
+		return false;						//false!!!
 	}
 	
 	public static void main(String[] args) {
