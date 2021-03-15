@@ -25,9 +25,11 @@ board and word consists only of lowercase and uppercase English letters.
  */
 public class n079_Word_Search {
 	public boolean exist(char[][] board, String word) {
+		int start = 0;
+		
 		for(int i=0; i<board.length; i++) {
 			for(int j=0; j<board[0].length; j++) {
-				if(dfs(board, word, i, j, 0)) {			//why can't return dfs(board, word, i, j, 0)...cuz need to go through all the values
+				if(dfs(board, word, i, j, start)) {			//why can't return dfs(board, word, i, j, 0)...cuz need to go through all the values
 					return true;
 				}
 			}
