@@ -18,6 +18,8 @@ Output: [-1,-1]
 public class n034_Search_for_a_Range {
 	//https://leetcode.wang/leetCode-34-Find-First-and-Last-Position-of-Element-in-Sorted-Array.html
 	//Binary search solution       almost [LC33 - LC34]
+	//Follow up: Could you write an algorithm with O(log n) runtime complexity? 
+	//binary search is O(log N)
 	public int[] searchRange(int[] nums, int target) {
 		int[] res = new int[] {-1,-1};
 		
