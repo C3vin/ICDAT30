@@ -31,9 +31,9 @@ public class n219_Contains_Duplicate_II {
 		}
 		return false;
 	}
-	
+
 	//cs
-	//time:O(n) space:O(n)
+	//time:O(n) space:O(n) Good !!!
 	public boolean containsNearbyDuplicate2(int[] nums, int k) {
 		HashMap<Integer, Integer> map = new HashMap<Integer, Integer>();
 		for(int i=0; i<nums.length; i++) {
@@ -41,12 +41,13 @@ public class n219_Contains_Duplicate_II {
 				if(i - map.get(nums[i]) <= k) {
 					return true;
 				}
-			}  	
-			map.put(nums[i], i);		//can't use else to handle this case [1,0,1,1]
+			} //else {                      //can't use this cuz need to put all the possible index
+			map.put(nums[i], i);            //handle case e.g [1,0,1,1] k=1
+			//}
 		}
 		return false;
 	}
-	
+
 	public static void main(String[] args) {
 		n219_Contains_Duplicate_II obj = new n219_Contains_Duplicate_II();
 		int[] nums = {1,2,3,1,3};
