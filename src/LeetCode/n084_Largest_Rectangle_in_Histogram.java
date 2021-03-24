@@ -1,6 +1,5 @@
 package LeetCode;
 
-import java.util.HashSet;
 import java.util.Stack;
 
 /*
@@ -12,37 +11,11 @@ Input: [2,1,5,6,2,3]
 Output: 10
  */
 public class n084_Largest_Rectangle_in_Histogram {
-	public int largestRectangleArea(int[] heights) {
-		HashSet<Integer> heightSet = new HashSet<Integer>();
-
-		for(int i=0; i<heights.length; i++) {
-			heightSet.add(heights[i]);
-		}
-
-		int maxArea = 0;
-
-		for(int h : heightSet) {
-			int width = 0;
-			int maxWidth = 1;		//must set default to 1
-			for(int i=0; i<heights.length; i++) {
-				if(heights[i] >= h) {
-					width++;
-				} else {
-					maxWidth = Math.max(maxWidth, width);
-					width = 0;
-				}
-			}
-			maxWidth = Math.max(maxWidth, width); 
-			maxArea = Math.max(maxArea, h * maxWidth);
-		}
-
-		return maxArea;
-	}
-
 	//Good // LC42-LC84-LC85 Stack template better!
 	//https://leetcode.com/problems/largest-rectangle-in-histogram/discuss/29018/AC-clean-Java-solution-using-stack
 	public int largestRectangleArea3(int[] heights) {
-		Stack<Integer> stack = new Stack<Integer>();
+		Stack<Integer> stack = new Stack<Integer>();									//cur index
+		
 		int maxArea = 0;
 		int current = 0;
 
@@ -56,6 +29,7 @@ public class n084_Largest_Rectangle_in_Histogram {
 				} else {
 					distance = current - stack.peek() - 1;
 				}
+				
 				maxArea = Math.max(maxArea, distance * h);
 			}
 
@@ -73,6 +47,7 @@ public class n084_Largest_Rectangle_in_Histogram {
 			} else {
 				distance = current - stack.peek() - 1;
 			}
+			
 			maxArea = Math.max(maxArea, distance * h);
 		}
 
@@ -81,7 +56,7 @@ public class n084_Largest_Rectangle_in_Histogram {
 
 	// LC42-LC84-LC85 Stack template better!
 	public int largestRectangleArea2(int[] heights) {
-		Stack<Integer> stack = new Stack<Integer>();
+		Stack<Integer> stack = new Stack<Integer>();			//cur index
 
 		int maxArea = 0;
 		int current = 0;
@@ -123,7 +98,6 @@ public class n084_Largest_Rectangle_in_Histogram {
 
 	public static void main(String[] args) {
 		n084_Largest_Rectangle_in_Histogram obj = new n084_Largest_Rectangle_in_Histogram();
-		System.out.println(obj.largestRectangleArea(new int[] {2,1,5,6,2,3}));
 		System.out.println(obj.largestRectangleArea2(new int[] {2,1,5,6,2,3}));
 		System.out.println(obj.largestRectangleArea2(new int[] {1}));
 
