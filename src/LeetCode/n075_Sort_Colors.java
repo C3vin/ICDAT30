@@ -17,22 +17,22 @@ Could you come up with a one-pass algorithm using only constant space?
  */
 public class n075_Sort_Colors {
 	public void sortColors(int[] nums) {
-		int zero_position = 0; 
-		int two_position = nums.length-1;
+		int zero_idx = 0; 
+		int two_idx = nums.length-1;
 
-		for(int i=0; i<two_position; i++) {			//two_position is dynamic, must <= e.g.[2,0,1]
+		for(int i=0; i<=two_idx; i++) {			//must <=, cuz two_idx-- so the length change after that will miss check one idx e.g.[2,0,1] -> [1,0,2]
 			if (nums[i] == 0) {
 				int tmp = nums[i];
-				nums[i] = nums[zero_position];
-				nums[zero_position] = tmp;
+				nums[i] = nums[zero_idx];
+				nums[zero_idx] = tmp;
 				
-				zero_position++;
+				zero_idx++;
 			} else if (nums[i] == 2) {
 				int tmp = nums[i];
-				nums[i] = nums[two_position];
-				nums[two_position] = tmp;
+				nums[i] = nums[two_idx];
+				nums[two_idx] = tmp;
 
-				two_position--;
+				two_idx--;
 
 				i--;								//why i--, cuz need to check the value after swap form 2.)
 			}
@@ -44,6 +44,7 @@ public class n075_Sort_Colors {
 
 	public static void main(String[] args) {
 		n075_Sort_Colors obj = new n075_Sort_Colors();
+		obj.sortColors(new int[] {2,0,1});
 		obj.sortColors(new int[] {2,0,2,1,1,0});
 	}
 }
