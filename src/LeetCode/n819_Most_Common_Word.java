@@ -1,7 +1,9 @@
 package LeetCode;
 
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Map;
 
 /*
 Given a paragraph and a list of banned words, return the most frequent word that is not in the list of banned words.  
@@ -42,8 +44,8 @@ public class n819_Most_Common_Word {
 		}
 		
 		int max = Integer.MIN_VALUE;
-		for(String word : words) {
-			if(!set.contains(word) && !word.equals("")) {			//deal with "" buz regex will created "" after split
+		for(String word : words) {									//[bob, hit, a, ball, , the, hit, ball, flew, far, after, , it, was, hit]
+			if(!set.contains(word) && !word.equals("")) {			//deal with "" cuz regex will created "" after split for ',' !!!!!!!!! must
 				map.put(word, map.getOrDefault(word, 0)+1);
 				
 				max = Math.max(max, map.get(word));
@@ -53,6 +55,15 @@ public class n819_Most_Common_Word {
 				}*/
 			}
 		}
+
+		//another way without use max and get the most key
+//		int maxValue = Collections.max(map.values());
+//		for(Map.Entry<String, Integer> entry : map.entrySet()) {
+//			if(entry.getValue() == maxValue) {
+//				System.out.println(entry.getKey());
+//				return entry.getKey();
+//			}
+//		}
 		
 		for(String maxWord : map.keySet()) {
 			if(map.get(maxWord) == max) {
