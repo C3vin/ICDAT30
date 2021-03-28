@@ -10,13 +10,14 @@ public class n198_House_Robber {
 	 * 同理，当奇数位置时，robOdd 加上当前数字和 robEven 比较，取较大值来更新 robOdd，这种按奇偶分别来更新的方法，
 	 * 可以保证组成最大和的数字不相邻，最后别忘了在 robEven 和 robOdd 种取较大值返回
 	 */
+	//[LC198-LC213]
 	public int rob3(int[] nums) {
 		int robEven = 0;
 		int robOdd = 0;
 		
 		for(int i=0; i<nums.length; i++) {
 			if(i % 2 == 0) {
-				robEven = Math.max(robEven + nums[i], robOdd);
+				robEven = Math.max(robEven + nums[i], robOdd);			//robEven + nums[i] !!!
 			} else {
 				robOdd = Math.max(robOdd + nums[i], robEven);
 			}
