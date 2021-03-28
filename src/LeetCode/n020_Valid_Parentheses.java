@@ -34,9 +34,32 @@ import java.util.Stack;
 //The brackets must close in the correct order, "()" and "()[]{}" are all valid but "(]" and "([)]" are not.
 
 public class n020_Valid_Parentheses {
+	//Good!!! 
+	public boolean isValid3(String s) {
+		if(s == null || s.length() == 0) {
+			return true;
+		}
+
+		Stack<Character> stack = new Stack<Character>();
+		for(char ch : s.toCharArray()) {
+			if(ch == '(') {
+				stack.push(')');
+			} else if(ch == '[') {
+				stack.push(']');
+			} else if(ch == '{') {
+				stack.push('}');
+			} else {
+				if(stack.isEmpty() || stack.pop() != ch) {	//check if stack is empty, e.g. "]", stack will be empty
+					return false;
+				}
+			}
+		}
+		return stack.isEmpty();		//handle one side case e.g. '[' !!!!!!!!!!! 
+	}
+
 	//sol2
 	public boolean isValid2(String s) {
-/*		if(s.length() == 0 || s.length() == 1) {
+		/*		if(s.length() == 0 || s.length() == 1) {
 			return false;			//deal with "" case
 		}*/
 
@@ -44,7 +67,7 @@ public class n020_Valid_Parentheses {
 		map.put(')', '(');
 		map.put(']', '[');
 		map.put('}', '{');
-		
+
 		LinkedList<Character> stack = new LinkedList<Character>();
 		for(int i=0; i<s.length(); i++) {
 			char c = s.charAt(i);
@@ -59,37 +82,14 @@ public class n020_Valid_Parentheses {
 		return stack.isEmpty();
 	}
 
-	//Good!!! 
-	public boolean isValid3(String s) {
-		if(s == null || s.length() == 0) {
-			return true;
-		}
-		
-		Stack<Character> stack = new Stack<Character>();
-		for(char ch : s.toCharArray()) {
-			if(ch == '(') {
-				stack.push(')');
-			} else if(ch == '[') {
-				stack.push(']');
-			} else if(ch == '{') {
-				stack.push('}');
-			} else {
-				if(stack.isEmpty() || stack.pop() != ch) {	//pop will remove the stack and check with ch value
-					return false;
-				}
-			}
-		}
-		return stack.isEmpty();		//handle one side case e.g. '[' !!!!!!!!!!! 
-	}
-	
 	public static void main(String[] args) {
 		n020_Valid_Parentheses obj = new n020_Valid_Parentheses();
-		
+
 		System.out.println(obj.isValid2("()[]{}"));
 		System.out.println(obj.isValid2("){"));
 		System.out.println(obj.isValid2(""));
 		System.out.println(obj.isValid2("["));
-		
+
 		System.out.println(obj.isValid3("()[]{}"));
 		System.out.println(obj.isValid3("){"));
 		System.out.println(obj.isValid3(""));
