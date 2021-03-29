@@ -53,8 +53,9 @@ public class n094_Binary_Tree_Inorder_Traversal {
 				root = root.left;		//left
 			} 
 			else {
-				root = stack.pop();  	//preorder & inorder use pop()
+				root = stack.pop();  	//only preorder & inorder use pop()
 				res.add(root.val);
+				
 				root = root.right;		//right
 			}
 		}
