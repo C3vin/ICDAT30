@@ -52,26 +52,27 @@ public class n003_longest_substring_without_repeating_characters {
 		HashMap<Character, Integer> map = new HashMap<Character, Integer>();		//Character not String type
 
 		int res = 0;
-		int start = 0;
-		int current = 0;
+		int left = 0;
+		int right = 0;
 		
-		while(current < s.length()) {						//no need (start < s.length() && 
-			if(map.containsKey(s.charAt(current))) {
+		while(right < s.length()) {						//no need (start < s.length() && 
+			if(map.containsKey(s.charAt(right))) {
 				//e.g. pwwkew
 				//     s s    (0->2)
-				start = Math.max(start, map.get(s.charAt(current))+1);	//update start, need to use Max cuz handle back to first match char index e.g. "abba"
+				left = Math.max(left, map.get(s.charAt(right))+1);	//update left, need to use 'Max' in case get wrong idx to first match char index e.g. "abba"
 			} //no else !!!
 			
-			map.put(s.charAt(current), current);		                //either add or update value
-			res = Math.max(res, current-start+1);
+			map.put(s.charAt(right), right);		                //either add or update value
+			res = Math.max(res, right-left+1);
 			
-			current++;
+			right++;
 		}
 		
 		return res;
 	}
 	public static void main(String[] args) {
 		n003_longest_substring_without_repeating_characters obj = new n003_longest_substring_without_repeating_characters();
+		System.out.println(obj.lengthOfLongestSubstring3("abba"));
 		System.out.println(obj.lengthOfLongestSubstring("abcabcbb"));
 		System.out.println(obj.lengthOfLongestSubstring3("abcabcbb"));
 		System.out.println(obj.lengthOfLongestSubstring("bbbbb"));
