@@ -52,11 +52,12 @@ public class n144_Binary_Tree_Preorder_Traversal {
 		
 		while(root != null || !stack.isEmpty()) {
 			if(root != null) {
+				res.add(root.val);	
+				
 				stack.push(root);
-				res.add(root.val);			 
 				root = root.left;
 			} else {
-				root = stack.pop();		//preorder & inorder use pop()
+				root = stack.pop();		//only preorder & inorder use pop()
 				root = root.right;
 			}
 		}
