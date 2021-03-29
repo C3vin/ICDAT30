@@ -55,7 +55,7 @@ public class n145_Binary_Tree_Postorder_Traversal {
 			} else {
 				TreeNode tmpNode = stack.peek();	//can't use root, it will infinite
 				
-				if(tmpNode.right != null && tmpNode.right != last) {	//must && 
+				if(tmpNode.right != null && tmpNode.right != last) {	//must && "tmpNode.right" != last not tmpNode 
 					root = tmpNode.right;		//F: tmpNode not root
 				} else {
 					res.add(tmpNode.val);
