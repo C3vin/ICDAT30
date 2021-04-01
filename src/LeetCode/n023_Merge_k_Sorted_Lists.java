@@ -30,6 +30,7 @@ Example 3:
 Input: lists = [[]]
 Output: []
  */
+
 public class n023_Merge_k_Sorted_Lists {
 	public static class ListNode {
 		int val;
@@ -62,15 +63,17 @@ public class n023_Merge_k_Sorted_Lists {
     	System.out.println("right:"+right.toString());
 		return n021_Merge_Two_Sorted_Lists.mergeTwoLists(left, right);
 	}*/
+	
+	//PQ O(NlogK) where k is the number of linked lists.  O(n) space
 	public ListNode mergeKLists(ListNode[] lists) {
 		if(lists == null || lists.length == 0) {
 			return null;
 		}
 
-		PriorityQueue<ListNode> pq = new PriorityQueue<>(lists.length, (a, b) -> {
-			return a.val - b.val;									// {} with return
+		PriorityQueue<ListNode> pq = new PriorityQueue<ListNode>((a, b) -> {	//No need lists.length,
+			return a.val - b.val;												// {} with return
 		});
-
+		
 		ListNode head = new ListNode(0);
 		ListNode cur = head;
 
@@ -85,12 +88,60 @@ public class n023_Merge_k_Sorted_Lists {
 			cur = cur.next;
 
 			if(cur.next != null) {				//handle last element
-				pq.offer(cur.next);			//need to add back the rest of the elements 
+				pq.offer(cur.next);				//need to add back the rest of the elements 
 			}
 		}
 
 		return head.next;
 	}
+	
+	
+	//Merge with Divide And Conquer
+	//O(NlogK) where k is the number of linked lists. But save to O(1) space !!!!!!!!!! Interview Q
+	public ListNode mergeKLists2(ListNode[] lists) {
+		if(lists.length == 0 || lists == null) {
+			return null;
+		}
+		
+		if(lists.length == 1) {
+			return lists[0];
+		}
+		
+		ListNode head = mergeTwoLists(lists[0], lists[1]);
+		
+		for(int i=2; i<lists.length; i++) {
+			head = mergeTwoLists(head, lists[i]);
+		}
+		
+		return head;
+	}
+	
+	private ListNode mergeTwoLists(ListNode l1, ListNode l2) {
+		ListNode dummy = new ListNode(0);
+		ListNode p = dummy;
+		
+		while(l1 != null && l2 != null) {
+			if(l1.val < l2.val) {
+				p.next = l1;
+				l1 = l1.next;
+				p = p.next;
+			} else {
+				p.next = l2;
+				l2 = l2.next;
+				p = p.next;
+			}
+		}
+		
+		if(l1 != null) {
+			p.next = l1;
+		}
+		if(l2 != null) {
+			p.next = l2;
+		}
+		
+		return dummy.next;
+	}
+	
 	public static void main(String[] args) {
 		n023_Merge_k_Sorted_Lists obj = new n023_Merge_k_Sorted_Lists();
 		ListNode t1 = new ListNode(1);
@@ -108,5 +159,7 @@ public class n023_Merge_k_Sorted_Lists {
 		t7.next = t8;
 		ListNode[] ListNodes = new ListNode[] {t1,t4,t7};
 		System.out.println(obj.mergeKLists(ListNodes));
+		
+		System.out.println(obj.mergeKLists2(ListNodes));
 	}
 }
