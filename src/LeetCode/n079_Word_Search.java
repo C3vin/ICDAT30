@@ -39,14 +39,14 @@ public class n079_Word_Search {
 	}
 	
 	private boolean dfs(char[][] board, String word, int i, int j, int start) {
-		if(start >= word.length()) {
+		if(start == word.length()) {					//need this first, in case start out of boundary  
 			return true;
 		}
-		if(i<0 || i>=board.length || j<0 || j>=board[0].length) {
+		if(i<0 || i>=board.length || j<0 || j>=board[0].length || board[i][j] != word.charAt(start)) {
 			return false;
 		}
 		
-		if(board[i][j] == word.charAt(start)) {
+		//if(board[i][j] == word.charAt(start)) {	//no this check already
 			start++;
 			
 			char ctmp = board[i][j];		//tmp store board[i][j] value
@@ -60,9 +60,9 @@ public class n079_Word_Search {
 			board[i][j] = ctmp;				//restore to original value
 			
  			return res;						//need return res and need to in if loop, cuz need to run other dfs
-		}
+		//}
 		
-		return false;						//false!!!
+		//return false;						//false!!!
 	}
 	
 	public static void main(String[] args) {
