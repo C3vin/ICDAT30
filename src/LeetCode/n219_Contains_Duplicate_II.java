@@ -21,14 +21,19 @@ Output: false
 public class n219_Contains_Duplicate_II {
 	public boolean containsNearbyDuplicate(int[] nums, int k) {
 		HashSet<Integer> set = new HashSet<Integer>();
+		
 		for(int i=0; i<nums.length; i++) {
-			if(set.contains(nums[i]))
+			if(set.contains(nums[i])) {
 				return true;
+			}
+			
 			set.add(nums[i]);
+			
 			if(set.size() > k) {			//why i-k, because set.size() > k, so i > k
-				set.remove(nums[i-k]);		//because we just need to care windows size i -> j 
+				set.remove(nums[i-k]);		//because we just need to care within the windows size i -> j 
 			}
 		}
+		
 		return false;
 	}
 
@@ -36,15 +41,36 @@ public class n219_Contains_Duplicate_II {
 	//time:O(n) space:O(n) Good !!!
 	public boolean containsNearbyDuplicate2(int[] nums, int k) {
 		HashMap<Integer, Integer> map = new HashMap<Integer, Integer>();
+		
 		for(int i=0; i<nums.length; i++) {
 			if(map.containsKey(nums[i])) {
 				if(i - map.get(nums[i]) <= k) {
 					return true;
 				}
 			} //else {                      //can't use this cuz need to put all the possible index
-			map.put(nums[i], i);            //handle case e.g [1,0,1,1] k=1
+			
+			map.put(nums[i], i);            //keep update the currnt i index, handle case e.g [1,0,1,1] k=1
 			//}
 		}
+		
+		return false;
+	}
+	
+	public boolean containsNearbyDuplicate3(int[] nums, int k) {
+		HashSet<Integer> set = new HashSet<Integer>();
+		
+		for(int i=0; i<nums.length; i++) {
+			if(set.contains(nums[i])) {
+				return true;
+			}
+			
+			set.add(nums[i]);
+			
+			if(set.size() > k) {
+				set.remove(nums[i-k]);
+			}
+		}
+		
 		return false;
 	}
 
@@ -54,7 +80,11 @@ public class n219_Contains_Duplicate_II {
 		int[] nums2 = {1,0,2,1};
 		System.out.println(obj.containsNearbyDuplicate(nums, 3));
 		System.out.println(obj.containsNearbyDuplicate(nums2, 2));
+
+		System.out.println(obj.containsNearbyDuplicate2(new int[] {1,2,1}, 2));
 		System.out.println(obj.containsNearbyDuplicate2(nums, 3));
 		System.out.println(obj.containsNearbyDuplicate2(nums2, 2));
+		
+		System.out.println(obj.containsNearbyDuplicate3(new int[] {1,2,3,1}, 2));
 	}
 }
