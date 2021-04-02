@@ -51,19 +51,21 @@ public class n287_Find_the_Duplicate_Number {
         return -1;
     }
 	
+	//https://leetcode.com/problems/find-the-duplicate-number/discuss/72846/My-easy-understood-solution-with-O(n
 	//Floyd's Tortoise and Hare (Cycle Detection)
 	//O(n) O(1) space !!!
+	//the beauty of this problem is that nums[0] is always the entrance to the cycle which has duplicate numbers, because no one can jump back to nums[0]. 
 	public int findDuplicate3(int[] nums) {
 		int slow = nums[0];
 		int fast = nums[nums[0]];		//s&f not the same!!!
-		
+		//寻找相遇点
 		while(slow != fast) {			//!= not <
 			slow = nums[slow];
 			fast = nums[nums[fast]];
 		}
 		
-		//fast = nums[0]; //0;						//0 not nums[0]
-		slow = 0;
+		//slow 从起点出发, fast 从相遇点出发, 一次走一步			
+		slow = 0;						//0 not nums[0]
 		while(slow != fast) {
 			slow = nums[slow];
 			fast = nums[fast];
