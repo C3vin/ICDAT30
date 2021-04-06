@@ -53,7 +53,7 @@ public class n042_Trapping_Rain_Water {
 		 */
 	}
 	//cs
-	//time:O(n) space:O(1)
+	//time:O(n) space:O(1) !!! better space than stack
 	public int trap2(int[] height) {
 		int res = 0;
 		int l = 0;
@@ -75,33 +75,37 @@ public class n042_Trapping_Rain_Water {
 		return res;
 	}
 
-	//stack sol#5
+	//stack sol#5 LC42-LC84-LC85 Stack template better!
 	//https://leetcode.wang/leetCode-42-Trapping-Rain-Water.html 
+	//O(n), O(n)
 	public int trap3(int[] height) {
-		Stack<Integer> stack = new Stack<Integer>();
+		Stack<Integer> stack = new Stack<Integer>();		//push current index
 		
-		int sumArea = 0;
+		int res = 0;
 		int current = 0;
+		int minH = 0;
 		
 		while(current < height.length) {
 			while(!stack.isEmpty() && height[current] > height[stack.peek()]) {		//diff than LC84, 'while' not if
 				int h = height[stack.pop()];
 				
-				if(stack.isEmpty()) {			//must check!!! for later distance and minH 
-					break;
-				}
+				int distance = 0;
+                if(stack.isEmpty()) {
+                    break;
+                } else {
+                	distance = current - stack.peek() - 1;
+                }
 				
-				int distance = current - stack.peek() - 1;
-				
-				int minH = Math.min(height[stack.peek()], height[current]);		//diff than LC84, find the lowest h
-				sumArea = sumArea + distance * (minH - h);						//width * height(min)  min will always larger than h
+				minH = Math.min(height[stack.peek()], height[current]);		//diff than LC84, find the lowest h
+				//e.g. minH = 2 (idx=3) h = 1 (idx=4), so d*(minH - h) = 3 * (2-1) = 3
+				res = res + distance * (minH - h);		//width * height(min)  min will always larger than h
 			}
 			
-			stack.push(current);
+			stack.push(current);			//push current index
 			current++;
 		}
 		
-		return sumArea;
+		return res;
 	} 
 	
 	public static void main(String[] artgs) {
