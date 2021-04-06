@@ -43,7 +43,7 @@ public class n165_Compare_Version_Numbers {
 		String[] v2 = version2.split("\\.");
 		
 		for(int i=0; i<Math.max(v1.length, v2.length); i++) {
-			int num1 = i < v1.length ? Integer.parseInt(v1[i]) : 0;		//need this in case i> v1.length
+			int num1 = i < v1.length ? Integer.parseInt(v1[i]) : 0;		//need this in case i> v1.length, pad the shorter string by adding .0 at the end
 			int num2 = i < v2.length ? Integer.parseInt(v2[i]) : 0;
 			
 			if(num1 < num2) {
@@ -60,6 +60,9 @@ public class n165_Compare_Version_Numbers {
 		n165_Compare_Version_Numbers obj = new n165_Compare_Version_Numbers();
 		String version1 = "1";
 		String version2 = "1.3711";
-		System.out.println(obj.compareVersion(version1, version2));
+		//System.out.println(obj.compareVersion(version1, version2));
+		System.out.println(obj.compareVersion("1.01", "1.001"));
+		System.out.println(obj.compareVersion("1.0.1", "1"));
+		System.out.println(obj.compareVersion("1.0", "1.0.0"));
 	}
 }
