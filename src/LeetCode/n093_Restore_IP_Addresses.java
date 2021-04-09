@@ -11,6 +11,44 @@ Input: "25525511135"
 Output: ["255.255.11.135", "255.255.111.35"]
  */
 public class n093_Restore_IP_Addresses {
+	 public List<String> restoreIpAddresses4(String s) {
+	        List<String> res = new ArrayList<String>();
+	        String path = "";
+	        int start = 0;
+	        int count = 0;
+	        
+	        helper(s, path, res, count, start);
+	        
+	        return res;
+	    }
+	    
+	    private void helper(String s, String path, List<String> res, int count, int start) {
+	        if(count == 4) {
+	            if(start == s.length()) {
+	                res.add(path.substring(0, path.length()-1));
+	            }
+	            
+	            return;
+	        }
+	        
+	        for(int i=start+1; i<=s.length(); i++) {            //must <= ,cuz +1
+	            if(isValid4(s.substring(start, i))) {
+	                helper(s, path+s.substring(start, i)+".", res, count+1, i);
+	            }
+	        }
+	    }
+	    
+	    private boolean isValid4(String s) {
+	        if(s.startsWith("0") && !s.equals("0")) {           //need to ignore 0 for false
+	            return false;
+	        }
+	        
+	        return s.length() < 4 && 0 <=Integer.valueOf(s) && Integer.valueOf(s) < 256;
+	    }
+	    
+	
+	
+	
 	public List<String> restoreIpAddresses(String s) {
 		List<String> res = new ArrayList<String>();
 		dfs(s, 0, 4, "", res);
@@ -101,6 +139,8 @@ public class n093_Restore_IP_Addresses {
 	public static void main(String[] args) {
 		n093_Restore_IP_Addresses obj = new n093_Restore_IP_Addresses();
 		String s = "25525511135";
+		System.out.println(obj.restoreIpAddresses4(s));
+		
 		System.out.println(obj.restoreIpAddresses(s));
 		System.out.println(obj.restoreIpAddresses2(s));
 		System.out.println(obj.restoreIpAddresses3(s));
