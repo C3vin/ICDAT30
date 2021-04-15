@@ -15,6 +15,50 @@ You should return the indices: [0,9].
  */
 //Sliding window
 public class n030_Substring_with_Concatenation_of_All_Words {
+	//Good https://redquark.org/leetcode/0030-substring-with-concatenation-of-all-words/
+	public List<Integer> findSubstring2(String s, String[] words) {
+		List<Integer> res = new ArrayList<Integer>();
+		
+		if(s == null || s.length() == 0 || words.length == 0) {
+			return res;
+		}
+		
+		HashMap<String, Integer> map = new HashMap<String, Integer>();
+		
+		for(String word : words) {
+			map.put(word, map.getOrDefault(word, 0)+1);
+		}
+		
+        int wordLength = words[0].length();
+        int wordArrayLength = wordLength * words.length;
+		
+		for(int i=0; i<=s.length() - wordArrayLength; i++) {		//<=
+			String currentString = s.substring(i, i+wordArrayLength);
+			
+			HashMap<String, Integer> wordMap = new HashMap<String, Integer>();
+			
+			int index = 0;
+			int j = 0;
+			
+			while(index < words.length) {			//0,1   only 2 times, cuz j+wordLength(3) 
+				String partString = currentString.substring(j, j+wordLength);
+				
+				wordMap.put(partString, wordMap.getOrDefault(partString, 0)+1);		//this is wordMap not map
+				
+				index++;
+				j = j+ wordLength;
+			}
+			
+			if(map.equals(wordMap)) {
+				res.add(i);
+			}
+		}
+		
+		
+		return res;
+	}
+	
+	
 	public List<Integer> findSubstring(String s, String[] words) {
 		List<Integer> res = new ArrayList<Integer>();
 
@@ -65,5 +109,6 @@ public class n030_Substring_with_Concatenation_of_All_Words {
 		String s = "barfoothefoobarbarman";
 		String[] words = {"foo", "bar"}; 
 		System.out.println(obj.findSubstring(s, words));
+		System.out.println(obj.findSubstring2(s, words));
 	}
 }
