@@ -18,30 +18,41 @@ public class n540_Single_Element_in_a_Sorted_Array {
 	public int singleNonDuplicate(int[] nums) {
 		//https://leetcode.com/problems/single-element-in-a-sorted-array/solution/
 		//Good to read
-		int lo = 0;
-		int hi = nums.length - 1;
-		while (lo < hi) {
-			int mid = lo + (hi - lo) / 2;
-			boolean halvesAreEven = (hi - mid) % 2 == 0;
+		
+		int left = 0;
+		int right = nums.length - 1;
+		
+		while (left < right) {
+			int mid = left + (right - left) / 2;
+			
+			boolean halvesAreEven = (right - mid) % 2 == 0;
 
-			if (nums[mid + 1] == nums[mid]) {
-				if (halvesAreEven) {
-					lo = mid + 2;
+			if(nums[mid + 1] == nums[mid]) {
+				if(halvesAreEven) {
+					//[1,1,O,D,D] 
+					// m e v e n
+					left = mid + 2;
 				} else {
-					hi = mid - 1;
+					//[1,1,E,V,E,N] Safe
+					// m o d d o d
+					right = mid - 1;
 				}
-			} else if (nums[mid - 1] == nums[mid]) {
-				if (halvesAreEven) {
-					hi = mid - 2;
+			} else if(nums[mid - 1] == nums[mid]) {
+				if(halvesAreEven) {
+					//[1,1,E,V,E,N] Safe
+					//   m e v e n
+					right = mid - 2;
 				} else {
-					lo = mid + 1;
+					//[1,1,O,D,D]
+					//   m o d d
+					left = mid + 1;
 				}
 			} else {
 				return nums[mid];
 			}
 		}
 
-		return nums[lo];
+		return nums[left];
 	}
 
 	/*
