@@ -36,8 +36,8 @@ public class n227_Basic_Calculator_II {
         	if(Character.isDigit(c)) {
         		operand = operand * 10 + (int)(c - '0');
         	}
-        	//s.charAt(i) != ' '
-        	if(!Character.isDigit(c) && !Character.isWhitespace(c) || i == s.length() -1) {
+        	//i==s.length()-1, cuz need handle last digit's operations, won't pass isDigit(c) e.g. 2 * 2' <-(last digit 2') 
+        	if(!Character.isDigit(c) && !Character.isWhitespace(c) || i == s.length() -1) {	
         		if(operation == '+') {
         			stack.push(operand);
         			
@@ -65,7 +65,7 @@ public class n227_Basic_Calculator_II {
     
     public static void main(String[] args) {
     	n227_Basic_Calculator_II obj = new n227_Basic_Calculator_II();
-    	System.out.println(obj.calculate("321"));
+    	//System.out.println(obj.calculate("321"));
     	System.out.println(obj.calculate("3+2*2"));
     	System.out.println(obj.calculate(" 3/2 "));
     	System.out.println(obj.calculate(" 3+5 / 2 "));
