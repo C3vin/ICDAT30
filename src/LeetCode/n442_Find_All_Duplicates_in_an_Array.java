@@ -32,6 +32,34 @@ public class n442_Find_All_Duplicates_in_an_Array {
 		return res;
 	}
 
+	//O(n) / O(1) //[LC287 - LC448 - LC442] 
+	public List<Integer> findDuplicates3(int[] nums) {
+		List<Integer> res = new ArrayList<Integer>();
+		
+		int i=0;
+		while(i < nums.length) {
+			if(nums[i] <= nums.length && nums[i] != nums[nums[i]-1]) {
+				swap(nums, i, nums[i]-1);
+			} else {
+				i++;
+			}
+		}
+		
+		for(int j=0; j<nums.length; j++) {
+			if(nums[j] != j+1) {
+				res.add(nums[j]);
+			}
+		}
+		
+		return res;
+	}
+	
+	private void swap(int[] nums, int i, int j) {
+		int tmp = nums[i];
+		nums[i] = nums[j];
+		nums[j] = tmp;
+	}
+	
 	//O(n)
 	//https://leetcode.com/problems/find-all-duplicates-in-an-array/solution/ approach 4
 	//for any integer x in the array, x-1 is a valid index, and thus, arr[x-1] is a valid reference to an element in the array.
@@ -58,5 +86,6 @@ public class n442_Find_All_Duplicates_in_an_Array {
 		n442_Find_All_Duplicates_in_an_Array obj = new n442_Find_All_Duplicates_in_an_Array();
 		System.out.println(obj.findDuplicates(new int[] {4,3,2,7,8,2,3,1}));
 		System.out.println(obj.findDuplicates2(new int[] {4,3,2,7,8,2,3,1}));
+		System.out.println(obj.findDuplicates3(new int[] {4,3,2,7,8,2,3,1}));
 	}
 }
