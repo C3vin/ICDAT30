@@ -33,9 +33,9 @@ public class n973_K_Closest_Points_to_Origin {
 		}
 		
 		PriorityQueue<int[]> pq = new PriorityQueue<int[]>((a, b) -> {
-			return (b[0]*b[0] + b[1]*b[1]) - (a[0]*a[0] + a[1]*a[1]);		//() - ()
+			return (b[0]*b[0] + b[1]*b[1]) - (a[0]*a[0] + a[1]*a[1]);		//() - ()	so we can move farthest point in the first pq (for poll()) 
 		});
-	
+		
 		for(int[] point : points) {
             pq.offer(point);
             
