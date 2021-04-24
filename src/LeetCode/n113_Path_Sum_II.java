@@ -56,7 +56,7 @@ public class n113_Path_Sum_II {
 		tmp.add(root.val);				//must add the last element before the res.add if applicable
 
 		if(root.left == null && root.right == null && root.val == sum) {
-			res.add(new ArrayList<Integer>(tmp));
+			res.add(new ArrayList<Integer>(tmp));			//no need to return if we add into res
 		}
 
 		helper(root.left, sum - root.val, tmp, res);
