@@ -32,7 +32,7 @@ public class n018_4Sum {
 					if(j == i+1 || nums[j] != nums[j-1]) {				//remove duplicate also F: need j==i+1
 						int low = j+1;
 						int high = nums.length-1;
-						int sum = target - nums[i] - nums[j];			//i & j not low / height
+						int sum = target - nums[i] - nums[j];			//i & j not low / height, target - (n[i] + n[j]) or target - n[i] - n[j] 
 						
 						while(low < high) {
 							if(nums[low] + nums[high] == sum) {
