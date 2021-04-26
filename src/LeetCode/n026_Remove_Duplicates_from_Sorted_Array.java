@@ -18,6 +18,25 @@ It doesn't matter what values are set beyond the returned length.
 */
 
 public class n026_Remove_Duplicates_from_Sorted_Array {
+	//cs   [LC26 - LC27 template]
+	//time:O(n) space:O(1)
+	public int removeDuplicates1(int[] nums) {
+		if(nums == null || nums.length == 0) {
+			return 0;
+		}
+		int count = 1;      //why 1, cuz it is sorted array, so we count the 1th and compare with 2th
+
+		for(int i=1; i<nums.length; i++) {		//i=1, cuz need to compare i and i-1
+			if(nums[i] != nums[i-1]) {
+				nums[count] = nums[i];
+				count++;
+			}
+		}
+		
+		System.out.println(Arrays.toString(nums));
+		return count;
+	}
+	
 	public int removeDuplicates(int[] nums) {
 		if(nums == null || nums.length == 0) {
 			return 0;
@@ -39,23 +58,6 @@ public class n026_Remove_Duplicates_from_Sorted_Array {
 		return count + 1;
 	}
 
-	//cs   [LC26 - LC27 template]
-	//time:O(n) space:O(1)
-	public int removeDuplicates1(int[] nums) {
-		if(nums == null || nums.length == 0) {
-			return 0;
-		}
-		int count = 1;      //why 1, cuz it is sorted array, so we count the 1th and compare with 2th
-
-		for(int i=1; i<nums.length; i++) {		//i=1, cuz need to compare i and i-1
-			if(nums[i] != nums[i-1]) {
-				nums[count] = nums[i];
-				count++;
-			}
-		}
-		System.out.println(Arrays.toString(nums));
-		return count;
-	}
 	public static void main(String[] args) {
 		n026_Remove_Duplicates_from_Sorted_Array obj = new n026_Remove_Duplicates_from_Sorted_Array();
 		int[] nums = {0,0,1,1,1,2,2,3,3,4};
