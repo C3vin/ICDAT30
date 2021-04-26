@@ -20,6 +20,7 @@ public class n075_Sort_Colors {
 		int zero_idx = 0; 
 		int two_idx = nums.length-1;
 
+		//why 'two_idx', cuz we don't need to check after swap to two_idx, also two_idx will smaller and smaller (dynamic)
 		for(int i=0; i<=two_idx; i++) {			//must <=, cuz two_idx-- so the length change after that will miss check one idx e.g.[2,0,1] -> [1,0,2]
 			if (nums[i] == 0) {
 				int tmp = nums[i];
@@ -44,7 +45,7 @@ public class n075_Sort_Colors {
 
 	public static void main(String[] args) {
 		n075_Sort_Colors obj = new n075_Sort_Colors();
-		obj.sortColors(new int[] {2,0,1});
+		//obj.sortColors(new int[] {2,0,1});
 		obj.sortColors(new int[] {2,0,2,1,1,0});
 	}
 }
