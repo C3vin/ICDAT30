@@ -8,7 +8,7 @@ import java.util.Set;
 
 //Given nums1 = [1,2,2,1,3,4,5,5,6], nums2 = [2, 2, 6], return [2, 6].
 public class n349_Intersection_of_Two_Arrays {
-	//Good 2 HashSet
+	//Good 2 HashSet  [LC349-LC350]
 	public int[] intersection(int[] nums1, int[] nums2) {
 		Set<Integer> s1 = new HashSet<Integer>();
 		Set<Integer> s2 = new HashSet<Integer>();
