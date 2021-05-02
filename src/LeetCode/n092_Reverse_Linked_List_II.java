@@ -11,6 +11,53 @@ public class n092_Reverse_Linked_List_II {
 			val = x;
 		}
 	}
+	
+	//Good, [LC206 - LC92]
+	public ListNode reverseBetween2(ListNode head, int left, int right) {
+		//https://leetcode-cn.com/problems/reverse-linked-list-ii/solution/fan-zhuan-lian-biao-ii-by-leetcode-solut-teyq/
+		ListNode dummy = new ListNode(0);
+		dummy.next = head;
+		
+		ListNode pre = dummy;
+		for(int i=0; i<left-1; i++) {
+			pre = pre.next;
+		}
+		
+		ListNode rightNode = pre;
+		for(int i=0; i<right-left+1; i++) {			//why can't just move to right, cuz start at 0, also handle [5] left=1, right=1
+			rightNode = rightNode.next;
+		}
+		
+		ListNode leftNode = pre.next;
+		ListNode cur = rightNode.next;
+		
+		//cut
+		pre.next = null;
+		rightNode.next = null;
+		
+		reverse(leftNode);
+		
+		//build tree
+		pre.next = rightNode;
+		leftNode.next = cur;
+		
+		
+		return dummy.next;
+	}
+	
+	//LC206
+	private void reverse(ListNode head) {
+		ListNode p = null;
+		
+		while(head != null) {
+			ListNode tmp = head.next;
+			head.next = p;
+			
+			p = head;
+			head = tmp;
+		}
+	}
+	
 	public ListNode reverseBetween(ListNode head, int m, int n) {
 		ListNode dummy = new ListNode(0);
 		dummy.next = head;
@@ -58,6 +105,8 @@ public class n092_Reverse_Linked_List_II {
 		p3.next = p4;
 		p4.next = p5;
 		
-		System.out.println(obj.reverseBetween(head, 2, 4));
+		//System.out.println(obj.reverseBetween(head, 2, 4));
+		
+		System.out.println(obj.reverseBetween2(head, 2, 4));
 	}
 }
