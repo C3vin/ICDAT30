@@ -14,43 +14,54 @@ If there is such window, you are guaranteed that there will always be only one u
 public class n076_Minimum_Window_Substring {
 	public String minWindow(String s, String t) {
 		String res = "";
-		if(s==null || t==null || s.length()==0 || t.length()==0) return res;
-		HashMap<Character, Integer> dict = new HashMap<Character, Integer>();
+		if(s == null || t == null || s.length() == 0 || t.length() == 0) {
+			return res;
+		}
+		
+		HashMap<Character, Integer> map = new HashMap<Character, Integer>();
 
 		for(int i=0; i<t.length(); i++) {
-			if(!dict.containsKey(t.charAt(i))) {
-				dict.put(t.charAt(i), 1);
-			} else
-				dict.put(t.charAt(i), dict.get(t.charAt(i))+1);
+			map.put(t.charAt(i), map.getOrDefault(t.charAt(i), 0)+1);			//default is 1 e.g. {A=1, B=1, C=1}
 		}
-
+ 
 		int count = 0;
-		int pre = 0;
-		int minLen = s.length()+1;
+		int start = 0;					//same as LC 3 start index
+		int minLen = Integer.MAX_VALUE;
+		
 		for(int i=0; i<s.length(); i++) {
-			if(dict.containsKey(s.charAt(i))) {
-				dict.put(s.charAt(i), dict.get(s.charAt(i))-1);	
-				if(dict.get(s.charAt(i)) >= 0)
+			if(map.containsKey(s.charAt(i))) {
+				map.put(s.charAt(i), map.get(s.charAt(i))-1);			//@step1
+				
+				//mean [A=1, B=-1, C=0] if two B in start -> i, so can't count++
+				if(map.get(s.charAt(i)) >= 0) {					// >= 0 not just >  !, avoid count too much when @step1 
 					count++;
+				}
 
-				while(count == t.length()) {
-					if(dict.containsKey(s.charAt(pre))) {
-						dict.put(s.charAt(pre), dict.get(s.charAt(pre))+1);
+				//while not if  !!!!!!!!!!!!!!!!!!!!!!!!!!!!
+				while(count == t.length()) {			
+					if(map.containsKey(s.charAt(start))) {		//Need this check to avoid irrelevant char !!!!!!!!!!!!!
+						map.put(s.charAt(start), map.get(s.charAt(start))+1);
 
-						if(dict.get(s.charAt(pre)) > 0) {
-							if(minLen > i-pre+1) {
-								res = s.substring(pre, i+1);
-								minLen = i-pre+1;
+						//why? cuz between start and i idx might include two char e.g. [BECODEBA] need to pass first B, until B val > 1
+						if(map.get(s.charAt(start)) > 0) {		//why? cuz we count too much at @step1, so only accept > 0 for valid case
+							if(minLen > i-start+1) {			// > !!!
+								res = s.substring(start, i+1);
+								minLen = i-start+1;
 							} 
-							count--;
+							
+							//why? count--, cuz next will move start++ change window index
+							count--;							//must in this loop, cuz match map.get(s.charAt(start)) > 0
 						} 
 					} 
-					pre++;
+					
+					start++;
 				} 
 			}
 		}
+		
 		return res;
 	}
+	
 	//better and faster, Sliding Window! same as 438
 	public String minWindow2(String s, String t) {
 		String res = "";
@@ -95,7 +106,9 @@ public class n076_Minimum_Window_Substring {
 	}
 	public static void main(String[] args) {
 		n076_Minimum_Window_Substring obj = new n076_Minimum_Window_Substring();
-		//System.out.println(obj.minWindow("ADOBECODEBANC", "ABC"));
-		System.out.println(obj.minWindow2("ADOBECODEBANC", "ABC"));
+		System.out.println(obj.minWindow("ADBECBANC", "ABCC"));		//CBANC good example
+		
+		System.out.println(obj.minWindow("ADOBECODEBANC", "ABC"));
+		//System.out.println(obj.minWindow2("ADOBECODEBANC", "ABC"));
 	}
 }
