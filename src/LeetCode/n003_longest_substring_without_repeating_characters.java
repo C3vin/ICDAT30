@@ -24,7 +24,27 @@ Explanation: The answer is "wke", with the length of 3.
 //abcabcbb
 //iiiiiiii
 //ssss s s
-public class n003_longest_substring_without_repeating_characters {	
+public class n003_longest_substring_without_repeating_characters {
+	
+	//Good!!
+    public int lengthOfLongestSubstring2(String s) {
+        int res = 0;
+        int start = 0;
+        
+        HashMap<Character, Integer> map = new HashMap<Character, Integer>();
+        
+        for(int i=0; i<s.length(); i++) {
+            if(map.containsKey(s.charAt(i))) {
+                start = Math.max(start, map.get(s.charAt(i))+1);
+            }    
+            
+            map.put(s.charAt(i), i);
+            res = Math.max(res, i-start+1);
+        }
+        
+        return res;
+    }
+	
 	//Sliding Window, HashSet
 	public int lengthOfLongestSubstring(String s) {
         HashSet<Character> set = new HashSet<Character>();
