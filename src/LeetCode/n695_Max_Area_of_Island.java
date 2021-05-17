@@ -1,6 +1,8 @@
 package LeetCode;
 
+import java.util.ArrayList;
 import java.util.LinkedList;
+import java.util.List;
 import java.util.Queue;
 
 /*
@@ -60,17 +62,27 @@ public class n695_Max_Area_of_Island {
 			return 0;
 		}
 
+		//List<Integer> list = new ArrayList<Integer>();	//follow-up, store each islands area
+		
 		int res = 0;   //new 
 		int[] count = new int[1];	//need to use array instead of int (immutable)
+		
 		for(int i=0; i<grid.length; i++) {
 			for(int j=0; j<grid[0].length; j++) {
 				if(grid[i][j] == 1) {
 					count[0] = 0;					//Default and reset count[0] 'inside' for each island
 					dfs2(grid, i, j, count);
 					res = Math.max(res, count[0]);
+					
+					//list.add(count[0]);		//follow-up
 				}
 			}
 		}
+		
+//		for(int area : list) {
+//			System.out.println("area: " + area);	//follow-up
+//		}
+		
 		return res;
 	}
 
@@ -155,7 +167,7 @@ public class n695_Max_Area_of_Island {
 					{0,0,0,0,0,0,0,1,1,1,0,0,0},
 					{0,0,0,0,0,0,0,1,1,0,0,0,0}};
 		//System.out.println(obj.maxAreaOfIsland(grid));
-		//System.out.println(obj.maxAreaOfIsland2(grid));
-		System.out.println(obj.maxAreaOfIsland3(grid));
+		System.out.println(obj.maxAreaOfIsland2(grid));
+		//System.out.println(obj.maxAreaOfIsland3(grid));
 	}
 }
