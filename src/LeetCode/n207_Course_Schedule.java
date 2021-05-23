@@ -42,6 +42,9 @@ public class n207_Course_Schedule {
 				graph.put(prerequisite[0], new ArrayList<Integer>(Arrays.asList(prerequisite[1])));
 			}
 		}
+		
+		System.out.println(graph);
+		
 		//0: unvisited; 1: visiting 2: visited
 		int[] visited = new int[numCourses];
 		for(int i = 0; i < numCourses; i++) {	//course 0 to n-1
