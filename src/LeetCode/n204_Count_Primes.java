@@ -8,6 +8,7 @@ public class n204_Count_Primes {
 			return 0;
 		}
 		
+		//https://www.youtube.com/watch?v=KMzyTDQ7_Ek&t=83s
 		boolean[] prime = new boolean[n];
 		Arrays.fill(prime, true);
 		
