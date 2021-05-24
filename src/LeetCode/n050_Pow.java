@@ -22,6 +22,11 @@ n is a 32-bit signed integer, within the range [-2^31, 2^31-1]
  */
 public class n050_Pow {
     //Good!
+	/* x = 2 n = 1 | half = 1
+	 *     2     2          2
+	 *     2	 5          4
+	 *     2    10         32
+	 */
     public double myPow2(double x, int n) {
     	if(n == 0) {
     		return 1;
@@ -37,7 +42,7 @@ public class n050_Pow {
     		return half*half*x;
     	}
     	
-    	return half*(half/x);
+    	return half*half/x;				//handle n is negative
     }
 	
     public double myPow(double x, int n) {
@@ -65,10 +70,13 @@ public class n050_Pow {
     
     public static void main(String[] args) {
     	n050_Pow obj = new n050_Pow();
-    	System.out.println(obj.myPow(2, 4));
-    	System.out.println(obj.myPow(2, 5));
-    	System.out.println(obj.myPow2(2, 4));
-    	System.out.println(obj.myPow2(2, 5));
-    	System.out.println(obj.myPow2(2.10000, 3));
+//    	System.out.println(obj.myPow(2, 4));
+//    	System.out.println(obj.myPow(2, 5));
+//    	System.out.println(obj.myPow2(2, 4));
+//    	System.out.println(obj.myPow2(2, 5));
+//    	System.out.println(obj.myPow2(2.10000, 3));
+//    	System.out.println(obj.myPow2(3.00000, 2));
+//    	System.out.println(obj.myPow2(2.00000, 10));
+    	System.out.println(obj.myPow2(2.00000, -2));
     }
 }
