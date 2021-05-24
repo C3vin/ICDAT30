@@ -85,8 +85,9 @@ public class n127_Word_Ladder {
 					}
 				}
 			}
-			step++;
+			step++;				//why here, cuz every time add into Queue means found one step
 		}
+		
 		return 0;
 	}
 
