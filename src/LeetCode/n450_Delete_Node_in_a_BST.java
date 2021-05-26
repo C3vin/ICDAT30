@@ -55,7 +55,8 @@ public class n450_Delete_Node_in_a_BST {
 			//case 3
 			TreeNode minNode = getMin(root.right);
 			root.val = minNode.val;
-			root.right = deleteNode(root.right, minNode.val);
+			
+			root.right = deleteNode(root.right, minNode.val);	//delete root.right and orig val cuz it already set to root.val
 			
 		} else if(root.val > key) {
 			root.left = deleteNode(root.left, key);
