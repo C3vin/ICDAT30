@@ -45,7 +45,8 @@ public class n144_Binary_Tree_Preorder_Traversal {
 	}
 
 	//Iteration
-	//Stack approach LC94 in-order
+	//Stack approach LC94 in-order 
+	//O(n) O(n)
 	public List<Integer> preorderTraversal2(TreeNode root) {
 		List<Integer> res = new ArrayList<Integer>();
 		Stack<TreeNode> stack = new Stack<TreeNode>();	
