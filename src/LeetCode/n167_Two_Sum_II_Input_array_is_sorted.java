@@ -16,17 +16,18 @@ Output: [1,2]
 Explanation: The sum of 2 and 7 is 9. Therefore index1 = 1, index2 = 2.
  */
 public class n167_Two_Sum_II_Input_array_is_sorted {
+	//O(n) O(1) 
 	public int[] twoSum(int[] numbers, int target) {
-		int i=0;
-		int j=numbers.length-1;
+		int left = 0;
+		int right = numbers.length-1;
 		
-		while(i<=j) {
-			if(numbers[i] + numbers[j] == target) {
-				return new int[] {i+1, j+1};				//why +1 for index 
-			} else if(numbers[i] + numbers[j] < target) {	//already sorted!
-				i++;
+		while(left < right) {
+			if(numbers[left] + numbers[right] == target) {
+				return new int[] {left+1, right+1};				//why +1 for index 
+			} else if(numbers[left] + numbers[right] < target) {	//already sorted!
+				left ++;
 			} else {
-				j--;
+				right--;
 			}
 		}
 		
