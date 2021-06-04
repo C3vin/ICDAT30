@@ -44,8 +44,8 @@ public class n895_Maximum_Frequency_Stack {
     push(x) will push x tom[++freq[x]]
     pop() will pop from the m[maxfreq]
     */
-    HashMap<Integer, Integer> freq;
-    HashMap<Integer, Stack<Integer>> map;       //freq number, val
+    HashMap<Integer, Integer> freq;				//val = freq#
+    HashMap<Integer, Stack<Integer>> map;       //freq# = stack val
     int maxFreq;
     
     public n895_Maximum_Frequency_Stack() {
@@ -55,7 +55,7 @@ public class n895_Maximum_Frequency_Stack {
     }
     
     public void push(int val) {
-        freq.put(val, freq.getOrDefault(val, 0)+1);
+        freq.put(val, freq.getOrDefault(val, 0)+1);		//freq: //{4=1, 5=3, 7=2}
         
         maxFreq = Math.max(maxFreq, freq.get(val));
         
@@ -63,14 +63,15 @@ public class n895_Maximum_Frequency_Stack {
             map.put(freq.get(val), new Stack<Integer>());
         }
         
-        map.get(freq.get(val)).add(val);
+        map.get(freq.get(val)).add(val);				//map: {1=[5, 7, 4], 2=[5, 7], 3=[5]}
     }
     
     public int pop() {
-        int res = map.get(maxFreq).pop();
-        freq.put(res, maxFreq-1);
+        int res = map.get(maxFreq).pop();				//e.g. res = 5
         
-        if(map.get(maxFreq).size() == 0) {
+        freq.put(res, maxFreq-1);						//update freq 
+        
+        if(map.get(maxFreq).size() == 0) {				//update maxFreq e.g. [] empty, so maxFreq-- 
             maxFreq--;
         }
         
