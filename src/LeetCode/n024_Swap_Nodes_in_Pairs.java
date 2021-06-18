@@ -1,31 +1,58 @@
 package LeetCode;
 
 public class n024_Swap_Nodes_in_Pairs {
-	public ListNode swapPairs(ListNode head) {
-	      if(head == null || head.next == null)
-	        return head;
-	    
-	      ListNode fakehead = new ListNode(-1);
-	      fakehead.next = head;
-	      
-	      ListNode ptr1 = fakehead;
-	      ListNode ptr2 = head;
-	      
-	      while(ptr2!=null && ptr2.next!=null){
-	          ListNode nextstart = ptr2.next.next;
-	          
-	          ptr2.next.next = ptr2;	//2->1
-	          ptr1.next = ptr2.next;	//0->2
-	          ptr2.next = nextstart;	//1->3
-	          
-	          ptr1 = ptr2;				//after first while, fh->2->1(p1)->3(p2)->4
-	          ptr2 = ptr2.next;			
-	      }
-	    return fakehead.next;
-	  }
+	
+	public class ListNode {
+		int val;
+		ListNode next;
+		
+		ListNode(int val) {
+			this.val = val;
+		}
+		ListNode(int val, ListNode next) {
+			this.val = val;
+			this.next = next;
+		}
+	}
+	
+	//O(n) O(1)
+	public ListNode swapPairs2(ListNode head) {
+		ListNode dummy = new ListNode(0);
+		dummy.next = head;
+		
+		ListNode p = dummy;
+		
+		while(head != null && head.next != null) {
+			ListNode first = head;
+			ListNode second = head.next;
+			
+			//swap
+			p.next = second;
+			first.next = second.next;
+			second.next = first;
+			
+			//reset
+			p = first;
+			head = first.next;
+		}
+		
+		return dummy.next;
+	}
+	
+	
 	public static void main(String[] args) {
 		n024_Swap_Nodes_in_Pairs obj = new n024_Swap_Nodes_in_Pairs();
-		System.out.println(obj.swapPairs(ListNode.create(1234)));
+		
+		ListNode p1 = obj.new ListNode(1);
+		ListNode p2 = obj.new ListNode(2);
+		ListNode p3 = obj.new ListNode(3);
+		ListNode p4 = obj.new ListNode(4);
+		
+		p1.next = p2;
+		p2.next = p3;
+		p3.next = p4;
+		
+		System.out.println(obj.swapPairs2(p1));
 	}
 }
 
