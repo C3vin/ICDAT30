@@ -17,7 +17,7 @@ import java.util.Map;
 public class n001_two_sum {
 	//Can't use Sorted & LR sol
 	
-	//Hash Table
+	//Hash Table O(n) O(n)
 	public int[] twoSum(int[] nums, int target) {
 		Map<Integer, Integer> map = new HashMap<Integer, Integer>();		// [num, index]		
 		int[] res = new int[2];
@@ -34,8 +34,32 @@ public class n001_two_sum {
 		return res;				//return null, cuz move res in here
 	}
 
+	//2pointer O(n) O)(1)
+	//need sorted
+	public int[] twoSum2(int[] nums, int target) {
+		int left = 0;
+		int right = nums.length-1;
+		
+		while(left < right) {
+			int currentSum = nums[left]+nums[right];
+			
+			if(currentSum == target) {
+				return new int[] {left, right};
+			}
+			
+			if(currentSum < target) {
+				left++;
+			} else {
+				right--;
+			}
+		}
+		
+		return new int[] {-1,-1};
+	}
+	
 	public static void main(String[] args) {
 		n001_two_sum obj = new n001_two_sum();
 		System.out.println(Arrays.toString(obj.twoSum(new int[] {2,7,11,15}, 9)));	
+		System.out.println(Arrays.toString(obj.twoSum2(new int[] {2,7,11,15}, 9)));	
 	}
 }
